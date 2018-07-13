@@ -1,0 +1,17 @@
+Init :
+git remote add origin https://github.com/Chocolaat/Terre-Hostile.git
+
+
+
+git pull origin master => update de origin vers master
+
+git status => liste fichiers ajoutés, supprimés ...
+git status -s
+
+git add <filename> => ajout d'un fichier 
+git reset <filename> => enleve le add
+
+git commit -m 'Initial commit' => commit dans le repo local (master)
+
+git push -u origin master => commit sur le repo distant
+
