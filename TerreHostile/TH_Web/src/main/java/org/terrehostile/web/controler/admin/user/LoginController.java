@@ -69,5 +69,11 @@ public class LoginController {
 		return modelAndView;
 	}
 	
+	@RequestMapping(value="/admin/map", method = RequestMethod.GET)
+	public ModelAndView adminMap(){
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("admin/map");
+		return modelAndView;
+	}
 
 }
