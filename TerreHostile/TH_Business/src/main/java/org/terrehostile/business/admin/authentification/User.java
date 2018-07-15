@@ -1,4 +1,4 @@
-package org.terrehostile.business.admin.user;
+package org.terrehostile.business.admin.authentification;
 
 import java.util.Set;
 

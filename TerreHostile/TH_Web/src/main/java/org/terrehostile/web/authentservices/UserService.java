@@ -1,4 +1,4 @@
-package org.terrehostile.web.services.admin.user;
+package org.terrehostile.web.authentservices;
 
 
 import java.util.Arrays;
@@ -7,10 +7,10 @@ import java.util.HashSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.terrehostile.business.admin.user.User;
-import org.terrehostile.business.admin.user.Role;
-import org.terrehostile.repo.admin.user.RoleRepository;
-import org.terrehostile.repo.admin.user.UserRepository;
+import org.terrehostile.business.admin.authentification.Role;
+import org.terrehostile.business.admin.authentification.User;
+import org.terrehostile.repository.RoleRepository;
+import org.terrehostile.repository.UserRepository;
 
 
 @Service("userService")

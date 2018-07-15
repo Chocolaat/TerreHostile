@@ -1,6 +1,6 @@
-package org.terrehostile.web.services.admin.user;
+package org.terrehostile.web.authentservices;
 
-import org.terrehostile.business.admin.user.User;
+import org.terrehostile.business.admin.authentification.User;
 
 public interface IUserService {
 	public User findUserByEmail(String email);

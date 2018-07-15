@@ -2,13 +2,29 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 
+
 <head>
-<title>Admin Page</title>
-<link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
+<title>Terre Hostile</title>
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
+<script type="text/javascript" th:src="@{/js/map.js}"></script>
+        
+    </head>
+     
+	<header>
+	    ma super bannière 
+	</header>
+	
+	
+<nav>
+    <ul>
+        <li><a th:href="@{../home.html}">Accueil</a></li>
+        <li><a th:href="@{../admin/mapEditor}">Éditeur de carte</a></li>
+        <li><a th:href="@{mapViewer}">Carte du monde</a></li>
+    </ul>
+</nav>
 
 <body>
 	<div class="container">
@@ -18,18 +34,16 @@
 				type="Submit">Logout</button>
 		</form>    
 		
-		<div class="panel-group" style="margin-top:40px">
-			<div class="panel panel-primary">
-				<div class="panel-heading">
-					<span th:utext="${userName}"></span>
-				</div>
-				<div class="panel-body">
-					<img th:src="@{/images/beer.jpg}" class="img-responsive center-block" width="400" height="400" alt="Beer" /> 
-				</div>
-				<p class="admin-message-text text-center" th:utext="${adminMessage}"></p>
-			</div>
+		<div>
+		  <input id="toggle-grid" type="checkbox"><label for="toggle-grid">Show grid?</label>
 		</div>
+		<canvas id="orthogonal-map" class="canvas-map" width="704" height="576"></canvas>
+
 		
 	</div>
 </body>
+
+
+
+
 </html>
