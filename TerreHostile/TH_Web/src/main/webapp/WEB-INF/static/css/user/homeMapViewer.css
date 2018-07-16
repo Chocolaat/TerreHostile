@@ -1,0 +1,9 @@
+.mapViewSection
+{
+	display: flex;
+}
+.mapView
+{
+    border: 1px solid red;
+    margin: auto;
+}

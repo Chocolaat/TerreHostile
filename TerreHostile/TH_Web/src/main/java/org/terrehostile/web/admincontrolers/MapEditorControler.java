@@ -11,7 +11,7 @@ public class MapEditorControler {
 	@RequestMapping(value={"/admin/mapEditor"}, method = RequestMethod.GET)
 	public ModelAndView login(){
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("admin/mapEditor/homeMapEditor");
+		modelAndView.setViewName("admin/homeMapEditor");
 		return modelAndView;
 	}
 }

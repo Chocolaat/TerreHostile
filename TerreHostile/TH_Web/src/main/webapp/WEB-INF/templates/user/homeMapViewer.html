@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8" />
+<link rel="stylesheet" th:href="@{/css/common.css}" />
+<link rel="stylesheet" th:href="@{/css/user/homeMapViewer.css}" />
+<title>Terre Hostile</title>
+</head>
+
+<script type="text/javascript" th:src="@{/js/map.js}"></script>
+
+<body>
+
+	<header> Bannière </header>
+
+	<nav>
+		<ul>
+			<li><a th:href="@{../home}">Accueil</a></li>
+			<li><a th:href="@{../admin/mapEditor}">Éditeur de carte</a></li>
+			<li><a th:href="@{mapViewer}">Carte du monde</a></li>
+		</ul>
+	</nav>
+
+
+	<h1>Carte du monde</h1>
+	<section class="pageContent">
+	
+	<section class="mapViewSection">
+
+		<div>
+			<input id="toggle-grid" type="checkbox"><label
+				for="toggle-grid">Show grid?</label>
+		</div>
+		<canvas class="mapView" id="orthogonal-map" width="704" height="576"></canvas>
+
+	</section>
+	
+	</section>
+
+
+
+
+	<footer> Footer </footer>
+</body>
+</html>

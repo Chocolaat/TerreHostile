@@ -11,7 +11,7 @@ public class MapViewerController {
 	@RequestMapping(value={"/user/mapViewer"}, method = RequestMethod.GET)
 	public ModelAndView login(){
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("user/mapViewer/homeMapViewer");
+		modelAndView.setViewName("user/homeMapViewer");
 		return modelAndView;
 	}
 }
