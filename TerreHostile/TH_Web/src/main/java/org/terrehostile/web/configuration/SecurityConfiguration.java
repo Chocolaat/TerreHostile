@@ -49,16 +49,29 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/login").permitAll()
 				.antMatchers("/home").permitAll()
 				.antMatchers("/registration").permitAll()
-				.antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest()
-				.authenticated().and().csrf().disable().formLogin()
-				.loginPage("/login").failureUrl("/login?error=true")
-				.defaultSuccessUrl("/home")
-				.usernameParameter("email")
-				.passwordParameter("password")
+				.antMatchers("/admin/**").permitAll()
 				.and().logout()
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 				.logoutSuccessUrl("/").and().exceptionHandling()
 				.accessDeniedPage("/access-denied");
+		
+		
+//		http.
+//		authorizeRequests()
+//			.antMatchers("/").permitAll()
+//			.antMatchers("/login").permitAll()
+//			.antMatchers("/home").permitAll()
+//			.antMatchers("/registration").permitAll()
+//			.antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest()
+//			.authenticated().and().csrf().disable().formLogin()
+//			.loginPage("/login").failureUrl("/login?error=true")
+//			.defaultSuccessUrl("/home")
+//			.usernameParameter("email")
+//			.passwordParameter("password")
+//			.and().logout()
+//			.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+//			.logoutSuccessUrl("/").and().exceptionHandling()
+//			.accessDeniedPage("/access-denied");
 	}
 	
 	@Override

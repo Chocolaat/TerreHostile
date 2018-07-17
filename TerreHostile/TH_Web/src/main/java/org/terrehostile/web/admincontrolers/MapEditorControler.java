@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.terrehostile.business.map.Map;
 
 @Controller
 public class MapEditorControler {
@@ -14,4 +15,16 @@ public class MapEditorControler {
 		modelAndView.setViewName("admin/homeMapEditor");
 		return modelAndView;
 	}
+	
+	
+	@RequestMapping(value={"/admin/createMap"}, method = RequestMethod.GET)
+	public ModelAndView createMap(){
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("MapStr", Map.createMapStr());
+		modelAndView.addObject("MapBck", Map.createMapBack());
+		modelAndView.addObject("User", Map.createUser());
+		modelAndView.setViewName("admin/homeMapEditor2");
+		return modelAndView;
+	}
+	
 }

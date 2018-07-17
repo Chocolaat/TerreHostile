@@ -5,14 +5,11 @@
 <head>
 <meta charset="ISO-8859-1" />
 <link rel="stylesheet" th:href="@{/css/common.css}" />
-<link rel="stylesheet" th:href="@{/css/user/homeMapViewer.css}" />
 <title>Terre Hostile</title>
 </head>
 
-<script type="text/javascript" th:src="@{/js/user/map.js}"></script>
-
 <body>
-
+	
 	<nav>
 		<div class='wifeo_conteneur_menu'>
 			<div class='wifeo_pagemenu'>
@@ -22,7 +19,7 @@
 				<a href='#mw999'>Administration</a>
 				<div class='wifeo_sousmenu'>
 					<div class='wifeo_pagesousmenu'>
-						<a th:href="@{../admin/mapEditor}">Éditeur de carte</a>
+						<a th:href="@{mapEditor}">Éditeur de carte</a>
 					</div>
 				</div>
 			</div>
@@ -30,7 +27,7 @@
 				<a href='#mw999'>Joueurs</a>
 				<div class='wifeo_sousmenu'>
 					<div class='wifeo_pagesousmenu'>
-						<a th:href="@{mapViewer}">Carte du monde</a>
+						<a th:href="@{../user/mapViewer}">Carte du monde</a>
 					</div>
 				</div>
 			</div>
@@ -41,17 +38,17 @@
 
 	<header> Bannière </header>
 	
-
 	<section class="pageContent">
-		<h1>Carte du monde</h1>
+		<h1>Editeur de carte</h1>
 		<p>Bienvenu sur l'éditeur de carte</p>
 		
-		<div>
-			<input id="toggle-grid" type="checkbox"><label
-				for="toggle-grid">Show grid?</label>
-		</div>
-		<canvas class="mapView" id="orthogonal-map" width="704" height="576"></canvas>
-
+		
+		<Button th:onclick="@{../admin/createMap}">Create User</Button>
+		<div>User créé :  <span th:utext="${User.email}"></span>  avec succès ! </div>
+		
+	<!-- 	th:onclick="|upload('${command['class'].simpleName}', '${gallery}')|" -->
+		
+		
 	</section>
 
 	<footer> Footer </footer>
