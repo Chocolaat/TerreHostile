@@ -3,26 +3,41 @@
 	xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<meta charset="UTF-8" />
+<meta charset="ISO-8859-1" />
 <link rel="stylesheet" th:href="@{/css/common.css}" />
 <link rel="stylesheet" th:href="@{/css/user/homeMapViewer.css}" />
 <title>Terre Hostile</title>
 </head>
 
-<script type="text/javascript" th:src="@{/js/map.js}"></script>
+<script type="text/javascript" th:src="@{/js/user/map.js}"></script>
 
 <body>
 
-	<header> BanniÃ¨re </header>
+	<header> Bannière </header>
 
 	<nav>
-		<ul>
-			<li><a th:href="@{../home}">Accueil</a></li>
-			<li><a th:href="@{../admin/mapEditor}">Ã‰diteur de carte</a></li>
-			<li><a th:href="@{mapViewer}">Carte du monde</a></li>
-		</ul>
+		<div class='wifeo_conteneur_menu'>
+			<div class='wifeo_pagemenu'>
+				<a th:href="@{../home}">Accueil</a>
+			</div>
+			<div class='wifeo_rubrique'>
+				<a href='#mw999'>Administration</a>
+				<div class='wifeo_sousmenu'>
+					<div class='wifeo_pagesousmenu'>
+						<a th:href="@{../admin/mapEditor}">Éditeur de carte</a>
+					</div>
+				</div>
+			</div>
+			<div class='wifeo_rubrique'>
+				<a href='#mw999'>Joueurs</a>
+				<div class='wifeo_sousmenu'>
+					<div class='wifeo_pagesousmenu'>
+						<a th:href="@{mapViewer}">Carte du monde</a>
+					</div>
+				</div>
+			</div>
+		</div>
 	</nav>
-
 
 	<h1>Carte du monde</h1>
 	<section class="pageContent">
