@@ -31,7 +31,7 @@ nav {
 }
 
 h1 {
-	
+		
 }
 
 section {
@@ -40,14 +40,20 @@ section {
 
 .pageContent {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex: 4;
     min-height: 60vh;
 }
 
+.pageContent > h1
+{
+	display: flex;
+	color:red;
+}
+
 
   header, footer {
-    height: 20vh;
+    height: 10vh;
   }
   header, footer, .pageContent, .th_menu {
     padding: 1em;
@@ -143,4 +149,16 @@ a {
 	top: 0;
 	right: -160px;
 	margin-left: 0px
+}
+
+.hrefButton {
+  font: bold 11px Arial;
+  text-decoration: none;
+  background-color: #EEEEEE;
+  color: #333333;
+  padding: 2px 6px 2px 6px;
+  border-top: 1px solid #CCCCCC;
+  border-right: 1px solid #333333;
+  border-bottom: 1px solid #333333;
+  border-left: 1px solid #CCCCCC;
 }

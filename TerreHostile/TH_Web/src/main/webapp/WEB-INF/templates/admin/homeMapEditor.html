@@ -3,7 +3,12 @@
 	xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="fragments :: head"></head>
+<meta charset="ISO-8859-1" />
 
+<link rel="stylesheet" th:href="@{/css/map.css}" />
+<script type="text/javascript" th:src="@{/js/map.js}"></script>
+
+ 
 <body>
 	<nav th:replace="fragments :: nav"></nav>
 
@@ -11,12 +16,27 @@
 
 		<header th:replace="fragments :: header"></header>
 
-		<section class="pageContent">
+		<section class="pageContent"> 
 			<h1>Editeur de carte</h1>
-			<p>Bienvenu sur l'Ã©diteur de carte</p>
+			<p>Bienvenu sur l'éditeur de carte</p>
 
-			<a th:href="@{../admin/createMap}">Carte du monde</a>
-			<div>User crÃ©Ã© :</div>
+			<a th:href="@{../admin/createMap}" class="hrefButton">Créer carte</a>
+			
+
+<div th:if="${mapStr != null}">
+    <h1>Result</h1>
+    <ul>
+       <li th:text="|Width = ${mapStr?.width}|">Item description here...</li>
+       <li th:text="|Height = ${mapStr?.height}|">Item description here...</li>
+    </ul>
+
+<canvas  class="mapView" id="mapCustom" width="704" height="576"></canvas>
+<canvas  class="mapView" id="orthogonal-map" width="704" height="576"></canvas>
+    
+</div>
+
+
+			
 
 		</section>
 

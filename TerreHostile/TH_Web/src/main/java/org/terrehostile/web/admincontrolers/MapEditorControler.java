@@ -20,10 +20,10 @@ public class MapEditorControler {
 	@RequestMapping(value={"/admin/createMap"}, method = RequestMethod.GET)
 	public ModelAndView createMap(){
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("MapStr", Map.createMapStr());
-		modelAndView.addObject("MapBck", Map.createMapBack());
-		modelAndView.addObject("User", Map.createUser());
-		modelAndView.setViewName("admin/homeMapEditor2");
+		modelAndView.addObject("mapStr", Map.createMapStr());
+		modelAndView.addObject("mapBck", Map.createMapBack());
+		modelAndView.addObject("user", Map.createUser());
+		modelAndView.setViewName("admin/homeMapEditor");
 		return modelAndView;
 	}
 	

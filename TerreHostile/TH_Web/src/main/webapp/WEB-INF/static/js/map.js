@@ -78,9 +78,12 @@ class OrthogonalMap extends Map {
   
   draw () {
     super.draw() // Call draw() method from Map class
-
+    
+    
     const numCols = this.data[0].length
     const numRows = this.data.length
+   
+    
     
     // Iterate through map data and draw each tile
     for (let y = 0; y < numRows; y++) {
@@ -126,6 +129,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Init orthogonal map
   const map = new OrthogonalMap('orthogonal-map', mapData, { tileSize: 64 })
+  
+
+   //mapData = 
+  
+   map = new OrthogonalMap('mapCustom', mapData, { tileSize: 64 })
 
   // Bind click event to show grid checkbox toggle
   const cb = document.getElementById('toggle-grid')
