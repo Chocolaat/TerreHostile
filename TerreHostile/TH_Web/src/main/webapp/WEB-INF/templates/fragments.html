@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+	
+<!-- Template meta data : head -->
+<head th:fragment="head">
+	<meta charset="ISO-8859-1" />
+	<link rel="stylesheet" th:href="@{/css/common.css}" />
+	<title>Terre Hostile</title>
+</head>
+
+
+<!-- Template navigation menu -->
+	<nav class = th_menu th:fragment="nav">
+		<div class='wifeo_conteneur_menu'>
+			<div class='wifeo_pagemenu'>
+				<a th:href="@{/home}">Accueil</a>
+			</div>
+			<div class='wifeo_rubrique'>
+				<a href='#mw999'>Administration</a>
+				<div class='wifeo_sousmenu'>
+					<div class='wifeo_pagesousmenu'>
+						<a th:href="@{/admin/mapEditor}">Éditeur de carte</a>
+					</div>
+				</div>
+			</div>
+			<div class='wifeo_rubrique'>
+				<a href='#mw999'>Joueurs</a>
+				<div class='wifeo_sousmenu'>
+					<div class='wifeo_pagesousmenu'>
+						<a th:href="@{/user/mapViewer}">Carte du monde</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</nav>
+
+<!-- Template header -->
+<header th:fragment="header"> Bannière </header>
+
+<!-- Template header -->
+<footer th:fragment="footer"> Super footer </footer>
+
+<body>
+
+</body>
+</html>

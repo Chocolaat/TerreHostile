@@ -2,56 +2,29 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 
-<head>
-<meta charset="ISO-8859-1" />
-<link rel="stylesheet" th:href="@{/css/common.css}" />
-<title>Terre Hostile</title>
-</head>
+<head th:replace="fragments :: head"></head>
 
 <body>
-	
-	<nav>
-		<div class='wifeo_conteneur_menu'>
-			<div class='wifeo_pagemenu'>
-				<a th:href="@{../home}">Accueil</a>
-			</div>
-			<div class='wifeo_rubrique'>
-				<a href='#mw999'>Administration</a>
-				<div class='wifeo_sousmenu'>
-					<div class='wifeo_pagesousmenu'>
-						<a th:href="@{mapEditor}">Éditeur de carte</a>
-					</div>
-				</div>
-			</div>
-			<div class='wifeo_rubrique'>
-				<a href='#mw999'>Joueurs</a>
-				<div class='wifeo_sousmenu'>
-					<div class='wifeo_pagesousmenu'>
-						<a th:href="@{../user/mapViewer}">Carte du monde</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</nav>
-	
+	<nav th:replace="fragments :: nav"></nav>
+
 	<section class="pageWithoutNav">
 
-	<header> Bannière </header>
-	
+		<header th:replace="fragments :: header"></header>
+
 	<section class="pageContent">
 		<h1>Editeur de carte</h1>
-		<p>Bienvenu sur l'éditeur de carte</p>
+		<p>Bienvenu sur l'Ã©diteur de carte</p>
 		
 		
 		<Button th:onclick="@{../admin/createMap}">Create User</Button>
-		<div>User créé :  <span th:utext="${User.email}"></span>  avec succès ! </div>
-		
-	<!-- 	th:onclick="|upload('${command['class'].simpleName}', '${gallery}')|" -->
-		
+		<div>User crÃ©Ã© :  <span th:utext="${User.email}"></span>  avec succÃ¨s ! </div>
+	
+	</section>
+
+		<footer th:replace="fragments :: footer"></footer>
 		
 	</section>
 
-	<footer> Footer </footer>
-	</section>
 </body>
+
 </html>

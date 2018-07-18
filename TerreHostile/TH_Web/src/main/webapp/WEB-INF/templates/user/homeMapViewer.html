@@ -2,49 +2,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 
-<head>
-<meta charset="ISO-8859-1" />
-<link rel="stylesheet" th:href="@{/css/common.css}" />
-<link rel="stylesheet" th:href="@{/css/user/homeMapViewer.css}" />
-<title>Terre Hostile</title>
-</head>
+<head th:replace="fragments :: head"></head>
 
+<link rel="stylesheet" th:href="@{/css/user/homeMapViewer.css}" />
 <script type="text/javascript" th:src="@{/js/user/map.js}"></script>
 
 <body>
+	<nav th:replace="fragments :: nav"></nav>
 
-	<nav>
-		<div class='wifeo_conteneur_menu'>
-			<div class='wifeo_pagemenu'>
-				<a th:href="@{../home}">Accueil</a>
-			</div>
-			<div class='wifeo_rubrique'>
-				<a href='#mw999'>Administration</a>
-				<div class='wifeo_sousmenu'>
-					<div class='wifeo_pagesousmenu'>
-						<a th:href="@{../admin/mapEditor}">Éditeur de carte</a>
-					</div>
-				</div>
-			</div>
-			<div class='wifeo_rubrique'>
-				<a href='#mw999'>Joueurs</a>
-				<div class='wifeo_sousmenu'>
-					<div class='wifeo_pagesousmenu'>
-						<a th:href="@{mapViewer}">Carte du monde</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</nav>
-	
 	<section class="pageWithoutNav">
 
-	<header> Bannière </header>
-	
+		<header th:replace="fragments :: header"></header>
 
 	<section class="pageContent">
 		<h1>Carte du monde</h1>
-		<p>Bienvenu sur l'éditeur de carte</p>
+		<p>Bienvenu sur l'Ã©diteur de carte</p>
 		
 		<div>
 			<input id="toggle-grid" type="checkbox"><label
@@ -54,7 +26,10 @@
 
 	</section>
 
-	<footer> Footer </footer>
+		<footer th:replace="fragments :: footer"></footer>
+		
 	</section>
+
 </body>
+
 </html>
