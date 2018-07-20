@@ -87,11 +87,13 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addResourceHandler(
                 "/img/**",
                 "/css/**",
-                "/js/**")
+                "/js/**",
+        		"/json/**")
                 .addResourceLocations(
                         "/WEB-INF/static/img/",
                         "/WEB-INF/static/css/",
-                        "/WEB-INF/static/js/");
+                        "/WEB-INF/static/js/",
+                        "/WEB-INF/static/json/");
     }
 
 }

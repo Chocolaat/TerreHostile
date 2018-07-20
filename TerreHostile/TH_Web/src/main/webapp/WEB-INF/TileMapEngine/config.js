@@ -1,5 +1,5 @@
 requirejs.config({
-    baseUrl: "http://localhost:8082/TH_Web/TileMapEngine"
+    baseUrl: "file:///C:/Users/Silv%E8re/Desktop/Dev/TerreHostile/GitLocal/TerreHostile/TH_Web/src/main/webapp/WEB-INF/TileMapEngine/"
     	
     	
 });
