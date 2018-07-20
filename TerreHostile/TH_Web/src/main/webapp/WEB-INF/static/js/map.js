@@ -124,20 +124,27 @@ class OrthogonalMap extends Map {
   }
 }
 
-// Init canvas tile map on document ready
-document.addEventListener('DOMContentLoaded', function () {
 
-  // Init orthogonal map
-  const map = new OrthogonalMap('orthogonal-map', mapData, { tileSize: 64 })
+//
+//// Init canvas tile map on document ready
+//document.addEventListener('DOMContentLoaded', function () {
+//
+//  // Init orthogonal map
+//  const map = new OrthogonalMap('orthogonal-map', mapData, { tileSize: 64 })
+//  
+//
+//   //mapData = 
+//  
+//   map = new OrthogonalMap('mapCustom', mapData, { tileSize: 64 })
+//
+//  // Bind click event to show grid checkbox toggle
+//  const cb = document.getElementById('toggle-grid')
+//  cb.addEventListener('click', function () {
+//    map.toggleGrid()
+//  })
+//  
+//  
   
-
-   //mapData = 
-  
-   map = new OrthogonalMap('mapCustom', mapData, { tileSize: 64 })
-
-  // Bind click event to show grid checkbox toggle
-  const cb = document.getElementById('toggle-grid')
-  cb.addEventListener('click', function () {
-    map.toggleGrid()
-  })
-})
+//  
+//  
+//})
