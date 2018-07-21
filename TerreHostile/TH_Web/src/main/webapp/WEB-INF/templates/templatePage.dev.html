@@ -2,15 +2,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="fragments :: head"></head>
+<head th:replace="fragments/pageStructure :: head"></head>
 <meta charset="ISO-8859-1" />
 
 <body>
-	<nav th:replace="fragments :: nav"></nav>
+	<nav th:replace="fragments/pageStructure :: nav"></nav>
 
 	<section class="pageWithoutNav">
 
-		<header th:replace="fragments :: header"></header>
+		<header th:replace="fragments/pageStructure :: header"></header>
 
 		<!-- //TO SPECIALIZE -->
 		<section class="pageContent">
@@ -19,7 +19,7 @@
 		</section>
 		<!-- //TO SPECIALIZE -->
 
-		<footer th:replace="fragments :: footer"></footer>
+		<footer th:replace="fragments/pageStructure :: footer"></footer>
 		
 	</section>
 

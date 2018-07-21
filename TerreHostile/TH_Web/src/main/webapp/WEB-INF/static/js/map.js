@@ -1,13 +1,16 @@
     require([
-        'jsiso/canvas/Control',
-        'jsiso/canvas/Input',
-        'jsiso/img/load',
-        'jsiso/json/load',
-        'jsiso/tile/Field',
-        'jsiso/pathfind/pathfind',
-        'jsiso/particles/EffectLoader',
-        'jsiso/utils',
-        'map'
+	    'jsiso/canvas/Control',
+	    'jsiso/canvas/Input',
+	    'jsiso/img/load',
+	    'jsiso/json/load',
+	    'jsiso/tile/Field',
+	    'jsiso/pathfind/pathfind',
+	    'jsiso/particles/EffectLoader',
+	    'jsiso/particles/Emitter',
+	    'jsiso/particles/Effect',
+	    'jsiso/particles/Particle',
+	    'jsiso/utils',
+	    'requirejs/domReady!'
     ],
     function(CanvasControl, CanvasInput, imgLoader, jsonLoader, TileField) {
 
@@ -64,7 +67,7 @@
           display: "block",
           marginLeft: "auto",
           marginRight: "auto"
-        });
+        }, "mapView");
         
 
       function ProjectileObject(x, y, tileHeight, tileWidth, img) {

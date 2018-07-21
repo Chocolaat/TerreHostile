@@ -2,22 +2,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="fragments :: head"></head>
+<head th:replace="fragments/pageStructure :: head"></head>
 
 <body>
 
-	<nav th:replace="fragments :: nav"></nav>
+	<nav th:replace="fragments/pageStructure :: nav"></nav>
 
 	<section class="pageWithoutNav">
 
-		<header th:replace="fragments :: header"></header>
+		<header th:replace="fragments/pageStructure :: header"></header>
 
 		<section class="pageContent">
 			<h1>Accueil</h1>
 			<p>Bienvenu sur la page d'accueil</p>
 		</section>
 
-		<footer th:replace="fragments :: footer"></footer>
+		<footer th:replace="fragments/pageStructure :: footer"></footer>
 
 
 	</section>

@@ -2,82 +2,25 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="fragments :: head"></head>
+<head th:replace="fragments/pageStructure :: head"></head>
 <meta charset="ISO-8859-1" />
 <link rel="stylesheet" th:href="@{/css/map.css}" />
-<!-- <script type="text/javascript" th:src="@{/js/map.js}"></script> -->
 
-
-
-
-
-
-
-
-
-
-
-    <style type="text/css">
-      body {
-        margin: 0;
-        padding: 0;
-        background: #000022
-      }
-       .twitter-follow-button {
-        position: absolute !important;
-      }
-      a, a:visited {
-        color: #FFF;
-      }
-      .gameInfo {
-        position: absolute;
-        right: 0px;
-        top: 0px;
-        width: 200px;
-        height: 24px;
-        background: #222244;
-        text-align: center;
-        color: #FFF;
-      }
-    </style>
-    
-   
-    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-   
-    <script th:attr="data-main=@{/js/config.js}" th:src="@{/js/requirejs/require.js}"></script>
-
-  <script> 
-  require([
-	    'jsiso/canvas/Control',
-	    'jsiso/canvas/Input',
-	    'jsiso/img/load',
-	    'jsiso/json/load',
-	    'jsiso/tile/Field',
-	    'jsiso/pathfind/pathfind',
-	    'jsiso/particles/EffectLoader',
-	    'jsiso/particles/Emitter',
-	    'jsiso/particles/Effect',
-	    'jsiso/particles/Particle',
-	    'jsiso/utils',
-	    'map',
-	    'requirejs/domReady!'
-	  ])
   
-  </script>
-    
+
+
  
 <body>
-	<nav th:replace="fragments :: nav"></nav>
+	<nav th:replace="fragments/pageStructure :: nav"></nav>
+	
+    
 
 	<section class="pageWithoutNav">
 
-		<header th:replace="fragments :: header"></header>
+		<header th:replace="fragments/pageStructure :: header"></header>
 
 		<section class="pageContent"> 
-			<h1>Editeur de carte</h1>
-			<p>Bienvenu sur l'éditeur de carte</p>
-
-			<a th:href="@{../admin/createMap}" class="hrefButton">Créer carte</a>
+			<h1>Éditeur de carte</h1>
 			
 
 <div th:if="${mapStr != null}">
@@ -86,17 +29,13 @@
        <li th:text="|Width = ${mapStr?.width}|">Item description here...</li>
        <li th:text="|Height = ${mapStr?.height}|">Item description here...</li>
     </ul>
-
- <canvas  class="mapView" id="mapCustom" width="704" height="576"></canvas>
-<canvas  class="mapView" id="orthogonal-map" width="704" height="576"></canvas>
-
-    <div id="timer" class="gameInfo">Game Time</div>
-    <a href="https://twitter.com/Beakable" class="twitter-follow-button" data-show-count="false">Follow @Beakable</a>
     
 </div>
+
+ <section th:replace="fragments/Map/map :: section"> </section>
 		</section>
 
-		<footer th:replace="fragments :: footer"></footer>
+		<footer th:replace="fragments/pageStructure :: footer"></footer>
 		
 	</section>
 
