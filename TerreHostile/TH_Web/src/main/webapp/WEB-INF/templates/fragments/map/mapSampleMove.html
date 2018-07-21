@@ -3,13 +3,14 @@
 	xmlns:th="http://www.thymeleaf.org">
 
 
-<section th:fragment="map">
+<section th:fragment="mapSampleMove">
 
 	<section id="mapView"> </section>
 
 	<script th:attr="data-main=@{/js/config.js}" th:src="@{/js/requirejs/require.js}"></script>
 	 
 	  <script > 
+      
 	  require([
 		    'jsiso/canvas/Control',
 		    'jsiso/canvas/Input',
@@ -22,7 +23,7 @@
 		    'jsiso/particles/Effect',
 		    'jsiso/particles/Particle',
 		    'jsiso/utils',
-		    'map',
+		    'map/mapSampleMove',
 		    'requirejs/domReady!'
 		  ])
 	  

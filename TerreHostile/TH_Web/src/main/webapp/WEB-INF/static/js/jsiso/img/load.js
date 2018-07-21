@@ -22,6 +22,7 @@ THE SOFTWARE.
 
 
 define(function() {
+	
 
   /**
   * Loads an array of images or an array of spritesheets for using within JsIso
