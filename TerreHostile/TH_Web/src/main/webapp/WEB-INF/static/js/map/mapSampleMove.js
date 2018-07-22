@@ -39,7 +39,6 @@
 																// tile span to
 																// draw
             
-            
             game.init([{
               title: "Graphics",
               layout: jsonResponse[0].ground,
@@ -72,12 +71,16 @@
         var balls = [];
         var rangeX = xrange;
         var rangeY = yrange;
-        var context = CanvasControl.create("canavas", 1000, 600, {
-          background: "#FFF",
-          display: "block",
-          marginLeft: "auto",
-          marginRight: "auto"
-        }, "mapView");
+        
+		var elem, style;
+		elem = document.querySelector('#mapView');
+		style = getComputedStyle(elem);
+
+		
+		var w = style.width.replace("px", "");
+		var h = style.height.replace("px", "");
+
+		var context = CanvasControl.create("mapViewCanvas", w, h, "mapView");
         
 
       function ProjectileObject(x, y, tileHeight, tileWidth, img) {

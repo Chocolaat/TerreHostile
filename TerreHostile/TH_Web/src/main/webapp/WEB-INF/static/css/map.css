@@ -1,9 +1,21 @@
-.mapViewSection
+
+
+#mapContainer
 {
-	display: flex;
+    display:flex;
+    widht:100%;
+    height:100%;
 }
-.mapView
+
+#mapView
 {
-    border: 1px solid red;
-    margin: auto;
+    width:100%;
+    height:100%;
+}
+
+
+#mapViewCanvas
+{
+    widht:100%;
+    height:100%;
 }

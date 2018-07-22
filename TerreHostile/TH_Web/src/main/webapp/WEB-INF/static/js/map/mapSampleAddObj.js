@@ -23,7 +23,7 @@ require(
 
 			function launch() {
 
-				jsonLoader([ '../json/map.json', '../json/imageFiles.json' ])
+				jsonLoader([ '../json/map2.json', '../json/imageFiles2.json' ])
 						.then(
 								function(jsonResponse) {
 

@@ -51,7 +51,7 @@ define(function() {
   }
 
  
-  function _create(name, w, h, style, element, usePixelRatio) {
+  function _create(name, w, h, element, usePixelRatio) {
     var pxRatio = 1;
     var canvasType = null;
     if (_supported()) {
@@ -63,9 +63,6 @@ define(function() {
       canvasElement = document.createElement('canvas');
       canvasElement.id = name;
       canvasElement.tabindex = "1";
-      for (var s in style) {
-        canvasElement.style[s] = style[s];
-      }
       
       canvasType = '2d';
       canvasElement.style.width = w + "px";
@@ -73,6 +70,8 @@ define(function() {
       canvasElement.width = w * pxRatio || window.innerWidth;
       canvasElement.height = h * pxRatio || window.innerHeight;
       canvasElement.getContext(canvasType).setTransform(pxRatio, 0, 0, pxRatio, 0, 0);
+
+      
       if (!element) {
         // Append Canvas into document body
         return document.body.appendChild(canvasElement).getContext(canvasType);

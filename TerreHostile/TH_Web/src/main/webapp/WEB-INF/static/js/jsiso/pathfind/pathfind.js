@@ -41,7 +41,7 @@ define(['module'], function(self) {
   return function (id, start, end, map, diagonal, force) {
 
     if (workers[id] === undefined) {
-      workers[id] = (new Worker(self.uri.replace("pathfind.js", "worker.js?") + Math.random()));
+      workers[id] = (new Worker(self.uri.replace("pathfind.js", "worker.js?").replace("http://localhost:8080/TH_Web/webapp/WEB-INF/static/js", "http://localhost:8080/TH_Web/js") + Math.random()));
     }
 
     return new Promise(function(resolve, reject) {

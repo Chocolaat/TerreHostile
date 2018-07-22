@@ -8,7 +8,6 @@
 <link rel="stylesheet" th:href="@{/css/map.css}" />
 
 
-
 <body>
 	<nav th:replace="fragments/pageStructure :: nav"></nav>
 
@@ -16,16 +15,20 @@
 
 		<header th:replace="fragments/pageStructure :: header"></header>
 
-	<section class="pageContent">
-		<h1>Carte du monde</h1>
-		
- <section th:replace="fragments/map/mapSampleAddObj :: section"> </section>
-		
-	</section>
-	
+		<section class="pageContent">
+			<h1>Carte du monde</h1>
+
+			<section th:replace="fragments/map/mapSampleMove :: section">
+			</section>
+
+			<!--  <section th:replace="fragments/map/mapSampleAddObj :: section"> </section> -->
+
+
+		</section>
+
 
 		<footer th:replace="fragments/pageStructure :: footer"></footer>
-		
+
 	</section>
 
 </body>

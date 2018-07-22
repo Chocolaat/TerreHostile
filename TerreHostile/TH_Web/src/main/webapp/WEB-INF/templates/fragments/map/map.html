@@ -3,27 +3,29 @@
 	xmlns:th="http://www.thymeleaf.org">
 
 
-<section th:fragment="map">
+<section id="mapContainer" th:fragment="map">
 
 	<section id="mapView"> </section>
 
 	<script th:attr="data-main=@{/js/config.js}" th:src="@{/js/requirejs/require.js}"></script>
 	 
 	  <script > 
+	  
 	  require([
-		    'jsiso/canvas/Control',
-		    'jsiso/canvas/Input',
-		    'jsiso/img/load',
-		    'jsiso/json/load',
-		    'jsiso/tile/Field',
-		    'jsiso/pathfind/pathfind',
-		    'jsiso/particles/EffectLoader',
-		    'jsiso/particles/Emitter',
-		    'jsiso/particles/Effect',
-		    'jsiso/particles/Particle',
-		    'jsiso/utils',
-		    'map/map',
-		    'requirejs/domReady!'
+	      'jsiso/canvas/Control',
+	      'jsiso/canvas/Input',
+	      'jsiso/img/load',
+	      'jsiso/json/load',
+	      'jsiso/tile/Field',
+	      'jsiso/pathfind/pathfind',
+	      'jsiso/pathfind/worker',
+	      'jsiso/particles/EffectLoader',
+          'jsiso/particles/Emitter',
+          'jsiso/particles/Effect',
+          'jsiso/particles/Particle',
+          'jsiso/utils',
+    	  'map/map',
+	      'requirejs/domReady!'
 		  ])
 	  
 	  </script>

@@ -4,41 +4,40 @@
 
 <head th:replace="fragments/pageStructure :: head"></head>
 <meta charset="ISO-8859-1" />
+
 <link rel="stylesheet" th:href="@{/css/map.css}" />
 
-  
 
-
- 
 <body>
 	<nav th:replace="fragments/pageStructure :: nav"></nav>
-	
-    
 
 	<section class="pageWithoutNav">
 
 		<header th:replace="fragments/pageStructure :: header"></header>
 
-		<section class="pageContent"> 
+		<section class="pageContent">
 			<h1>Éditeur de carte</h1>
-			
 
-<div th:if="${mapStr != null}">
-    <h1>Result</h1>
-    <ul>
-       <li th:text="|Width = ${mapStr?.width}|">Item description here...</li>
-       <li th:text="|Height = ${mapStr?.height}|">Item description here...</li>
-    </ul>
-    
-</div>
+			<section th:replace="fragments/map/map :: section"></section>
 
- 
- <section th:replace="fragments/map/mapSampleMove :: section"> </section>
+
+			<div th:if="${mapStr != null}">
+				<h1>Result</h1>
+				<ul>
+					<li th:text="|Width = ${mapStr?.width}|">Item description
+						here...</li>
+					<li th:text="|Height = ${mapStr?.height}|">Item description
+						here...</li>
+				</ul>
+
+			</div>
+
+
 
 		</section>
 
 		<footer th:replace="fragments/pageStructure :: footer"></footer>
-		
+
 	</section>
 
 </body>
