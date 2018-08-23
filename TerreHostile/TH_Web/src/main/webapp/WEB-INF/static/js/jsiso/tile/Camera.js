@@ -67,13 +67,15 @@ define([], function() {
       mapHeight = mapH;
       tileWidth = tileW;
       tileHeight = tileH;
-      curZoom = curZ || 1;
+      curZoom = curZ || 6;
       screenWidth = screenW;
       screenHeight = screenH;
       scaledMapWidth = mapWidth / tileW;
       scaledMapWidth = scaledMapWidth * (tileW * curZoom);
       scaledMapHeight = mapHeight / tileH;
       scaledMapHeight = scaledMapHeight * (tileH * curZoom);
+      
+      console.log ("curZoom = " + curZoom);
 
       domHeight = domH || window.innerHeight;
       domWidth = domW || window.innerWidth;

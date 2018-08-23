@@ -658,6 +658,8 @@ function(EffectLoader, Emitter, utils) {
         focusTilePosX = Math.round((x - (tileHeight * curZoom) / 2)/ (tileHeight * curZoom));
       }
       else {
+
+          console.log ("curZoom = " + curZoom);
         focusTilePosY = (2 * (y - drawY) - x + drawX) / 2;
         focusTilePosX = x + focusTilePosY - drawX - (tileHeight * curZoom);
         focusTilePosY = Math.round(focusTilePosY / (tileHeight * curZoom));

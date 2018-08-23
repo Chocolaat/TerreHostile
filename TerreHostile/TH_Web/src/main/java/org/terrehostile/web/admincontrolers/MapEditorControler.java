@@ -9,15 +9,8 @@ import org.terrehostile.business.map.Map;
 @Controller
 public class MapEditorControler {
 	
+	
 	@RequestMapping(value={"/admin/mapEditor"}, method = RequestMethod.GET)
-	public ModelAndView login(){
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("admin/homeMapEditor");
-		return modelAndView;
-	}
-	
-	
-	@RequestMapping(value={"/admin/createMap"}, method = RequestMethod.GET)
 	public ModelAndView createMap(){
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("mapStr", Map.createMapStr());

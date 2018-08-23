@@ -19,11 +19,5 @@
     "../img/JsIso/ground/swamp.png",
     "../img/JsIso/ground/water-purple.png",
     "../img/JsIso/ground/water.png"
-  ],
-  "players": [
-    "../img/JsIso/players/enemy1.png",
-    "../img/JsIso/players/enemy2.png",
-    "../img/JsIso/players/enemy3.png",
-    "../img/JsIso/players/main.png"
   ]
 }

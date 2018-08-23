@@ -29,9 +29,8 @@ require(
 
 									imgLoader([ {
 										graphics : jsonResponse[1].ground
-									}, {
-										graphics : jsonResponse[1].players
-									} ])
+									}
+									])
 											.then(
 													function(imgResponse) {
 
@@ -61,17 +60,20 @@ require(
 																			}
 																		},
 																		{
-																			title : "AI",
-																			layout : jsonResponse[0].objects,
+																			title : "TestSCh",
+																			layout : jsonResponse[0].ground,
+																			graphics : imgResponse[0].files,
+																			graphicsDictionary : imgResponse[0].dictionary,
 																			heightMap : {
 																				map : jsonResponse[0].height,
-																				offset : 20, // Offset is the same height as the  graphics stack tile
-																				heightMapOnTop : true
+																				offset : 0,
+																				heightTile : imgResponse[0].files["1-grass-8.png"],
 																			},
 																			tileHeight : 50,
 																			tileWidth : 100,
 																			applyInteractions : true
-																		} ]);
+																		}
+																		]);
 
 													});
 								});
@@ -84,22 +86,14 @@ require(
 				var rangeX = xrange;
 				var rangeY = yrange;
 
-				var calculatePaths = 0;
-
-				var enemy = [];
-
-				var enemyStart = [ 4, 0 ]; // Starting location of AI
-				var enemyEnd = [ 4, 9 ]; // Ending location of AI
+//				var context = CanvasControl.createSizeNotFixed("mapViewCanvas", "mapView");
 				
-				var elem, style;
-				elem = document.querySelector('#mapView');
-				style = getComputedStyle(elem);
-
+				vw = document.getElementById('mapView').offsetWidth;
+				vh = document.getElementById('mapView').offsetHeight;
 				
-				var w = style.width.replace("px", "");
-				var h = style.height.replace("px", "");
-
-				var context = CanvasControl.create("mapViewCanvas", w, h, "mapView");
+		        var context = CanvasControl.create("mapViewCanvas", 1250, 500, {}, "mapView");
+		        console.log("vw" + vw);
+		        console.log(" vh" +  vh);
 				//CanvasControl.fullScreen();
 
 				var input = new CanvasInput(document, CanvasControl());
@@ -114,7 +108,7 @@ require(
 													tile_coordinates.x,
 													tile_coordinates.y) + 1); // Increase heightmap tile 
 					mapLayers[0].setTile(tile_coordinates.x,
-							tile_coordinates.y, 9); // Force the chaning of tile graphic
+							tile_coordinates.y, 9); // Force the changing of tile graphic
 				});
 
 				input.mouse_move(function(coords) {
@@ -124,52 +118,98 @@ require(
 					});
 				});
 
+		        input.keyboard(function(pressed, keydown) {
+		        	console.log("PRESSED " + pressed);
+		          if (!keydown) {
+		            switch(pressed) {
+		              case 65:
+		                mapLayers.map(function(layer) {
+		                  if (yrange < layer.getLayout().length) {
+		                    xrange +=  4;
+		                    yrange +=  4;
+		                    startY -= 2;
+		                    startX -= 2;
+		                    if (startX < 0) { startX = 0; }
+		                    if (startY < 0) { startY = 0; }
+		                    layer.setZoom("out");
+
+		                    layer.align("h-center", CanvasControl().width, xrange + startX, 0);
+		                    layer.align("v-center", CanvasControl().height, yrange + startY, (yrange + startY));
+		                 }
+		                });
+		              break;
+		              case 83:
+		                mapLayers.map(function(layer) {
+		                  if (yrange > defaultyrange) {
+		                    xrange -=  4;
+		                    yrange -=  4;
+		                    startY += 2;
+		                    startX += 2;
+		                    layer.setZoom("in");
+
+		                    layer.align("h-center", CanvasControl().width, xrange + startX, 0);
+		                    layer.align("v-center", CanvasControl().height, yrange + startY, (yrange + startY));
+
+		                  }
+		                })
+		              break;
+		              case 81:
+		                mapLayers.map(function(layer) {
+		                  layer.rotate("left");
+
+		                });
+		              break;
+		              case 87:
+		                mapLayers.map(function(layer) {
+		                  layer.rotate("right");
+		                });
+		              break;
+		              case 39:
+		                mapLayers.map(function(layer) {
+			                  layer.move("right");
+			                  layer.move("up");
+		                });
+		                startY ++;
+		              break;
+		              case 38:
+		                mapLayers.map(function(layer) {
+		                  layer.move("left");
+		                  layer.move("right");
+		                });
+		                startX --;
+		              break;
+		              case 40:
+		                mapLayers.map(function(layer) {
+		                  layer.move("down");
+		                  layer.move("up");
+		                });
+		                startX ++;
+		              break;
+		              case 37:
+		                mapLayers.map(function(layer) {
+			                  layer.move("left");
+			                  layer.move("down");
+		                });
+		                startY --;
+		              break;
+		            }
+		          }
+		        });
+
 				function draw() {
 					context.clearRect(0, 0, CanvasControl().width,
 							CanvasControl().height);
-					if (calculatePaths === 100) { // Calculate AI paths every 100 ticks
-						enemy
-								.map(function(e) {
-									pathfind(e.id, [ e.xPos, e.yPos ],
-											[ enemyEnd[0], enemyEnd[1] ],
-											mapLayers[0].getHeightLayout(),
-											false, true)
-											.then(
-													function(data) {
-														if (data.length > 0
-																&& data[1] !== undefined) {
-															e.xPos = data[1].x;
-															e.yPos = data[1].y;
-														}
-													});
-								});
-						calculatePaths = 0;
-						enemy = enemy.filter(function(e) {
-							if (e.xPos === Number(enemyEnd[0])
-									&& e.yPos === Number(enemyEnd[1])) {
-								return false;
-							} else {
-								return true
-							}
-						});
-					}
+					
 					for (i = 0; i < 0 + rangeY; i++) {
 						for (j = 0; j < 0 + rangeX; j++) {
 							mapLayers.map(function(layer) {
 								if (layer.getTitle() === "Graphics") {
 									layer.draw(i, j); // Draw the graphics layer
-								} else {
-									enemy.map(function(e) {
-										if (i === e.xPos && j === e.yPos) {
-											layer.draw(i, j, e.image); // Only draw the enemy over writes of the AI layer
-										}
-									});
 								}
 							});
 						}
 					}
-
-					calculatePaths += 1;
+					
 					requestAnimFrame(draw);
 				}
 
@@ -180,20 +220,8 @@ require(
 									CanvasControl().height,
 									CanvasControl().width);
 							mapLayers[i].setup(layers[i]);
-							mapLayers[i].align("h-center",
-									CanvasControl().width, xrange, 0);
-							mapLayers[i].align("v-center",
-									CanvasControl().height, yrange, 0);
-						}
-						;
-						setInterval(function() {
-							enemy.push({
-								id : enemy.length,
-								image : playerImages.files["enemy3.png"],
-								xPos : enemyStart[0],
-								yPos : enemyStart[1]
-							});
-						}, 2500); // Create new enemy AI every 2.5 seconds
+
+						};
 						draw();
 					}
 				}

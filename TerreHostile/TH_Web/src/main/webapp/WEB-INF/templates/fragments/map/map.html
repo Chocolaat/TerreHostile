@@ -8,6 +8,19 @@
 	<section id="mapView"> </section>
 
 	<script th:attr="data-main=@{/js/config.js}" th:src="@{/js/requirejs/require.js}"></script>
+	
+	
+	<!-- Initialisation varibales pour javascritp -->
+	
+
+	
+<script th:inline="javascript">
+/*<![CDATA[*/
+
+    var mapStr = /*[[${mapStr}]]*/ "mapStr";  
+
+/*]]>*/
+</script>
 	 
 	  <script > 
 	  
@@ -17,14 +30,16 @@
 	      'jsiso/img/load',
 	      'jsiso/json/load',
 	      'jsiso/tile/Field',
+	      'jsiso/particles/Effect',
+	      'jsiso/particles/EffectLoader',
+	      'jsiso/particles/Emitter',
+	      'jsiso/particles/Particle',
 	      'jsiso/pathfind/pathfind',
 	      'jsiso/pathfind/worker',
-	      'jsiso/particles/EffectLoader',
-          'jsiso/particles/Emitter',
-          'jsiso/particles/Effect',
-          'jsiso/particles/Particle',
-          'jsiso/utils',
-    	  'map/map',
+	      'jsiso/tile/Camera',
+	      'jsiso/url/url',
+	      'jsiso/utils',
+	      'map/map',
 	      'requirejs/domReady!'
 		  ])
 	  

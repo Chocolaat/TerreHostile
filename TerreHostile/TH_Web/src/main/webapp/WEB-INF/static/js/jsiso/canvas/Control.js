@@ -51,7 +51,7 @@ define(function() {
   }
 
  
-  function _create(name, w, h, element, usePixelRatio) {
+  function _create(name, w, h, style, element, usePixelRatio) {
     var pxRatio = 1;
     var canvasType = null;
     if (_supported()) {
@@ -63,15 +63,15 @@ define(function() {
       canvasElement = document.createElement('canvas');
       canvasElement.id = name;
       canvasElement.tabindex = "1";
+      for (var s in style) {
+        canvasElement.style[s] = style[s];
+      }
       
       canvasType = '2d';
-      canvasElement.style.width = w + "px";
-      canvasElement.style.height = h + "px";
       canvasElement.width = w * pxRatio || window.innerWidth;
       canvasElement.height = h * pxRatio || window.innerHeight;
       canvasElement.getContext(canvasType).setTransform(pxRatio, 0, 0, pxRatio, 0, 0);
-
-      
+      console.log("element = " + element)
       if (!element) {
         // Append Canvas into document body
         return document.body.appendChild(canvasElement).getContext(canvasType);
@@ -90,6 +90,45 @@ define(function() {
       return document.body.appendChild(noCanvas);
     }
   }
+  
+  function _createSizeNotFixed(name, element) {
+	    var pxRatio = 1;
+	    var canvasType = null;
+	    if (_supported()) {
+
+	      canvasElement = document.createElement('canvas');
+	      canvasElement.id = name;
+	      canvasElement.tabindex = "1";
+	      
+	      canvasType = '2d';
+	      
+	      
+	      // if high, vew from far
+	      // if low, view from near
+	      canvasElement.width =  1487;
+	      canvasElement.height =  654;
+	     // canvasElement.getContext(canvasType).setTransform(pxRatio, 0, 0, pxRatio, 0, 0);
+	      
+	      return document.getElementById(element).appendChild(canvasElement).getContext(canvasType);
+	      
+//	      if (!element) {
+//	        // Append Canvas into document body
+//	        return document.body.appendChild(canvasElement).getContext(canvasType);
+//	      }
+//	      else {
+//	        // Place canvas into passed through body element
+//	        return document.getElementById(element).appendChild(canvasElement).getContext(canvasType);
+//	      }
+	    }
+	    else {
+	      // Create an HTML element displaying that Canvas is not supported :(
+	      var noCanvas = document.createElement("div");
+	      noCanvas.style.color = "#FFF";
+	      noCanvas.style.textAlign = "center";
+	      noCanvas.innerHTML = "Sorry, you need to use a more modern browser. We like: <a href='https://www.google.com/intl/en/chrome/browser/'>Chrome</a> &amp; <a href='http://www.mozilla.org/en-US/firefox/new/'>Firefox</a>";
+	      return document.body.appendChild(noCanvas);
+	    }
+	  }
 
   function _style(setting, value) {
     canvasElement.style[setting] = value;
@@ -140,6 +179,7 @@ define(function() {
   // ----
   // -- Public properties for Control
   // ----
+  canvas.createSizeNotFixed = _createSizeNotFixed;
   canvas.create = _create;
   canvas.fullScreen = _fullScreen;
   canvas.update = _update;
