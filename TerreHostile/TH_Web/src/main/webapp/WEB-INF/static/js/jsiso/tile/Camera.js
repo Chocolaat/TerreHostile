@@ -74,8 +74,6 @@ define([], function() {
       scaledMapWidth = scaledMapWidth * (tileW * curZoom);
       scaledMapHeight = mapHeight / tileH;
       scaledMapHeight = scaledMapHeight * (tileH * curZoom);
-      
-      console.log ("curZoom = " + curZoom);
 
       domHeight = domH || window.innerHeight;
       domWidth = domW || window.innerWidth;
@@ -120,9 +118,6 @@ define([], function() {
         screenWidth = round(domWidth / (tileWidth * curZoom));
       }
 
-
-
-      //console.log(screenWidth, scaledMapWidth, screenHeight, scaledMapHeight)
 
       rangeX = cameraRangeX || rangeX;
       rangeY = cameraRangeY || rangeY;

@@ -71,7 +71,6 @@ define(function() {
       canvasElement.width = w * pxRatio || window.innerWidth;
       canvasElement.height = h * pxRatio || window.innerHeight;
       canvasElement.getContext(canvasType).setTransform(pxRatio, 0, 0, pxRatio, 0, 0);
-      console.log("element = " + element)
       if (!element) {
         // Append Canvas into document body
         return document.body.appendChild(canvasElement).getContext(canvasType);

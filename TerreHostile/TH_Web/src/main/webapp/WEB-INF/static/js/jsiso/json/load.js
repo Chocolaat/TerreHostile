@@ -38,16 +38,25 @@ define(function() {
  */
     function _jsonPromise(path) {
        return new Promise(function(resolve, reject) {
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("GET", path, true);
-        xmlhttp.send();
-        xmlhttp.onload = function() {
-          if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-            resolve(JSON.parse(xmlhttp.responseText));
-          }
-          else {
-            reject();
-          }
+    	   //path is json
+    	   if (path.startsWith("{"))
+    		   {
+    		   		resolve(JSON.parse(path));
+    		   }
+    	   // path is a file
+    	   else
+    		   {
+    	        var xmlhttp = new XMLHttpRequest();
+    	        xmlhttp.open("GET", path, true);
+    	        xmlhttp.send();
+    	        xmlhttp.onload = function() {
+    	          if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+    	            resolve(JSON.parse(xmlhttp.responseText));
+    	          }
+    	          else {
+    	            reject();
+    	          }
+    		   }
         };
       });
     }

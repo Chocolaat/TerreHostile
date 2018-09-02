@@ -22,8 +22,10 @@ require(
 			// ---------------------------------------
 
 			function launch() {
+				
+				var map = '{ "ground": [ [9,9,9,9,9,9,9,9,9,9], [9,17,17,17,17,17,17,17,17,9], [9,17,17,17,17,17,17,17,17,9], [17,17,17,17,17,17,17,17,17,17], [17,17,17,17,17,17,17,17,17,17], [17,17,17,17,17,17,17,17,17,17], [9,17,17,17,17,17,17,17,17,9], [9,17,17,17,17,17,17,17,17,9], [9,17,17,17,17,17,17,17,17,9], [9,9,9,9,9,9,9,9,9,9] ], "height": [ [2,1,1,1,1,1,1,1,1,2], [1,0,0,0,0,0,0,0,0,1], [1,0,0,0,0,0,0,0,0,1], [0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], [1,0,0,0,0,0,0,0,0,1], [1,0,0,0,0,0,0,0,0,1], [1,0,0,0,0,0,0,0,0,1], [2,1,1,1,1,1,1,1,1,2] ], "objects": [ [1,1,1,1,1,1,1,1,1,1], [1,0,0,0,0,0,0,0,0,1], [1,0,0,0,0,0,0,0,0,1], [0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], [1,0,0,0,0,0,0,0,0,1], [1,0,0,0,0,0,0,0,0,1], [1,0,0,0,0,0,0,0,0,1], [1,1,1,1,1,1,1,1,1,1] ] }';
 
-				jsonLoader([ '../json/map.json', '../json/imageFiles.json' ])
+				jsonLoader([ map, '../json/imageFiles.json' ])
 						.then(
 								function(jsonResponse) {
 
@@ -92,8 +94,7 @@ require(
 				vh = document.getElementById('mapView').offsetHeight;
 				
 		        var context = CanvasControl.create("mapViewCanvas", 1250, 500, {}, "mapView");
-		        console.log("vw" + vw);
-		        console.log(" vh" +  vh);
+		        
 				//CanvasControl.fullScreen();
 
 				var input = new CanvasInput(document, CanvasControl());
@@ -119,7 +120,6 @@ require(
 				});
 
 		        input.keyboard(function(pressed, keydown) {
-		        	console.log("PRESSED " + pressed);
 		          if (!keydown) {
 		            switch(pressed) {
 		              case 65:

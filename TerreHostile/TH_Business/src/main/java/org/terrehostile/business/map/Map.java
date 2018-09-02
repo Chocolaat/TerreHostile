@@ -27,8 +27,8 @@ public class Map {
 	public static Map createMapStr()
 	{
 		List<String> backgroundStrTypes = new ArrayList<String>();
-		backgroundStrTypes.add("STONE");
 		backgroundStrTypes.add("GRASS");
+		backgroundStrTypes.add("STONE");
 		
 		
 		return createMapFromStringBackgrounds(10, 10, backgroundStrTypes);
@@ -59,30 +59,9 @@ public class Map {
 		for (String bgStrType : strBackgroundTypes)
 		{
 			lvlBackgroundTypes.add(BackgroundType.valueOf(bgStrType));
-		}
+		} 
 		
-		Map currentMap = new Map();
-		currentMap.height = height;
-		currentMap.width = height;
-		currentMap.map = new ArrayList<Tile>();
-		
-		for (int w = 0 ; w < width ; w++)
-		{
-			for (int h = 0 ; h < height ; h++)
-			{
-				ArrayList<TileLevel> tileLevelList = new ArrayList<TileLevel>();
-				int level =0;
-				for (BackgroundType bgType : lvlBackgroundTypes)
-				{
-					tileLevelList.add(new TileLevel(bgType, level));
-					level --;
-				}
-				
-				Tile tile = new Tile(tileLevelList);
-				currentMap.map.add(tile);
-			}
-		}
-		return currentMap;
+		return createMapFromBackgrounds (width, height, lvlBackgroundTypes);
 	}
 	
 	public static Map createMapFromBackgrounds (int width, int height, List<BackgroundType> lvlBackgroundTypes)
@@ -98,7 +77,7 @@ public class Map {
 			for (int h = 0 ; h < height ; h++)
 			{
 				ArrayList<TileLevel> tileLevelList = new ArrayList<TileLevel>();
-				int level =0;
+				int level = 0;
 				for (BackgroundType bgType : lvlBackgroundTypes)
 				{
 					tileLevelList.add(new TileLevel(bgType, level));
