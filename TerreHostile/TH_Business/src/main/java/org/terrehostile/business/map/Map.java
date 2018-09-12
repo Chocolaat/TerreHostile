@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
 
 import org.terrehostile.business.admin.authentification.Role;
 import org.terrehostile.business.admin.authentification.User;
@@ -17,8 +18,8 @@ public class Map {
 	public static Map createMapBack()
 	{
 		List<BackgroundType> backgroundTypes = new ArrayList<BackgroundType>();
-		backgroundTypes.add(BackgroundType.STONE);
-		backgroundTypes.add(BackgroundType.GRASS);
+		backgroundTypes.add(BackgroundType.ROCK);
+		backgroundTypes.add(BackgroundType.GRASS_1);
 		
 		
 		return createMapFromBackgrounds(10, 10, backgroundTypes);
@@ -27,8 +28,13 @@ public class Map {
 	public static Map createMapStr()
 	{
 		List<String> backgroundStrTypes = new ArrayList<String>();
-		backgroundStrTypes.add("GRASS");
-		backgroundStrTypes.add("STONE");
+		
+		int randomNum = ThreadLocalRandom.current().nextInt(1, 9);
+		System.out.println("randomNum = " + randomNum);
+		String randomGrass = "GRASS_" + randomNum;
+		
+		backgroundStrTypes.add(randomGrass);
+		backgroundStrTypes.add("ROCK");
 		
 		
 		return createMapFromStringBackgrounds(10, 10, backgroundStrTypes);

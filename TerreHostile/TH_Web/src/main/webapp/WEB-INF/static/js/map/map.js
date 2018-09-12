@@ -21,10 +21,87 @@ require(
 			})();
 			// ---------------------------------------
 
+			
+			function constructJsonMap(javaMap)
+			{
+				var constructedMap = "";
+				console.log ("javaMap = " + javaMap);
+				console.log ("javaMap.width = " + javaMap.width);
+				console.log ("javaMap.height = " + javaMap.height);
+				i = 0;
+				
+				for (x = 0; x < javaMap.width; x++) {
+
+					
+					for (y = 0; y < javaMap.height; y++) {
+
+						console.log ("x = " + x);
+						console.log ("y = " + y);
+					    mapTile = javaMap.map[i] ;
+						console.log ("mapTile = " + mapTile);
+						console.log ("mapTile.levelList = " + mapTile.levelList);
+						console.log ("i = " + i);
+						i++;
+						
+						for (j = 0; j < mapTile.levelList.length; j++) { 
+						    mapTileLevel = mapTile.levelList[j] ;
+						    					
+						
+							if (mapTileLevel.levelValue == 0)
+								{
+									if (y == 0)
+										{
+											constructedColumn = " [ " + mapTileLevel.backgroundValue + ", ";
+										}
+									else if (y == javaMap.height - 1)
+										{
+											constructedColumn = constructedColumn + mapTileLevel.backgroundValue + " ]";
+										}
+									else
+										{
+											constructedColumn = constructedColumn + mapTileLevel.backgroundValue + ", ";
+										}
+								}
+
+							console.log ("constructedColumn = " + constructedColumn);
+						}
+					}
+					
+					if (x == 0)
+						{
+							constructedMap = "[ " + constructedColumn + ", "
+						}
+					else if (x == javaMap.width - 1)
+						{
+						constructedMap = constructedMap + constructedColumn + " ]"
+						}
+					else
+						{
+							constructedMap = constructedMap + constructedColumn + ", "
+						}			
+
+					console.log ("constructedMap = " + constructedMap);
+				}
+				
+				constructedMap = "{ \"ground\": " + constructedMap + " }";
+				console.log("constructedMap = " + constructedMap)
+				
+
+				
+				return constructedMap;
+			}
+			
+			
 			function launch() {
+
+				console.log ("constructJsonMap Begin");
+				
+				console.log ("constructJsonMap End");
 				
 				var map = '{ "ground": [ [9,9,9,9,9,9,9,9,9,9], [9,17,17,17,17,17,17,17,17,9], [9,17,17,17,17,17,17,17,17,9], [17,17,17,17,17,17,17,17,17,17], [17,17,17,17,17,17,17,17,17,17], [17,17,17,17,17,17,17,17,17,17], [9,17,17,17,17,17,17,17,17,9], [9,17,17,17,17,17,17,17,17,9], [9,17,17,17,17,17,17,17,17,9], [9,9,9,9,9,9,9,9,9,9] ], "height": [ [2,1,1,1,1,1,1,1,1,2], [1,0,0,0,0,0,0,0,0,1], [1,0,0,0,0,0,0,0,0,1], [0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], [1,0,0,0,0,0,0,0,0,1], [1,0,0,0,0,0,0,0,0,1], [1,0,0,0,0,0,0,0,0,1], [2,1,1,1,1,1,1,1,1,2] ], "objects": [ [1,1,1,1,1,1,1,1,1,1], [1,0,0,0,0,0,0,0,0,1], [1,0,0,0,0,0,0,0,0,1], [0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], [1,0,0,0,0,0,0,0,0,1], [1,0,0,0,0,0,0,0,0,1], [1,0,0,0,0,0,0,0,0,1], [1,1,1,1,1,1,1,1,1,1] ] }';
 
+				map = constructJsonMap(mapStr);
+				
 				jsonLoader([ map, '../json/imageFiles.json' ])
 						.then(
 								function(jsonResponse) {
