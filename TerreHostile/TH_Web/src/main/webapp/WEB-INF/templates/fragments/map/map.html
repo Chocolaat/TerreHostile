@@ -1,11 +1,46 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
-
+	
+<head th:replace="fragments/pageStructure :: head"></head>
+<meta charset="ISO-8859-1" />
 
 <section id="mapContainer" th:fragment="map">
 
-	<section id="mapView"> </section>
+
+	<div id="mapView"> </div>
+
+	<div id="mapToolBar"> 
+	
+	<button type="button" class="mapToolBarItem">Type de terrain</button>
+	<button type="button" class="mapToolBarItem">Bâtiments</button>
+	<button type="button" class="mapToolBarItem"></button>
+	
+	
+	
+	
+	</div>
+	
+	<div id="mapToolBarSubMenu"> 
+	
+	<button type="button" class="mapToolBarSubMenuItem">Grass</button>
+	<button type="button" class="mapToolBarSubMenuItem">Rock</button>
+	<button type="button" class="mapToolBarSubMenuItem">Stone</button>
+	<button type="button" class="mapToolBarSubMenuItem">Ocean</button>
+	<button type="button" class="mapToolBarSubMenuItem">Ocean</button>
+	<button type="button" class="mapToolBarSubMenuItem">Ocean</button>
+	<button type="button" class="mapToolBarSubMenuItem">Ocean</button>
+	<button type="button" class="mapToolBarSubMenuItem">Ocean</button>
+	<button type="button" class="mapToolBarSubMenuItem">Ocean</button>
+	<button type="button" class="mapToolBarSubMenuItem">Ocean</button>
+	<button type="button" class="mapToolBarSubMenuItem">Ocean</button>
+	<button type="button" class="mapToolBarSubMenuItem">Ocean</button>
+	<button type="button" class="mapToolBarSubMenuItem">Ocean</button>
+	<button type="button" class="mapToolBarSubMenuItem">Ocean</button>
+	
+	
+	</div>
+	
 
 	<script th:attr="data-main=@{/js/config.js}" th:src="@{/js/requirejs/require.js}"></script>
 	
@@ -17,7 +52,7 @@
 <script th:inline="javascript">
 /*<![CDATA[*/
 
-    var mapStr = /*[[${mapStr}]]*/ "mapStr";  
+    var map = /*[[${map}]]*/ "map";  
 
 /*]]>*/
 </script>

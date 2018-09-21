@@ -13,9 +13,7 @@ public class MapEditorControler {
 	@RequestMapping(value={"/admin/mapEditor"}, method = RequestMethod.GET)
 	public ModelAndView createMap(){
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("mapStr", Map.createMapStr());
-		modelAndView.addObject("mapBck", Map.createMapBack());
-		modelAndView.addObject("user", Map.createUser());
+		modelAndView.addObject("map", Map.createMapRandomBackgrounds(10, 10));
 		modelAndView.setViewName("admin/homeMapEditor");
 		return modelAndView;
 	}

@@ -18,9 +18,7 @@ public class Map {
 	public static Map createMapBack()
 	{
 		List<BackgroundType> backgroundTypes = new ArrayList<BackgroundType>();
-		backgroundTypes.add(BackgroundType.ROCK);
-		backgroundTypes.add(BackgroundType.GRASS_1);
-		
+		backgroundTypes.add(BackgroundType.GROUND);		
 		
 		return createMapFromBackgrounds(10, 10, backgroundTypes);
 	}
@@ -30,7 +28,6 @@ public class Map {
 		List<String> backgroundStrTypes = new ArrayList<String>();
 		
 		int randomNum = ThreadLocalRandom.current().nextInt(1, 9);
-		System.out.println("randomNum = " + randomNum);
 		String randomGrass = "GRASS_" + randomNum;
 		
 		backgroundStrTypes.add(randomGrass);
@@ -89,6 +86,43 @@ public class Map {
 					tileLevelList.add(new TileLevel(bgType, level));
 					level --;
 				}
+				
+				Tile tile = new Tile(tileLevelList);
+				currentMap.map.add(tile);
+			}
+		}
+		
+		return currentMap;
+	}
+	
+	public static Map createMapRandomBackgrounds (int width, int height)
+	{
+	
+		Map currentMap = new Map();
+		currentMap.height = height;
+		currentMap.width = height;
+		currentMap.map = new ArrayList<Tile>();
+		
+		for (int w = 0 ; w < width ; w++)
+		{
+			for (int h = 0 ; h < height ; h++)
+			{
+				ArrayList<TileLevel> tileLevelList = new ArrayList<TileLevel>();
+				int level = 0;
+				
+				int randomNum = ThreadLocalRandom.current().nextInt(1, 4);
+				BackgroundType bgType;
+				
+				switch (randomNum)
+				{
+				case 1 : bgType = BackgroundType.GRASS; break;
+				case 2 : bgType = BackgroundType.GROUND; break;
+				case 3 : bgType = BackgroundType.OCEAN; break;
+				case 4 : bgType = BackgroundType.SAND; break;
+				default: bgType = BackgroundType.GROUND; break;
+				}
+					
+			    tileLevelList.add(new TileLevel(bgType, 0));
 				
 				Tile tile = new Tile(tileLevelList);
 				currentMap.map.add(tile);

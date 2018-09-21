@@ -3,7 +3,7 @@ git remote add origin https://github.com/Chocolaat/Terre-Hostile.git
 
 
 
-git pull origin master => update de origin vers master
+git pull origin master => update de origin par master
 
 git status => liste fichiers ajoutés, supprimés ...
 git status -s
