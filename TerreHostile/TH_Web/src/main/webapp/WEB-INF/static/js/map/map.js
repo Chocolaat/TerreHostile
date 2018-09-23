@@ -104,6 +104,7 @@ require(
 																			layout : jsonResponse[0].ground,
 																			graphics : imgResponse[0].files,
 																			graphicsDictionary : imgResponse[0].dictionary,
+																			isometric: true,
 																			heightMap : {
 																				map : jsonResponse[0].height,
 																				offset : 0,
@@ -156,18 +157,18 @@ require(
 
 				var input = new CanvasInput(document, CanvasControl());
 
-				input.mouse_action(function(coords) {
-					tile_coordinates = mapLayers[0].applyMouseFocus(coords.x,
-							coords.y); // Get the current mouse location from X & Y Coords
-					mapLayers[0]
-							.setHeightmapTile(tile_coordinates.x,
-									tile_coordinates.y, mapLayers[0]
-											.getHeightMapTile(
-													tile_coordinates.x,
-													tile_coordinates.y) + 1); // Increase heightmap tile 
-					mapLayers[0].setTile(tile_coordinates.x,
-							tile_coordinates.y, 9); // Force the changing of tile graphic
-				});
+//				input.mouse_action(function(coords) {
+//					tile_coordinates = mapLayers[0].applyMouseFocus(coords.x,
+//							coords.y); // Get the current mouse location from X & Y Coords
+//					mapLayers[0]
+//							.setHeightmapTile(tile_coordinates.x,
+//									tile_coordinates.y, mapLayers[0]
+//											.getHeightMapTile(
+//													tile_coordinates.x,
+//													tile_coordinates.y) + 1); // Increase heightmap tile 
+//					mapLayers[0].setTile(tile_coordinates.x,
+//							tile_coordinates.y, 9); // Force the changing of tile graphic
+//				});
 
 				input.mouse_move(function(coords) {
 					mapLayers.map(function(layer) {

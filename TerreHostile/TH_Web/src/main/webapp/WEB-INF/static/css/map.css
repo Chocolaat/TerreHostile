@@ -47,9 +47,26 @@
   color: #FFFFFF;
   border-radius: 5px;
   padding: 2px;
-  background-image: url("../img/JsIso/ground/1-grass-1.png");
   background-repeat: repeat;
 }
+
+#mapToolBarSubMenuItem_Grass {
+  background-image: url("../img/JsIso/ground/grass_square.png");
+}
+
+#mapToolBarSubMenuItem_Ground {
+  background-image: url("../img/JsIso/ground/ground_square.png");
+}
+
+#mapToolBarSubMenuItem_Ocean {
+  background-image: url("../img/JsIso/ground/ocean_square.png");
+}
+
+#mapToolBarSubMenuItem_Sand {
+  background-image: url("../img/JsIso/ground/sand_square.png");
+}
+
+
 
 #mapViewCanvas
 {

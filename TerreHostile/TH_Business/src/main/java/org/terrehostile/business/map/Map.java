@@ -108,7 +108,6 @@ public class Map {
 			for (int h = 0 ; h < height ; h++)
 			{
 				ArrayList<TileLevel> tileLevelList = new ArrayList<TileLevel>();
-				int level = 0;
 				
 				int randomNum = ThreadLocalRandom.current().nextInt(1, 4);
 				BackgroundType bgType;

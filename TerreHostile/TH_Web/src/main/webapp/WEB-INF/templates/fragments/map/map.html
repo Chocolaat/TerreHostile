@@ -12,38 +12,37 @@
 
 	<div id="mapToolBar"> 
 	
-	<button type="button" class="mapToolBarItem">Type de terrain</button>
-	<button type="button" class="mapToolBarItem">Bâtiments</button>
+	<button type="button" class="mapToolBarItem" onclick="show('mapToolBarSubMenu_groundType')">Type de terrain</button>
+	<button type="button" class="mapToolBarItem" onclick="show('mapToolBarSubMenu_Buildings')">Bâtiments</button>
 	<button type="button" class="mapToolBarItem"></button>
-	
-	
-	
 	
 	</div>
 	
 	<div id="mapToolBarSubMenu"> 
-	
-	<button type="button" class="mapToolBarSubMenuItem">Grass</button>
-	<button type="button" class="mapToolBarSubMenuItem">Rock</button>
-	<button type="button" class="mapToolBarSubMenuItem">Stone</button>
-	<button type="button" class="mapToolBarSubMenuItem">Ocean</button>
-	<button type="button" class="mapToolBarSubMenuItem">Ocean</button>
-	<button type="button" class="mapToolBarSubMenuItem">Ocean</button>
-	<button type="button" class="mapToolBarSubMenuItem">Ocean</button>
-	<button type="button" class="mapToolBarSubMenuItem">Ocean</button>
-	<button type="button" class="mapToolBarSubMenuItem">Ocean</button>
-	<button type="button" class="mapToolBarSubMenuItem">Ocean</button>
-	<button type="button" class="mapToolBarSubMenuItem">Ocean</button>
-	<button type="button" class="mapToolBarSubMenuItem">Ocean</button>
-	<button type="button" class="mapToolBarSubMenuItem">Ocean</button>
-	<button type="button" class="mapToolBarSubMenuItem">Ocean</button>
-	
-	
 	</div>
 	
-
-	<script th:attr="data-main=@{/js/config.js}" th:src="@{/js/requirejs/require.js}"></script>
 	
+	
+	<div id = "mapToolBarSubMenu_groundType" style='display:none'> 
+		<button type="button" class="mapToolBarSubMenuItem" id="mapToolBarSubMenuItem_Grass">Grass</button>
+		<button type="button" class="mapToolBarSubMenuItem" id="mapToolBarSubMenuItem_Ground">Ground</button>
+		<button type="button" class="mapToolBarSubMenuItem" id="mapToolBarSubMenuItem_Ocean">Ocean</button>
+		<button type="button" class="mapToolBarSubMenuItem" id="mapToolBarSubMenuItem_Sand">Sand</button>
+	</div>
+	
+	<div id="mapToolBarSubMenu_Buildings"  style='display:none'> 
+	Buildings
+	</div>
+	
+	
+
+	<script th:attr="data-main=@{/js/config.js}" th:src="@{/js/requirejs/require.js}">
+	</script>
+	
+	<script> function show(param_div_id) {
+	    document.getElementById('mapToolBarSubMenu').innerHTML = document.getElementById(param_div_id).innerHTML;
+	  } </script>
+
 	
 	<!-- Initialisation varibales pour javascritp -->
 	
