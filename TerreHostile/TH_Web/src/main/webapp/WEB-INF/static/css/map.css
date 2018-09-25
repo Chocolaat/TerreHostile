@@ -3,32 +3,46 @@
 #mapContainer
 {
     display:flex;
-    widht:100%;
+    width:100%;
     height:100%;
     border: dashed black;
+  	overflow-y: hidden;
+  	overflow-x: hidden;
 }
 
 #mapView
 {
     height:100%;
+    width:100%;
     border: dashed green;
+  	overflow-y: hidden;
+ 	overflow-x: hidden;
+}
+
+
+#mapViewCanvas
+{
+    width:2000px;
+    height:1000px;
+    border: dashed red;
 }
 
 #mapToolBar
 {
-  	width:10%;
-    height:100%;
-    border: dashed yellow; 
-    padding: 0px;
+	width:10%;
+	display: inline-grid;
+ 	grid-template-columns: 100%;
+	grid-gap: 2px 2px;
+	border: dashed yellow; 
+	padding: 0px;
+	color: #444;
 	overflow-y: auto;
 	overflow-x: hidden;
 }
 
 .mapToolBarItem {
-  width:100%;
   color: #000;
   border-radius: 5px;
-  height:120px;
 }
 
 
@@ -66,11 +80,3 @@
   background-image: url("../img/JsIso/ground/sand_square.png");
 }
 
-
-
-#mapViewCanvas
-{
-    width:100%;
-    height:100%;
-    border: dashed red;
-}

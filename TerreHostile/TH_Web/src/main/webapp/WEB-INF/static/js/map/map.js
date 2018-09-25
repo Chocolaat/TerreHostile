@@ -96,7 +96,6 @@ require(
 														var game = new main(0,
 																0, 10, 10,
 																imgResponse[1]); // X & Y drawing position, and tile span to draw 
-
 														game
 																.init([
 																		{
@@ -118,25 +117,27 @@ require(
 																				verticalColor : '(5, 5, 30, 0.4)',
 																				horizontalColor : '(6, 5, 50, 0.5)'
 																			}
-																		},
-																		{
-																			title : "TestSCh",
-																			layout : jsonResponse[0].ground,
-																			graphics : imgResponse[0].files,
-																			graphicsDictionary : imgResponse[0].dictionary,
-																			heightMap : {
-																				map : jsonResponse[0].height,
-																				offset : 0,
-																				heightTile : imgResponse[0].files["1-grass-8.png"],
-																			},
-																			tileHeight : 50,
-																			tileWidth : 100,
-																			applyInteractions : true
 																		}
+//																		{
+//																			title : "TestSCh",
+//																			layout : jsonResponse[0].ground,
+//																			graphics : imgResponse[0].files,
+//																			graphicsDictionary : imgResponse[0].dictionary,
+//																			heightMap : {
+//																				map : jsonResponse[0].height,
+//																				offset : 0,
+//																				heightTile : imgResponse[0].files["1-grass-8.png"],
+//																			},
+//																			tileHeight : 50,
+//																			tileWidth : 100,
+//																			applyInteractions : true
+//																		}
 																		]);
 
 													});
 								});
+
+				
 			}
 
 			function main(x, y, xrange, yrange, playerImages) {
@@ -145,17 +146,11 @@ require(
 				var mapLayers = [];
 				var rangeX = xrange;
 				var rangeY = yrange;
-
-//				var context = CanvasControl.createSizeNotFixed("mapViewCanvas", "mapView");
-				
-				vw = document.getElementById('mapView').offsetWidth;
-				vh = document.getElementById('mapView').offsetHeight;
-				
-		        var context = CanvasControl.create("mapViewCanvas", 1250, 500, {}, "mapView");
+							
+		        var context = CanvasControl.create("mapViewCanvas", 2000, 1000, {}, "mapView");
 		        
-				//CanvasControl.fullScreen();
-
 				var input = new CanvasInput(document, CanvasControl());
+
 
 //				input.mouse_action(function(coords) {
 //					tile_coordinates = mapLayers[0].applyMouseFocus(coords.x,
@@ -278,7 +273,6 @@ require(
 									CanvasControl().height,
 									CanvasControl().width);
 							mapLayers[i].setup(layers[i]);
-
 						};
 						draw();
 					}
@@ -286,5 +280,6 @@ require(
 			}
 			
 			launch();
+
 
 		});

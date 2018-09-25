@@ -58,14 +58,14 @@ define(function() {
       if (usePixelRatio) {
         pxRatio = _getRatio();
       }
-      width = w;
-      height = h;
+      
       canvasElement = document.createElement('canvas');
       canvasElement.id = name;
       canvasElement.tabindex = "1";
       for (var s in style) {
         canvasElement.style[s] = style[s];
       }
+      
       
       canvasType = '2d';
       canvasElement.width = w * pxRatio || window.innerWidth;
