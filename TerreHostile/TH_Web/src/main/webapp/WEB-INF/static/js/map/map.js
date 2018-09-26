@@ -1,3 +1,14 @@
+
+
+var groundValueGlobal;
+
+function setGroundTypeFocus(groundValue)
+{
+	groundValueGlobal = groundValue;
+}
+
+
+
 require(
 		[ 'jsiso/canvas/Control', 'jsiso/canvas/Input', 'jsiso/img/load',
 				'jsiso/json/load', 'jsiso/tile/Field',
@@ -20,6 +31,7 @@ require(
 						};
 			})();
 			// ---------------------------------------
+
 
 			
 			function constructJsonMap(javaMap)
@@ -93,9 +105,10 @@ require(
 											.then(
 													function(imgResponse) {
 
-														var game = new main(0,
+														game = new main(0,
 																0, 10, 10,
 																imgResponse[1]); // X & Y drawing position, and tile span to draw 
+
 														game
 																.init([
 																		{
@@ -151,8 +164,10 @@ require(
 		        
 				var input = new CanvasInput(document, CanvasControl());
 
-
 				input.mouse_action(function(coords) {
+					
+					
+					
 					tile_coordinates = mapLayers[0].applyMouseFocus(coords.x,
 							coords.y); // Get the current mouse location from X & Y Coords
 					mapLayers[0]
@@ -161,8 +176,9 @@ require(
 											.getHeightMapTile(
 													tile_coordinates.x,
 													tile_coordinates.y) + 0); // Increase heightmap tile 
-					mapLayers[0].setTile(tile_coordinates.x,
-							tile_coordinates.y, 1); // Force the changing of tile graphic
+					
+					newTile = (groundValueGlobal != undefined) ? groundValueGlobal : 1;
+					mapLayers[0].setTile(tile_coordinates.x, tile_coordinates.y, newTile); // Force the changing of tile graphic
 				});
 
 				input.mouse_move(function(coords) {
@@ -171,6 +187,7 @@ require(
 								coords.y); // Apply mouse rollover via mouse location X & Y
 					});
 				});
+				
 
 		        input.keyboard(function(pressed, keydown) {
 		          if (!keydown) {
@@ -248,6 +265,8 @@ require(
 		          }
 		        });
 
+
+				
 				function draw() {
 					context.clearRect(0, 0, CanvasControl().width,
 							CanvasControl().height);

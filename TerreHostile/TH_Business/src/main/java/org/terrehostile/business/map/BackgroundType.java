@@ -3,10 +3,10 @@ package org.terrehostile.business.map;
 public enum BackgroundType {
 
 	
-	GRASS(1, 0),
-	GROUND(2, 0),
-	OCEAN(3, 0),
-	SAND(4, 0);
+	GRASS(0, 0),
+	GROUND(1, 0),
+	OCEAN(2, 0),
+	SAND(3, 0);
 
 	private int imgPositionInimageFilesJson;
 	private int moveMod;
@@ -28,5 +28,4 @@ public enum BackgroundType {
 	public int getImgPositionInimageFilesJson() {
 		return imgPositionInimageFilesJson;
 	}
-	
 }

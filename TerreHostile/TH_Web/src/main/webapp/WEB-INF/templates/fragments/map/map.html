@@ -5,59 +5,46 @@
 <head th:replace="fragments/pageStructure :: head"></head>
 <meta charset="ISO-8859-1" />
 
-<section id="mapContainer" th:fragment="map">
 
+
+<section id="mapContainer" th:fragment="map">
 
 	<div id="mapView"> </div>
 
 	<div id="mapToolBar"> 
-	
 	<button type="button" class="mapToolBarItem" onclick="show('mapToolBarSubMenu_groundType')">Type de terrain</button>
 	<button type="button" class="mapToolBarItem" onclick="show('mapToolBarSubMenu_Buildings')">Bâtiments</button>
 	<button type="button" class="mapToolBarItem"></button>
-	
 	</div>
 	
-	<div id="mapToolBarSubMenu"> 
-	</div>
-	
-	
+	<div id="mapToolBarSubMenu"> </div>
 	
 	<div id = "mapToolBarSubMenu_groundType" style='display:none'> 
-		<button type="button" class="mapToolBarSubMenuItem" id="mapToolBarSubMenuItem_Grass">Grass</button>
-		<button type="button" class="mapToolBarSubMenuItem" id="mapToolBarSubMenuItem_Ground">Ground</button>
-		<button type="button" class="mapToolBarSubMenuItem" id="mapToolBarSubMenuItem_Ocean">Ocean</button>
-		<button type="button" class="mapToolBarSubMenuItem" id="mapToolBarSubMenuItem_Sand">Sand</button>
-	</div>
-	
-	<div id="mapToolBarSubMenu_Buildings"  style='display:none'> 
-	Buildings
+		<button type="button" class="mapToolBarSubMenuItem" id="mapToolBarSubMenuItem_Grass" onClick="setGroundTypeFocus(0)">Grass</button>
+		<button type="button" class="mapToolBarSubMenuItem" id="mapToolBarSubMenuItem_Ground" onClick="setGroundTypeFocus(1)">Ground</button>
+		<button type="button" class="mapToolBarSubMenuItem" id="mapToolBarSubMenuItem_Ocean" onClick="setGroundTypeFocus(2)">Ocean</button>
+		<button type="button" class="mapToolBarSubMenuItem" id="mapToolBarSubMenuItem_Sand" onClick="setGroundTypeFocus(3)">Sand</button>
 	</div>
 	
 	
-
-	<script th:attr="data-main=@{/js/config.js}" th:src="@{/js/requirejs/require.js}">
-	</script>
 	
+	<div id="mapToolBarSubMenu_Buildings"  style='display:none'> Buildings </div>
+	
+	
+	<!-- Scripts for map.html elements -->
 	<script> function show(param_div_id) {
 	    document.getElementById('mapToolBarSubMenu').innerHTML = document.getElementById(param_div_id).innerHTML;
 	  } </script>
-
-	
-	<!-- Initialisation varibales pour javascritp -->
-	
-
-	
-<script th:inline="javascript">
-/*<![CDATA[*/
-
-    var map = /*[[${map}]]*/ "map";  
-
-/*]]>*/
-</script>
-	 
-	  <script > 
 	  
+	  
+	<!-- Initialisation variables from html/server to javascript -->
+	<script th:inline="javascript">
+    	var map = /*[[${map}]]*/ "map";  
+    </script>
+
+<!-- Load  scripts and librairies -->
+<script th:attr="data-main=@{/js/config.js}" th:src="@{/js/requirejs/require.js}"></script>
+<script > 
 	  require([
 	      'jsiso/canvas/Control',
 	      'jsiso/canvas/Input',
@@ -76,6 +63,6 @@
 	      'map/map',
 	      'requirejs/domReady!'
 		  ])
-	  
-	  </script>
+</script>
+
 </section>

@@ -109,15 +109,15 @@ public class Map {
 			{
 				ArrayList<TileLevel> tileLevelList = new ArrayList<TileLevel>();
 				
-				int randomNum = ThreadLocalRandom.current().nextInt(1, 4);
+				int randomNum = ThreadLocalRandom.current().nextInt(0, 3);
 				BackgroundType bgType;
 				
 				switch (randomNum)
 				{
-				case 1 : bgType = BackgroundType.GRASS; break;
-				case 2 : bgType = BackgroundType.GROUND; break;
-				case 3 : bgType = BackgroundType.OCEAN; break;
-				case 4 : bgType = BackgroundType.SAND; break;
+				case 0 : bgType = BackgroundType.GRASS; break;
+				case 1 : bgType = BackgroundType.GROUND; break;
+				case 2 : bgType = BackgroundType.OCEAN; break;
+				case 3 : bgType = BackgroundType.SAND; break;
 				default: bgType = BackgroundType.GROUND; break;
 				}
 					
