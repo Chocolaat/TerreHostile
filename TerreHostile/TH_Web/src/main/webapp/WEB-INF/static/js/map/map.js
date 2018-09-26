@@ -46,27 +46,19 @@ require(
 
 					    mapTile = javaMap.map[i] ;
 						i++;
-						
-						for (j = 0; j < mapTile.levelList.length; j++) { 
-						    mapTileLevel = mapTile.levelList[j] ;
-						    					
-						
-							if (mapTileLevel.levelValue == 0)
-								{
-									if (y == 0)
-										{
-											constructedColumn = " [ " + mapTileLevel.backgroundValue + ", ";
-										}
-									else if (y == javaMap.height - 1)
-										{
-											constructedColumn = constructedColumn + mapTileLevel.backgroundValue + " ]";
-										}
-									else
-										{
-											constructedColumn = constructedColumn + mapTileLevel.backgroundValue + ", ";
-										}
-								}
-						}
+			
+						if (y == 0)
+							{
+								constructedColumn = " [ " + mapTile.backgroundValue + ", ";
+							}
+						else if (y == javaMap.height - 1)
+							{
+								constructedColumn = constructedColumn + mapTile.backgroundValue + " ]";
+							}
+						else
+							{
+								constructedColumn = constructedColumn + mapTile.backgroundValue + ", ";
+							}
 					}
 					
 					if (x == 0)
@@ -84,8 +76,7 @@ require(
 				}
 				
 				constructedMap = "{ \"ground\": " + constructedMap + ", \"height\": [ [0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0] ]" +  " }";				
-
-				
+		
 				return constructedMap;
 			}
 			

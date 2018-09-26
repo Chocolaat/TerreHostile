@@ -1,13 +1,9 @@
 package org.terrehostile.business.map;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
-import org.terrehostile.business.admin.authentification.Role;
-import org.terrehostile.business.admin.authentification.User;
 
 public class Map {
 	
@@ -37,25 +33,6 @@ public class Map {
 		return createMapFromStringBackgrounds(10, 10, backgroundStrTypes);
 	}
 	
-	public static User createUser()
-	{
-		User user = new User();
-		user.setEmail("toto");
-		
-		Role role1 = new Role();
-		role1.setRole("ADMIN");
-		Role role2 = new Role();
-		role2.setRole("USER");
-		
-		Set<Role> roles= new HashSet<Role>();
-		roles.add(role1);
-		roles.add(role2);
-		
-		user.setRoles(roles);
-		
-		return user;
-	}
-	
 	public static Map createMapFromStringBackgrounds (int width, int height, List<String> strBackgroundTypes)
 	{
 		List<BackgroundType> lvlBackgroundTypes = new ArrayList<BackgroundType>();
@@ -79,16 +56,10 @@ public class Map {
 		{
 			for (int h = 0 ; h < height ; h++)
 			{
-				ArrayList<TileLevel> tileLevelList = new ArrayList<TileLevel>();
-				int level = 0;
 				for (BackgroundType bgType : lvlBackgroundTypes)
 				{
-					tileLevelList.add(new TileLevel(bgType, level));
-					level --;
+					currentMap.map.add(new Tile(bgType, 0));
 				}
-				
-				Tile tile = new Tile(tileLevelList);
-				currentMap.map.add(tile);
 			}
 		}
 		
@@ -107,7 +78,6 @@ public class Map {
 		{
 			for (int h = 0 ; h < height ; h++)
 			{
-				ArrayList<TileLevel> tileLevelList = new ArrayList<TileLevel>();
 				
 				int randomNum = ThreadLocalRandom.current().nextInt(0, 3);
 				BackgroundType bgType;
@@ -120,11 +90,8 @@ public class Map {
 				case 3 : bgType = BackgroundType.SAND; break;
 				default: bgType = BackgroundType.GROUND; break;
 				}
-					
-			    tileLevelList.add(new TileLevel(bgType, 0));
 				
-				Tile tile = new Tile(tileLevelList);
-				currentMap.map.add(tile);
+				currentMap.map.add(new Tile(bgType, 0));
 			}
 		}
 		
@@ -174,5 +141,5 @@ public class Map {
 	public void setMap(List<Tile> map) {
 		this.map = map;
 	}
-
+	
 }

@@ -1,22 +1,51 @@
 package org.terrehostile.business.map;
 
-import java.util.List;
-
 public class Tile {
 	
-	private List<TileLevel> levelList;
+	private BackgroundType background;
+	private int backgroundValue;
+	private OnTileObject listElems;
+	private int height;
 	
-	public Tile (List<TileLevel> levelList)
+	public Tile (BackgroundType background, int height)
 	{
-		this.levelList = levelList;
+		this.background = background;
+		this.backgroundValue = background.getImgPositionInimageFilesJson();
+		this.height = height;
+	}
+	
+	
+
+	public int getHeight() {
+		return height;
+	}
+	
+	public void setHeight(int height) {
+		this.height = height;
 	}
 
-	public List<TileLevel> getLevelList() {
-		return levelList;
+	public BackgroundType getBackground() {
+		return background;
 	}
 
-	public void setLevelList(List<TileLevel> levelList) {
-		this.levelList = levelList;
+	public void setBackground(BackgroundType background) {
+		this.background = background;
+	}
+
+	public OnTileObject getListElems() {
+		return listElems;
+	}
+
+	public void setListElems(OnTileObject listElems) {
+		this.listElems = listElems;
+	}
+
+	public int getBackgroundValue() {
+		return backgroundValue;
+	}
+
+	public void setBackgroundValue(int backgroundValue) {
+		this.backgroundValue = backgroundValue;
 	}
 	
 }
