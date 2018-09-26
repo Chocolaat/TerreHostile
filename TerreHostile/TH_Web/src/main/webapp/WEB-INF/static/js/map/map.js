@@ -160,7 +160,7 @@ require(
 									tile_coordinates.y, mapLayers[0]
 											.getHeightMapTile(
 													tile_coordinates.x,
-													tile_coordinates.y) + 1); // Increase heightmap tile 
+													tile_coordinates.y) + 0); // Increase heightmap tile 
 					mapLayers[0].setTile(tile_coordinates.x,
 							tile_coordinates.y, 1); // Force the changing of tile graphic
 				});

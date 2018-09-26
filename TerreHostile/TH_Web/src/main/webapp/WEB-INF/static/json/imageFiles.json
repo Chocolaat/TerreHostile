@@ -3,7 +3,6 @@
     "../img/JsIso/ground/grass.png",
     "../img/JsIso/ground/ground.png",
     "../img/JsIso/ground/ocean.png",
-    "../img/JsIso/ground/sand.png",
-    "../img/JsIso/game/ground/blank-block.png"
+    "../img/JsIso/ground/sand.png"
   ]
 }
