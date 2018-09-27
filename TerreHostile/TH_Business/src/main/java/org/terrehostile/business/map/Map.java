@@ -4,11 +4,31 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "map")
 public class Map {
 	
+	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name="map_id")
+	private int id;
+	
+	@Column(name = "width")
 	private int width;
+	
+	@Column(name = "height")
 	private int height;
+	
+	@Column(name = "map")
+	@Lob
 	private List<Tile> map;
 	
 	public String toJsonView()
@@ -204,5 +224,17 @@ public class Map {
 	public void setMap(List<Tile> map) {
 		this.map = map;
 	}
+
+
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	
 	
 }

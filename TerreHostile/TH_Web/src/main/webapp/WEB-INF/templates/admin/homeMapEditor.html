@@ -23,8 +23,21 @@
     	<input type="number" th:field="*{width}" />
    		<label for="height">Hauteur</label>
     	<input type="number" th:field="*{height}" />
+   		<label for="id" th:text="${map?.id}" ></label>
+   		<label for="id" th:text="${map?.width}" ></label>
+   		<label for="id" th:text="${map?.height}" ></label>
+   		<label for="id" th:text="${map?.map}" ></label>
+   		
+   		<!-- th:text= -->
     	
         <input type="submit" value="Générer une carte" />
+    </form>
+    
+    <form action="#" th:action="@{/admin/mapEditorSaveMap}" th:object="${map}" method="post">
+    	<input type="number" th:field="*{width}" hidden="true"/>
+    	<input type="number" th:field="*{height}" hidden="true"/>
+    	<input type="number" th:field="*{height}" hidden="true"/>
+        <input type="submit" value="Sauvegarder" />
     </form>
 
 			<div th:replace="fragments/map/map :: section"></div>

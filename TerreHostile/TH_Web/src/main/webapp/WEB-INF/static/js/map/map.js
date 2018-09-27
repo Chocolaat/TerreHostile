@@ -230,6 +230,14 @@ require(
 									CanvasControl().height,
 									CanvasControl().width);
 							mapLayers[i].setup(layers[i]);
+							
+							var mapViewWidth = document.getElementById('mapView').offsetWidth;
+							var mapViewHeight = document.getElementById('mapView').offsetHeight;
+														
+							mapLayers[i].align("h-center",
+									mapViewWidth, xrange, 0);
+							mapLayers[i].align("v-center",
+									mapViewHeight, yrange, 0);
 						};
 						draw();
 					}
