@@ -11,6 +11,69 @@ public class Map {
 	private int height;
 	private List<Tile> map;
 	
+	public String toJsonView()
+	{
+		StringBuilder jsonView = new StringBuilder();
+		StringBuilder jsonViewGround = new StringBuilder();
+		StringBuilder jsonViewHeight = new StringBuilder();
+
+		jsonView.append("{ ");
+		jsonViewGround.append("\"ground\": ");
+		jsonViewHeight.append("\"height\": ");
+		
+		
+		int indexInMap = 0;
+		
+		for (int i = 0; i < width; i++)
+		{
+
+			StringBuilder jsonViewColGround = new StringBuilder();
+			StringBuilder jsonViewColHeight = new StringBuilder();
+			
+			for (int j = 0; j < height; j++)
+			{
+				Tile t = map.get(indexInMap);
+				indexInMap++;
+								
+				if (j == 0)
+				{
+					jsonViewColGround.append(" [ " + t.getBackgroundValue() + ", ");
+					jsonViewColHeight.append(" [ " + t.getHeight() + ", ");
+				}
+				else if (j == height - 1)
+				{
+					jsonViewColGround.append(t.getBackgroundValue() + " ]");
+					jsonViewColHeight.append(t.getHeight() + " ]");
+				}
+				else
+				{
+					jsonViewColGround.append(t.getBackgroundValue() + ", ");
+					jsonViewColHeight.append(t.getHeight() + ", ");
+				}
+			}
+			
+			if (i == 0)
+			{
+				jsonViewGround.append("[ ").append(jsonViewColGround).append(", ");
+				jsonViewHeight.append("[ ").append(jsonViewColHeight).append(", ");
+			}
+			else if (i == width - 1)
+			{
+				jsonViewGround.append(jsonViewColGround).append(" ]");
+				jsonViewHeight.append(jsonViewColHeight).append(" ]");
+			}
+			else
+			{
+				jsonViewGround.append(jsonViewColGround).append(", ");
+				jsonViewHeight.append(jsonViewColHeight).append(", ");
+			}	
+		}
+		
+		jsonView.append(jsonViewGround).append(", ").append(jsonViewHeight).append(" }");
+		return jsonView.toString();
+	}
+	
+	
 	public static Map createMapBack()
 	{
 		List<BackgroundType> backgroundTypes = new ArrayList<BackgroundType>();

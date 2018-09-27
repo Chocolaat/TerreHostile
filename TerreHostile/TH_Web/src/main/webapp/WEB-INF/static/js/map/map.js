@@ -30,62 +30,10 @@ require(
 							window.setTimeout(callback, 1000 / 60);
 						};
 			})();
-			// ---------------------------------------
-
-
-			
-			function constructJsonMap(javaMap)
-			{
-				var constructedMap = "";
-				i = 0;
 				
-				for (x = 0; x < javaMap.width; x++) {
-
-					
-					for (y = 0; y < javaMap.height; y++) {
-
-					    mapTile = javaMap.map[i] ;
-						i++;
-			
-						if (y == 0)
-							{
-								constructedColumn = " [ " + mapTile.backgroundValue + ", ";
-							}
-						else if (y == javaMap.height - 1)
-							{
-								constructedColumn = constructedColumn + mapTile.backgroundValue + " ]";
-							}
-						else
-							{
-								constructedColumn = constructedColumn + mapTile.backgroundValue + ", ";
-							}
-					}
-					
-					if (x == 0)
-						{
-							constructedMap = "[ " + constructedColumn + ", "
-						}
-					else if (x == javaMap.width - 1)
-						{
-						constructedMap = constructedMap + constructedColumn + " ]"
-						}
-					else
-						{
-							constructedMap = constructedMap + constructedColumn + ", "
-						}			
-				}
-				
-				constructedMap = "{ \"ground\": " + constructedMap + ", \"height\": [ [0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0] ]" +  " }";				
-		
-				return constructedMap;
-			}
-			
-			
 			function launch() {
-				
-				map = constructJsonMap(map);
-				
-				jsonLoader([ map, '../json/imageFiles.json' ])
+		
+				jsonLoader([ mapJsonView, '../json/imageFiles.json' ])
 						.then(
 								function(jsonResponse) {
 
@@ -97,7 +45,7 @@ require(
 													function(imgResponse) {
 
 														game = new main(0,
-																0, 10, 10,
+																0, map.width, map.height,
 																imgResponse[1]); // X & Y drawing position, and tile span to draw 
 
 														game
@@ -188,10 +136,10 @@ require(
 		                  if (yrange < layer.getLayout().length) {
 		                    xrange +=  4;
 		                    yrange +=  4;
-		                    startY -= 2;
-		                    startX -= 2;
-		                    if (startX < 0) { startX = 0; }
-		                    if (startY < 0) { startY = 0; }
+//		                    startY -= 2;
+//		                    startX -= 2;
+//		                    if (startX < 0) { startX = 0; }
+//		                    if (startY < 0) { startY = 0; }
 		                    layer.setZoom("out");
 
 		                    layer.align("h-center", CanvasControl().width, xrange + startX, 0);
@@ -204,8 +152,8 @@ require(
 		                  if (yrange > defaultyrange) {
 		                    xrange -=  4;
 		                    yrange -=  4;
-		                    startY += 2;
-		                    startX += 2;
+//		                    startY += 2;
+//		                    startX += 2;
 		                    layer.setZoom("in");
 
 		                    layer.align("h-center", CanvasControl().width, xrange + startX, 0);
@@ -229,28 +177,28 @@ require(
 			                  layer.move("left");
 			                  layer.move("down");
 		                });
-		                startY ++;
+		            //    startY ++;
 		              break;
 		              case 38:
 		                mapLayers.map(function(layer) {
 			                  layer.move("down");
 			                  layer.move("up");
 		                });
-		                startX --;
+		            //    startX --;
 		              break;
 		              case 40:
 		                mapLayers.map(function(layer) {
 			                  layer.move("left");
 			                  layer.move("right");
 		                });
-		                startX ++;
+		           //     startX ++;
 		              break;
 		              case 37:
 		                mapLayers.map(function(layer) {
 			                  layer.move("right");
 			                  layer.move("up");
 		                });
-		                startY --;
+//		                startY --;
 		              break;
 		            }
 		          }

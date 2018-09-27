@@ -17,6 +17,15 @@
 
 		<section class="pageContent">
 			<h1>Éditeur de carte</h1>
+						
+    <form action="#" th:action="@{/admin/mapEditor}" th:object="${map}" method="post">
+   		<label for="width">Largeur</label>
+    	<input type="number" th:field="*{width}" />
+   		<label for="height">Hauteur</label>
+    	<input type="number" th:field="*{height}" />
+    	
+        <input type="submit" value="Générer une carte" />
+    </form>
 
 			<div th:replace="fragments/map/map :: section"></div>
 
