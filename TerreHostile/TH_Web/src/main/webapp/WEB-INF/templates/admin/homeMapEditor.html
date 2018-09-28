@@ -17,27 +17,32 @@
 
 		<section class="pageContent">
 			<h1>Éditeur de carte</h1>
+			
+			<div>   		
+				<label for="beginXCoord">Coordonnée X : </label>
+				<label for="beginXCoord" th:text="${map?.beginXCoord}" ></label>
+				<label for="beginXCoord">Coordonnée Y : </label>
+		   		<label for="beginYCoord" th:text="${map?.beginYCoord}" ></label>
+   			</div>
 						
     <form action="#" th:action="@{/admin/mapEditor}" th:object="${map}" method="post">
-   		<label for="width">Largeur</label>
-    	<input type="number" th:field="*{width}" />
-   		<label for="height">Hauteur</label>
-    	<input type="number" th:field="*{height}" />
-   		<label for="id" th:text="${map?.id}" ></label>
-   		<label for="id" th:text="${map?.width}" ></label>
-   		<label for="id" th:text="${map?.height}" ></label>
-   		<label for="id" th:text="${map?.map}" ></label>
-   		
-   		<!-- th:text= -->
-    	
+   		<label for="beginXCoord">Coordonnée X : </label>
+    	<input type="number" th:field="*{beginXCoord}" />
+   		<label for="beginYCoord">Coordonnée Y : </label>
+    	<input type="number" th:field="*{beginYCoord}" />
+
+   		    	
         <input type="submit" value="Générer une carte" />
     </form>
     
-    <form action="#" th:action="@{/admin/mapEditorSaveMap}" th:object="${map}" method="post">
-    	<input type="number" th:field="*{width}" hidden="true"/>
-    	<input type="number" th:field="*{height}" hidden="true"/>
-    	<input type="number" th:field="*{height}" hidden="true"/>
+    <form action="#" th:action="@{/admin/mapEditorSaveMap}" method="post">
+		   		
+		<input type="text" name="mapJsonView" th:value="${mapJsonView}" hidden="true"/>
+		<input type="number" name="beginXCoord" th:value="${map?.beginXCoord}" hidden="true"/>
+		<input type="number" name="beginYCoord" th:value="${map?.beginYCoord}" hidden="true" />
+		
         <input type="submit" value="Sauvegarder" />
+        
     </form>
 
 			<div th:replace="fragments/map/map :: section"></div>

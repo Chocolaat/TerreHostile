@@ -4,105 +4,35 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.Table;
 
-@Entity
-@Table(name = "map")
 public class Map {
 	
-	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="map_id")
-	private int id;
+
+	private int beginXCoord;
+	private int beginYCoord;
 	
-	@Column(name = "width")
 	private int width;
-	
-	@Column(name = "height")
 	private int height;
 	
-	@Column(name = "map")
-	@Lob
-	private List<Tile> map;
-	
-	public String toJsonView()
-	{
-		StringBuilder jsonView = new StringBuilder();
-		StringBuilder jsonViewGround = new StringBuilder();
-		StringBuilder jsonViewHeight = new StringBuilder();
-
-		jsonView.append("{ ");
-		jsonViewGround.append("\"ground\": ");
-		jsonViewHeight.append("\"height\": ");
-		
-		
-		int indexInMap = 0;
-		
-		for (int i = 0; i < width; i++)
-		{
-
-			StringBuilder jsonViewColGround = new StringBuilder();
-			StringBuilder jsonViewColHeight = new StringBuilder();
-			
-			for (int j = 0; j < height; j++)
-			{
-				Tile t = map.get(indexInMap);
-				indexInMap++;
-								
-				if (j == 0)
-				{
-					jsonViewColGround.append(" [ " + t.getBackgroundValue() + ", ");
-					jsonViewColHeight.append(" [ " + t.getHeight() + ", ");
-				}
-				else if (j == height - 1)
-				{
-					jsonViewColGround.append(t.getBackgroundValue() + " ]");
-					jsonViewColHeight.append(t.getHeight() + " ]");
-				}
-				else
-				{
-					jsonViewColGround.append(t.getBackgroundValue() + ", ");
-					jsonViewColHeight.append(t.getHeight() + ", ");
-				}
-			}
-			
-			if (i == 0)
-			{
-				jsonViewGround.append("[ ").append(jsonViewColGround).append(", ");
-				jsonViewHeight.append("[ ").append(jsonViewColHeight).append(", ");
-			}
-			else if (i == width - 1)
-			{
-				jsonViewGround.append(jsonViewColGround).append(" ]");
-				jsonViewHeight.append(jsonViewColHeight).append(" ]");
-			}
-			else
-			{
-				jsonViewGround.append(jsonViewColGround).append(", ");
-				jsonViewHeight.append(jsonViewColHeight).append(", ");
-			}	
-		}
-		
-		jsonView.append(jsonViewGround).append(", ").append(jsonViewHeight).append(" }");
-		return jsonView.toString();
-	}
+	private List<Tile> mapTiles;
+	private String jsonView;
 	
 	
-	public static Map createMapBack()
+//	public Map getMap(int beginXCoord, int beginYCoord, int width, int height)
+//	{
+//		Map m = new Map();
+//		return m;
+//	}
+		
+	public static Map createMapBack(int beginXCoord, int beginYCoord, int width, int height)
 	{
 		List<BackgroundType> backgroundTypes = new ArrayList<BackgroundType>();
 		backgroundTypes.add(BackgroundType.GROUND);		
 		
-		return createMapFromBackgrounds(10, 10, backgroundTypes);
+		return createMapFromBackgrounds(backgroundTypes, beginXCoord, beginYCoord, width, height);
 	}
 	
-	public static Map createMapStr()
+	public static Map createMapStr(int beginXCoord, int beginYCoord, int width, int height)
 	{
 		List<String> backgroundStrTypes = new ArrayList<String>();
 		
@@ -113,10 +43,10 @@ public class Map {
 		backgroundStrTypes.add("ROCK");
 		
 		
-		return createMapFromStringBackgrounds(10, 10, backgroundStrTypes);
+		return createMapFromStringBackgrounds(backgroundStrTypes, beginXCoord, beginYCoord, width, height);
 	}
 	
-	public static Map createMapFromStringBackgrounds (int width, int height, List<String> strBackgroundTypes)
+	public static Map createMapFromStringBackgrounds (List<String> strBackgroundTypes, int beginXCoord, int beginYCoord, int width, int height)
 	{
 		List<BackgroundType> lvlBackgroundTypes = new ArrayList<BackgroundType>();
 		for (String bgStrType : strBackgroundTypes)
@@ -124,16 +54,18 @@ public class Map {
 			lvlBackgroundTypes.add(BackgroundType.valueOf(bgStrType));
 		} 
 		
-		return createMapFromBackgrounds (width, height, lvlBackgroundTypes);
+		return createMapFromBackgrounds (lvlBackgroundTypes, beginXCoord, beginYCoord, width, height);
 	}
 	
-	public static Map createMapFromBackgrounds (int width, int height, List<BackgroundType> lvlBackgroundTypes)
+	public static Map createMapFromBackgrounds (List<BackgroundType> lvlBackgroundTypes, int beginXCoord, int beginYCoord, int width, int height)
 	{
 	
 		Map currentMap = new Map();
+		currentMap.mapTiles = new ArrayList<Tile>();
+		currentMap.beginXCoord = beginXCoord;
+		currentMap.beginYCoord = beginYCoord;
+		currentMap.width = width;
 		currentMap.height = height;
-		currentMap.width = height;
-		currentMap.map = new ArrayList<Tile>();
 		
 		for (int w = 0 ; w < width ; w++)
 		{
@@ -141,7 +73,7 @@ public class Map {
 			{
 				for (BackgroundType bgType : lvlBackgroundTypes)
 				{
-					currentMap.map.add(new Tile(bgType, 0));
+					currentMap.mapTiles.add(new Tile(bgType, 0));
 				}
 			}
 		}
@@ -149,13 +81,15 @@ public class Map {
 		return currentMap;
 	}
 	
-	public static Map createMapRandomBackgrounds (int width, int height)
+	public static Map createMapRandomBackgrounds (int beginXCoord, int beginYCoord, int width, int height)
 	{
 	
 		Map currentMap = new Map();
+		currentMap.mapTiles = new ArrayList<Tile>();
+		currentMap.beginXCoord = beginXCoord;
+		currentMap.beginYCoord = beginYCoord;
+		currentMap.width = width;
 		currentMap.height = height;
-		currentMap.width = height;
-		currentMap.map = new ArrayList<Tile>();
 		
 		for (int w = 0 ; w < width ; w++)
 		{
@@ -174,67 +108,77 @@ public class Map {
 				default: bgType = BackgroundType.GROUND; break;
 				}
 				
-				currentMap.map.add(new Tile(bgType, 0));
+				currentMap.mapTiles.add(new Tile(bgType, 0));
 			}
 		}
 		
 		return currentMap;
 	}
-	
-	
-	public Map (int width, int height)
+		
+	public Map (List<Tile> tileList)
 	{
-		this.height = height;
-		this.width = width;
-		this.map = new ArrayList<Tile>();
-	}
-	
-	public Map (int width, int height, List<Tile> tileList)
-	{
-		this.height = height;
-		this.width = width;
-		this.map = tileList;
+		this.mapTiles = tileList;
 	}
 	
 	public Map ()
 	{
+		this.mapTiles = new ArrayList<Tile>();
 	}
 	
+	
+
+	public int getBeginXCoord() {
+		return beginXCoord;
+	}
+
+
+	public void setBeginXCoord(int beginXCoord) {
+		this.beginXCoord = beginXCoord;
+	}
+
+
+	public int getBeginYCoord() {
+		return beginYCoord;
+	}
+
+
+	public void setBeginYCoord(int beginYCoord) {
+		this.beginYCoord = beginYCoord;
+	}
+
 
 	public int getWidth() {
 		return width;
-	}
-
-	public void setWidth(int width) {
-		this.width = width;
 	}
 
 	public int getHeight() {
 		return height;
 	}
 
+
+	public List<Tile> getMapTiles() {
+		return mapTiles;
+	}
+
+	public void setMapTiles(List<Tile> mapTiles) {
+		this.mapTiles = mapTiles;
+	}
+
+	public String getJsonView() {
+		return jsonView;
+	}
+
+	public void setJsonView(String jsonView) {
+		this.jsonView = jsonView;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
 	public void setHeight(int height) {
 		this.height = height;
-	}
-
-	public List<Tile> getMap() {
-		return map;
-	}
-
-	public void setMap(List<Tile> map) {
-		this.map = map;
-	}
-
-
-	public int getId() {
-		return id;
-	}
-
-
-	public void setId(int id) {
-		this.id = id;
-	}
-	
+	}		
 	
 	
 }
