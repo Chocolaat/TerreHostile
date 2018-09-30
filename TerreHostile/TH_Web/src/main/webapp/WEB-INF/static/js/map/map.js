@@ -1,12 +1,64 @@
 
 
 var groundValueGlobal;
+var allGround = false;
+var mapLayers = [];
+var currentXcenter;
+var currentYcenter;
+
 
 function setGroundTypeFocus(groundValue)
 {
 	groundValueGlobal = groundValue;
+	allGround = false;
 }
 
+
+function setAllGroundType(groundValue)
+{
+	groundValueGlobal = groundValue;
+	allGround = true;
+}
+
+
+function saveJsonView()
+{
+	document.getElementById('mapLayoutValue').value = mapLayers[0].getLayout();
+	document.getElementById('mapLayoutHeightValue').value = mapLayers[0].getHeightLayout();
+}
+
+
+function updateCurrentCenterXY (x, y)
+{ 
+
+	
+	console.log("updateCurrentCenterXY x = " + x + " / y = " + y)
+	console.log("map.beginXCoord x = " + map.beginXCoord)
+	console.log("map.beginYCoord x = " + map.beginYCoord)
+	
+	currentXcenter = x;
+	currentYcenter = y ;
+	document.getElementById('currentCenterX').innerHTML = x;
+	document.getElementById('currentCenterY').innerHTML = y;
+	
+	document.getElementById('xCoord').value = currentXcenter;
+	document.getElementById('yCoord').value = currentYcenter;
+	document.getElementById('size').value = map.width / 10;
+	
+	var toto = currentYcenter + 20;
+	var tata = map.beginYCoord + map.height;
+	console.log("PPP = " + toto);
+	console.log("PPP = " + tata);
+	
+		if (currentXcenter < map.beginXCoord + 20 || currentXcenter > map.beginXCoord + map.width - 20 || currentYcenter < map.beginYCoord + 20 || currentYcenter > map.beginYCoord + map.height - 20)
+		{
+			console.log("SUBMIT")
+			document.updateMap.submit();
+		}
+	
+	
+	
+}
 
 
 require(
@@ -94,8 +146,9 @@ require(
 
 			function main(x, y, xrange, yrange, playerImages) {
 
+				updateCurrentCenterXY(map.beginXCoord + (map.width - 10) / 2, map.beginYCoord + (map.height - 10) / 2);
+				
 				self = this;
-				var mapLayers = [];
 				var rangeX = xrange;
 				var rangeY = yrange;
 							
@@ -105,19 +158,35 @@ require(
 
 				input.mouse_action(function(coords) {
 					
-					
-					
-					tile_coordinates = mapLayers[0].applyMouseFocus(coords.x,
-							coords.y); // Get the current mouse location from X & Y Coords
-					mapLayers[0]
-							.setHeightmapTile(tile_coordinates.x,
-									tile_coordinates.y, mapLayers[0]
-											.getHeightMapTile(
-													tile_coordinates.x,
-													tile_coordinates.y) + 0); // Increase heightmap tile 
-					
 					newTile = (groundValueGlobal != undefined) ? groundValueGlobal : 1;
-					mapLayers[0].setTile(tile_coordinates.x, tile_coordinates.y, newTile); // Force the changing of tile graphic
+					
+					if (allGround)
+					{
+						for (var i = 0; i < 0 + xrange; i++) 
+						{
+							for (var j = 0; j < 0 + yrange; j++) 
+							{
+								mapLayers[0].setTile(i, j, newTile); // Force the changing of tile graphic
+							}
+						}
+					}
+
+					else
+						{
+							tile_coordinates = mapLayers[0].applyMouseFocus(coords.x,
+									coords.y); // Get the current mouse location from X & Y Coords
+							mapLayers[0]
+									.setHeightmapTile(tile_coordinates.x,
+											tile_coordinates.y, mapLayers[0]
+													.getHeightMapTile(
+															tile_coordinates.x,
+															tile_coordinates.y) + 0); // Increase heightmap tile 
+							
+							mapLayers[0].setTile(tile_coordinates.x, tile_coordinates.y, newTile); // Force the changing of tile graphic
+						}
+
+					
+
 				});
 
 				input.mouse_move(function(coords) {
@@ -172,31 +241,51 @@ require(
 		                  layer.rotate("left");
 		                });
 		              break;
+		              //flech droite
 		              case 39:
 		                mapLayers.map(function(layer) {
-			                  layer.move("left");
-			                  layer.move("down");
+		                	for (var i = 0 ; i < 10; i++)
+		                		{
+				                  layer.move("left");
+				                  layer.move("down");
+		                		}
+			                  updateCurrentCenterXY(currentXcenter - 10, currentYcenter + 10);
 		                });
 		            //    startY ++;
 		              break;
+	                	//fleche haut
 		              case 38:
 		                mapLayers.map(function(layer) {
-			                  layer.move("down");
-			                  layer.move("up");
+		                	for (var i = 0 ; i < 10; i++)
+	                		{
+				                  layer.move("down");
+				                  layer.move("up");
+	                		}
+			                  updateCurrentCenterXY(currentXcenter - 10, currentYcenter -10);
 		                });
 		            //    startX --;
 		              break;
+		            //fleche bas
 		              case 40:
 		                mapLayers.map(function(layer) {
-			                  layer.move("left");
-			                  layer.move("right");
+		                	for (var i = 0 ; i < 10; i++)
+	                		{
+				                  layer.move("left");
+				                  layer.move("right");
+	                		}
+			                  updateCurrentCenterXY(currentXcenter +10, currentYcenter + 10);
 		                });
 		           //     startX ++;
 		              break;
+		              //fleche gauche
 		              case 37:
 		                mapLayers.map(function(layer) {
-			                  layer.move("right");
-			                  layer.move("up");
+		                	for (var i = 0 ; i < 10; i++)
+	                		{
+				                  layer.move("right");
+				                  layer.move("up");
+	                		}
+			                updateCurrentCenterXY(currentXcenter + 10, currentYcenter - 10);
 		                });
 //		                startY --;
 		              break;

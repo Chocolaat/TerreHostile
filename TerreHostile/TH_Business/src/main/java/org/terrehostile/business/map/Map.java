@@ -17,12 +17,6 @@ public class Map {
 	private List<Tile> mapTiles;
 	private String jsonView;
 	
-	
-//	public Map getMap(int beginXCoord, int beginYCoord, int width, int height)
-//	{
-//		Map m = new Map();
-//		return m;
-//	}
 		
 	public static Map createMapBack(int beginXCoord, int beginYCoord, int width, int height)
 	{

@@ -13,7 +13,7 @@ public interface MapBackgroundViewRepository extends JpaRepository<MapBackground
 	
 	 public MapBackgroundView findByBeginXCoordAndBeginYCoord(int x, int y);
 	 
-	 @Query("select * from map_background_view mbv where mbv.begin_x_coord >= ?1 and mbv.begin_x_coord <= ?2 and mbv.begin_y_coord >= ?3 and mbv.begin_y_coord <= ?4 order by begin_x_coord, begin_y_coord")
+	 @Query("select mbv from MapBackgroundView mbv where mbv.beginXCoord >= ?1 and mbv.beginXCoord <= ?2 and mbv.beginYCoord >= ?3 and mbv.beginYCoord <= ?4 order by beginYCoord, beginXCoord")
 	 public List<MapBackgroundView> findByXYMinMax(int xBegin, int xEnd, int yBegin, int yEnd);
 	 
 }
