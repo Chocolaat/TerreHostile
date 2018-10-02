@@ -11,6 +11,9 @@ public class Map {
 	private int beginXCoord;
 	private int beginYCoord;
 	
+	private int currentXCoord;
+	private int currentYCoord;
+	
 	private int width;
 	private int height;
 	
@@ -172,7 +175,23 @@ public class Map {
 
 	public void setHeight(int height) {
 		this.height = height;
-	}		
+	}
+
+	public int getCurrentXCoord() {
+		return currentXCoord;
+	}
+
+	public void setCurrentXCoord(int currentXCoord) {
+		this.currentXCoord = currentXCoord;
+	}
+
+	public int getCurrentYCoord() {
+		return currentYCoord;
+	}
+
+	public void setCurrentYCoord(int currentYCoord) {
+		this.currentYCoord = currentYCoord;
+	}
 	
 	
 }

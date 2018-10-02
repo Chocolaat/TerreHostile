@@ -4,8 +4,6 @@
 var groundValueGlobal;
 var allGround = false;
 var mapLayers = [];
-var currentXcenter;
-var currentYcenter;
 
 
 
@@ -34,7 +32,6 @@ require(
 				
 			
 			document.getElementById('mapEditorGetMapByXYAndSizeButton').addEventListener("click", mapEditorGetMapByXYAndSize);
-			document.getElementById('mapEditorGetMapByXYAndSizeButton2').addEventListener("click", mapEditorGetMapByXYAndSize2);
 						
 			
 			function setGroundTypeFocus(groundValue)
@@ -57,45 +54,18 @@ require(
 				document.getElementById('mapLayoutHeightValue').value = mapLayers[0].getHeightLayout();
 			}
 
-			function mapEditorGetMapByXYAndSize()
-			{
-				var parameters = { 
-						xCoord : currentXcenter,
-						yCoord : currentYcenter,
-						size : map.width / 10
-					}
-				
-				console.log("parameters =");
-				console.log(parameters);
-				
-				console.log("mapEditorGetMapByXYAndSize START");
-				 $.ajax({
-				        type: "GET",
-				        url: "/TH_Web/admin/mapEditorGetMapByXYAndSize",
-				        data: parameters,
-				        success: function (result) {
-				        	console.log("mapEditorGetMapByXYAndSize SUCCESS");
-				        	
-				        	console.log(result);
-				        	launch();
-				        	$('#mapView').replaceWith(result);
-				        },
-				        error: function (result) {
-				        	console.log("mapEditorGetMapByXYAndSize FAIL");
-				        }
-				    });
-				
-				 console.log("mapEditorGetMapByXYAndSize END");
-			}
 			
-			function mapEditorGetMapByXYAndSize2()
-			{
-				console.log("22222222222");
+			function mapEditorGetMapByXYAndSizeButton(xCoord, yCoord, size)
+			{				
+
+				console.log("mapEditorGetMapByXYAndSizeButton xCoord = " + xCoord)
+				console.log("mapEditorGetMapByXYAndSizeButton yCoord = " + yCoordd)
+				console.log("mapEditorGetMapByXYAndSizeButton size = " + size)
 				
 				var parameters = { 
-						xCoord : document.getElementById('xCoord').value,
-						yCoord : document.getElementById('yCoord').value,
-						size : document.getElementById('size').value
+						xCoord : xCoord,
+						yCoord : yCoord,
+						size : size
 					}
 				
 				console.log("parameters =");
@@ -128,30 +98,22 @@ require(
 
 			function updateCurrentCenterXY (x, y)
 			{ 
+				
+				console.log("OLD map.currentXCoord x = " + map.currentXCoord)
+				console.log("OLD map.currentYCoord x = " + map.currentYCoord)
+				console.log("OLD map.size x = " + map.size)
+				
+				map.currentXCoord = x; 
+				map.currentYCoord = y; 
 
-				
-				console.log("updateCurrentCenterXY x = " + x + " / y = " + y)
-				console.log("map.beginXCoord x = " + map.beginXCoord)
-				console.log("map.beginYCoord x = " + map.beginYCoord)
-				
-				currentXcenter = x;
-				currentYcenter = y ;
-				document.getElementById('currentCenterX').innerHTML = x;
-				document.getElementById('currentCenterY').innerHTML = y;
-				
-				document.getElementById('xCoord').value = currentXcenter;
-				document.getElementById('yCoord').value = currentYcenter;
-				document.getElementById('size').value = map.width / 10;
-				
-				var toto = currentYcenter + 20;
-				var tata = map.beginYCoord + map.height;
-				console.log("PPP = " + toto);
-				console.log("PPP = " + tata);
+				console.log("OLD map.currentXCoord x = " + map.currentXCoord)
+				console.log("OLD map.currentYCoord x = " + map.currentYCoord)
+	
 				
 					if (currentXcenter < map.beginXCoord + 20 || currentXcenter > map.beginXCoord + map.width - 20 || currentYcenter < map.beginYCoord + 20 || currentYcenter > map.beginYCoord + map.height - 20)
 					{
 						console.log("SUBMIT")
-						document.updateMap.submit();
+						mapEditorGetMapByXYAndSizeButton(map.currentXCoord, map.currentYCoord, map.size)
 						
 					}
 				
@@ -175,17 +137,10 @@ require(
 			
 			function launch() {
 				
-				
-
-			
-				
-
-				console.log("mapJsonView = " + mapJsonView);
-				
-				
-				
+				console.log("map = ");
+				console.log(map);
 		
-				jsonLoader([ mapJsonView, '../json/imageFiles.json' ])
+				jsonLoader([ map.jsonView, '../json/imageFiles.json' ])
 						.then(
 								function(jsonResponse) {
 

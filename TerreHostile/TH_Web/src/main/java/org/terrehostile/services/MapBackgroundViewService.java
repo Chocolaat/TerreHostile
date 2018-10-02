@@ -8,16 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.terrehostile.business.map.Map;
 import org.terrehostile.business.map.MapBackgroundView;
-import org.terrehostile.business.map.Tile;
 import org.terrehostile.repository.MapBackgroundViewRepository;
 
 
 @Service("mapBackgroundViewService")
 public class MapBackgroundViewService {
-	
-	
-	private String jsonView;
-	
 	
 
 	@Autowired
@@ -307,11 +302,11 @@ public class MapBackgroundViewService {
 		
 		map.setBeginXCoord(xMin - xMin%10 + 1);
 		map.setBeginYCoord(yMin - yMin%10 + 1);
+		map.setCurrentXCoord(map.getCurrentXCoord());
+		map.setCurrentYCoord(map.getCurrentYCoord());
 		map.setHeight(size * 10);
 		map.setWidth(size * 10);
 		
-		
-
 		System.out.println(	"x = " + x);
 		System.out.println(	"y = " + y);
 		System.out.println(	"size = " + size);
