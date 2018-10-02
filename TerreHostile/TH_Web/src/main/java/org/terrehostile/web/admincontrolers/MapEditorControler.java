@@ -24,7 +24,7 @@ public class MapEditorControler {
 	@RequestMapping(value={"/admin/mapEditor"}, method = RequestMethod.GET)
 	public ModelAndView mapEditor(){
 		
-	    Map map = mapBackgroundViewService.getMapByXYAndSize(1, 1, 5);
+	    Map map = mapBackgroundViewService.getMapByXYAndSize(51, 51, 9);
 	   	ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("map", map);
 		modelAndView.addObject("mapJsonView", map.getJsonView());
@@ -62,27 +62,15 @@ public class MapEditorControler {
 			return modelAndView;
 	    }
 	   
-	   @PostMapping("/admin/mapEditorGetMapByXY")
-	    public ModelAndView getMapByXY(@RequestParam int xCoord, int yCoord) {
-		   		   		   
-		    Map map = mapBackgroundViewService.getMapByXY(xCoord, yCoord);
-
-		   	ModelAndView modelAndView = new ModelAndView();
-			modelAndView.addObject("map", map);
-			modelAndView.addObject("mapJsonView", map.getJsonView());
-			modelAndView.setViewName("admin/homeMapEditor");
-			
-			return modelAndView;
-	    }
 	   
-	   @PostMapping("/admin/mapEditorGetMapByXYAndSize")
+	   @RequestMapping(value={"/admin/mapEditorGetMapByXYAndSize"}, method = RequestMethod.GET)
 	    public ModelAndView getMapByXYAndSize(@RequestParam int xCoord, int yCoord, int size) {   
 		   		   
 		    Map map = mapBackgroundViewService.getMapByXYAndSize(xCoord, yCoord, size);
 		   	ModelAndView modelAndView = new ModelAndView();
 			modelAndView.addObject("map", map);
 			modelAndView.addObject("mapJsonView", map.getJsonView());
-			modelAndView.setViewName("admin/homeMapEditor");
+			modelAndView.setViewName("fragments/map/mapView");
 			
 			return modelAndView;
 	    }

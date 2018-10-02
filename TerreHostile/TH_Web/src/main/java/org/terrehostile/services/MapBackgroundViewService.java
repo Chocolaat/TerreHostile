@@ -8,11 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.terrehostile.business.map.Map;
 import org.terrehostile.business.map.MapBackgroundView;
+import org.terrehostile.business.map.Tile;
 import org.terrehostile.repository.MapBackgroundViewRepository;
 
 
 @Service("mapBackgroundViewService")
 public class MapBackgroundViewService {
+	
+	
+	private String jsonView;
+	
+	
 
 	@Autowired
 	private MapBackgroundViewRepository mapBackgroundViewRepository;
@@ -149,21 +155,6 @@ public class MapBackgroundViewService {
 				mapBackgroundViewRepository.save(mres);
 			}
 	}
-	
-	
-	public Map getMapByXY(int x, int y) {
-		MapBackgroundView m = mapBackgroundViewRepository.findByBeginXCoordAndBeginYCoord(x, y);
-		Map map = new Map();
-		map.setJsonView(m.toJsonView());
-		map.setBeginXCoord(x);
-		map.setBeginYCoord(y);
-		map.setHeight(10); 
-		map.setWidth(10);
-		
-		
-		return map;
-	}
-	
 	
 	public Map getMapByXYAndSize(int x, int y, int size) {
 		
@@ -318,6 +309,17 @@ public class MapBackgroundViewService {
 		map.setBeginYCoord(yMin - yMin%10 + 1);
 		map.setHeight(size * 10);
 		map.setWidth(size * 10);
+		
+		
+
+		System.out.println(	"x = " + x);
+		System.out.println(	"y = " + y);
+		System.out.println(	"size = " + size);
+		System.out.println(	"beginx = " + map.getBeginXCoord());
+		System.out.println(	"beginx = " + map.getBeginYCoord());
+		System.out.println(	"getHeight = " + map.getHeight());
+		System.out.println(	"jsonView = " + map.getJsonView());
+		System.out.println(	"jsonView.toString() = " + jsonView.toString());
 		
 		
 		return map;

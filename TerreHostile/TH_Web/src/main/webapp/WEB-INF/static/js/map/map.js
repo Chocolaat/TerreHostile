@@ -1,5 +1,6 @@
 
 
+
 var groundValueGlobal;
 var allGround = false;
 var mapLayers = [];
@@ -7,58 +8,6 @@ var currentXcenter;
 var currentYcenter;
 
 
-function setGroundTypeFocus(groundValue)
-{
-	groundValueGlobal = groundValue;
-	allGround = false;
-}
-
-
-function setAllGroundType(groundValue)
-{
-	groundValueGlobal = groundValue;
-	allGround = true;
-}
-
-
-function saveJsonView()
-{
-	document.getElementById('mapLayoutValue').value = mapLayers[0].getLayout();
-	document.getElementById('mapLayoutHeightValue').value = mapLayers[0].getHeightLayout();
-}
-
-
-function updateCurrentCenterXY (x, y)
-{ 
-
-	
-	console.log("updateCurrentCenterXY x = " + x + " / y = " + y)
-	console.log("map.beginXCoord x = " + map.beginXCoord)
-	console.log("map.beginYCoord x = " + map.beginYCoord)
-	
-	currentXcenter = x;
-	currentYcenter = y ;
-	document.getElementById('currentCenterX').innerHTML = x;
-	document.getElementById('currentCenterY').innerHTML = y;
-	
-	document.getElementById('xCoord').value = currentXcenter;
-	document.getElementById('yCoord').value = currentYcenter;
-	document.getElementById('size').value = map.width / 10;
-	
-	var toto = currentYcenter + 20;
-	var tata = map.beginYCoord + map.height;
-	console.log("PPP = " + toto);
-	console.log("PPP = " + tata);
-	
-		if (currentXcenter < map.beginXCoord + 20 || currentXcenter > map.beginXCoord + map.width - 20 || currentYcenter < map.beginYCoord + 20 || currentYcenter > map.beginYCoord + map.height - 20)
-		{
-			console.log("SUBMIT")
-			document.updateMap.submit();
-		}
-	
-	
-	
-}
 
 
 require(
@@ -83,7 +32,152 @@ require(
 						};
 			})();
 				
+			
+			document.getElementById('mapEditorGetMapByXYAndSizeButton').addEventListener("click", mapEditorGetMapByXYAndSize);
+			document.getElementById('mapEditorGetMapByXYAndSizeButton2').addEventListener("click", mapEditorGetMapByXYAndSize2);
+						
+			
+			function setGroundTypeFocus(groundValue)
+			{
+				groundValueGlobal = groundValue;
+				allGround = false;
+			}
+
+
+			function setAllGroundType(groundValue)
+			{
+				groundValueGlobal = groundValue;
+				allGround = true;
+			}
+
+
+			function saveJsonView()
+			{
+				document.getElementById('mapLayoutValue').value = mapLayers[0].getLayout();
+				document.getElementById('mapLayoutHeightValue').value = mapLayers[0].getHeightLayout();
+			}
+
+			function mapEditorGetMapByXYAndSize()
+			{
+				var parameters = { 
+						xCoord : currentXcenter,
+						yCoord : currentYcenter,
+						size : map.width / 10
+					}
+				
+				console.log("parameters =");
+				console.log(parameters);
+				
+				console.log("mapEditorGetMapByXYAndSize START");
+				 $.ajax({
+				        type: "GET",
+				        url: "/TH_Web/admin/mapEditorGetMapByXYAndSize",
+				        data: parameters,
+				        success: function (result) {
+				        	console.log("mapEditorGetMapByXYAndSize SUCCESS");
+				        	launch();
+				        	$('#mapView').replaceWith(result);
+				        },
+				        error: function (result) {
+				        	console.log("mapEditorGetMapByXYAndSize FAIL");
+				        }
+				    });
+				
+				 console.log("mapEditorGetMapByXYAndSize END");
+			}
+			
+			function mapEditorGetMapByXYAndSize2()
+			{
+				console.log("22222222222");
+				
+				var parameters = { 
+						xCoord : document.getElementById('xCoord').value,
+						yCoord : document.getElementById('yCoord').value,
+						size : document.getElementById('size').value
+					}
+				
+				console.log("parameters =");
+				console.log(parameters);
+				
+				console.log("mapEditorGetMapByXYAndSize START");
+				 $.ajax({
+				        type: "GET",
+				        url: "/TH_Web/admin/mapEditorGetMapByXYAndSize",
+				        data: parameters,
+				        success: function (result) {
+				        	console.log("mapEditorGetMapByXYAndSize SUCCESS");
+				        	var map = /*[[${map}]]*/ "map";  
+				        	var mapJsonView = /*[[${mapJsonView}]]*/ "mapJsonView"; 
+				        	$('#mapView').replaceWith(result);
+				        	launch();
+				        },
+				        error: function (result) {
+				        	console.log("mapEditorGetMapByXYAndSize FAIL");
+				        }
+				    });
+				
+				 console.log("mapEditorGetMapByXYAndSize END");
+			}
+
+
+			function updateCurrentCenterXY (x, y)
+			{ 
+
+				
+				console.log("updateCurrentCenterXY x = " + x + " / y = " + y)
+				console.log("map.beginXCoord x = " + map.beginXCoord)
+				console.log("map.beginYCoord x = " + map.beginYCoord)
+				
+				currentXcenter = x;
+				currentYcenter = y ;
+				document.getElementById('currentCenterX').innerHTML = x;
+				document.getElementById('currentCenterY').innerHTML = y;
+				
+				document.getElementById('xCoord').value = currentXcenter;
+				document.getElementById('yCoord').value = currentYcenter;
+				document.getElementById('size').value = map.width / 10;
+				
+				var toto = currentYcenter + 20;
+				var tata = map.beginYCoord + map.height;
+				console.log("PPP = " + toto);
+				console.log("PPP = " + tata);
+				
+					if (currentXcenter < map.beginXCoord + 20 || currentXcenter > map.beginXCoord + map.width - 20 || currentYcenter < map.beginYCoord + 20 || currentYcenter > map.beginYCoord + map.height - 20)
+					{
+						console.log("SUBMIT")
+						document.updateMap.submit();
+						
+					}
+				
+				
+			}	
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			function launch() {
+				
+				
+
+			
+				
+
+				console.log("mapJsonView = " + mapJsonView);
+				
+				
+				
 		
 				jsonLoader([ mapJsonView, '../json/imageFiles.json' ])
 						.then(

@@ -9,7 +9,8 @@
 
 <section id="mapContainer" th:fragment="map">
 
-	<div id="mapView"> </div>
+	
+	<div th:replace="fragments/map/mapView :: div"></div>
 
 	<div id="mapToolBar"> 
 	<button type="button" class="mapToolBarItem" onclick="show('mapToolBarSubMenu_groundType')">Type de terrain</button>
@@ -36,7 +37,8 @@
 	
 	
 	<!-- Scripts for map.html elements -->
-	<script> function show(param_div_id) {
+	<script> 
+	function show(param_div_id) {
 	    document.getElementById('mapToolBarSubMenu').innerHTML = document.getElementById(param_div_id).innerHTML;
 	  } </script>
 	  
@@ -48,26 +50,29 @@
     </script>
 
 <!-- Load  scripts and librairies -->
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+
 <script th:attr="data-main=@{/js/config.js}" th:src="@{/js/requirejs/require.js}"></script>
 <script > 
-	  require([
-	      'jsiso/canvas/Control',
-	      'jsiso/canvas/Input',
-	      'jsiso/img/load',
-	      'jsiso/json/load',
-	      'jsiso/tile/Field',
-	      'jsiso/particles/Effect',
-	      'jsiso/particles/EffectLoader',
-	      'jsiso/particles/Emitter',
-	      'jsiso/particles/Particle',
-	      'jsiso/pathfind/pathfind',
-	      'jsiso/pathfind/worker',
-	      'jsiso/tile/Camera',
-	      'jsiso/url/url',
-	      'jsiso/utils',
-	      'map/map',
-	      'requirejs/domReady!'
-		  ])
-</script>
+require([
+    'jsiso/canvas/Control',
+    'jsiso/canvas/Input',
+    'jsiso/img/load',
+    'jsiso/json/load',
+    'jsiso/tile/Field',
+    'jsiso/particles/Effect',
+    'jsiso/particles/EffectLoader',
+    'jsiso/particles/Emitter',
+    'jsiso/particles/Particle',
+    'jsiso/pathfind/pathfind',
+    'jsiso/pathfind/worker',
+    'jsiso/tile/Camera',
+    'jsiso/url/url',
+    'jsiso/utils',
+    'map/map',
+    'requirejs/domReady!'
+	  ])
+</script> 
 
 </section>

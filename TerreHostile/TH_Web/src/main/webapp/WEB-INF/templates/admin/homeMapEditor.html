@@ -8,6 +8,7 @@
 <link rel="stylesheet" th:href="@{/css/map.css}" />
 
 
+
 <body>
 	<nav th:replace="fragments/pageStructure :: nav"></nav>
 
@@ -17,6 +18,8 @@
 
 		<section class="pageContent">
 			<h1>Éditeur de carte</h1>
+			
+			<button id="mapEditorGetMapByXYAndSizeButton">mapEditorGetMapByXYAndSize</button>
 			
 			<div>   		
 				<label for="beginXCoord">Coordonnée X : </label>
@@ -53,12 +56,10 @@
 		        <input type="submit" value="Générer une carte" />
 	   		</form>
 	    
-	        <form name="updateMap" id="updateMap" action="#" th:action="@{/admin/mapEditorGetMapByXYAndSize}" method="post">
 				<input type="number" name="xCoord" id="xCoord"/>
 				<input type="number" name="yCoord" id="yCoord"/>
 				<input type="number" name="size" id="size"/>
-		        <input type="submit" value="mapEditorGetMapByXYAndSize" />
-	        </form>
+		        <button id="mapEditorGetMapByXYAndSizeButton2">mapEditorGetMapByXYAndSize2</button>
 	        
 	        
 <!-- 		<form action="#" th:action="@{/admin/mapEditorSave100x100TileMap}" method="post">
