@@ -56,7 +56,6 @@ public class MapEditorControler {
 		    Map map = mapBackgroundViewService.getMapByXYAndSize(xCoord, yCoord, size);
 		   	ModelAndView modelAndView = new ModelAndView();
 			modelAndView.setViewName("fragments/map/mapView");
-			System.out.println("mapJsonView CONTROLLER = " + map.getJsonView());
 			modelAndView.addObject("map", map);
 			modelAndView.addObject("mapJsonView", map.getJsonView());
 			
@@ -70,7 +69,7 @@ public class MapEditorControler {
 	    public ModelAndView generateMap(@ModelAttribute Map map) {
 		   	ModelAndView modelAndView = new ModelAndView();
 		   	
-		   	map = Map.createMapRandomBackgrounds(map.getBeginXCoord(), map.getBeginYCoord(), 10, 10);
+		   	map = Map.createMapRandomBackgrounds(map.getBeginXCoord(), map.getBeginYCoord(), 9);
 		   	MapBackgroundView mBackView = new MapBackgroundView(map);
 			modelAndView.addObject("map", map);
 			modelAndView.addObject("mapJsonView", mBackView.toJsonView());
@@ -84,9 +83,9 @@ public class MapEditorControler {
 	   @PostMapping("/admin/mapEditorSaveMap")
 	    public ModelAndView saveMap(@ModelAttribute Map map, @RequestParam String mapLayoutValue, String mapLayoutHeightValue) {
 
-		   mapBackgroundViewService.saveMapFromLayout(mapLayoutValue, mapLayoutHeightValue,  map.getWidth(), map.getHeight(), map.getBeginXCoord(), map.getBeginYCoord());
+		   mapBackgroundViewService.saveMapFromLayout(mapLayoutValue, mapLayoutHeightValue,  map.getSize(), map.getBeginXCoord(), map.getBeginYCoord());
 		   		   
-		    map = mapBackgroundViewService.getMapByXYAndSize(map.getBeginXCoord(), map.getBeginYCoord(), map.getWidth() / 10);
+		    map = mapBackgroundViewService.getMapByXYAndSize(map.getBeginXCoord(), map.getBeginYCoord(), map.getSize());
 		   	ModelAndView modelAndView = new ModelAndView();
 			modelAndView.addObject("map", map);
 			modelAndView.addObject("mapJsonView", map.getJsonView());
@@ -110,13 +109,13 @@ public class MapEditorControler {
 		   	{
 		   		for (Integer j : a2)
 		   		{
-				   	map = Map.createMapRandomBackgrounds(i, j, 10, 10);
+				   	map = Map.createMapRandomBackgrounds(i, j, 1);
 				   	mBackView = new MapBackgroundView(map);
 				   	mapBackgroundViewService.saveMap(mBackView);
 		   		}
 		   	}
 		   	
-		   	map = Map.createMapRandomBackgrounds(map.getBeginXCoord(), map.getBeginYCoord(), 1, 11);
+		   	map = Map.createMapRandomBackgrounds(map.getBeginXCoord(), map.getBeginYCoord(), 10);
 		   	mBackView = new MapBackgroundView(map);
 		   	
 			modelAndView.addObject("map", map);

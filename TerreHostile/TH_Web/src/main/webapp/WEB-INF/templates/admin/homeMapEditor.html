@@ -20,32 +20,30 @@
 			<h1>Éditeur de carte</h1>
 			
 			
-		    <button id="mapEditorGetMapByXYAndSizeButton">mapEditorGetMapByXYAndSize</button>
+		    <button id="mapEditorGetMapByXYAndSize">mapEditorGetMapByXYAndSize</button>
 			
 			<div>   		
 				<label for="beginXCoord">Coordonnée X : </label>
 				<label for="beginXCoord" th:text="${map?.beginXCoord}" ></label>
 				<label for="beginXCoord">Coordonnée Y : </label>
 		   		<label for="beginYCoord" th:text="${map?.beginYCoord}" ></label>
-				<label for="beginXCoord">Width : </label>
-		   		<label for="beginYCoord" th:text="${map?.width}" ></label>
-				<label for="beginXCoord">Height : </label>
-		   		<label for="beginYCoord" th:text="${map?.height}" ></label>
-				<label for="currentXCoord">Width : </label>
-		   		<label for="currentXCoord" th:text="${map?.currentXCoord}" ></label>
-				<label for="currentXCoord">Height : </label>
-		   		<label for="currentYCoord" th:text="${map?.currentYCoord}" ></label>
+				<label for="beginXCoord">Size : </label>
+		   		<label for="beginYCoord" th:text="${map?.size}" ></label>
+				<label for="currentXCoord">currentXCoord : </label>
+		   		<label id="currentXCoord" for="currentXCoord" th:text="${map?.currentXCoord}" ></label>
+				<label for="currentYCoord">currentYCoord : </label>
+		   		<label id="currentYCoord" for="currentYCoord" th:text="${map?.currentYCoord}" ></label>
    			</div>
 
 	    						
 	  		<form action="#" th:action="@{/admin/mapEditor}" th:object="${map}" method="post">
-		   		<label for="beginXCoord">Coordonnée X : </label>
-		    	<input type="number" th:field="*{beginXCoord}" />
-		   		<label for="beginYCoord">Coordonnée Y : </label>
-		    	<input type="number" th:field="*{beginYCoord}" />
-		        <input type="submit" value="getMap" />/><!-- 
-		    	<input type="number" th:field="*{size}" />
-				<input type="number" name="size" id="size"/> -->
+		   		<label for="currentXCoord">Coordonnée X : </label>
+		    	<input name="xCoord" type="number" th:value="${map?.currentXCoord}" />
+		   		<label for="currentYCoord">Coordonnée Y : </label>
+		    	<input name="yCoord" type="number" th:value="${map?.currentYCoord}" />
+		   		<label for="size">Size: </label>
+		    	<input name="size" type="number" th:value="${map?.size}" />
+		        <input type="submit" value="getMap" />
 	   		</form>
 	    
 	    	<form onsubmit="saveJsonView()" action="#" th:action="@{/admin/mapEditorSaveMap}" method="post">
@@ -53,8 +51,7 @@
 				<input type="text" name="mapLayoutHeightValue" id="mapLayoutHeightValue" hidden="true"/>
 				<input type="number" name="beginYCoord" th:value="${map?.beginYCoord}" hidden="true"/>
 				<input type="number" name="beginXCoord" th:value="${map?.beginXCoord}" hidden="true"/>
-				<input type="number" name="width" th:value="${map?.width}" hidden="true"/>
-				<input type="number" name="height" th:value="${map?.height}" hidden="true"/>
+				<input type="number" name="size" th:value="${map?.size}" hidden="true"/>
 		        <input type="submit" value="Sauvegarder" />
 	    	</form>
 	    

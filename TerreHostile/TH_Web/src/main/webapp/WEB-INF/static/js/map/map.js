@@ -5,6 +5,26 @@ var groundValueGlobal;
 var allGround = false;
 var mapLayers = [];
 
+function setGroundTypeFocus(groundValue)
+{
+	groundValueGlobal = groundValue;
+	allGround = false;
+}
+
+
+function setAllGroundType(groundValue)
+{
+	groundValueGlobal = groundValue;
+	allGround = true;
+}
+
+
+function saveJsonView()
+{
+	document.getElementById('mapLayoutValue').value = mapLayers[0].getLayout();
+	document.getElementById('mapLayoutHeightValue').value = mapLayers[0].getHeightLayout();
+}
+
 
 
 
@@ -29,61 +49,27 @@ require(
 							window.setTimeout(callback, 1000 / 60);
 						};
 			})();
-				
+
+			document.getElementById('mapEditorGetMapByXYAndSize').addEventListener("click", mapEditorGetMapByXYAndSizeButton);
 			
-			document.getElementById('mapEditorGetMapByXYAndSizeButton').addEventListener("click", mapEditorGetMapByXYAndSize);
-						
-			
-			function setGroundTypeFocus(groundValue)
-			{
-				groundValueGlobal = groundValue;
-				allGround = false;
-			}
 
-
-			function setAllGroundType(groundValue)
-			{
-				groundValueGlobal = groundValue;
-				allGround = true;
-			}
-
-
-			function saveJsonView()
-			{
-				document.getElementById('mapLayoutValue').value = mapLayers[0].getLayout();
-				document.getElementById('mapLayoutHeightValue').value = mapLayers[0].getHeightLayout();
-			}
-
-			
-			function mapEditorGetMapByXYAndSizeButton(xCoord, yCoord, size)
-			{				
-
-				console.log("mapEditorGetMapByXYAndSizeButton xCoord = " + xCoord)
-				console.log("mapEditorGetMapByXYAndSizeButton yCoord = " + yCoordd)
-				console.log("mapEditorGetMapByXYAndSizeButton size = " + size)
+			function mapEditorGetMapByXYAndSizeButton()
+			{		
 				
 				var parameters = { 
-						xCoord : xCoord,
-						yCoord : yCoord,
-						size : size
+						xCoord : map.currentXCoord,
+						yCoord : map.currentYCoord,
+						size : map.size
 					}
 				
-				console.log("parameters =");
-				console.log(parameters);
-				
-				console.log("mapEditorGetMapByXYAndSize START");
 				 $.ajax({
 				        type: "GET",
 				        url: "/TH_Web/admin/mapEditorGetMapByXYAndSize",
 				        data: parameters,
 				        success: function (result) {
-				        	console.log("mapEditorGetMapByXYAndSize222 SUCCESS");
-				        	console.log(result);
-				        	console.log("mapEditorGetMapByXYAndSize222 SUCCESS");
 				        	mapJsonView = result.jsonView; 
 				        	map = result;
 
-				        	console.log("mapJsonView = " + mapJsonView);
 				        	$('#mapViewCanvas').remove();
 				        	launch();
 				        },
@@ -91,8 +77,6 @@ require(
 				        	console.log("mapEditorGetMapByXYAndSize FAIL");
 				        }
 				    });
-				
-				 console.log("mapEditorGetMapByXYAndSize END");
 			}
 
 
@@ -106,39 +90,21 @@ require(
 				map.currentXCoord = x; 
 				map.currentYCoord = y; 
 
-				console.log("OLD map.currentXCoord x = " + map.currentXCoord)
-				console.log("OLD map.currentYCoord x = " + map.currentYCoord)
-	
+				console.log("NEW map.currentXCoord x = " + map.currentXCoord)
+				console.log("NEW map.currentYCoord x = " + map.currentYCoord)
+
 				
-					if (currentXcenter < map.beginXCoord + 20 || currentXcenter > map.beginXCoord + map.width - 20 || currentYcenter < map.beginYCoord + 20 || currentYcenter > map.beginYCoord + map.height - 20)
-					{
-						console.log("SUBMIT")
-						mapEditorGetMapByXYAndSizeButton(map.currentXCoord, map.currentYCoord, map.size)
-						
-					}
-				
+//					if (currentXcenter < map.beginXCoord + 20 || currentXcenter > map.beginXCoord + map.width - 20 || currentYcenter < map.beginYCoord + 20 || currentYcenter > map.beginYCoord + map.height - 20)
+//					{
+//						console.log("SUBMIT")
+//						mapEditorGetMapByXYAndSizeButton(map.currentXCoord, map.currentYCoord, map.size)
+//						
+//					}
 				
 			}	
 			
 			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
 			function launch() {
-				
-				console.log("map = ");
-				console.log(map);
 		
 				jsonLoader([ map.jsonView, '../json/imageFiles.json' ])
 						.then(
@@ -152,7 +118,7 @@ require(
 													function(imgResponse) {
 
 														game = new main(0,
-																0, map.width, map.height,
+																0, map.size,
 																imgResponse[1]); // X & Y drawing position, and tile span to draw 
 
 														game
@@ -199,13 +165,9 @@ require(
 				
 			}
 
-			function main(x, y, xrange, yrange, playerImages) {
-
-				updateCurrentCenterXY(map.beginXCoord + (map.width - 10) / 2, map.beginYCoord + (map.height - 10) / 2);
+			function main(x, y, size, playerImages) {
 				
 				self = this;
-				var rangeX = xrange;
-				var rangeY = yrange;
 							
 		        var context = CanvasControl.create("mapViewCanvas", 2000, 1000, {}, "mapView");
 		        
@@ -217,9 +179,9 @@ require(
 					
 					if (allGround)
 					{
-						for (var i = 0; i < 0 + xrange; i++) 
+						for (var i = 0; i < 0 + size * 10; i++) 
 						{
-							for (var j = 0; j < 0 + yrange; j++) 
+							for (var j = 0; j < 0 + size * 10; j++) 
 							{
 								mapLayers[0].setTile(i, j, newTile); // Force the changing of tile graphic
 							}
@@ -304,7 +266,8 @@ require(
 				                  layer.move("left");
 				                  layer.move("down");
 		                		}
-			                  updateCurrentCenterXY(currentXcenter - 10, currentYcenter + 10);
+		                	
+			                  updateCurrentCenterXY(map.currentXCoord - 10, map.currentYCoord + 10);
 		                });
 		            //    startY ++;
 		              break;
@@ -316,7 +279,7 @@ require(
 				                  layer.move("down");
 				                  layer.move("up");
 	                		}
-			                  updateCurrentCenterXY(currentXcenter - 10, currentYcenter -10);
+			                  updateCurrentCenterXY(map.currentXCoord - 10, map.currentYCoord -10);
 		                });
 		            //    startX --;
 		              break;
@@ -328,7 +291,7 @@ require(
 				                  layer.move("left");
 				                  layer.move("right");
 	                		}
-			                  updateCurrentCenterXY(currentXcenter +10, currentYcenter + 10);
+			                  updateCurrentCenterXY(map.currentXCoord +10, map.currentYCoord + 10);
 		                });
 		           //     startX ++;
 		              break;
@@ -340,7 +303,7 @@ require(
 				                  layer.move("right");
 				                  layer.move("up");
 	                		}
-			                updateCurrentCenterXY(currentXcenter + 10, currentYcenter - 10);
+			                updateCurrentCenterXY(map.currentXCoord + 10, map.currentYCoord - 10);
 		                });
 //		                startY --;
 		              break;
@@ -354,8 +317,8 @@ require(
 					context.clearRect(0, 0, CanvasControl().width,
 							CanvasControl().height);
 					
-					for (i = 0; i < 0 + rangeY; i++) {
-						for (j = 0; j < 0 + rangeX; j++) {
+					for (i = 0; i < 0 + size * 10; i++) {
+						for (j = 0; j < 0 + size * 10; j++) {
 							mapLayers.map(function(layer) {
 								if (layer.getTitle() === "Graphics") {
 									layer.draw(i, j); // Draw the graphics layer
@@ -379,9 +342,9 @@ require(
 							var mapViewHeight = document.getElementById('mapView').offsetHeight;
 														
 							mapLayers[i].align("h-center",
-									mapViewWidth, xrange, 0);
+									mapViewWidth, size * 10, 0);
 							mapLayers[i].align("v-center",
-									mapViewHeight, yrange, 0);
+									mapViewHeight, size * 10, 0);
 						};
 						draw();
 					}

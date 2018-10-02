@@ -24,12 +24,10 @@ public class MapBackgroundViewService {
 	}
 	
     
-	public void saveMapFromLayout(String mapValueLayout, String mapValueHeightLayout, int width, int height, int beginX, int beginY)
+	public void saveMapFromLayout(String mapValueLayout, String mapValueHeightLayout, int size, int beginX, int beginY)
 	{
-
-		int squareSize = width / 10;
 		
-		MapBackgroundView[] array = new MapBackgroundView[squareSize*squareSize];
+		MapBackgroundView[] array = new MapBackgroundView[size*size];
 		
 		for (int i = 0; i < array.length; i++)
 		{
@@ -49,9 +47,9 @@ public class MapBackgroundViewService {
 	      int curBeginY = beginY;
 	      int curBeginX = beginX;
 	      
-	      for (int j = 0; j < squareSize*squareSize; j+=squareSize)
+	      for (int j = 0; j < size*size; j+=size)
 	      {
-				for (int i = 0; i < squareSize; i++)
+				for (int i = 0; i < size; i++)
 				{
 					m.find();
 					m2.find();
@@ -60,7 +58,7 @@ public class MapBackgroundViewService {
 					array[i + j].setBeginXCoord(curBeginX + 10 * i);
 					array[i + j].setBeginYCoord(curBeginY);
 				}
-				for (int i = 0; i < squareSize; i++)
+				for (int i = 0; i < size; i++)
 				{
 					m.find();
 					m2.find();
@@ -69,7 +67,7 @@ public class MapBackgroundViewService {
 					array[i + j].setBeginXCoord(curBeginX + 10 * i);
 					array[i + j].setBeginYCoord(curBeginY);
 				}
-				for (int i = 0; i < squareSize; i++)
+				for (int i = 0; i < size; i++)
 				{
 					m.find();
 					m2.find();
@@ -78,7 +76,7 @@ public class MapBackgroundViewService {
 					array[i + j].setBeginXCoord(curBeginX + 10 * i);
 					array[i + j].setBeginYCoord(curBeginY);
 				}
-				for (int i = 0; i < squareSize; i++)
+				for (int i = 0; i < size; i++)
 				{
 					m.find();
 					m2.find();
@@ -87,7 +85,7 @@ public class MapBackgroundViewService {
 					array[i + j].setBeginXCoord(curBeginX + 10 * i);
 					array[i + j].setBeginYCoord(curBeginY);
 				}
-				for (int i = 0; i < squareSize; i++)
+				for (int i = 0; i < size; i++)
 				{
 					m.find();
 					m2.find();
@@ -96,7 +94,7 @@ public class MapBackgroundViewService {
 					array[i + j].setBeginXCoord(curBeginX + 10 * i);
 					array[i + j].setBeginYCoord(curBeginY);
 				}
-				for (int i = 0; i < squareSize; i++)
+				for (int i = 0; i < size; i++)
 				{
 					m.find();
 					m2.find();
@@ -105,7 +103,7 @@ public class MapBackgroundViewService {
 					array[i + j].setBeginXCoord(curBeginX + 10 * i);
 					array[i + j].setBeginYCoord(curBeginY);
 				}
-				for (int i = 0; i < squareSize; i++)
+				for (int i = 0; i < size; i++)
 				{
 					m.find();
 					m2.find();
@@ -114,7 +112,7 @@ public class MapBackgroundViewService {
 					array[i + j].setBeginXCoord(curBeginX + 10 * i);
 					array[i + j].setBeginYCoord(curBeginY);
 				}
-				for (int i = 0; i < squareSize; i++)
+				for (int i = 0; i < size; i++)
 				{
 					m.find();
 					m2.find();
@@ -123,7 +121,7 @@ public class MapBackgroundViewService {
 					array[i + j].setBeginXCoord(curBeginX + 10 * i);
 					array[i + j].setBeginYCoord(curBeginY);
 				}
-				for (int i = 0; i < squareSize; i++)
+				for (int i = 0; i < size; i++)
 				{
 					m.find();
 					m2.find();
@@ -132,7 +130,7 @@ public class MapBackgroundViewService {
 					array[i + j].setBeginXCoord(curBeginX + 10 * i);
 					array[i + j].setBeginYCoord(curBeginY);
 				}
-				for (int i = 0; i < squareSize; i++)
+				for (int i = 0; i < size; i++)
 				{
 					m.find();
 					m2.find();
@@ -160,11 +158,6 @@ public class MapBackgroundViewService {
 		
 		xMin = xMin < 1 ? 1 : xMin;
 		yMin = yMin < 1 ? 1 : yMin;
-		
-		System.out.println("xMin = " + xMin);
-		System.out.println("yMin = " + yMin);
-		System.out.println("xMax = " + xMax);
-		System.out.println("yMax = " + yMax);
 		
 		List<MapBackgroundView> mList = mapBackgroundViewRepository.findByXYMinMax(xMin, xMax, yMin, yMax);
 		
@@ -300,22 +293,11 @@ public class MapBackgroundViewService {
 		Map map = new Map();
 		map.setJsonView(jsonView.toString());
 		
-		map.setBeginXCoord(xMin - xMin%10 + 1);
-		map.setBeginYCoord(yMin - yMin%10 + 1);
-		map.setCurrentXCoord(map.getCurrentXCoord());
-		map.setCurrentYCoord(map.getCurrentYCoord());
-		map.setHeight(size * 10);
-		map.setWidth(size * 10);
-		
-		System.out.println(	"x = " + x);
-		System.out.println(	"y = " + y);
-		System.out.println(	"size = " + size);
-		System.out.println(	"beginx = " + map.getBeginXCoord());
-		System.out.println(	"beginx = " + map.getBeginYCoord());
-		System.out.println(	"getHeight = " + map.getHeight());
-		System.out.println(	"jsonView = " + map.getJsonView());
-		System.out.println(	"jsonView.toString() = " + jsonView.toString());
-		
+		map.setBeginXCoord(x);
+		map.setBeginYCoord(y);
+		map.setCurrentXCoord(map.getBeginXCoord());
+		map.setCurrentYCoord(map.getBeginYCoord());
+		map.setSize(size);
 		
 		return map;
 	}
