@@ -75,6 +75,8 @@ require(
 				        data: parameters,
 				        success: function (result) {
 				        	console.log("mapEditorGetMapByXYAndSize SUCCESS");
+				        	
+				        	console.log(result);
 				        	launch();
 				        	$('#mapView').replaceWith(result);
 				        },
@@ -105,10 +107,14 @@ require(
 				        url: "/TH_Web/admin/mapEditorGetMapByXYAndSize",
 				        data: parameters,
 				        success: function (result) {
-				        	console.log("mapEditorGetMapByXYAndSize SUCCESS");
-				        	var map = /*[[${map}]]*/ "map";  
-				        	var mapJsonView = /*[[${mapJsonView}]]*/ "mapJsonView"; 
-				        	$('#mapView').replaceWith(result);
+				        	console.log("mapEditorGetMapByXYAndSize222 SUCCESS");
+				        	console.log(result);
+				        	console.log("mapEditorGetMapByXYAndSize222 SUCCESS");
+				        	mapJsonView = result.jsonView; 
+				        	map = result;
+
+				        	console.log("mapJsonView = " + mapJsonView);
+				        	$('#mapViewCanvas').remove();
 				        	launch();
 				        },
 				        error: function (result) {

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.terrehostile.business.map.Map;
 import org.terrehostile.business.map.MapBackgroundView;
@@ -64,15 +65,17 @@ public class MapEditorControler {
 	   
 	   
 	   @RequestMapping(value={"/admin/mapEditorGetMapByXYAndSize"}, method = RequestMethod.GET)
-	    public ModelAndView getMapByXYAndSize(@RequestParam int xCoord, int yCoord, int size) {   
+	   @ResponseBody
+	    public Map getMapByXYAndSize(@RequestParam int xCoord, int yCoord, int size) {   
 		   		   
 		    Map map = mapBackgroundViewService.getMapByXYAndSize(xCoord, yCoord, size);
 		   	ModelAndView modelAndView = new ModelAndView();
+			modelAndView.setViewName("fragments/map/mapView");
+			System.out.println("mapJsonView CONTROLLER = " + map.getJsonView());
 			modelAndView.addObject("map", map);
 			modelAndView.addObject("mapJsonView", map.getJsonView());
-			modelAndView.setViewName("fragments/map/mapView");
 			
-			return modelAndView;
+			return map;
 	    }
 	   
 	   @PostMapping("/admin/mapEditorSave100x100TileMap")
@@ -83,8 +86,8 @@ public class MapEditorControler {
 		   	
 		   	MapBackgroundView mBackView;
 		   	
-		   	ArrayList<Integer> a = new ArrayList<Integer>(Arrays.asList(101, 111, 121, 131, 141, 151, 161, 171, 181, 191, 201, 211, 221, 231, 241, 251, 261, 271, 281, 291, 301));
-		   	ArrayList<Integer> a2 = new ArrayList<Integer>(Arrays.asList(101, 111, 121, 131, 141, 151, 161, 171, 181, 191, 201, 211, 221, 231, 241, 251, 261, 271, 281, 291, 301));
+		   	ArrayList<Integer> a = new ArrayList<Integer>(Arrays.asList(1,11, 21, 31, 41, 51, 61, 71, 81, 91, 101, 111, 121, 131, 141, 151, 161, 171, 181, 191, 201, 211, 221, 231, 241, 251, 261, 271, 281, 291, 301));
+		   	ArrayList<Integer> a2 = new ArrayList<Integer>(Arrays.asList(1,11, 21, 31, 41, 51, 61, 71, 81, 91, 101, 111, 121, 131, 141, 151, 161, 171, 181, 191, 201, 211, 221, 231, 241, 251, 261, 271, 281, 291, 301));
 		   	
 		   	for (Integer i : a)
 		   	{
