@@ -82,24 +82,14 @@ require(
 
 			function updateCurrentCenterXY (x, y)
 			{ 
-				
-				console.log("OLD map.currentXCoord x = " + map.currentXCoord)
-				console.log("OLD map.currentYCoord x = " + map.currentYCoord)
-				console.log("OLD map.size x = " + map.size)
-				
 				map.currentXCoord = x; 
 				map.currentYCoord = y; 
-
-				console.log("NEW map.currentXCoord x = " + map.currentXCoord)
-				console.log("NEW map.currentYCoord x = " + map.currentYCoord)
-
 				
-//					if (currentXcenter < map.beginXCoord + 20 || currentXcenter > map.beginXCoord + map.width - 20 || currentYcenter < map.beginYCoord + 20 || currentYcenter > map.beginYCoord + map.height - 20)
-//					{
-//						console.log("SUBMIT")
-//						mapEditorGetMapByXYAndSizeButton(map.currentXCoord, map.currentYCoord, map.size)
-//						
-//					}
+					if (map.currentXCoord <= map.beginXCoord - 40 || map.currentYCoord <= map.beginYCoord - 40 || map.currentXCoord >= map.beginXCoord + 40 || map.currentYCoord >= map.beginYCoord + 40)
+					{
+						mapEditorGetMapByXYAndSizeButton();
+						
+					}
 				
 			}	
 			
@@ -169,7 +159,7 @@ require(
 				
 				self = this;
 							
-		        var context = CanvasControl.create("mapViewCanvas", 2000, 1000, {}, "mapView");
+		        var context = CanvasControl.create("mapViewCanvas", 4000, 2000, {}, "mapView");
 		        
 				var input = new CanvasInput(document, CanvasControl());
 
@@ -217,37 +207,6 @@ require(
 		        input.keyboard(function(pressed, keydown) {
 		          if (!keydown) {
 		            switch(pressed) {
-		              case 65:
-		                mapLayers.map(function(layer) {
-		                  if (yrange < layer.getLayout().length) {
-		                    xrange +=  4;
-		                    yrange +=  4;
-//		                    startY -= 2;
-//		                    startX -= 2;
-//		                    if (startX < 0) { startX = 0; }
-//		                    if (startY < 0) { startY = 0; }
-		                    layer.setZoom("out");
-
-		                    layer.align("h-center", CanvasControl().width, xrange + startX, 0);
-		                    layer.align("v-center", CanvasControl().height, yrange + startY, (yrange + startY));
-		                 }
-		                });
-		              break;
-		              case 83:
-		                mapLayers.map(function(layer) {
-		                  if (yrange > defaultyrange) {
-		                    xrange -=  4;
-		                    yrange -=  4;
-//		                    startY += 2;
-//		                    startX += 2;
-		                    layer.setZoom("in");
-
-		                    layer.align("h-center", CanvasControl().width, xrange + startX, 0);
-		                    layer.align("v-center", CanvasControl().height, yrange + startY, (yrange + startY));
-
-		                  }
-		                })
-		              break;
 		              case 81:
 		                mapLayers.map(function(layer) {
 			                  layer.rotate("right");
@@ -307,6 +266,18 @@ require(
 		                });
 //		                startY --;
 		              break;
+		              case 107:
+			                mapLayers.map(function(layer) {
+			                	layer.setZoom("in");
+			                });
+//			                startY --;
+			              break;
+		              case 109:
+			                mapLayers.map(function(layer) {
+			                	layer.setZoom("out");
+			                });
+//			                startY --;
+			              break;
 		            }
 		          }
 		        });
@@ -340,7 +311,9 @@ require(
 							
 							var mapViewWidth = document.getElementById('mapView').offsetWidth;
 							var mapViewHeight = document.getElementById('mapView').offsetHeight;
-														
+
+							mapLayers[i].setZoom("out");
+							mapLayers[i].setZoom("out");
 							mapLayers[i].align("h-center",
 									mapViewWidth, size * 10, 0);
 							mapLayers[i].align("v-center",

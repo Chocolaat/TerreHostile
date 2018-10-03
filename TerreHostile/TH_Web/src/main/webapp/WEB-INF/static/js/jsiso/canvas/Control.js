@@ -103,9 +103,7 @@ define(function() {
 	      
 	      
 	      // if high, vew from far
-	      // if low, view from near
-	      canvasElement.width =  1487;
-	      canvasElement.height =  654;
+//	      // if low, view from near
 	     // canvasElement.getContext(canvasType).setTransform(pxRatio, 0, 0, pxRatio, 0, 0);
 	      
 	      return document.getElementById(element).appendChild(canvasElement).getContext(canvasType);
