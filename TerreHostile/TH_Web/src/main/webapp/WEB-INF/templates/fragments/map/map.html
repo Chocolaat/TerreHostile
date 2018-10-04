@@ -13,35 +13,27 @@
 	
 
 	<div id="mapToolBar"> 
-	<button type="button" class="mapToolBarItem" onclick="show('mapToolBarSubMenu_groundType')">Type de terrain</button>
-	<button type="button" class="mapToolBarItem" onclick="show('mapToolBarSubMenu_Buildings')">Bâtiments</button>
-	<button type="button" class="mapToolBarItem"></button>
+	<button type="button" class="mapToolBarItem" id="mapToolBarItemGroundType">Type de terrain</button>
+	<button type="button" class="mapToolBarItem" id="mapToolBarItemBuildings">Bâtiments</button>
 	</div>
 	
 	<div id="mapToolBarSubMenu"> </div>
 	
 	<div id = "mapToolBarSubMenu_groundType" style='display:none'> 
-		<button type="button" class="mapToolBarSubMenuItem" id="mapToolBarSubMenuItem_Grass" onClick="setGroundTypeFocus(0)">Grass</button>
-		<button type="button" class="mapToolBarSubMenuItem" id="mapToolBarSubMenuItem_Ground" onClick="setGroundTypeFocus(1)">Ground</button>
-		<button type="button" class="mapToolBarSubMenuItem" id="mapToolBarSubMenuItem_Ocean" onClick="setGroundTypeFocus(2)">Ocean</button>
-		<button type="button" class="mapToolBarSubMenuItem" id="mapToolBarSubMenuItem_Sand" onClick="setGroundTypeFocus(3)">Sand</button>
-		<button type="button" class="mapToolBarSubMenuItem" id="mapToolBarSubMenuItem_Grass" onClick="setAllGroundType(0)">GrassAll</button>
-		<button type="button" class="mapToolBarSubMenuItem" id="mapToolBarSubMenuItem_Ground" onClick="setAllGroundType(1)">GroundAll</button>
-		<button type="button" class="mapToolBarSubMenuItem" id="mapToolBarSubMenuItem_Ocean" onClick="setAllGroundType(2)">OceanAll</button>
-		<button type="button" class="mapToolBarSubMenuItem" id="mapToolBarSubMenuItem_Sand" onClick="setAllGroundType(3)">SandAll</button>
+		<button type="button" class="mapToolBarSubMenuItem" id="mapToolBarSubMenuItem_Grass">Grass</button>
+		<button type="button" class="mapToolBarSubMenuItem" id="mapToolBarSubMenuItem_Ground">Ground</button>
+		<button type="button" class="mapToolBarSubMenuItem" id="mapToolBarSubMenuItem_Ocean">Ocean</button>
+		<button type="button" class="mapToolBarSubMenuItem" id="mapToolBarSubMenuItem_Sand">Sand</button>
+		<button type="button" class="mapToolBarSubMenuItem" id="mapToolBarSubMenuItem_GrassAll">GrassAll</button>
+		<button type="button" class="mapToolBarSubMenuItem" id="mapToolBarSubMenuItem_GroundAll">GroundAll</button>
+		<button type="button" class="mapToolBarSubMenuItem" id="mapToolBarSubMenuItem_OceanAll">OceanAll</button>
+		<button type="button" class="mapToolBarSubMenuItem" id="mapToolBarSubMenuItem_SandAll">SandAll</button>
 	</div>
 	
 	
 	
 	<div id="mapToolBarSubMenu_Buildings"  style='display:none'> Buildings </div>
 	
-	
-	<!-- Scripts for map.html elements -->
-	<script> 
-	function show(param_div_id) {
-	    document.getElementById('mapToolBarSubMenu').innerHTML = document.getElementById(param_div_id).innerHTML;
-	  } </script>
-	  
 	  
 	<!-- Initialisation variables from html/server to javascript -->
 	<script th:inline="javascript">

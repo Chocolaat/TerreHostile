@@ -1,33 +1,4 @@
 
-
-
-var groundValueGlobal;
-var allGround = false;
-var mapLayers = [];
-
-function setGroundTypeFocus(groundValue)
-{
-	groundValueGlobal = groundValue;
-	allGround = false;
-}
-
-
-function setAllGroundType(groundValue)
-{
-	groundValueGlobal = groundValue;
-	allGround = true;
-}
-
-
-function saveJsonView()
-{
-	document.getElementById('mapLayoutValue').value = mapLayers[0].getLayout();
-	document.getElementById('mapLayoutHeightValue').value = mapLayers[0].getHeightLayout();
-}
-
-
-
-
 require(
 		[ 'jsiso/canvas/Control', 'jsiso/canvas/Input', 'jsiso/img/load',
 				'jsiso/json/load', 'jsiso/tile/Field',
@@ -50,9 +21,54 @@ require(
 						};
 			})();
 
+
+			// Global variables used to ddisplay and update map
+			var groundValueGlobal;
+			var allGround = false;
+			var mapLayers = [];
+			
 			document.getElementById('mapEditorGetMapByXYAndSize').addEventListener("click", mapEditorGetMapByXYAndSizeButton);
 			
+			document.getElementById('mapToolBarItemGroundType').addEventListener('click', function() {showMapToolBarSubMenu("mapToolBarSubMenu_groundType");});
+			document.getElementById('mapToolBarItemBuildings').addEventListener('click', function() {showMapToolBarSubMenu("mapToolBarSubMenu_Buildings");});
 
+			function showMapToolBarSubMenu(param_div_id) {
+				console.log("showMapToolBarSubMenu value = " + param_div_id);
+			    document.getElementById('mapToolBarSubMenu').innerHTML = document.getElementById(param_div_id).innerHTML;
+				document.getElementById('mapToolBarSubMenuItem_Grass').addEventListener('click', function() {setGroundTypeFocus("0");});
+				document.getElementById('mapToolBarSubMenuItem_Ground').addEventListener('click', function() {setGroundTypeFocus("1");});
+				document.getElementById('mapToolBarSubMenuItem_Ocean').addEventListener('click', function() {setGroundTypeFocus("2");});
+				document.getElementById('mapToolBarSubMenuItem_Sand').addEventListener('click', function() {setGroundTypeFocus("3");});
+				document.getElementById('mapToolBarSubMenuItem_GrassAll').addEventListener('click', function() {setAllGroundType("0");});
+				document.getElementById('mapToolBarSubMenuItem_GroundAll').addEventListener('click', function() {setAllGroundType("1");});
+				document.getElementById('mapToolBarSubMenuItem_OceanAll').addEventListener('click', function() {setAllGroundType("2");});
+				document.getElementById('mapToolBarSubMenuItem_SandAll').addEventListener('click', function() {setAllGroundType("3");});
+			    
+			  }
+
+			function setGroundTypeFocus(groundValue)
+			{
+				groundValueGlobal = groundValue;
+				allGround = false;
+			}
+
+
+			function setAllGroundType(groundValue)
+			{
+				groundValueGlobal = groundValue;
+				allGround = true;
+			}
+
+			
+			
+
+			function saveJsonView()
+			{
+				document.getElementById('mapLayoutValue').value = mapLayers[0].getLayout();
+				document.getElementById('mapLayoutHeightValue').value = mapLayers[0].getHeightLayout();
+			}
+
+			
 			function mapEditorGetMapByXYAndSizeButton()
 			{		
 				
@@ -154,6 +170,16 @@ require(
 
 				
 			}
+			
+			function centerView(layer)
+			{
+				var mapViewWidth = document.getElementById('mapView').offsetWidth;
+				var mapViewHeight = document.getElementById('mapView').offsetHeight;
+            	layer.align("h-center",
+						mapViewWidth, map.size * 10, 0);
+            	layer.align("v-center",
+						mapViewHeight, map.size * 10, 0);
+			}
 
 			function main(x, y, size, playerImages) {
 				
@@ -204,7 +230,9 @@ require(
 				});
 				
 
-		        input.keyboard(function(pressed, keydown) {
+		        input.keyboard(function(pressed, keydown, event) {
+					var mapViewWidth = document.getElementById('mapView').offsetWidth;
+					var mapViewHeight = document.getElementById('mapView').offsetHeight;
 		          if (!keydown) {
 		            switch(pressed) {
 		              case 81:
@@ -217,64 +245,158 @@ require(
 		                  layer.rotate("left");
 		                });
 		              break;
-		              //flech droite
+		              //flech droite ou numpad 6
 		              case 39:
+		              case 102:		              
+		            	  
 		                mapLayers.map(function(layer) {
-		                	for (var i = 0 ; i < 10; i++)
+		                	if (event.ctrlKey)
 		                		{
-				                  layer.move("left");
-				                  layer.move("down");
+		                			layer.rotate("right");
 		                		}
-		                	
-			                  updateCurrentCenterXY(map.currentXCoord - 10, map.currentYCoord + 10);
+		                	else
+		                		{
+				                	for (var i = 0 ; i < 10; i++)
+			                		{
+					                  layer.move("left");
+					                  layer.move("down");
+			                		}
+			                	
+				                  updateCurrentCenterXY(map.currentXCoord - 10, map.currentYCoord + 10);
+				                  
+		                		}			                  
 		                });
 		            //    startY ++;
 		              break;
-	                	//fleche haut
+	                	//fleche haut ou numpad8
 		              case 38:
+		              case 104:
 		                mapLayers.map(function(layer) {
-		                	for (var i = 0 ; i < 10; i++)
+		                	if (event.ctrlKey)
 	                		{
-				                  layer.move("down");
-				                  layer.move("up");
+		                		layer.setZoom("in");
+		                		centerView(layer);
 	                		}
-			                  updateCurrentCenterXY(map.currentXCoord - 10, map.currentYCoord -10);
+		                	else
+		                		{
+				                	for (var i = 0 ; i < 10; i++)
+			                		{
+						                  layer.move("down");
+						                  layer.move("up");
+			                		}
+					                  updateCurrentCenterXY(map.currentXCoord - 10, map.currentYCoord -10);
+		                		}
+
 		                });
 		            //    startX --;
 		              break;
-		            //fleche bas
+		            //fleche bas ou numpad 2
 		              case 40:
+		              case 98:
 		                mapLayers.map(function(layer) {
-		                	for (var i = 0 ; i < 10; i++)
+		                	if (event.ctrlKey)
 	                		{
-				                  layer.move("left");
-				                  layer.move("right");
+		                		layer.setZoom("out");
+		                		centerView(layer);
 	                		}
-			                  updateCurrentCenterXY(map.currentXCoord +10, map.currentYCoord + 10);
+		                	else
+		                		{
+				                	for (var i = 0 ; i < 10; i++)
+			                		{
+						                  layer.move("left");
+						                  layer.move("right");
+			                		}
+					                  updateCurrentCenterXY(map.currentXCoord +10, map.currentYCoord + 10);
+		                		}
 		                });
 		           //     startX ++;
 		              break;
-		              //fleche gauche
+		              //fleche gauche ou numpad 4
 		              case 37:
+		              case 100:
 		                mapLayers.map(function(layer) {
-		                	for (var i = 0 ; i < 10; i++)
+		                	if (event.ctrlKey)
 	                		{
-				                  layer.move("right");
-				                  layer.move("up");
+	                			layer.rotate("left");
 	                		}
-			                updateCurrentCenterXY(map.currentXCoord + 10, map.currentYCoord - 10);
+		                	else
+		                		{
+				                	for (var i = 0 ; i < 10; i++)
+			                		{
+						                  layer.move("right");
+						                  layer.move("up");
+			                		}
+					                updateCurrentCenterXY(map.currentXCoord + 10, map.currentYCoord - 10);
+		                		}
+
 		                });
 //		                startY --;
 		              break;
+		              // numpad 1 (bas gauche)
+		              case 97:
+		                mapLayers.map(function(layer) {
+		                	for (var i = 0 ; i < 5; i++)
+	                		{
+				                  layer.move("right");
+				                  layer.move("up");
+				                  layer.move("left");
+				                  layer.move("right");
+	                		}
+			                updateCurrentCenterXY(map.currentXCoord + 10, map.currentYCoord);
+		                });
+		              break;
+		           // numpad 3 bas droite
+		              case 99:
+			                mapLayers.map(function(layer) {
+			                	for (var i = 0 ; i < 5; i++)
+		                		{
+					                  layer.move("left");
+					                  layer.move("right");
+					                  layer.move("left");
+					                  layer.move("down");
+		                		}
+				                updateCurrentCenterXY(map.currentXCoord, map.currentYCoord  + 10);
+			                });
+			              break;
+		           // numpad 7 haut gauche
+		              case 103:
+			                mapLayers.map(function(layer) {
+			                	for (var i = 0 ; i < 5; i++)
+		                		{
+					                  layer.move("down");
+					                  layer.move("up");
+					                  layer.move("right");
+					                  layer.move("up");
+		                		}
+				                updateCurrentCenterXY(map.currentXCoord, map.currentYCoord - 10);
+			                });
+			              break;
+		           // numpad 9 haut droite
+		              case 105:
+			                mapLayers.map(function(layer) {
+			                	for (var i = 0 ; i < 5; i++)
+		                		{
+					                  layer.move("down");
+					                  layer.move("up");
+					                  layer.move("left");
+					                  layer.move("down");
+		                		}
+				                updateCurrentCenterXY(map.currentXCoord - 10, map.currentYCoord);
+			                });
+			              break;
 		              case 107:
 			                mapLayers.map(function(layer) {
 			                	layer.setZoom("in");
+			                	centerView(layer);
+			                	
 			                });
 //			                startY --;
 			              break;
 		              case 109:
 			                mapLayers.map(function(layer) {
 			                	layer.setZoom("out");
+			                	centerView(layer);
+			                	
 			                });
 //			                startY --;
 			              break;
@@ -309,15 +431,9 @@ require(
 									CanvasControl().width);
 							mapLayers[i].setup(layers[i]);
 							
-							var mapViewWidth = document.getElementById('mapView').offsetWidth;
-							var mapViewHeight = document.getElementById('mapView').offsetHeight;
-
-							mapLayers[i].setZoom("out");
-							mapLayers[i].setZoom("out");
-							mapLayers[i].align("h-center",
-									mapViewWidth, size * 10, 0);
-							mapLayers[i].align("v-center",
-									mapViewHeight, size * 10, 0);
+							mapLayers[i].setZoom(0.8);
+							
+							centerView(mapLayers[i]);
 						};
 						draw();
 					}
@@ -325,6 +441,7 @@ require(
 			}
 			
 			launch();
+
 
 
 		});
