@@ -46,7 +46,8 @@
 		        <input type="submit" value="getMap" />
 	   		</form>
 	    
-	    	<form onsubmit="saveJsonView()" action="#" th:action="@{/admin/mapEditorSaveMap}" method="post">
+	    	<!--  -->
+	    	<form id="saveJsonViewForm" action="#" th:action="@{/admin/mapEditorSaveMap}" method="post">
 				<input type="text" name="mapLayoutValue" id="mapLayoutValue" hidden="true"/>
 				<input type="text" name="mapLayoutHeightValue" id="mapLayoutHeightValue" hidden="true"/>
 				<input type="number" name="beginYCoord" th:value="${map?.beginYCoord}" hidden="true"/>

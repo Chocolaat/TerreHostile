@@ -1,5 +1,6 @@
 package org.terrehostile;
 
+import org.terrehostile.services.MapBackgroundViewService;
 
 public class TestSch {
 	
@@ -11,7 +12,7 @@ public class TestSch {
 	//	Map map = Map.createMapRandomBackgrounds(0, 0);
 	//	MapBackgroundView mapBGV = new MapBackgroundView(map);
 		
-	//	new MapBackgroundViewService().saveMap(mapBGV);
+		new MapBackgroundViewService().getMapByXYAndSize(311, -9, 3);
 	}
 
 }

@@ -31,6 +31,8 @@ require(
 			
 			document.getElementById('mapToolBarItemGroundType').addEventListener('click', function() {showMapToolBarSubMenu("mapToolBarSubMenu_groundType");});
 			document.getElementById('mapToolBarItemBuildings').addEventListener('click', function() {showMapToolBarSubMenu("mapToolBarSubMenu_Buildings");});
+			
+			document.getElementById('saveJsonViewForm').onsubmit = saveJsonView;
 
 			function showMapToolBarSubMenu(param_div_id) {
 				console.log("showMapToolBarSubMenu value = " + param_div_id);
