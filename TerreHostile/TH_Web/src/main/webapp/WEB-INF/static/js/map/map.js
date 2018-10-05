@@ -35,7 +35,6 @@ require(
 			document.getElementById('saveJsonViewForm').onsubmit = saveJsonView;
 
 			function showMapToolBarSubMenu(param_div_id) {
-				console.log("showMapToolBarSubMenu value = " + param_div_id);
 			    document.getElementById('mapToolBarSubMenu').innerHTML = document.getElementById(param_div_id).innerHTML;
 				document.getElementById('mapToolBarSubMenuItem_Grass').addEventListener('click', function() {setGroundTypeFocus("0");});
 				document.getElementById('mapToolBarSubMenuItem_Ground').addEventListener('click', function() {setGroundTypeFocus("1");});
