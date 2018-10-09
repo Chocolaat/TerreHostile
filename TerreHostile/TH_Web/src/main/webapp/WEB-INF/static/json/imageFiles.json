@@ -1,8 +1,11 @@
 {
   "ground": [
-    "../img/JsIso/ground/grass.png",
-    "../img/JsIso/ground/ground.png",
-    "../img/JsIso/ground/ocean.png",
-    "../img/JsIso/ground/sand.png"
+    "../img/ground/grass.png",
+    "../img/ground/ground.png",
+    "../img/ground/ocean.png",
+    "../img/ground/sand.png"
+  ],
+    "monsters": [
+    "../img/monsters/Dragon.png"
   ]
 }
