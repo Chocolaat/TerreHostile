@@ -32,7 +32,7 @@ require(
 			document.getElementById('mapToolBarItemGroundType').addEventListener('click', function() {showMapToolBarSubMenu("mapToolBarSubMenu_groundType");});
 			document.getElementById('mapToolBarItemBuildings').addEventListener('click', function() {showMapToolBarSubMenu("mapToolBarSubMenu_Buildings");});
 			
-			document.getElementById('saveJsonViewForm').onsubmit = saveJsonView;
+			document.getElementById('saveJsonViewForm').addEventListener("click", saveJsonView);
 
 			function showMapToolBarSubMenu(param_div_id) {
 			    document.getElementById('mapToolBarSubMenu').innerHTML = document.getElementById(param_div_id).innerHTML;
@@ -61,12 +61,24 @@ require(
 			}
 
 			
-			
-
 			function saveJsonView()
 			{
-				document.getElementById('mapLayoutValue').value = mapLayers[0].getLayout();
-				document.getElementById('mapLayoutHeightValue').value = mapLayers[0].getHeightLayout();
+				map.ground = mapLayers[0].getLayout();
+				map.height = mapLayers[0].getHeightLayout();
+
+				 $.ajax({
+				        type: "POST",
+				        url: "/TH_Web/admin/mapEditorSaveMap",
+				        data: JSON.stringify(map),
+				        dataType : "json" ,
+			            contentType : "application/json",
+				        success: function (result) {
+				        },
+				        error: function (result) {
+				        	console.log("saveJsonView FAIL");
+				        	console.log(result);
+				        }
+				    });
 			}
 
 			
@@ -74,9 +86,9 @@ require(
 			{		
 				
 				var parameters = { 
-						xCoord : map.currentXCoord,
-						yCoord : map.currentYCoord,
-						size : map.size
+						beginX : map.currentXCoord,
+						beginY : map.currentYCoord,
+						size : map.size / 10
 					}
 				
 				 $.ajax({
@@ -84,7 +96,6 @@ require(
 				        url: "/TH_Web/admin/mapEditorGetMapByXYAndSize",
 				        data: parameters,
 				        success: function (result) {
-				        	mapJsonView = result.jsonView; 
 				        	map = result;
 
 				        	$('#mapViewCanvas').remove();
@@ -92,6 +103,7 @@ require(
 				        },
 				        error: function (result) {
 				        	console.log("mapEditorGetMapByXYAndSize FAIL");
+				        	console.log(result);
 				        }
 				    });
 			}
@@ -102,18 +114,17 @@ require(
 				map.currentXCoord = x; 
 				map.currentYCoord = y; 
 				
-					if (map.currentXCoord <= map.beginXCoord - 40 || map.currentYCoord <= map.beginYCoord - 40 || map.currentXCoord >= map.beginXCoord + 40 || map.currentYCoord >= map.beginYCoord + 40)
+					if (map.currentXCoord <= map.beginXCoord || map.currentYCoord <= map.beginYCoord || map.currentXCoord >= map.beginXCoord + map.size - 10 || map.currentYCoord >= map.beginYCoord + map.size - 10)
 					{
 						mapEditorGetMapByXYAndSizeButton();
-						
 					}
 				
 			}	
 			
 			
 			function launch() {
-		
-				jsonLoader([ map.jsonView, '../json/imageFiles.json' ])
+							
+				jsonLoader([ "{\"ground\" : " + JSON.stringify(map.ground) + ", \"height\" : " + JSON.stringify(map.height) + "}", '../json/imageFiles.json' ])
 						.then(
 								function(jsonResponse) {
 
@@ -123,7 +134,9 @@ require(
 									])
 											.then(
 													function(imgResponse) {
-
+											
+														
+														
 														game = new main(0,
 																0, map.size,
 																imgResponse[1]); // X & Y drawing position, and tile span to draw 
@@ -139,7 +152,7 @@ require(
 																			heightMap : {
 																				map : jsonResponse[0].height,
 																				offset : 0,
-																				heightTile : imgResponse[0].files["blank-block.png"],
+																				heightTile : imgResponse[0].files["ground.png"],
 																			},
 																			tileHeight : 50,
 																			tileWidth : 100,
@@ -177,9 +190,9 @@ require(
 				var mapViewWidth = document.getElementById('mapView').offsetWidth;
 				var mapViewHeight = document.getElementById('mapView').offsetHeight;
             	layer.align("h-center",
-						mapViewWidth, map.size * 10, 0);
+						mapViewWidth, map.size, 0);
             	layer.align("v-center",
-						mapViewHeight, map.size * 10, 0);
+						mapViewHeight, map.size, 0);
 			}
 
 			function main(x, y, size, playerImages) {
@@ -196,9 +209,9 @@ require(
 					
 					if (allGround)
 					{
-						for (var i = 0; i < 0 + size * 10; i++) 
+						for (var i = 0; i < 0 + size; i++) 
 						{
-							for (var j = 0; j < 0 + size * 10; j++) 
+							for (var j = 0; j < 0 + size; j++) 
 							{
 								mapLayers[0].setTile(i, j, newTile); // Force the changing of tile graphic
 							}
@@ -411,8 +424,8 @@ require(
 					context.clearRect(0, 0, CanvasControl().width,
 							CanvasControl().height);
 					
-					for (i = 0; i < 0 + size * 10; i++) {
-						for (j = 0; j < 0 + size * 10; j++) {
+					for (i = 0; i < 0 + size; i++) {
+						for (j = 0; j < 0 + size; j++) {
 							mapLayers.map(function(layer) {
 								if (layer.getTitle() === "Graphics") {
 									layer.draw(i, j); // Draw the graphics layer

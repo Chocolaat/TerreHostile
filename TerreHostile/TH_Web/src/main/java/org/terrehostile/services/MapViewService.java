@@ -58,8 +58,7 @@ public class MapViewService {
 		// Classic case
 		if (!((xMin < 1 || xMax > Constants.XMAX || yMin < 1 || yMax > Constants.YMAX)))
 		{
-			System.out.println("xMin, xMax, yMin, yMax = " + xMin + ", " + xMax + ", " + yMin + ", " + yMax);
-			return new MapView(mapViewPartRepository.findByXYMinMax(xMin, xMax, yMin, yMax), size);
+			return new MapView(mapViewPartRepository.findByXYMinMax(xMin, xMax, yMin, yMax), size, x, y);
 		}
 		
 		// Case where we're outbounds 
@@ -67,9 +66,9 @@ public class MapViewService {
 		{
 			if (xMin < 1)
 			{
-				xMin1 = xMin + Constants.XMAX + (MapViewPart.size - 1);
+				xMin1 = xMin + Constants.XMAX + (MapViewPart.size);
 				xMax1 = Constants.XMAX;
-				xMin2 = 1;
+				xMin2 = 0;
 				xMax2 = xMax;
 				
 				begin = xMin1;
@@ -92,8 +91,8 @@ public class MapViewService {
 			{
 				xMin1 = xMin;
 				xMax1 = Constants.XMAX;
-				xMin2 = 1;
-				xMax2 = xMax - Constants.XMAX - (MapViewPart.size - 1);
+				xMin2 = 0;
+				xMax2 = xMax - Constants.XMAX - (MapViewPart.size);
 				
 				begin = xMin1;
 				while (begin <= xMax1)
@@ -123,9 +122,9 @@ public class MapViewService {
 
 			if (yMin < 1)
 			{
-				yMin1 = yMin + Constants.YMAX + (MapViewPart.size - 1);
+				yMin1 = yMin + Constants.YMAX + (MapViewPart.size);
 				yMax1 = Constants.YMAX;
-				yMin2 = 1;
+				yMin2 = 0;
 				yMax2 = yMax;
 				
 				begin = yMin1;
@@ -149,8 +148,8 @@ public class MapViewService {
 			{
 				yMin1 = yMin;
 				yMax1 = Constants.YMAX;
-				yMin2 = 1;
-				yMax2 = yMax - Constants.YMAX - (MapViewPart.size - 1);
+				yMin2 = 0;
+				yMax2 = yMax - Constants.YMAX - (MapViewPart.size);
 				
 				begin = yMin1;
 				while (begin <= yMax1)
@@ -182,12 +181,12 @@ public class MapViewService {
 			for (int i = 0 ; i < yCoords.size() ; i++)
 			{
 				for (int j = 0 ; j < xCoords.size() ; j++)
-				{
+				{					
 					mapViewPartList.add(mapViewPartRepository.findByXYMinMax(xCoords.get(j), xCoords.get(j), yCoords.get(i), yCoords.get(i)).get(0));
 				}
 			}
 			
-			return new MapView(mapViewPartList, size);
+			return new MapView(mapViewPartList, size, x, y);
 		}
 		
 	}

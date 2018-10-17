@@ -59,7 +59,7 @@ public class MapViewPart {
 		{
 			for (int y = 0; y < size; y++)
 			{
-				resultMapViewPart.mapViewPartTilesGround[x][y] = ThreadLocalRandom.current().nextInt(1, 9);
+				resultMapViewPart.mapViewPartTilesGround[x][y] = ThreadLocalRandom.current().nextInt(0, 3);
 				resultMapViewPart.mapViewPartTilesHeight[x][y] = 0;
 			}
 		}

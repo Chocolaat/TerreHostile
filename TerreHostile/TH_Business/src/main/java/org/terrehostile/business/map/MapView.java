@@ -10,17 +10,22 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class MapView {
 		
+	
+	private Integer[][] ground;
+	private Integer[][] height;
+	
+
 	private int beginXCoord;
 	private int beginYCoord;
 	
-	private int size;
+	private int currentXCoord;
+	private int currentYCoord;
 	
-	private Integer[][] mapTilesGround;
-	private Integer[][] mapTilesHeight;
+	private int size;
 	
 	public MapView()
 	{
-		mapTilesGround = new Integer[size][size];
+		ground = new Integer[size][size];
 	}
 	
 	public MapView(int beginXCoord, int beginYCoord, int size, Integer[][] mapTilesGround, Integer[][] mapTilesHeight)
@@ -28,23 +33,21 @@ public class MapView {
 		this.beginXCoord = beginXCoord;
 		this.beginYCoord = beginYCoord;
 		this.size = size;
-		this.mapTilesGround = mapTilesGround;
-		this.mapTilesHeight = mapTilesHeight;
+		this.ground = mapTilesGround;
+		this.height = mapTilesHeight;
 	}
 	
-	public MapView(List<MapViewPart> mapViewPartList, int squaredSize)
+	public MapView(List<MapViewPart> mapViewPartList, int squaredSize, int currentXCoord, int currentYCoord)
 	{
-		
-		for (MapViewPart mpv : mapViewPartList)
-		{
-			System.out.println(mpv);
-		}
-		
+				
 		this.beginXCoord = mapViewPartList.get(0).getBeginXCoord();
 		this.beginYCoord = mapViewPartList.get(0).getBeginYCoord();
+		this.currentXCoord = currentXCoord;
+		this.currentYCoord = currentYCoord;
+		
 		this.size = MapViewPart.size * squaredSize ;
-		mapTilesGround = new Integer[size][size];
-		mapTilesHeight = new Integer[size][size];
+		ground = new Integer[size][size];
+		height = new Integer[size][size];
 		
 		int xOffset = 0;
 		int yOffset = 0;
@@ -56,18 +59,8 @@ public class MapView {
 				{
 					for (int x = 0; x < MapViewPart.size; x++)
 					{
-						
-						System.out.println("i = " + i);
-						System.out.println("j = " + j);
-						System.out.println("beginn[x,y] = [" + y + ","+ x + "]");
-						System.out.println("result[x,y] = [" + (y + yOffset) + ","+ (x + xOffset) + "]");
-						System.out.println("mapTilesGround size " + mapTilesGround.length);
-						System.out.println("getMapViewPartTilesGround size " + mapViewPartList.get(i).getMapViewPartTilesGround().length);
-						System.out.println("getMapViewPartTilesHeight size " + mapViewPartList.get(i).getMapViewPartTilesHeight().length);
-						System.out.println("---------------");
-						
-						mapTilesGround[(y + yOffset)][(x + xOffset)] = mapViewPartList.get(i).getMapViewPartTilesGround()[y][x];
-						mapTilesHeight[(y + yOffset)][(x + xOffset)] = mapViewPartList.get(i).getMapViewPartTilesHeight()[y][x];
+						ground[(y + yOffset)][(x + xOffset)] = mapViewPartList.get(i).getMapViewPartTilesGround()[y][x];
+						height[(y + yOffset)][(x + xOffset)] = mapViewPartList.get(i).getMapViewPartTilesHeight()[y][x];
 					}
 				}
 				
@@ -108,7 +101,7 @@ public class MapView {
 						xpart = 0;
 						ypart = 0;
 						yPartNumber++;
-						partNumber = yPartNumber * MapViewPart.size;
+						partNumber = yPartNumber * ((size / MapViewPart.size));
 					}
 					
 					for (int x = 0; x < this.size; x ++)
@@ -119,11 +112,12 @@ public class MapView {
 							// 1st part done
 							partNumber ++;
 							xpart = 0;
+
 						}
 						
-						mapViewPartList.get(partNumber).getMapViewPartTilesGround()[ypart][xpart] = this.mapTilesGround[y][x];
-						mapViewPartList.get(partNumber).getMapViewPartTilesHeight()[ypart][xpart] = this.mapTilesHeight[y][x];
-						
+						mapViewPartList.get(partNumber).getMapViewPartTilesGround()[ypart][xpart] = this.ground[y][x];
+						mapViewPartList.get(partNumber).getMapViewPartTilesHeight()[ypart][xpart] = this.height[y][x];
+												
 						if(xpart == 0 && ypart == 0)
 						{
 							mapViewPartList.get(partNumber).setBeginXCoord(x + beginXCoord);
@@ -132,7 +126,7 @@ public class MapView {
 						
 						xpart++;
 					}
-					partNumber = yPartNumber * MapViewPart.size;
+					partNumber = yPartNumber * ((size / MapViewPart.size));
 					xpart = 0;
 					ypart++;
 				}
@@ -148,16 +142,16 @@ public class MapView {
 		resultMapView.beginXCoord = beginXCoord;
 		resultMapView.beginYCoord = beginYCoord;
 		resultMapView.size = size;
-		resultMapView.mapTilesGround = new Integer[size][size];
-		resultMapView.mapTilesHeight = new Integer[size][size];
+		resultMapView.ground = new Integer[size][size];
+		resultMapView.height = new Integer[size][size];
 		
 		
 		for (int x = 0; x < size; x++)
 		{
 			for (int y = 0; y < size; y++)
 			{
-				resultMapView.mapTilesGround[x][y] = ThreadLocalRandom.current().nextInt(1, 9);
-				resultMapView.mapTilesHeight[x][y] = 0;
+				resultMapView.ground[x][y] = ThreadLocalRandom.current().nextInt(0, 3);
+				resultMapView.height[x][y] = 0;
 			}
 		}
 		return resultMapView;
@@ -191,21 +185,37 @@ public class MapView {
 	public void setSize(int size) {
 		this.size = size;
 	}	
-
-	public Integer[][] getMapTilesGround() {
-		return mapTilesGround;
+	
+	public Integer[][] getGround() {
+		return ground;
 	}
 
-	public void setMapTilesGround(Integer[][] mapTilesGround) {
-		this.mapTilesGround = mapTilesGround;
+	public void setGround(Integer[][] ground) {
+		this.ground = ground;
 	}
 
-	public Integer[][] getMapTilesHeight() {
-		return mapTilesHeight;
+	public Integer[][] getHeight() {
+		return height;
 	}
 
-	public void setMapTilesHeight(Integer[][] mapTilesHeight) {
-		this.mapTilesHeight = mapTilesHeight;
+	public void setHeight(Integer[][] height) {
+		this.height = height;
+	}	
+
+	public int getCurrentXCoord() {
+		return currentXCoord;
+	}
+
+	public void setCurrentXCoord(int currentXCoord) {
+		this.currentXCoord = currentXCoord;
+	}
+
+	public int getCurrentYCoord() {
+		return currentYCoord;
+	}
+
+	public void setCurrentYCoord(int currentYCoord) {
+		this.currentYCoord = currentYCoord;
 	}
 
 	public String toString()
@@ -218,12 +228,16 @@ public class MapView {
 		result.append("\n");
 		result.append("beginYCoord = " + beginYCoord);
 		result.append("\n");
+		result.append("currentXCoord = " + currentXCoord);
+		result.append("\n");
+		result.append("currentYCoord = " + currentYCoord);
+		result.append("\n");
 		result.append("size = " + size);
 		result.append("\n");
 		try {
-			result.append("mapViewPartTiles = " + mapper.writeValueAsString(mapTilesGround));
+			result.append("mapViewPartTiles = " + mapper.writeValueAsString(ground));
 			result.append("\n");
-			result.append("mapViewPartTiles = " + mapper.writeValueAsString(mapTilesHeight));
+			result.append("mapViewPartTiles = " + mapper.writeValueAsString(height));
 		} catch (JsonProcessingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
