@@ -38,6 +38,11 @@ public class MapViewService {
 		List<Integer> xCoords = new ArrayList<>();
 		List<Integer> yCoords = new ArrayList<>();
 		
+		x = (x < 0) ? x + Constants.XMAX : x;
+		y = (y < 0) ? y + Constants.YMAX : y;
+		x = (x > Constants.XMAX) ? x - Constants.XMAX : x;
+		y = (y > Constants.YMAX) ? y - Constants.YMAX : y;
+		
 		
 		int xMin = x - (((size - 1) * MapViewPart.size)/2);
 		int yMin = y - (((size - 1) * MapViewPart.size)/2);
@@ -56,7 +61,7 @@ public class MapViewService {
 		int begin;
 		
 		// Classic case
-		if (!((xMin < 1 || xMax > Constants.XMAX || yMin < 1 || yMax > Constants.YMAX)))
+		if (!((xMin < 0 || xMax > Constants.XMAX || yMin < 0 || yMax > Constants.YMAX)))
 		{
 			return new MapView(mapViewPartRepository.findByXYMinMax(xMin, xMax, yMin, yMax), size, x, y);
 		}

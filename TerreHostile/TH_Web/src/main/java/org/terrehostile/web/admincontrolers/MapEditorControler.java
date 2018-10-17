@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-import org.terrehostile.business.map.Map;
 import org.terrehostile.business.map.MapView;
-import org.terrehostile.services.MapBackgroundViewService;
 import org.terrehostile.services.MapViewService;
 
 @RestController
@@ -20,22 +18,7 @@ public class MapEditorControler {
 		
 	@Autowired
 	private MapViewService mapViewService;
-	
-	@Autowired
-	private MapBackgroundViewService mapBackgroundViewService;
-	
-	
-	@RequestMapping(value={"/admin/mapEditorOld"}, method = RequestMethod.GET)
-	public ModelAndView mapEditorOld(){
 		
-	    Map map = mapBackgroundViewService.getMapByXYAndSize(71, 71, 3);
-	   	ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("map", map);
-		modelAndView.setViewName("admin/homeMapEditor");
-				   	
-		return modelAndView;
-	}
-	
 	//getMapByXYAndSize from form
 	@RequestMapping(value={"/admin/mapEditor"}, method = RequestMethod.GET)
 	public ModelAndView mapEditorPost(@RequestParam(defaultValue = "100") int beginX, @RequestParam(defaultValue = "100") int beginY, @RequestParam(defaultValue = "9") int size){

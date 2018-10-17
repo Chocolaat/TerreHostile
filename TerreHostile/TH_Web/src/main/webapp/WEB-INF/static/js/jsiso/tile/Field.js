@@ -577,6 +577,31 @@ function(EffectLoader, Emitter, utils) {
         mapLayout = data;
       }
     }
+    
+    function _setHeightLayout(data, width) {
+        if (width) {
+          var row = [];
+          var col = 0;
+
+          heightMap = [];
+          for (var i = 0; i < data.length; i++) {
+            col ++;
+            if (col !== width) {
+              row.push(data[i]);
+            }
+            else {
+              row.push(data[i]);
+              heightMap.push(row);
+              row = [];
+              col = 0;
+            }
+          }
+        }
+        else {
+        	heightMap = data;
+        }
+      }
+
 
     function _getHeightLayout() {
       return heightMap;
@@ -800,6 +825,10 @@ function(EffectLoader, Emitter, utils) {
       setLayout: function(data, width) {
         _setLayout(data, width);
       },
+      
+      setHeightLayout: function(data, width) {
+          _setHeightLayout(data, width);
+        },
 
       getHeightLayout: function() {
         return _getHeightLayout();

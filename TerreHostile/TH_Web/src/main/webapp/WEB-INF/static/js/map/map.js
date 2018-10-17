@@ -66,6 +66,7 @@ require(
 				map.ground = mapLayers[0].getLayout();
 				map.height = mapLayers[0].getHeightLayout();
 
+				
 				 $.ajax({
 				        type: "POST",
 				        url: "/TH_Web/admin/mapEditorSaveMap",
@@ -96,10 +97,14 @@ require(
 				        url: "/TH_Web/admin/mapEditorGetMapByXYAndSize",
 				        data: parameters,
 				        success: function (result) {
+				        	
 				        	map = result;
-
-				        	$('#mapViewCanvas').remove();
-				        	launch();
+							mapLayers[0].setLayout(result.ground);
+							mapLayers[0].setHeightLayout(result.height);
+							
+							for (var i = 0; i < 0 + mapLayers.length; i++) {
+								centerView(mapLayers[i]);
+							};
 				        },
 				        error: function (result) {
 				        	console.log("mapEditorGetMapByXYAndSize FAIL");

@@ -16,8 +16,8 @@ public class TestSch {
 	public void launch()
 	{
 
-    	MapView m = mapViewService.getMapByXYAndSize(500, 500, 3);
-    	System.out.println(m.toString());
+    	MapView m2 = mapViewService.getMapByXYAndSize(10, 10, 5);
+    	System.out.println(m2.toString());
 		
 	}
 	
