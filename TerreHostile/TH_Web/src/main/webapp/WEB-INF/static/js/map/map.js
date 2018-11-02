@@ -26,6 +26,7 @@ require(
 			var groundValueGlobal;
 			var allGround = false;
 			var mapLayers = [];
+	
 			
 			document.getElementById('mapEditorGetMapByXYAndSize').addEventListener("click", mapEditorGetMapByXYAndSizeButton);
 			
@@ -128,15 +129,22 @@ require(
 			
 			
 			function launch() {
+				
+
 							
 				jsonLoader([ "{\"ground\" : " + JSON.stringify(map.ground) + ", \"height\" : " + JSON.stringify(map.height) + "}", '../json/imageFiles.json' ])
 						.then(
 								function(jsonResponse) {
+						            var images = [
+							              {
+							                graphics: jsonResponse[1].ground,
+							              },
+							              {
+							                graphics: jsonResponse[1].monsters,
+							              }
+							            ];
 
-									imgLoader([ {
-										graphics : jsonResponse[1].ground
-									}
-									])
+									imgLoader(images)
 											.then(
 													function(imgResponse) {
 											
@@ -201,6 +209,35 @@ require(
 			}
 
 			function main(x, y, size, playerImages) {
+				
+				
+				var mapMonsters = 
+					[
+			            {
+			              id: 0,
+			              image: playerImages.files["Dragon.png"],
+			              xPos: 44,
+			              yPos: 44
+			            },
+			            {
+			              id: 1,
+			              image: playerImages.files["Dragon.png"],
+			              xPos: 45,
+			              yPos: 45
+			            },
+			            {
+			              id: 2,
+			              image: playerImages.files["Unicorn.png"],
+			              xPos: 43,
+			              yPos: 43
+			            },
+			            {
+			              id: 3,
+			              image: playerImages.files["Unicorn.png"],
+			              xPos: 42,
+			              yPos: 42
+			            }
+			          ];
 				
 				self = this;
 							
@@ -435,6 +472,11 @@ require(
 								if (layer.getTitle() === "Graphics") {
 									layer.draw(i, j); // Draw the graphics layer
 								}
+				                  mapMonsters.map(function(monster) {
+				                      if (i === monster.xPos  && j === monster.yPos  && layer.getTitle() === "Graphics") {
+				                        layer.draw(i, j, monster.image);
+				                      }
+				                    });   
 							});
 						}
 					}

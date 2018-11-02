@@ -6,6 +6,7 @@
     "../img/ground/sand.png"
   ],
     "monsters": [
-    "../img/monsters/Dragon.png"
+    "../img/monsters/Dragon.png",
+    "../img/monsters/Unicorn.png"
   ]
 }
