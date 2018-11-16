@@ -16,8 +16,13 @@ public class TestSch {
 	public void launch()
 	{
 
-    	MapView m2 = mapViewService.getMapByXYAndSize(10, 10, 5);
-    	System.out.println(m2.toString());
+    for (int i = 0; i < 100; i++)
+    {
+    	for (int j = 0; j < 100; j++)
+    	{
+    		
+    	}
+    }
 		
 	}
 	

@@ -1,0 +1,66 @@
+
+CREATE TABLE mapNoIndex (coordinates POINT NOT NULL, background INTEGER, heigth INTEGER, PRIMARY KEY (coordinates));
+CREATE TABLE mapView (coordinates POINT NOT NULL, background INTEGER, heigth INTEGER, PRIMARY KEY (coordinates), SPATIAL INDEX(coordinates));
+
+
+SET @hereami = POINT(500,500);
+SELECT *, ST_AsText(coordinates) FROM terrehostile.mapnoindex where ST_Distance(@hereami, coordinates) < 1;
+
+SELECT *, ST_AsText(coordinates) FROM terrehostile.mapnoindex where X(coordinates) = 500 and Y(coordinates) = 500;
+SELECT *, ST_AsText(coordinates) FROM terrehostile.mapnoindex where X(coordinates) = 31 and Y(coordinates) = 781;
+
+ DELIMITER $$
+ DROP PROCEDURE IF EXISTS createPoints$$
+ CREATE PROCEDURE createPoints(beginXY INT, endXY INT)
+ BEGIN
+ 
+ DECLARE XIndex INT;
+ DECLARE YIndex INT;
+ SET XIndex = beginXY;
+ SET YIndex = beginXY;
+ 
+ WHILE XIndex  <= endXY DO
+	WHILE YIndex  <= endXY DO
+		INSERT INTO mapnoindex VALUES (POINT(XIndex, YIndex), 1, 20);
+		SET  YIndex = YIndex + 1; 
+    END WHILE;
+ SET  XIndex = XIndex + 1; 
+ SET  YIndex = beginXY; 
+ END WHILE;
+ 
+ END$$
+DELIMITER ;
+
+CALL createPoints(0, 1);
+
+SELECT COUNT(*) from mapView;
+
+SET @hereami = POINT(500,500);
+SELECT *, ST_AsText(coordinates) FROM terrehostile.mapnoindex where ST_Distance(@hereami, coordinates) < 1;
+SELECT *, ST_AsText(coordinates) FROM terrehostile.mapnoindex where ST_Distance(@hereami, coordinates) < 100;
+
+
+SELECT *, ST_AsText(coordinates) FROM terrehostile.mapnoindex where X(coordinates) = 500 and Y(coordinates) = 500;
+SELECT *, ST_AsText(coordinates) FROM terrehostile.mapnoindex where X(coordinates) = 31 and Y(coordinates) = 781;
+
+
+SET @hereami = POINT(500,500);
+SELECT *, ST_AsText(coordinates) FROM terrehostile.mapView where ST_Distance(@hereami, coordinates) < 1;
+SELECT *, ST_AsText(coordinates) FROM terrehostile.mapnoindex where ST_Distance(@hereami, coordinates) < 100;
+
+SELECT *, ST_AsText(coordinates) FROM terrehostile.mapView where X(coordinates) = 500 and Y(coordinates) = 500;
+SELECT *, ST_AsText(coordinates) FROM terrehostile.mapView where X(coordinates) = 31 and Y(coordinates) = 781;
+_______
+
+SELECT 
+     table_schema as `Database`, 
+     table_name AS `Table`, 
+     round(((data_length + index_length) / 1024 / 1024), 2) `Size in MB` 
+FROM information_schema.TABLES 
+ORDER BY (data_length + index_length) DESC;
+
+
+SELECT column FROM
+( SELECT column FROM table
+ORDER BY dbms_random.value )
+WHERE rownum = 1
