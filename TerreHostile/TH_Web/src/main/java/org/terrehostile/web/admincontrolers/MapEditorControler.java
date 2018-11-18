@@ -21,9 +21,9 @@ public class MapEditorControler {
 		
 	//getMapByXYAndSize from form
 	@RequestMapping(value={"/admin/mapEditor"}, method = RequestMethod.GET)
-	public ModelAndView mapEditorPost(@RequestParam(defaultValue = "100") int beginX, @RequestParam(defaultValue = "100") int beginY, @RequestParam(defaultValue = "9") int size){
+	public ModelAndView mapEditorPost(@RequestParam(defaultValue = "100") int beginX, @RequestParam(defaultValue = "100") int beginY, @RequestParam(defaultValue = "50") int size){
 		
-		MapView map = mapViewService.getMapByXYAndSize(beginX, beginY, size);
+		MapView map = mapViewService.getMapByXYAndSize(beginX, beginY, size, size);
 	   	ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("map", map);
 		modelAndView.setViewName("admin/homeMapEditor");
@@ -37,7 +37,7 @@ public class MapEditorControler {
 	   @ResponseBody
 	    public MapView getMapByXYAndSize(@RequestParam int beginX, int beginY, int size) {   
 		   		
-		   MapView map = mapViewService.getMapByXYAndSize(beginX, beginY, size);
+		   MapView map = mapViewService.getMapByXYAndSize(beginX, beginY, size, size);
 		   	ModelAndView modelAndView = new ModelAndView();
 			modelAndView.setViewName("fragments/map/mapView");
 			modelAndView.addObject("map", map);
@@ -49,7 +49,7 @@ public class MapEditorControler {
 	   @PostMapping("/admin/mapEditorGenerateMap")
 	    public ModelAndView generateMap(@RequestParam int beginX, int beginY, int size) {
 		   	ModelAndView modelAndView = new ModelAndView();
-		   	MapView map = MapView.createMapViewWithRandomTiles(beginX, beginY, size);
+		   	MapView map = MapView.createMapViewWithRandomTiles(beginX, beginY, size, size);
 			modelAndView.addObject("map", map);
 			modelAndView.setViewName("admin/homeMapEditor");
 					   	
@@ -61,7 +61,7 @@ public class MapEditorControler {
 	    public ModelAndView generateRandomTileMap(@RequestParam int beginX, int beginY, int size) {
 		   		   
 		   	ModelAndView modelAndView = new ModelAndView();
-		   	MapView map = MapView.createMapViewWithRandomTiles(beginX, beginY, size);
+		   	MapView map = MapView.createMapViewWithRandomTiles(beginX, beginY, size, size);
 		   	mapViewService.save(map);
 			modelAndView.addObject("map", map);
 			modelAndView.setViewName("admin/homeMapEditor");

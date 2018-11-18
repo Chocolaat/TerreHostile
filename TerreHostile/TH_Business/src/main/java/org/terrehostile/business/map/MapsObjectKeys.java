@@ -6,22 +6,24 @@ public class MapsObjectKeys implements Serializable {
 	
 	private static final long serialVersionUID = 6292962577748821631L;
 	
-	private int beginXCoord;
-	private int beginYCoord;
+	private int xCoord;
+	private int yCoord;
 	
 	
-	public int getBeginXCoord() {
-		return beginXCoord;
+	public int getxCoord() {
+		return xCoord;
 	}
-	public void setBeginXCoord(int beginXCoord) {
-		this.beginXCoord = beginXCoord;
+	public void setxCoord(int xCoord) {
+		this.xCoord = xCoord;
 	}
-	public int getBeginYCoord() {
-		return beginYCoord;
+	public int getyCoord() {
+		return yCoord;
 	}
-	public void setBeginYCoord(int beginYCoord) {
-		this.beginYCoord = beginYCoord;
+	public void setyCoord(int yCoord) {
+		this.yCoord = yCoord;
 	}
+	
+	
 	
 	
 

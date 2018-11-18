@@ -1,4 +1,46 @@
 
+CREATE TABLE mapView (xCoord INTEGER NOT NULL, yCoord INTEGER NOT NULL, background INTEGER, heigth INTEGER, PRIMARY KEY (xCoord, yCoord));
+
+
+ DELIMITER $$
+ DROP PROCEDURE IF EXISTS createPoints$$
+ CREATE PROCEDURE createPoints(beginXY INT, endXY INT)
+ BEGIN
+ 
+ DECLARE XIndex INT;
+ DECLARE YIndex INT;
+ SET XIndex = beginXY;
+ SET YIndex = beginXY;
+ 
+ WHILE XIndex  <= endXY DO
+	WHILE YIndex  <= endXY DO
+		INSERT INTO mapView VALUES (XIndex, YIndex, 1, 0);
+		SET  YIndex = YIndex + 1; 
+    END WHILE;
+ SET  XIndex = XIndex + 1; 
+ SET  YIndex = beginXY; 
+ END WHILE;
+ 
+ END$$
+DELIMITER ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 CREATE TABLE mapNoIndex (coordinates POINT NOT NULL, background INTEGER, heigth INTEGER, PRIMARY KEY (coordinates));
 CREATE TABLE mapView (coordinates POINT NOT NULL, background INTEGER, heigth INTEGER, PRIMARY KEY (coordinates), SPATIAL INDEX(coordinates));
 

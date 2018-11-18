@@ -1,11 +1,25 @@
 package org.terrehostile.business.map;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
+import java.io.Serializable;
 
-public class Tile {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.Table;
+
+
+@Entity 
+@IdClass(MapsObjectKeys.class)
+@Table(name = "mapview")
+public class Tile implements Serializable {
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@Column(name="xCoord", nullable = false)
 	private int xCoord;
@@ -33,18 +47,24 @@ public class Tile {
 		this.height = height;
 	}
 	
+	
+	
 	public int getxCoord() {
 		return xCoord;
 	}
+
 	public void setxCoord(int xCoord) {
 		this.xCoord = xCoord;
 	}
+
 	public int getyCoord() {
 		return yCoord;
 	}
+
 	public void setyCoord(int yCoord) {
 		this.yCoord = yCoord;
 	}
+
 	public int getBackground() {
 		return background;
 	}
