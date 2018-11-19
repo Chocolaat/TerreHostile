@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.terrehostile.Constants;
+import org.terrehostile.business.Constants;
 import org.terrehostile.business.map.MapView;
 import org.terrehostile.business.map.Tile;
 import org.terrehostile.repository.TileRepository;
@@ -47,14 +47,16 @@ public class MapViewService {
 		
 		int xMin = x;
 		int yMin = y;
-		int xMax = x + xSize;
-		int yMax = y + ySize;
+		int xMax = x + xSize - 1;
+		int yMax = y + ySize - 1;
 		
-		ArrayList<Integer> xList = new ArrayList<>();
-		ArrayList<Integer> yList = new ArrayList<>();
-		
+		System.out.println("yMin, yMax = " + yMin + ", " + yMax);
+				
 		int xMin1, xMax1, yMin1, yMax1;
 		int xMin2, xMax2, yMin2, yMax2;
+		
+		boolean xOut = false;
+		boolean yOut = false;
 	
 		
 		// Classic case
@@ -68,10 +70,12 @@ public class MapViewService {
 		{
 			if (xMin < 0)
 			{
-				xMin1 = xMin + Constants.XMAX;
+				xMin1 = xMin + Constants.XCOUNT;
 				xMax1 = Constants.XMAX;
 				xMin2 = 0;
 				xMax2 = xMax;
+				xOut = true;
+				System.out.println("yMin, yMax = " + yMin + ", " + yMax);
 			}
 			
 			else if (xMax > Constants.XMAX)
@@ -79,7 +83,9 @@ public class MapViewService {
 				xMin1 = xMin;
 				xMax1 = Constants.XMAX;
 				xMin2 = 0;
-				xMax2 = xMax - Constants.XMAX;
+				xMax2 = xMax - Constants.XCOUNT;
+				xOut = true;
+				System.out.println("yMin, yMax = " + yMin + ", " + yMax);
 			}
 			
 			else
@@ -88,14 +94,16 @@ public class MapViewService {
 				xMax1 = xMax;
 				xMin2 = xMin;
 				xMax2 = xMax;
+				System.out.println("yMin, yMax = " + yMin + ", " + yMax);
 			}
 
 			if (yMin < 0)
 			{
-				yMin1 = yMin + Constants.YMAX;
+				yMin1 = yMin + Constants.YCOUNT;
 				yMax1 = Constants.YMAX;
 				yMin2 = 0;
 				yMax2 = yMax;
+				yOut = true;
 			}
 			
 			else if (yMax > Constants.YMAX)
@@ -103,7 +111,8 @@ public class MapViewService {
 				yMin1 = yMin;
 				yMax1 = Constants.YMAX;
 				yMin2 = 0;
-				yMax2 = yMax - Constants.YMAX;
+				yMax2 = yMax - Constants.YCOUNT;
+				yOut = true;
 			}
 			else
 			{
@@ -112,11 +121,59 @@ public class MapViewService {
 				yMin2 = yMin;
 				yMax2 = yMax;
 			}
+
+			System.out.println("yMin, yMax = " + yMin + ", " + yMax);
 			
-			mapTileList.addAll(tileRepository.findByXYMinMax(xMin1, xMax1, yMin1, yMax1));
-			mapTileList.addAll(tileRepository.findByXYMinMax(xMin2, xMax2, yMin1, yMax1));
-			mapTileList.addAll(tileRepository.findByXYMinMax(xMin2, xMax2, yMin1, yMax1));
-			mapTileList.addAll(tileRepository.findByXYMinMax(xMin2, xMax2, yMin2, yMax2));
+			if(xOut && yOut)
+			{
+				System.out.println("xOut && yOut");
+				System.out.println("xMin, xMax, yMin, yMax = " + xMin1 + "," + xMax1 + "," + yMin1 + "," + yMax1);
+				System.out.println(tileRepository.findByXYMinMax(xMin1, xMax1, yMin1, yMax1).size());
+				
+				System.out.println("xMin, xMax, yMin, yMax = " + xMin2 + "," + xMax2 + "," + yMin1 + "," + yMax1);
+				System.out.println(tileRepository.findByXYMinMax(xMin2, xMax2, yMin1, yMax1).size());
+				
+				System.out.println("xMin, xMax, yMin, yMax = " + xMin1 + "," + xMax1 + "," + yMin2 + "," + yMax2);
+				System.out.println(tileRepository.findByXYMinMax(xMin1, xMax1, yMin2, yMax2).size());
+				
+				System.out.println("xMin, xMax, yMin, yMax = " + xMin2 + xMax2 + yMin2 + yMax2);
+				System.out.println(tileRepository.findByXYMinMax(xMin2, xMax2, yMin2, yMax2).size());
+				
+				
+				mapTileList.addAll(tileRepository.findByXYMinMax(xMin1, xMax1, yMin1, yMax1));
+				mapTileList.addAll(tileRepository.findByXYMinMax(xMin2, xMax2, yMin1, yMax1));
+				mapTileList.addAll(tileRepository.findByXYMinMax(xMin1, xMax1, yMin2, yMax2));
+				mapTileList.addAll(tileRepository.findByXYMinMax(xMin2, xMax2, yMin2, yMax2));
+			}
+			else if (xOut)
+			{
+				System.out.println("yMin, yMax = " + yMin + ", " + yMax);
+				
+				System.out.println("xOut");
+				System.out.println("xMin, xMax, yMin, yMax = " + xMin1 + "," + xMax1 + "," + yMin + "," + yMax);
+				System.out.println(tileRepository.findByXYMinMax(xMin1, xMax1, yMin, yMax).size());
+				
+				System.out.println("xMin, xMax, yMin, yMax = " + xMin2 + "," + xMax2 + "," + yMin + "," + yMax);
+				System.out.println(tileRepository.findByXYMinMax(xMin2, xMax2, yMin, yMax).size());
+				
+				
+				mapTileList.addAll(tileRepository.findByXYMinMax(xMin1, xMax1, yMin, yMax));
+				mapTileList.addAll(tileRepository.findByXYMinMax(xMin2, xMax2, yMin, yMax));
+			}
+			else if (yOut)
+			{
+				System.out.println("yOut");
+				System.out.println("xMin, xMax, yMin, yMax = " + xMin + "," + xMax + "," + yMin1 + "," + yMax1);
+				System.out.println(tileRepository.findByXYMinMax(xMin, xMax, yMin1, yMax1).size());
+				
+				System.out.println("xMin, xMax, yMin, yMax = " + xMin + "," + xMax + "," + yMin2 + "," + yMax2);
+				System.out.println(tileRepository.findByXYMinMax(xMin, xMax, yMin2, yMax2).size());
+				
+				mapTileList.addAll(tileRepository.findByXYMinMax(xMin, xMax, yMin1, yMax1));
+				mapTileList.addAll(tileRepository.findByXYMinMax(xMin, xMax, yMin2, yMax2));
+			}
+			
+			
 			
 			
 			return new MapView(x, y, xSize, ySize, mapTileList);

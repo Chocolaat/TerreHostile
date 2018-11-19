@@ -11,9 +11,9 @@ import org.terrehostile.business.map.Tile;
 @Repository("tileRepository")
 public interface TileRepository extends JpaRepository<Tile, Long> {
 	
-	 public TileRepository findByCoordinate(int xCoord, int yCoord);
+	 public TileRepository findByXCoordAndYCoord(int xCoord, int yCoord);
 	 
-	 @Query("select Tile from mapview Tile where xCoord >= ?1 and xCoord <= ?2 and yCoord >= ?3 and yCoord <= ?4 order by yCoord, xCoord")
+	 @Query("select mapViewTiles from Tile mapViewTiles where xCoord >= ?1 and xCoord <= ?2 and yCoord >= ?3 and yCoord <= ?4 order by yCoord, xCoord")
 	 public List<Tile> findByXYMinMax(int xBegin, int xEnd, int yBegin, int yEnd);
 	 
 }

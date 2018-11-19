@@ -5,6 +5,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
+import org.terrehostile.business.Constants;
+
+
 
 public class MapView {
 		
@@ -45,11 +48,28 @@ public class MapView {
 		ground = new int[xSize][ySize];
 		height = new int[xSize][ySize];
 		
+		System.out.println("tileList size = " + tileList.size());
 		
 		for (Tile currentTile : tileList) 
 		{
-			ground[currentTile.getxCoord() - beginXCoord][currentTile.getyCoord() - beginYCoord] = currentTile.getBackground();
-			height[currentTile.getxCoord() - beginXCoord][currentTile.getyCoord() - beginYCoord] = currentTile.getHeight();
+
+			
+			int newX = currentTile.getxCoord() - beginXCoord;
+			int newY = currentTile.getyCoord() - beginYCoord;
+			newX = (newX < 0) ? newX + Constants.XCOUNT : newX;
+			newY = (newY < 0) ? newY + Constants.YCOUNT : newY;
+			newX = (newX > Constants.XMAX) ? newX - Constants.XCOUNT : newX;
+			newY = (newY > Constants.YMAX) ? newY - Constants.YCOUNT : newY;
+			
+
+			System.out.println("--------------");
+			System.out.println("currentTile = " + currentTile.toString());
+			System.out.println("ground[x][y] = " + "ground[" + (currentTile.getxCoord() - beginXCoord) + "][" + (currentTile.getyCoord() - beginYCoord) + "]");
+			System.out.println("ground[x][y] = " + "ground[" + (newX) + "][" + (newY) + "]");
+			System.out.println("--------------");
+			
+			ground[newX][newY] = currentTile.getBackground();
+			height[newX][newY] = currentTile.getHeight();
 		}
 
 	}
