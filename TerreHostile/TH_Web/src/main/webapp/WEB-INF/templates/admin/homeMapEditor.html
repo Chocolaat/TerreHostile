@@ -25,14 +25,15 @@
 			<div>   		
 				<label for="beginXCoord">Coordonnée X : </label>
 				<label for="beginXCoord" th:text="${map?.beginXCoord}" ></label>
+				<label for="beginXCoord"> | </label>
 				<label for="beginXCoord">Coordonnée Y : </label>
 		   		<label for="beginYCoord" th:text="${map?.beginYCoord}" ></label>
-				<label for="beginXCoord">Size : </label>
-		   		<label for="beginYCoord" th:text="${map?.size}" ></label>
-				<label for="currentXCoord">currentXCoord : </label>
-		   		<label id="currentXCoord" for="currentXCoord" th:text="${map?.currentXCoord}" ></label>
-				<label for="currentYCoord">currentYCoord : </label>
-		   		<label id="currentYCoord" for="currentYCoord" th:text="${map?.currentYCoord}" ></label>
+				<label for="beginXCoord"> | </label>
+				<label for="beginXCoord">X size : </label>
+		   		<label for="beginYCoord" th:text="${map?.xSize}" ></label>
+				<label for="beginXCoord"> | </label>
+				<label for="beginXCoord">Y size : </label>
+		   		<label for="beginYCoord" th:text="${map?.ySize}" ></label>
    			</div>
 
 	    						

@@ -17,10 +17,10 @@ public class Application extends SpringBootServletInitializer {
 
     public static void main(String[] args) throws Exception {
     	
-//    	SpringApplication.run(Application.class, args);
+   	SpringApplication.run(Application.class, args);
     	
-        ConfigurableApplicationContext context = SpringApplication.run(Application.class, args);
-        context.getBean(TestSch.class).launch(); 
+  //      ConfigurableApplicationContext context = SpringApplication.run(Application.class, args);
+  //      context.getBean(TestSch.class).launch(); 
 
     }
 

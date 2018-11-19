@@ -88,9 +88,9 @@ require(
 			{		
 				
 				var parameters = { 
-						beginX : map.currentXCoord,
-						beginY : map.currentYCoord,
-						size : map.size / 10
+						beginX : map.beginXCoord,
+						beginY : map.beginYCoord,
+						size : map.xSize
 					}
 				
 				 $.ajax({
@@ -130,7 +130,10 @@ require(
 			
 			function launch() {
 				
-
+console.log("map");
+console.log(map);
+console.log("JSON.stringify(map.ground)");
+console.log(JSON.stringify(map.ground));
 							
 				jsonLoader([ "{\"ground\" : " + JSON.stringify(map.ground) + ", \"height\" : " + JSON.stringify(map.height) + "}", '../json/imageFiles.json' ])
 						.then(
@@ -151,7 +154,7 @@ require(
 														
 														
 														game = new main(0,
-																0, map.size,
+																0, map.xSize,
 																imgResponse[1]); // X & Y drawing position, and tile span to draw 
 
 														game
@@ -203,9 +206,9 @@ require(
 				var mapViewWidth = document.getElementById('mapView').offsetWidth;
 				var mapViewHeight = document.getElementById('mapView').offsetHeight;
             	layer.align("h-center",
-						mapViewWidth, map.size, 0);
+						mapViewWidth, map.xSize, 0);
             	layer.align("v-center",
-						mapViewHeight, map.size, 0);
+						mapViewHeight, map.xSize, 0);
 			}
 
 			function main(x, y, size, playerImages) {
