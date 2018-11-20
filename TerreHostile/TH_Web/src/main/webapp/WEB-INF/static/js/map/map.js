@@ -26,6 +26,9 @@ require(
 			var groundValueGlobal;
 			var allGround = false;
 			var mapLayers = [];
+			
+			map.currentXCoord = map.beginXCoord;
+			map.currentYCoord = map.beginYCoord;
 	
 			
 			document.getElementById('mapEditorGetMapByXYAndSize').addEventListener("click", mapEditorGetMapByXYAndSizeButton);
@@ -88,8 +91,8 @@ require(
 			{		
 				
 				var parameters = { 
-						beginX : map.beginXCoord,
-						beginY : map.beginYCoord,
+						beginX : map.currentXCoord,
+						beginY : map.currentYCoord,
 						size : map.xSize
 					}
 				
@@ -102,6 +105,12 @@ require(
 				        	map = result;
 							mapLayers[0].setLayout(result.ground);
 							mapLayers[0].setHeightLayout(result.height);
+							
+							map.currentXCoord = map.beginXCoord;
+							map.currentYCoord = map.beginYCoord;
+							
+							console.log("map");
+							console.log(map);
 							
 							for (var i = 0; i < 0 + mapLayers.length; i++) {
 								centerView(mapLayers[i]);
@@ -120,7 +129,10 @@ require(
 				map.currentXCoord = x; 
 				map.currentYCoord = y; 
 				
-					if (map.currentXCoord <= map.beginXCoord || map.currentYCoord <= map.beginYCoord || map.currentXCoord >= map.beginXCoord + map.size - 10 || map.currentYCoord >= map.beginYCoord + map.size - 10)
+				console.log("map");
+				console.log(map);
+				
+					if (map.currentXCoord < map.beginXCoord - 20 || map.currentYCoord < map.beginYCoord -20 || map.currentXCoord > map.beginXCoord + map.xSize - 20 || map.currentYCoord > map.beginYCoord + map.xSize + 20)
 					{
 						mapEditorGetMapByXYAndSizeButton();
 					}
@@ -129,6 +141,7 @@ require(
 			
 			
 			function launch() {
+
 				
 console.log("map");
 console.log(map);
