@@ -82,7 +82,7 @@ public class MapView {
 		{
 			for (int y = 0; y < ySize; y++)
 			{
-				mapTileList.add(new Tile(x, y, ground[x][y], height[x][y]));
+				mapTileList.add(new Tile(x + this.beginXCoord, y + this.beginXCoord, ground[x][y], height[x][y]));
 			}
 		}
 	

@@ -23,12 +23,13 @@ public class MapViewService {
 	public void save(Tile tile) {
 		tileRepository.save(tile); 
 	}
+	
+	public void save(List<Tile> tiles) {
+		tileRepository.saveAll(tiles); 
+	}
 	 
 	public void save(MapView mapView) {
-		for (Tile tile : mapView.toTileList())
-		{
-			save(tile); 
-		}
+		save(mapView.toTileList());
 	}
 	
 	public MapView getMapByXYAndSize(int x, int y, int xSize, int ySize) {
