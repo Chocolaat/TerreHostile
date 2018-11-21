@@ -22,10 +22,13 @@ require(
 			})();
 
 
-			// Global variables used to ddisplay and update map
+			// Global variables used to display and update map
 			var groundValueGlobal;
 			var allGround = false;
 			var mapLayers = [];
+			
+			var sizeMapToLoad = 70;
+			var moveCountReloadTrigger = 3;
 			
 			map.currentXCoord = map.beginXCoord;
 			map.currentYCoord = map.beginYCoord;
@@ -93,7 +96,7 @@ require(
 				var parameters = { 
 						beginX : map.currentXCoord,
 						beginY : map.currentYCoord,
-						size : map.xSize
+						size : sizeMapToLoad
 					}
 				
 				 $.ajax({
@@ -108,10 +111,7 @@ require(
 							
 							map.currentXCoord = map.beginXCoord;
 							map.currentYCoord = map.beginYCoord;
-							
-							console.log("map");
-							console.log(map);
-							
+																					
 							for (var i = 0; i < 0 + mapLayers.length; i++) {
 								centerView(mapLayers[i]);
 							};
@@ -128,26 +128,17 @@ require(
 			{ 
 				map.currentXCoord = x; 
 				map.currentYCoord = y; 
-				
-				console.log("map");
-				console.log(map);
-				
-					if (map.currentXCoord < map.beginXCoord - 20 || map.currentYCoord < map.beginYCoord -20 || map.currentXCoord > map.beginXCoord + map.xSize - 20 || map.currentYCoord > map.beginYCoord + map.xSize + 20)
+								
+					if (map.currentXCoord <= map.beginXCoord - (10 * moveCountReloadTrigger) || map.currentYCoord <= map.beginYCoord - (10 * moveCountReloadTrigger) || map.currentXCoord >= map.beginXCoord + (10 * moveCountReloadTrigger) || map.currentYCoord >= map.beginYCoord + (10 * moveCountReloadTrigger))
 					{
 						mapEditorGetMapByXYAndSizeButton();
 					}
-				
 			}	
 			
+
 			
 			function launch() {
-
 				
-console.log("map");
-console.log(map);
-console.log("JSON.stringify(map.ground)");
-console.log(JSON.stringify(map.ground));
-							
 				jsonLoader([ "{\"ground\" : " + JSON.stringify(map.ground) + ", \"height\" : " + JSON.stringify(map.height) + "}", '../json/imageFiles.json' ])
 						.then(
 								function(jsonResponse) {

@@ -21,7 +21,7 @@ public class MapEditorControler {
 		
 	//getMapByXYAndSize from form
 	@RequestMapping(value={"/admin/mapEditor"}, method = RequestMethod.GET)
-	public ModelAndView mapEditorPost(@RequestParam(defaultValue = "100") int beginX, @RequestParam(defaultValue = "100") int beginY, @RequestParam(defaultValue = "50") int size){
+	public ModelAndView mapEditorPost(@RequestParam(defaultValue = "500") int beginX, @RequestParam(defaultValue = "500") int beginY, @RequestParam(defaultValue = "70") int size){
 		
 		MapView map = mapViewService.getMapByXYAndSize(beginX, beginY, size, size);
 	   	ModelAndView modelAndView = new ModelAndView();

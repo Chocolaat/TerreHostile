@@ -39,17 +39,14 @@ public class MapView {
 	
 	public MapView(int beginXCoord, int beginYCoord, int xSize, int ySize, List<Tile> tileList)
 	{
-				
 		this.beginXCoord = beginXCoord;
 		this.beginYCoord = beginYCoord;
 		this.xSize = xSize;
 		this.ySize = ySize;
 		
-		ground = new int[xSize][ySize];
-		height = new int[xSize][ySize];
-		
-		System.out.println("tileList size = " + tileList.size());
-		
+		ground = new int[ySize][xSize];
+		height = new int[ySize][xSize];
+				
 		for (Tile currentTile : tileList) 
 		{
 
@@ -60,16 +57,9 @@ public class MapView {
 			newY = (newY < 0) ? newY + Constants.YCOUNT : newY;
 			newX = (newX > Constants.XMAX) ? newX - Constants.XCOUNT : newX;
 			newY = (newY > Constants.YMAX) ? newY - Constants.YCOUNT : newY;
-			
-
-			System.out.println("--------------");
-			System.out.println("currentTile = " + currentTile.toString());
-			System.out.println("ground[x][y] = " + "ground[" + (currentTile.getxCoord() - beginXCoord) + "][" + (currentTile.getyCoord() - beginYCoord) + "]");
-			System.out.println("ground[x][y] = " + "ground[" + (newX) + "][" + (newY) + "]");
-			System.out.println("--------------");
-			
-			ground[newX][newY] = currentTile.getBackground();
-			height[newX][newY] = currentTile.getHeight();
+						
+			ground[newY][newX] = currentTile.getBackground();
+			height[newY][newX] = currentTile.getHeight();
 		}
 
 	}
@@ -82,7 +72,7 @@ public class MapView {
 		{
 			for (int y = 0; y < ySize; y++)
 			{
-				mapTileList.add(new Tile(x + this.beginXCoord, y + this.beginXCoord, ground[x][y], height[x][y]));
+				mapTileList.add(new Tile(x + this.beginXCoord, y + this.beginYCoord, ground[x][y], height[x][y]));
 			}
 		}
 	
