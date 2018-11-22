@@ -47,8 +47,6 @@ public class MapViewService {
 		int yMin = y;
 		int xMax = x + xSize - 1;
 		int yMax = y + ySize - 1;
-		
-		System.out.println("yMin, yMax = " + yMin + ", " + yMax);
 				
 		int xMin1, xMax1, yMin1, yMax1;
 		int xMin2, xMax2, yMin2, yMax2;
