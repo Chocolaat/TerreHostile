@@ -14,6 +14,8 @@ public class MapView {
 	
 	private int[][] ground;
 	private int[][] height;
+	private int[][] troops;
+	private int[][] buildings;
 	
 
 	private int beginXCoord;
@@ -27,7 +29,7 @@ public class MapView {
 		ground = new int[xSize][ySize];
 	}
 	
-	public MapView(int beginXCoord, int beginYCoord, int xSize, int ySize, int[][] mapTilesGround, int[][] mapTilesHeight)
+	public MapView(int beginXCoord, int beginYCoord, int xSize, int ySize, int[][] mapTilesGround, int[][] mapTilesHeight, int[][] mapTilesTroops, int[][] mapTilesBuildings)
 	{
 		this.beginXCoord = beginXCoord;
 		this.beginYCoord = beginYCoord;
@@ -35,6 +37,8 @@ public class MapView {
 		this.ySize = ySize;
 		this.ground = mapTilesGround;
 		this.height = mapTilesHeight;
+		this.troops = mapTilesTroops;
+		this.buildings = mapTilesBuildings;
 	}
 	
 	public MapView(int beginXCoord, int beginYCoord, int xSize, int ySize, List<Tile> tileList)
@@ -149,11 +153,31 @@ public class MapView {
 		this.ySize = ySize;
 	}
 
+	public int[][] getTroops() {
+		return troops;
+	}
+
+	public void setTroops(int[][] troops) {
+		this.troops = troops;
+	}
+
+	public int[][] getBuildings() {
+		return buildings;
+	}
+
+	public void setBuildings(int[][] buildings) {
+		this.buildings = buildings;
+	}
+
 	@Override
 	public String toString() {
-		return "MapView [ground=" + Arrays.deepToString(ground) + ", height=" + Arrays.deepToString(height) + ", beginXCoord="
-				+ beginXCoord + ", beginYCoord=" + beginYCoord + ", xSize=" + xSize + ", ySize=" + ySize + "]";
+		return "MapView [ground=" + Arrays.toString(ground) + ", height=" + Arrays.toString(height) + ", troops="
+				+ Arrays.toString(troops) + ", buildings=" + Arrays.toString(buildings) + ", beginXCoord=" + beginXCoord
+				+ ", beginYCoord=" + beginYCoord + ", xSize=" + xSize + ", ySize=" + ySize + "]";
 	}
+	
+	
+
 
 	
 }
