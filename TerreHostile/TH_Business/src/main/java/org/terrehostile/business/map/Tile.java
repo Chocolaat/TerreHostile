@@ -5,17 +5,18 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.JoinColumns;
 
-import javax.annotation.Resource;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.terrehostile.business.mapTileItem.Building;
+import org.terrehostile.business.mapTileItem.Resource;
 import org.terrehostile.business.mapTileItem.Troop;
 
 
@@ -47,27 +48,35 @@ public class Tile implements Serializable {
 	/** Height */
 	@Column(name="height", nullable = false)
 	private int height;
-
-	/** Buildings */
-	@Column(name="buildings", nullable = true)
-    @OneToMany
+	
+	/** Resource */
+	@Column(name="troops", nullable = true)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumns({
         @JoinColumn(name="x_coord", referencedColumnName="x_coord"),
         @JoinColumn(name="y_coord", referencedColumnName="y_coord")
     })
-	private List<Building> buildings = new ArrayList<>();
+	private Resource resource;
+
+	/** Buildings */
+	@Column(name="buildings", nullable = true)
+	@OneToOne(fetch = FetchType.EAGER)
+    @JoinColumns({
+        @JoinColumn(name="x_coord", referencedColumnName="x_coord"),
+        @JoinColumn(name="y_coord", referencedColumnName="y_coord")
+    })
+	private Building building;
+
+	/** Troops */
+	@Column(name="troops", nullable = true)
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumns({
+        @JoinColumn(name="x_coord", referencedColumnName="x_coord"),
+        @JoinColumn(name="y_coord", referencedColumnName="y_coord")
+    })
+	private List<Troop> troops = new ArrayList<>();
 	
-//	/** Troops */
-//	@Column(name="troops", nullable = true)
-//	@OneToMany(cascade = CascadeType.ALL)
-//	@JoinColumn(name = "id")
-//	private List<Troop> troops = new ArrayList<>();
-//
-//	@Column(name="resources", nullable = true)
-//	/** Resources */
-//	@OneToMany(cascade = CascadeType.ALL)
-//	@JoinColumn(name = "id")
-//	private List<Resource> resources = new ArrayList<>();
+
 	
 	
 	public Tile()
@@ -81,17 +90,19 @@ public class Tile implements Serializable {
 		this.background = background;
 		this.height = height;
 	}
+	
+	
 
-	public Tile(int xCoord, int yCoord, int background, int height, List<Building> buildings, List<Troop> troops,
-			List<Resource> resources) {
+	public Tile(int xCoord, int yCoord, int background, int height, Resource resource, Building building,
+			List<Troop> troops) {
 		super();
 		this.xCoord = xCoord;
 		this.yCoord = yCoord;
 		this.background = background;
 		this.height = height;
-		this.buildings = buildings;
-//		this.troops = troops;
-//		this.resources = resources;
+		this.resource = resource;
+		this.building = building;
+		this.troops = troops;
 	}
 
 	public int getxCoord() {
@@ -126,49 +137,37 @@ public class Tile implements Serializable {
 		this.height = height;
 	}
 
-	public List<Building> getBuildings() {
-		return buildings;
+	public Resource getResource() {
+		return resource;
 	}
 
-	public void setBuildings(List<Building> buildings) {
-		this.buildings = buildings;
+	public void setResource(Resource resource) {
+		this.resource = resource;
 	}
-	
 
-//	public List<Troop> getTroops() {
-//		return troops;
-//	}
-//
-//	public void setTroops(List<Troop> troops) {
-//		this.troops = troops;
-//	}
-//
-//	public List<Resource> getResources() {
-//		return resources;
-//	}
-//
-//	public void setResources(List<Resource> resources) {
-//		this.resources = resources;
-//	}
+	public Building getBuilding() {
+		return building;
+	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public void setBuilding(Building building) {
+		this.building = building;
+	}
+
+	public List<Troop> getTroops() {
+		return troops;
+	}
+
+	public void setTroops(List<Troop> troops) {
+		this.troops = troops;
 	}
 
 	@Override
 	public String toString() {
 		return "Tile [xCoord=" + xCoord + ", yCoord=" + yCoord + ", background=" + background + ", height=" + height
-				+ ", buildings=" + buildings + "]";
+				+ ", resource=" + resource + ", building=" + building + ", troops=" + troops + "]";
 	}
-	
-	
 
-//	@Override
-//	public String toString() {
-//		return "Tile [xCoord=" + xCoord + ", yCoord=" + yCoord + ", background=" + background + ", height=" + height
-//				+ ", buildings=" + buildings + ", troops=" + troops + ", resources=" + resources + "]";
-//	}
-	
+
 	
  
 }

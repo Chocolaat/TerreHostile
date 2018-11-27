@@ -6,8 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.terrehostile.business.map.Tile;
-
 
 @Entity 
 @Table(name = "buildings")

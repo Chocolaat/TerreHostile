@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 import org.terrehostile.business.Constants;
+import org.terrehostile.business.mapTileItem.Troop;
 
 
 
@@ -14,8 +15,9 @@ public class MapView {
 	
 	private int[][] ground;
 	private int[][] height;
-	private int[][] troops;
+	private int[][] resources;
 	private int[][] buildings;
+	private List<Troop>[][] troops;
 	
 
 	private int beginXCoord;
@@ -29,18 +31,26 @@ public class MapView {
 		ground = new int[xSize][ySize];
 	}
 	
-	public MapView(int beginXCoord, int beginYCoord, int xSize, int ySize, int[][] mapTilesGround, int[][] mapTilesHeight, int[][] mapTilesTroops, int[][] mapTilesBuildings)
-	{
+
+	public MapView(int[][] ground, int[][] height, int[][] resources, int[][] buildings, List<Troop>[][] troops,
+			int beginXCoord, int beginYCoord, int xSize, int ySize) {
+		super();
+		this.ground = ground;
+		this.height = height;
+		this.resources = resources;
+		this.buildings = buildings;
+		this.troops = troops;
 		this.beginXCoord = beginXCoord;
 		this.beginYCoord = beginYCoord;
 		this.xSize = xSize;
 		this.ySize = ySize;
-		this.ground = mapTilesGround;
-		this.height = mapTilesHeight;
-		this.troops = mapTilesTroops;
-		this.buildings = mapTilesBuildings;
 	}
-	
+
+
+
+
+
+
 	public MapView(int beginXCoord, int beginYCoord, int xSize, int ySize, List<Tile> tileList)
 	{
 		this.beginXCoord = beginXCoord;
@@ -64,6 +74,9 @@ public class MapView {
 						
 			ground[newY][newX] = currentTile.getBackground();
 			height[newY][newX] = currentTile.getHeight();
+			buildings[newY][newX] = currentTile.getBuilding().getType().ordinal();
+			resources[newY][newX] = currentTile.getResource().getType().ordinal();
+			troops[newY][newX] = currentTile.getTroops();
 		}
 
 	}
@@ -153,11 +166,19 @@ public class MapView {
 		this.ySize = ySize;
 	}
 
-	public int[][] getTroops() {
+	public int[][] getResources() {
+		return resources;
+	}
+
+	public void setResources(int[][] resources) {
+		this.resources = resources;
+	}
+
+	public List<Troop>[][] getTroops() {
 		return troops;
 	}
 
-	public void setTroops(int[][] troops) {
+	public void setTroops(List<Troop>[][] troops) {
 		this.troops = troops;
 	}
 
@@ -169,15 +190,12 @@ public class MapView {
 		this.buildings = buildings;
 	}
 
+
 	@Override
 	public String toString() {
-		return "MapView [ground=" + Arrays.toString(ground) + ", height=" + Arrays.toString(height) + ", troops="
-				+ Arrays.toString(troops) + ", buildings=" + Arrays.toString(buildings) + ", beginXCoord=" + beginXCoord
-				+ ", beginYCoord=" + beginYCoord + ", xSize=" + xSize + ", ySize=" + ySize + "]";
-	}
-	
-	
-
-
-	
+		return "MapView [ground=" + Arrays.toString(ground) + ", height=" + Arrays.toString(height) + ", resources="
+				+ Arrays.toString(resources) + ", buildings=" + Arrays.toString(buildings) + ", troops="
+				+ Arrays.toString(troops) + ", beginXCoord=" + beginXCoord + ", beginYCoord=" + beginYCoord + ", xSize="
+				+ xSize + ", ySize=" + ySize + "]";
+	}	
 }
