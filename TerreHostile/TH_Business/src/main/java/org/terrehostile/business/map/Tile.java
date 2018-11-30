@@ -1,17 +1,12 @@
 package org.terrehostile.business.map;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import javax.persistence.JoinColumns;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumns;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -19,90 +14,54 @@ import org.terrehostile.business.mapTileItem.Building;
 import org.terrehostile.business.mapTileItem.Resource;
 import org.terrehostile.business.mapTileItem.Troop;
 
-
-@Entity 
-@IdClass(MapsObjectKeys.class)
+@Entity
+@IdClass(CoordinatesKey.class)
 @Table(name = "mapview")
-public class Tile implements Serializable {
-	
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class Tile {
 
-	
 	/** Coordinates */
 	@Id
-	@Column(name="x_coord", nullable = false)
+	@Column(name = "x_coord", nullable = false)
 	private int xCoord;
-	
+
 	@Id
-	@Column(name="y_coord", nullable = false)
+	@Column(name = "y_coord", nullable = false)
 	private int yCoord;
-	
+
 	/** Background */
-	@Column(name="background", nullable = false)
+	@Column(name = "background", nullable = false)
 	private int background;
 
 	/** Height */
-	@Column(name="height", nullable = false)
+	@Column(name = "height", nullable = false)
 	private int height;
-	
+
 	/** Resource */
-	@Column(name="troops", nullable = true)
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumns({
-        @JoinColumn(name="x_coord", referencedColumnName="x_coord"),
-        @JoinColumn(name="y_coord", referencedColumnName="y_coord")
-    })
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumns({ @JoinColumn(name = "x_coord", referencedColumnName = "x_coord"),
+			@JoinColumn(name = "y_coord", referencedColumnName = "y_coord") })
 	private Resource resource;
 
 	/** Buildings */
-	@Column(name="buildings", nullable = true)
 	@OneToOne(fetch = FetchType.EAGER)
-    @JoinColumns({
-        @JoinColumn(name="x_coord", referencedColumnName="x_coord"),
-        @JoinColumn(name="y_coord", referencedColumnName="y_coord")
-    })
+	@JoinColumns({ @JoinColumn(name = "x_coord", referencedColumnName = "x_coord"),
+			@JoinColumn(name = "y_coord", referencedColumnName = "y_coord") })
 	private Building building;
 
 	/** Troops */
-	@Column(name="troops", nullable = true)
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumns({
-        @JoinColumn(name="x_coord", referencedColumnName="x_coord"),
-        @JoinColumn(name="y_coord", referencedColumnName="y_coord")
-    })
-	private List<Troop> troops = new ArrayList<>();
-	
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumns({ @JoinColumn(name = "x_coord", referencedColumnName = "x_coord"),
+			@JoinColumn(name = "y_coord", referencedColumnName = "y_coord") })
+	private Troop troop;
 
-	
-	
-	public Tile()
-	{
-		
+	public Tile() {
 	}
-	
+
 	public Tile(int xCoord, int yCoord, int background, int height) {
 		this.xCoord = xCoord;
 		this.yCoord = yCoord;
 		this.background = background;
 		this.height = height;
-	}
-	
-	
-
-	public Tile(int xCoord, int yCoord, int background, int height, Resource resource, Building building,
-			List<Troop> troops) {
-		super();
-		this.xCoord = xCoord;
-		this.yCoord = yCoord;
-		this.background = background;
-		this.height = height;
-		this.resource = resource;
-		this.building = building;
-		this.troops = troops;
 	}
 
 	public int getxCoord() {
@@ -153,21 +112,17 @@ public class Tile implements Serializable {
 		this.building = building;
 	}
 
-	public List<Troop> getTroops() {
-		return troops;
+	public Troop getTroop() {
+		return troop;
 	}
 
-	public void setTroops(List<Troop> troops) {
-		this.troops = troops;
+	public void setTroop(Troop troop) {
+		this.troop = troop;
 	}
 
 	@Override
 	public String toString() {
 		return "Tile [xCoord=" + xCoord + ", yCoord=" + yCoord + ", background=" + background + ", height=" + height
-				+ ", resource=" + resource + ", building=" + building + ", troops=" + troops + "]";
+				+ ", resource=" + resource + ", building=" + building + ", troop=" + troop + "]";
 	}
-
-
-	
- 
 }

@@ -2,7 +2,7 @@ package org.terrehostile.business.map;
 
 import java.io.Serializable;
 
-public class MapsObjectKeys implements Serializable {
+public class CoordinatesKey implements Serializable {
 	
 	private static final long serialVersionUID = 6292962577748821631L;
 	

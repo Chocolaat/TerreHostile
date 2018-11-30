@@ -4,52 +4,38 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.Table;
 
+import org.terrehostile.business.map.CoordinatesKey;
 
-@Entity 
+@Entity
+@IdClass(CoordinatesKey.class)
 @Table(name = "buildings")
 public class Building {
-	
-	@Id
+
 	@GeneratedValue
-	private int id;	
-	
-	@Column(name="x_coord", nullable = false)
-	private int xCoord ;
-	
-	@Column(name="y_coord", nullable = false)
+	private int id;
+
+	/** Coordinates */
+	@Id
+	@Column(name = "x_coord", nullable = false)
+	private int xCoord;
+
+	@Id
+	@Column(name = "y_coord", nullable = false)
 	private int yCoord;
-	
-	@Column(name="type", nullable = false)
+
+	@Column(name = "type", nullable = false)
 	private BuildingType type;
-	
-	@Column(name="health", nullable = false)
+
+	@Column(name = "health", nullable = false)
 	private int health;
-	
-	@Column(name="state", nullable = false)
+
+	@Column(name = "state", nullable = false)
 	private BuildingState state;
-	
+
 	public Building() {
-		super();
-	}
-
-	public Building(int id, int xCoord, int yCoord, BuildingType type, int health, BuildingState state) {
-		super();
-		this.id = id;
-		this.xCoord = xCoord;
-		this.yCoord = yCoord;
-		this.type = type;
-		this.health = health;
-		this.state = state;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public int getxCoord() {
@@ -94,10 +80,8 @@ public class Building {
 
 	@Override
 	public String toString() {
-		return "Building [id=" + id + ", xCoord=" + xCoord + ", yCoord=" + yCoord + ", type=" + type + ", health="
-				+ health + ", state=" + state + "]";
+		return "Building [xCoord=" + xCoord + ", yCoord=" + yCoord + ", type=" + type + ", health=" + health
+				+ ", state=" + state + "]";
 	}
-	
-	
 
 }

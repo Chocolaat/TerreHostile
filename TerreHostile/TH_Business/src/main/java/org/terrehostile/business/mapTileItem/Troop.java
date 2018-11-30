@@ -1,52 +1,49 @@
 package org.terrehostile.business.mapTileItem;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
-public abstract class Troop {
-	
-	@Id
+import org.terrehostile.business.map.CoordinatesKey;
+
+@Entity
+@IdClass(CoordinatesKey.class)
+@Table(name = "troops")
+public class Troop implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@GeneratedValue
-	@Column(name="id")
 	private int id;
-	
-	@Column(name="x_coord", nullable = false)
-	private int xCoord ;
-	
-	@Column(name="y_coord", nullable = false)
+
+	/** Coordinates */
+	@Id
+	@Column(name = "x_coord", nullable = false)
+	private int xCoord;
+
+	@Id
+	@Column(name = "y_coord", nullable = false)
 	private int yCoord;
-	
-	@Column(name="y_coord", nullable = false)
+
+	@OneToMany(fetch = FetchType.EAGER)
+	@JoinColumn(name = "troop_id", referencedColumnName = "id")
 	private List<Unit> units;
-	
+
 	public Troop() {
-		super();
-	}
-
-	public Troop(int id, int xCoord, int yCoord) {
-		super();
-		this.id = id;
-		this.xCoord = xCoord;
-		this.yCoord = yCoord;
-	}
-
-	public Troop(int id, int xCoord, int yCoord, List<Unit> units) {
-		super();
-		this.id = id;
-		this.xCoord = xCoord;
-		this.yCoord = yCoord;
-		this.units = units;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
+		units = new ArrayList<>();
 	}
 
 	public int getxCoord() {
@@ -75,10 +72,7 @@ public abstract class Troop {
 
 	@Override
 	public String toString() {
-		return "Troop [id=" + id + ", xCoord=" + xCoord + ", yCoord=" + yCoord + ", units=" + units + "]";
+		return "Troop [xCoord=" + xCoord + ", yCoord=" + yCoord + ", units=" + units + "]";
 	}
-	
-	
-	
 
 }
