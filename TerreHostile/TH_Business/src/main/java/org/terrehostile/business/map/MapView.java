@@ -50,6 +50,9 @@ public class MapView {
 
 		ground = new int[ySize][xSize];
 		height = new int[ySize][xSize];
+		buildings = new Building[ySize][xSize];
+		resources = new Resource[ySize][xSize];
+		troop = new Troop[ySize][xSize];
 
 		for (Tile currentTile : tileList) {
 
@@ -60,7 +63,7 @@ public class MapView {
 			newX = (newX > Constants.XMAX) ? newX - Constants.XCOUNT : newX;
 			newY = (newY > Constants.YMAX) ? newY - Constants.YCOUNT : newY;
 
-			ground[newY][newX] = currentTile.getBackground();
+			ground[newY][newX] = currentTile.getBackground().ordinal();
 			height[newY][newX] = currentTile.getHeight();
 			buildings[newY][newX] = currentTile.getBuilding();
 			resources[newY][newX] = currentTile.getResource();
@@ -74,7 +77,8 @@ public class MapView {
 
 		for (int x = 0; x < xSize; x++) {
 			for (int y = 0; y < ySize; y++) {
-				mapTileList.add(new Tile(x + this.beginXCoord, y + this.beginYCoord, ground[x][y], height[x][y]));
+				mapTileList.add(new Tile(x + this.beginXCoord, y + this.beginYCoord, GroundType.values()[ground[x][y]],
+						height[x][y]));
 			}
 		}
 

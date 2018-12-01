@@ -15,13 +15,13 @@ import org.terrehostile.repository.UnitRepository;
 public class TileItemService {
 
 	@Autowired
-	private BuildingRepository buildingRepository;
+	public BuildingRepository buildingRepository;
 	@Autowired
-	private ResourceRepository resourceRepository;
+	public ResourceRepository resourceRepository;
 	@Autowired
-	private TroopRepository troopRepository;
+	public TroopRepository troopRepository;
 	@Autowired
-	private UnitRepository unitRepository;
+	public UnitRepository unitRepository;
 
 	public void save(Building building) {
 		buildingRepository.save(building);

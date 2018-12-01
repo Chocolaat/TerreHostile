@@ -30,7 +30,7 @@ public class Tile {
 
 	/** Background */
 	@Column(name = "background", nullable = false)
-	private int background;
+	private GroundType background;
 
 	/** Height */
 	@Column(name = "height", nullable = false)
@@ -57,7 +57,7 @@ public class Tile {
 	public Tile() {
 	}
 
-	public Tile(int xCoord, int yCoord, int background, int height) {
+	public Tile(int xCoord, int yCoord, GroundType background, int height) {
 		this.xCoord = xCoord;
 		this.yCoord = yCoord;
 		this.background = background;
@@ -80,11 +80,11 @@ public class Tile {
 		this.yCoord = yCoord;
 	}
 
-	public int getBackground() {
+	public GroundType getBackground() {
 		return background;
 	}
 
-	public void setBackground(int background) {
+	public void setBackground(GroundType background) {
 		this.background = background;
 	}
 
