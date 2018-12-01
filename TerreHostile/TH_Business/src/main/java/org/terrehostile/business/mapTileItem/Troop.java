@@ -3,11 +3,12 @@ package org.terrehostile.business.mapTileItem;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
@@ -26,8 +27,8 @@ public class Troop implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@GeneratedValue
-	private int id;
+	@Column(name = "id", nullable = false)
+	private String id;
 
 	/** Coordinates */
 	@Id
@@ -38,12 +39,21 @@ public class Troop implements Serializable {
 	@Column(name = "y_coord", nullable = false)
 	private int yCoord;
 
-	@OneToMany(fetch = FetchType.EAGER)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "troop_id", referencedColumnName = "id")
 	private List<Unit> units;
 
 	public Troop() {
 		units = new ArrayList<>();
+		id = UUID.randomUUID().toString();
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public int getxCoord() {
@@ -72,7 +82,7 @@ public class Troop implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Troop [xCoord=" + xCoord + ", yCoord=" + yCoord + ", units=" + units + "]";
+		return "Troop [id=" + id + ", xCoord=" + xCoord + ", yCoord=" + yCoord + ", units=" + units + "]";
 	}
 
 }

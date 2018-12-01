@@ -13,7 +13,7 @@ public class Unit {
 	@GeneratedValue
 	private int id;
 
-	private int troop_id;
+	private String troop_id;
 
 	private UnitType unitType;
 	private int unitNumber;
@@ -21,6 +21,22 @@ public class Unit {
 	private int experience;
 
 	public Unit() {
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getTroop_id() {
+		return troop_id;
+	}
+
+	public void setTroop_id(String troop_id) {
+		this.troop_id = troop_id;
 	}
 
 	public UnitType getUnitType() {
@@ -53,22 +69,6 @@ public class Unit {
 
 	public void setExperience(int experience) {
 		this.experience = experience;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public int getTroop_id() {
-		return troop_id;
-	}
-
-	public void setTroop_id(int troop_id) {
-		this.troop_id = troop_id;
 	}
 
 	@Override

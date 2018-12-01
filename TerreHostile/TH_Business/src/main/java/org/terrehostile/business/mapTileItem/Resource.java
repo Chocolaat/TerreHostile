@@ -2,7 +2,6 @@ package org.terrehostile.business.mapTileItem;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
@@ -14,7 +13,7 @@ import org.terrehostile.business.map.CoordinatesKey;
 @Table(name = "resources")
 public class Resource {
 
-	@GeneratedValue
+	@Column(name = "id", nullable = false)
 	private int id;
 
 	/** Coordinates */
@@ -33,6 +32,14 @@ public class Resource {
 	private int quantity;
 
 	public Resource() {
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public int getxCoord() {
@@ -69,7 +76,8 @@ public class Resource {
 
 	@Override
 	public String toString() {
-		return "Resource [xCoord=" + xCoord + ", yCoord=" + yCoord + ", type=" + type + ", quantity=" + quantity + "]";
+		return "Resource [id=" + id + ", xCoord=" + xCoord + ", yCoord=" + yCoord + ", type=" + type + ", quantity="
+				+ quantity + "]";
 	}
 
 }
