@@ -52,7 +52,7 @@ public class Tile {
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumns({ @JoinColumn(name = "x_coord", referencedColumnName = "x_coord"),
 			@JoinColumn(name = "y_coord", referencedColumnName = "y_coord") })
-	private Troop troop;
+	private Troop troops;
 
 	public Tile() {
 	}
@@ -112,17 +112,18 @@ public class Tile {
 		this.building = building;
 	}
 
-	public Troop getTroop() {
-		return troop;
+	public Troop getTroops() {
+		return troops;
 	}
 
-	public void setTroop(Troop troop) {
-		this.troop = troop;
+	public void setTroops(Troop troops) {
+		this.troops = troops;
 	}
 
 	@Override
 	public String toString() {
 		return "Tile [xCoord=" + xCoord + ", yCoord=" + yCoord + ", background=" + background + ", height=" + height
-				+ ", resource=" + resource + ", building=" + building + ", troop=" + troop + "]";
+				+ ", resource=" + resource + ", building=" + building + ", troops=" + troops + "]";
 	}
+
 }

@@ -16,7 +16,7 @@ public class MapView {
 	private int[][] height;
 	private Resource[][] resources;
 	private Building[][] buildings;
-	private Troop[][] troop;
+	private Troop[][] troops;
 
 	private int beginXCoord;
 	private int beginYCoord;
@@ -28,14 +28,14 @@ public class MapView {
 		ground = new int[xSize][ySize];
 	}
 
-	public MapView(int[][] ground, int[][] height, Resource[][] resources, Building[][] buildings, Troop[][] troop,
+	public MapView(int[][] ground, int[][] height, Resource[][] resources, Building[][] buildings, Troop[][] troops,
 			int beginXCoord, int beginYCoord, int xSize, int ySize) {
 		super();
 		this.ground = ground;
 		this.height = height;
 		this.resources = resources;
 		this.buildings = buildings;
-		this.troop = troop;
+		this.troops = troops;
 		this.beginXCoord = beginXCoord;
 		this.beginYCoord = beginYCoord;
 		this.xSize = xSize;
@@ -52,7 +52,7 @@ public class MapView {
 		height = new int[ySize][xSize];
 		buildings = new Building[ySize][xSize];
 		resources = new Resource[ySize][xSize];
-		troop = new Troop[ySize][xSize];
+		troops = new Troop[ySize][xSize];
 
 		for (Tile currentTile : tileList) {
 
@@ -67,7 +67,7 @@ public class MapView {
 			height[newY][newX] = currentTile.getHeight();
 			buildings[newY][newX] = currentTile.getBuilding();
 			resources[newY][newX] = currentTile.getResource();
-			troop[newY][newX] = currentTile.getTroop();
+			troops[newY][newX] = currentTile.getTroops();
 		}
 
 	}
@@ -152,12 +152,12 @@ public class MapView {
 		this.ySize = ySize;
 	}
 
-	public Troop[][] getTroop() {
-		return troop;
+	public Troop[][] getTroops() {
+		return troops;
 	}
 
-	public void setTroop(Troop[][] troop) {
-		this.troop = troop;
+	public void setTroops(Troop[][] troops) {
+		this.troops = troops;
 	}
 
 	public Resource[][] getResources() {
@@ -179,8 +179,8 @@ public class MapView {
 	@Override
 	public String toString() {
 		return "MapView [ground=" + Arrays.toString(ground) + ", height=" + Arrays.toString(height) + ", resources="
-				+ Arrays.toString(resources) + ", buildings=" + Arrays.toString(buildings) + ", troop="
-				+ Arrays.toString(troop) + ", beginXCoord=" + beginXCoord + ", beginYCoord=" + beginYCoord + ", xSize="
+				+ Arrays.toString(resources) + ", buildings=" + Arrays.toString(buildings) + ", troops="
+				+ Arrays.toString(troops) + ", beginXCoord=" + beginXCoord + ", beginYCoord=" + beginYCoord + ", xSize="
 				+ xSize + ", ySize=" + ySize + "]";
 	}
 

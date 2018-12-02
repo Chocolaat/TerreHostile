@@ -37,10 +37,15 @@ define(function() {
  * @return {Promise.<Object>}      contains the loaded JSON
  */
     function _jsonPromise(path) {
+    	console.log("_jsonPromise path = ");
+    	console.log(path);
+    	console.log("------------");
        return new Promise(function(resolve, reject) {
     	   //path is json
+
     	   if (path.startsWith("{"))
     		   {
+    	    	console.log("resolve(JSON.parse(path));");
     		   		resolve(JSON.parse(path));
     		   }
     	   // path is a file
@@ -62,6 +67,9 @@ define(function() {
     }
 
     if (typeof paths !== "string") {
+    	console.log("typeof paths !== string");
+    	console.log(paths);
+    	console.log("------------");
       var promises = [];
       for (var i = 0; i < paths.length; i++) {
         promises.push(_jsonPromise(paths[i]));
@@ -69,6 +77,9 @@ define(function() {
       return Promise.all(promises);
     }
     else {
+    	console.log("typeof paths == string");
+    	console.log(paths);
+    	console.log("------------");
       return _jsonPromise(paths);
     }
   };

@@ -5,7 +5,15 @@
     "../img/ground/ocean.png",
     "../img/ground/sand.png"
   ],
-    "monsters": [
+    "buildings": [
+    "../img/monsters/Dragon.png",
+    "../img/monsters/Unicorn.png"
+  ],
+    "resources": [
+    "../img/monsters/Dragon.png",
+    "../img/monsters/Unicorn.png"
+  ],
+    "troops": [
     "../img/monsters/Dragon.png",
     "../img/monsters/Unicorn.png"
   ]
