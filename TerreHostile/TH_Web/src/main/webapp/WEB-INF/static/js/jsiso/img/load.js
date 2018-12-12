@@ -103,7 +103,7 @@ define(function() {
        
         graphic.graphics.map(function(img) {
           imgName = img;
-          if (graphic.removePath === undefined || graphic.removePath === true) {
+          if (graphic.removePath === undefined || graphic.removePath === true) {        	  
             imgName = img.split("/").pop();
           }
           images[imgName] = new Image();

@@ -77,7 +77,7 @@ public class MapView {
 
 		for (int x = 0; x < xSize; x++) {
 			for (int y = 0; y < ySize; y++) {
-				mapTileList.add(new Tile(x + this.beginXCoord, y + this.beginYCoord, GroundType.values()[ground[x][y]],
+				mapTileList.add(new Tile(x + this.beginXCoord, y + this.beginYCoord, GroundType.values()[ground[y][x]],
 						height[x][y]));
 			}
 		}
@@ -92,13 +92,13 @@ public class MapView {
 		resultMapView.beginYCoord = beginYCoord;
 		resultMapView.xSize = xSize;
 		resultMapView.ySize = ySize;
-		resultMapView.ground = new int[xSize][ySize];
-		resultMapView.height = new int[xSize][ySize];
+		resultMapView.ground = new int[ySize][xSize];
+		resultMapView.height = new int[ySize][xSize];
 
 		for (int x = 0; x < xSize; x++) {
 			for (int y = 0; y < ySize; y++) {
-				resultMapView.ground[x][y] = ThreadLocalRandom.current().nextInt(0, 3);
-				resultMapView.height[x][y] = 0;
+				resultMapView.ground[y][x] = ThreadLocalRandom.current().nextInt(0, 3);
+				resultMapView.height[y][x] = 0;
 			}
 		}
 		return resultMapView;

@@ -253,7 +253,26 @@ function(EffectLoader, Emitter, utils) {
       var resizedTileHeight;
       var stackGraphic = null;
 
-      var graphicValue = (mapLayout[i] ? mapLayout[i][j] : 0);
+      
+     
+
+      var graphicValue = 0;
+      if (mapLayout[i] && mapLayout[i][j])
+    	  {
+	  	  	if (mapLayout[i][j].units != undefined) 
+	  		{
+	  			graphicValue = mapLayout[i][j].units[0].unitType;
+	  		}
+	  	  	else if (mapLayout[i][j].type != undefined) 
+    	  		{
+    	  			graphicValue = mapLayout[i][j].type;
+    	  		}
+    	  	else
+    	  		{
+    	  			graphicValue = mapLayout[i][j]
+    	  		}
+    	  }
+ 
       var distanceLighting = null;
       var distanceLightingSettings;
       var k = 0;

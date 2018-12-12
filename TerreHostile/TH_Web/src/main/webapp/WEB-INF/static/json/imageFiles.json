@@ -6,15 +6,13 @@
     "../img/ground/sand.png"
   ],
     "buildings": [
-    "../img/monsters/Dragon.png",
-    "../img/monsters/Unicorn.png"
+    "../img/buildings/Barrack.png"
   ],
     "resources": [
-    "../img/monsters/Dragon.png",
-    "../img/monsters/Unicorn.png"
+    "../img/resources/Flours.png"
   ],
     "troops": [
-    "../img/monsters/Dragon.png",
-    "../img/monsters/Unicorn.png"
+    "../img/troops/monsters/Dragon.png",
+    "../img/troops/monsters/Unicorn.png"
   ]
 }

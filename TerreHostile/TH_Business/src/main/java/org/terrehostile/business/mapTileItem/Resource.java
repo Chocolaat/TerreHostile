@@ -13,6 +13,10 @@ import org.terrehostile.business.map.CoordinatesKey;
 @Table(name = "resources")
 public class Resource {
 
+	public final static int TYPE_FLOURS = 1;
+	public final static int TYPE_FISH = 2;
+	public final static int TYPE_GOLD = 3;
+
 	@Column(name = "id", nullable = false)
 	private int id;
 
@@ -26,7 +30,7 @@ public class Resource {
 	private int yCoord;
 
 	@Column(name = "type", nullable = false)
-	private ResourceType type;
+	private int type;
 
 	@Column(name = "quantity", nullable = false)
 	private int quantity;
@@ -58,11 +62,11 @@ public class Resource {
 		this.yCoord = yCoord;
 	}
 
-	public ResourceType getType() {
+	public int getType() {
 		return type;
 	}
 
-	public void setType(ResourceType type) {
+	public void setType(int type) {
 		this.type = type;
 	}
 

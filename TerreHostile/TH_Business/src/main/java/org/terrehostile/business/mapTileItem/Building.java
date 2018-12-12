@@ -13,6 +13,13 @@ import org.terrehostile.business.map.CoordinatesKey;
 @Table(name = "buildings")
 public class Building {
 
+	public final static int TYPE_BARRACK = 1;
+	public final static int TYPE_ARCHERY = 2;
+
+	public final static int STATE_PLANNED = 1;
+	public final static int STATE_UNDER_CONSTRUCTION = 2;
+	public final static int STATE_BUILT = 3;
+
 	@Column(name = "id", nullable = false)
 	private int id;
 
@@ -26,13 +33,13 @@ public class Building {
 	private int yCoord;
 
 	@Column(name = "type", nullable = false)
-	private BuildingType type;
+	private int type;
 
 	@Column(name = "health", nullable = false)
 	private int health;
 
 	@Column(name = "state", nullable = false)
-	private BuildingState state;
+	private int state;
 
 	public Building() {
 	}
@@ -61,11 +68,11 @@ public class Building {
 		this.yCoord = yCoord;
 	}
 
-	public BuildingType getType() {
+	public int getType() {
 		return type;
 	}
 
-	public void setType(BuildingType type) {
+	public void setType(int type) {
 		this.type = type;
 	}
 
@@ -77,11 +84,11 @@ public class Building {
 		this.health = health;
 	}
 
-	public BuildingState getState() {
+	public int getState() {
 		return state;
 	}
 
-	public void setState(BuildingState state) {
+	public void setState(int state) {
 		this.state = state;
 	}
 

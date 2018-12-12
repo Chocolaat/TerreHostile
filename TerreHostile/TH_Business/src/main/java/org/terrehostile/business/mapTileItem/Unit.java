@@ -9,13 +9,16 @@ import javax.persistence.Table;
 @Table(name = "units")
 public class Unit {
 
+	public final static int TYPE_DRAGON = 1;
+	public final static int TYPE_UNICORN = 2;
+
 	@Id
 	@GeneratedValue
 	private int id;
 
 	private String troop_id;
 
-	private UnitType unitType;
+	private int unitType;
 	private int unitNumber;
 	private int health;
 	private int experience;
@@ -39,11 +42,11 @@ public class Unit {
 		this.troop_id = troop_id;
 	}
 
-	public UnitType getUnitType() {
+	public int getUnitType() {
 		return unitType;
 	}
 
-	public void setUnitType(UnitType unitType) {
+	public void setUnitType(int unitType) {
 		this.unitType = unitType;
 	}
 

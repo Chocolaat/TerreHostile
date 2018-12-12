@@ -2,15 +2,10 @@ package org.terrehostile;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.terrehostile.business.map.CoordinatesKey;
 import org.terrehostile.business.mapTileItem.Building;
-import org.terrehostile.business.mapTileItem.BuildingState;
-import org.terrehostile.business.mapTileItem.BuildingType;
 import org.terrehostile.business.mapTileItem.Resource;
-import org.terrehostile.business.mapTileItem.ResourceType;
 import org.terrehostile.business.mapTileItem.Troop;
 import org.terrehostile.business.mapTileItem.Unit;
-import org.terrehostile.business.mapTileItem.UnitType;
 import org.terrehostile.repository.TileRepository;
 import org.terrehostile.services.MapViewService;
 import org.terrehostile.services.TileItemService;
@@ -34,27 +29,43 @@ public class TestSch {
 
 //		Building b = tileItemService.buildingRepository.findByXCoordAndYCoord(7, 7);
 
-		CoordinatesKey c = new CoordinatesKey(7, 7);
+		// CoordinatesKey c = new CoordinatesKey(7, 7);
 //		Building b = tileItemService.buildingRepository.findById(c).orElse(null);
 
 		Building b = new Building();
-		b.setState(BuildingState.Planned);
-		b.setType(BuildingType.Barrack);
-		b.setxCoord(535);
-		b.setyCoord(535);
+		b.setState(Building.STATE_PLANNED);
+		b.setType(Building.TYPE_BARRACK);
+		b.setxCoord(537);
+		b.setyCoord(532);
 
 		tileItemService.save(b);
+
+		Building b3 = new Building();
+		b3.setState(Building.STATE_PLANNED);
+		b3.setType(Building.TYPE_BARRACK);
+		b3.setxCoord(532);
+		b3.setyCoord(537);
+
+		tileItemService.save(b3);
+
 //
 		Resource r = new Resource();
 		r.setQuantity(55);
-		r.setType(ResourceType.Fish);
-		r.setxCoord(535);
-		r.setyCoord(540);
+		r.setType(Resource.TYPE_FLOURS);
+		r.setxCoord(534);
+		r.setyCoord(532);
+		tileItemService.save(r);
+
+		Resource r2 = new Resource();
+		r2.setQuantity(55);
+		r2.setType(Resource.TYPE_FLOURS);
+		r2.setxCoord(537);
+		r2.setyCoord(534);
 		tileItemService.save(r);
 
 		Troop t = new Troop();
-		t.setxCoord(542);
-		t.setyCoord(542);
+		t.setxCoord(534);
+		t.setyCoord(534);
 		System.out.println("t begin = " + t.toString());
 
 		// tileItemService.save(t);
@@ -62,7 +73,7 @@ public class TestSch {
 		System.out.println("t first save = " + t.toString());
 
 		Unit u = new Unit();
-		u.setUnitType(UnitType.Archer);
+		u.setUnitType(Unit.TYPE_DRAGON);
 		u.setUnitNumber(54);
 
 		t.getUnits().add(u);

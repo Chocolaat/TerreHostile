@@ -142,37 +142,40 @@ require(
 				console.log("map");
 				console.log(map);
 
-					
-				var mapBuildings = map.buildings.map(x => x.map(y => (y != null ? y.type : 0)));
-				var mapResources = map.resources.map(x => x.map(y => (y != null ? y.type : 0)));
-				var mapTroops = map.troops.map(x => x.map(y => (y != null ? y.type : 0)));
-
-				console.log("mapBuildings");
-				console.log(mapBuildings);
 				
-				console.log("mapBuildingsJSON");
-				console.log(JSON.stringify(mapBuildings));
-				
-l
-				
-				jsonLoader([ "{\"ground\" : " + JSON.stringify(map.ground) + ", \"height\" : " + JSON.stringify(map.height) + ", \"buildings\" : " + JSON.stringify(mapBuildings) + + ", \"resources\" : " + JSON.stringify(mapBuildings) + + ", \"troops\" : " + JSON.stringify(mapBuildings) + "}", '../json/imageFiles.json' ])
+				jsonLoader([ "{\"ground\" : " + JSON.stringify(map.ground) + ", \"height\" : " + JSON.stringify(map.height) + ", \"buildings\" : " + JSON.stringify(map.buildings) + ", \"resources\" : " + JSON.stringify(map.resources) + ", \"troops\" : " + JSON.stringify(map.troops) + "}", '../json/imageFiles.json' ])
 						.then(
-								function(jsonResponse) {
+								function(jsonResponse) 
+								{
 						            var images = [
 							              {
-							                graphics: jsonResponse[1].ground,
+							               // graphics: map.ground
+							            	  graphics:jsonResponse[1].ground
 							              },
 							              {
-							                graphics: jsonResponse[1].buildings,
+							                //graphics: map.buildings
+							            	graphics:jsonResponse[1].buildings
 							              },
 							              {
-								                graphics: jsonResponse[1].resources,
+								               // graphics: map.resources
+								            	graphics:jsonResponse[1].resources
 								          },
 							              {
-								                graphics: jsonResponse[1].troops,
+								               // graphics: map.troops
+								                graphics:jsonResponse[1].troops
 								          }
 							            ];
+						            
+						            console.log("------");
+					            	  console.log("jsonResponse = ");
+				            	  		console.log(jsonResponse);
+							            console.log("------");
 
+						            console.log("------");
+					            	  console.log("images = ");
+				            	  		console.log(images);
+							            console.log("------");
+				            	  		
 									imgLoader(images)
 											.then(
 													function(imgResponse) {
@@ -182,7 +185,7 @@ l
 														
 														game = new main(0,
 																0, map.xSize,
-																imgResponse[1]); // X & Y drawing position, and tile span to draw 
+																imgResponse[3]); // X & Y drawing position, and tile span to draw 
 
 														game
 																.init([
@@ -223,7 +226,8 @@ l
 //															                  },
 																			heightMap : {
 																				map : jsonResponse[0].height,
-																				offset : 0
+																				offset : 0,
+																                heightMapOnTop: true
 																			},
 																			tileHeight : 50,
 																			tileWidth : 100
@@ -231,12 +235,13 @@ l
 																		{
 																			title : "Resources",
 																			layout : jsonResponse[0].resources,
-																			graphics : imgResponse[1].files,
-																			graphicsDictionary : imgResponse[1].dictionary,
+																			graphics : imgResponse[2].files,
+																			graphicsDictionary : imgResponse[2].dictionary,
 																			zeroIsBlank: true,
 																			heightMap : {
 																				map : jsonResponse[0].height,
-																				offset : 0
+																				offset : 0,
+																                heightMapOnTop: true
 																			},
 																			tileHeight : 50,
 																			tileWidth : 100
@@ -244,12 +249,13 @@ l
 																		{
 																			title : "Troops",
 																			layout : jsonResponse[0].troops,
-																			graphics : imgResponse[1].files,
-																			graphicsDictionary : imgResponse[1].dictionary,
+																			graphics : imgResponse[3].files,
+																			graphicsDictionary : imgResponse[3].dictionary,
 																			zeroIsBlank: true,
 																			heightMap : {
 																				map : jsonResponse[0].height,
-																				offset : 0
+																				offset : 0,
+																                heightMapOnTop: true
 																			},
 																			tileHeight : 50,
 																			tileWidth : 100
@@ -257,7 +263,8 @@ l
 																		]);
 
 													});
-								});
+								}
+								);
 
 				
 			}
@@ -274,33 +281,34 @@ l
 
 			function main(x, y, size, playerImages) {
 				
-
+console.log("playerImages");
+console.log(playerImages);
 				
 				var mapMonsters = 
 					[
 			            {
 			              id: 0,
 			              image: playerImages.files["Dragon.png"],
-			              xPos: 44,
-			              yPos: 44
+			              xPos: 8,
+			              yPos: 2
 			            },
 			            {
 			              id: 1,
 			              image: playerImages.files["Dragon.png"],
-			              xPos: 45,
-			              yPos: 45
+			              xPos: 2,
+			              yPos: 8
 			            },
 			            {
 			              id: 2,
 			              image: playerImages.files["Unicorn.png"],
-			              xPos: 43,
-			              yPos: 43
+			              xPos: 7,
+			              yPos: 8
 			            },
 			            {
 			              id: 3,
 			              image: playerImages.files["Unicorn.png"],
-			              xPos: 42,
-			              yPos: 42
+			              xPos: 4,
+			              yPos: 6
 			            }
 			          ];
 				
@@ -543,11 +551,11 @@ l
 									layer.draw(i, j); // Draw the graphics layer
 								}
 								
-//				                  mapMonsters.map(function(monster) {
-//				                      if (i === monster.xPos  && j === monster.yPos  && layer.getTitle() === "Monsters") {
-//				                        layer.draw(i, j, monster.image);
-//				                      }
-//				                    });   
+				                  mapMonsters.map(function(monster) {
+				                      if (i === monster.xPos  && j === monster.yPos  && layer.getTitle() === "Troops") {
+				                        layer.draw(i, j, monster.image);
+				                      }
+				                    });   
 							});
 						}
 					}
