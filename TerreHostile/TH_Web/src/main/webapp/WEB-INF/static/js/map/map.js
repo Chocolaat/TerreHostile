@@ -138,50 +138,29 @@ require(
 
 			
 			function launch() {
-				
-				console.log("map");
-				console.log(map);
-
-				
-				jsonLoader([ "{\"ground\" : " + JSON.stringify(map.ground) + ", \"height\" : " + JSON.stringify(map.height) + ", \"buildings\" : " + JSON.stringify(map.buildings) + ", \"resources\" : " + JSON.stringify(map.resources) + ", \"troops\" : " + JSON.stringify(map.troops) + "}", '../json/imageFiles.json' ])
+								
+				jsonLoader(['../json/imageFiles.json'])
 						.then(
 								function(jsonResponse) 
 								{
 						            var images = [
 							              {
-							               // graphics: map.ground
-							            	  graphics:jsonResponse[1].ground
+							            	graphics:jsonResponse[0].ground
 							              },
 							              {
-							                //graphics: map.buildings
-							            	graphics:jsonResponse[1].buildings
+							            	graphics:jsonResponse[0].buildings
 							              },
 							              {
-								               // graphics: map.resources
-								            	graphics:jsonResponse[1].resources
+								            	graphics:jsonResponse[0].resources
 								          },
 							              {
-								               // graphics: map.troops
-								                graphics:jsonResponse[1].troops
+								                graphics:jsonResponse[0].troops
 								          }
 							            ];
-						            
-						            console.log("------");
-					            	  console.log("jsonResponse = ");
-				            	  		console.log(jsonResponse);
-							            console.log("------");
-
-						            console.log("------");
-					            	  console.log("images = ");
-				            	  		console.log(images);
-							            console.log("------");
-				            	  		
+						            				            	  		
 									imgLoader(images)
 											.then(
-													function(imgResponse) {
-														console.log("imgResponse");
-											console.log(imgResponse);
-														
+													function(imgResponse) {													
 														
 														game = new main(0,
 																0, map.xSize,
@@ -191,12 +170,12 @@ require(
 																.init([
 																		{
 																			title : "Ground",
-																			layout : jsonResponse[0].ground,
+																			layout : map.ground,
 																			graphics : imgResponse[0].files,
 																			graphicsDictionary : imgResponse[0].dictionary,
 																			isometric: true,
 																			heightMap : {
-																				map : jsonResponse[0].height,
+																				map : map.height,
 																				offset : 0,
 																				heightTile : imgResponse[0].files["ground.png"],
 																			},
@@ -211,7 +190,7 @@ require(
 																		},
 																		{
 																			title : "Buildings",
-																			layout : jsonResponse[0].buildings,
+																			layout : map.buildings,
 																			graphics : imgResponse[1].files,
 																			graphicsDictionary : imgResponse[1].dictionary,
 																			zeroIsBlank: true,
@@ -225,7 +204,7 @@ require(
 //															                    darkness: 1
 //															                  },
 																			heightMap : {
-																				map : jsonResponse[0].height,
+																				map : map.height,
 																				offset : 0,
 																                heightMapOnTop: true
 																			},
@@ -234,12 +213,12 @@ require(
 																		},
 																		{
 																			title : "Resources",
-																			layout : jsonResponse[0].resources,
+																			layout : map.resources,
 																			graphics : imgResponse[2].files,
 																			graphicsDictionary : imgResponse[2].dictionary,
 																			zeroIsBlank: true,
 																			heightMap : {
-																				map : jsonResponse[0].height,
+																				map : map.height,
 																				offset : 0,
 																                heightMapOnTop: true
 																			},
@@ -248,12 +227,12 @@ require(
 																		},
 																		{
 																			title : "Troops",
-																			layout : jsonResponse[0].troops,
+																			layout : map.troops,
 																			graphics : imgResponse[3].files,
 																			graphicsDictionary : imgResponse[3].dictionary,
 																			zeroIsBlank: true,
 																			heightMap : {
-																				map : jsonResponse[0].height,
+																				map : map.height,
 																				offset : 0,
 																                heightMapOnTop: true
 																			},
@@ -280,30 +259,27 @@ require(
 			}
 
 			function main(x, y, size, playerImages) {
-				
-console.log("playerImages");
-console.log(playerImages);
-				
+								
 				var mapMonsters = 
 					[
-			            {
-			              id: 0,
-			              image: playerImages.files["Dragon.png"],
-			              xPos: 8,
-			              yPos: 2
-			            },
-			            {
-			              id: 1,
-			              image: playerImages.files["Dragon.png"],
-			              xPos: 2,
-			              yPos: 8
-			            },
-			            {
-			              id: 2,
-			              image: playerImages.files["Unicorn.png"],
-			              xPos: 7,
-			              yPos: 8
-			            },
+//			            {
+//			              id: 0,
+//			              image: playerImages.files["Dragon.png"],
+//			              xPos: 8,
+//			              yPos: 2
+//			            },
+//			            {
+//			              id: 1,
+//			              image: playerImages.files["Dragon.png"],
+//			              xPos: 2,
+//			              yPos: 8
+//			            },
+//			            {
+//			              id: 2,
+//			              image: playerImages.files["Unicorn.png"],
+//			              xPos: 7,
+//			              yPos: 8
+//			            },
 			            {
 			              id: 3,
 			              image: playerImages.files["Unicorn.png"],
@@ -315,12 +291,7 @@ console.log(playerImages);
 				self = this;
 							
 		        var context = CanvasControl.create("mapViewCanvas", 4000, 2000, {}, "mapView");
-		        
-		        console.log("CanvasControl()");
-		        console.log(CanvasControl());
-		        console.log(CanvasControl);
-		        
-		        
+		        		        
 				var input = new CanvasInput(document, CanvasControl());
 
 				input.mouse_action(function(coords) {

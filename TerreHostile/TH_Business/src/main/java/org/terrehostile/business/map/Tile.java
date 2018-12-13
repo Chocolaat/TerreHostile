@@ -57,11 +57,15 @@ public class Tile {
 	public Tile() {
 	}
 
-	public Tile(int xCoord, int yCoord, GroundType background, int height) {
+	public Tile(int xCoord, int yCoord, GroundType background, int height, Resource resource, Building building,
+			Troop troops) {
 		this.xCoord = xCoord;
 		this.yCoord = yCoord;
 		this.background = background;
 		this.height = height;
+		this.resource = resource;
+		this.building = building;
+		this.troops = troops;
 	}
 
 	public int getxCoord() {

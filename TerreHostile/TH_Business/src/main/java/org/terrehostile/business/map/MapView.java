@@ -65,8 +65,8 @@ public class MapView {
 
 			ground[newY][newX] = currentTile.getBackground().ordinal();
 			height[newY][newX] = currentTile.getHeight();
-			buildings[newY][newX] = currentTile.getBuilding();
 			resources[newY][newX] = currentTile.getResource();
+			buildings[newY][newX] = currentTile.getBuilding();
 			troops[newY][newX] = currentTile.getTroops();
 		}
 
@@ -78,7 +78,7 @@ public class MapView {
 		for (int x = 0; x < xSize; x++) {
 			for (int y = 0; y < ySize; y++) {
 				mapTileList.add(new Tile(x + this.beginXCoord, y + this.beginYCoord, GroundType.values()[ground[y][x]],
-						height[x][y]));
+						height[x][y], resources[x][y], buildings[x][y], troops[x][y]));
 			}
 		}
 
