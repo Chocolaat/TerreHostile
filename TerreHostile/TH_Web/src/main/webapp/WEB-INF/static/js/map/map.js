@@ -2,13 +2,10 @@
 require(
 		[ 'jsiso/canvas/Control', 'jsiso/canvas/Input', 'jsiso/img/load',
 				'jsiso/json/load', 'jsiso/tile/Field',
-				'jsiso/pathfind/pathfind', 'jsiso/particles/EffectLoader',
-				'jsiso/particles/Emitter', 'jsiso/particles/Effect',
-				'jsiso/particles/Particle', 'jsiso/utils',
-				'requirejs/domReady!' ],
+				'jsiso/pathfind/pathfind', 'map/mapTileItem'],
 		function(CanvasControl, CanvasInput, imgLoader, jsonLoader, TileField,
-				pathfind) {
-
+				pathfind, MapTileItem) {
+			
 			// -- FPS --------------------------------
 			window.requestAnimFrame = (function() {
 				return window.requestAnimationFrame
@@ -23,50 +20,16 @@ require(
 
 
 			// Global variables used to display and update map
-			var groundValueGlobal;
-			var allGround = false;
 			var mapLayers = [];
-			
 			var sizeMapToLoad = 70;
 			var moveCountReloadTrigger = 3;
 			
 			map.currentXCoord = map.beginXCoord;
 			map.currentYCoord = map.beginYCoord;
-	
-			
+
 			document.getElementById('mapEditorGetMapByXYAndSize').addEventListener("click", mapEditorGetMapByXYAndSizeButton);
-			
-			document.getElementById('mapToolBarItemGroundType').addEventListener('click', function() {showMapToolBarSubMenu("mapToolBarSubMenu_groundType");});
-			document.getElementById('mapToolBarItemBuildings').addEventListener('click', function() {showMapToolBarSubMenu("mapToolBarSubMenu_Buildings");});
-			
 			document.getElementById('saveJsonViewForm').addEventListener("click", saveJsonView);
-
-			function showMapToolBarSubMenu(param_div_id) {
-			    document.getElementById('mapToolBarSubMenu').innerHTML = document.getElementById(param_div_id).innerHTML;
-				document.getElementById('mapToolBarSubMenuItem_Grass').addEventListener('click', function() {setGroundTypeFocus("0");});
-				document.getElementById('mapToolBarSubMenuItem_Ground').addEventListener('click', function() {setGroundTypeFocus("1");});
-				document.getElementById('mapToolBarSubMenuItem_Ocean').addEventListener('click', function() {setGroundTypeFocus("2");});
-				document.getElementById('mapToolBarSubMenuItem_Sand').addEventListener('click', function() {setGroundTypeFocus("3");});
-				document.getElementById('mapToolBarSubMenuItem_GrassAll').addEventListener('click', function() {setAllGroundType("0");});
-				document.getElementById('mapToolBarSubMenuItem_GroundAll').addEventListener('click', function() {setAllGroundType("1");});
-				document.getElementById('mapToolBarSubMenuItem_OceanAll').addEventListener('click', function() {setAllGroundType("2");});
-				document.getElementById('mapToolBarSubMenuItem_SandAll').addEventListener('click', function() {setAllGroundType("3");});
-			    
-			  }
-
-			function setGroundTypeFocus(groundValue)
-			{
-				groundValueGlobal = groundValue;
-				allGround = false;
-			}
-
-
-			function setAllGroundType(groundValue)
-			{
-				groundValueGlobal = groundValue;
-				allGround = true;
-			}
-
+			
 			
 			function saveJsonView()
 			{
@@ -296,34 +259,7 @@ require(
 
 				input.mouse_action(function(coords) {
 					
-					newTile = (groundValueGlobal != undefined) ? groundValueGlobal : 1;
-					
-					if (allGround)
-					{
-						for (var i = 0; i < 0 + size; i++) 
-						{
-							for (var j = 0; j < 0 + size; j++) 
-							{
-								mapLayers[0].setTile(i, j, newTile); // Force the changing of tile graphic
-							}
-						}
-					}
-
-					else
-						{
-							tile_coordinates = mapLayers[0].applyMouseFocus(coords.x,
-									coords.y); // Get the current mouse location from X & Y Coords
-							mapLayers[0]
-									.setHeightmapTile(tile_coordinates.x,
-											tile_coordinates.y, mapLayers[0]
-													.getHeightMapTile(
-															tile_coordinates.x,
-															tile_coordinates.y) + 0); // Increase heightmap tile 
-							
-							mapLayers[0].setTile(tile_coordinates.x, tile_coordinates.y, newTile); // Force the changing of tile graphic
-						}
-
-					
+					MapTileItem.updateGround(mapLayers, coords);
 
 				});
 
