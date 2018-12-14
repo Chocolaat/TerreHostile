@@ -36,6 +36,11 @@ require(
 				map.ground = mapLayers[0].getLayout();
 				map.height = mapLayers[0].getHeightLayout();
 
+				console.log("mapLayers[0].getLayout()");
+				console.log(mapLayers[0].getLayout());
+				console.log("mapLayers[1].getLayout()");
+				console.log(mapLayers[1].getLayout());
+				
 				
 				 $.ajax({
 				        type: "POST",
@@ -102,6 +107,9 @@ require(
 			
 			function launch() {
 								
+				console.log("map");
+				console.log(map);
+				
 				jsonLoader(['../json/imageFiles.json'])
 						.then(
 								function(jsonResponse) 
@@ -259,7 +267,7 @@ require(
 
 				input.mouse_action(function(coords) {
 					
-					MapTileItem.updateGround(mapLayers, coords);
+					MapTileItem.updateTile(mapLayers, coords);
 
 				});
 
