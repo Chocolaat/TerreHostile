@@ -1,5 +1,6 @@
 package org.terrehostile.business.map;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -37,19 +38,19 @@ public class Tile {
 	private int height;
 
 	/** Resource */
-	@OneToOne(fetch = FetchType.EAGER)
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumns({ @JoinColumn(name = "x_coord", referencedColumnName = "x_coord"),
 			@JoinColumn(name = "y_coord", referencedColumnName = "y_coord") })
 	private Resource resource;
 
 	/** Buildings */
-	@OneToOne(fetch = FetchType.EAGER)
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumns({ @JoinColumn(name = "x_coord", referencedColumnName = "x_coord"),
 			@JoinColumn(name = "y_coord", referencedColumnName = "y_coord") })
 	private Building building;
 
 	/** Troops */
-	@OneToOne(fetch = FetchType.EAGER)
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumns({ @JoinColumn(name = "x_coord", referencedColumnName = "x_coord"),
 			@JoinColumn(name = "y_coord", referencedColumnName = "y_coord") })
 	private Troop troops;

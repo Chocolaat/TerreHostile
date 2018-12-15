@@ -5,13 +5,9 @@
 
 define(function() {
 	
-	
-	
-	
 	var newTileValueGlobal;
 	var layerNumberGlobal;
-	
-	var allGround = false;
+	var allGroundGlobal = false;
 		
 	
 	document.getElementById('mapToolBarItemGroundType').addEventListener('click', function() {showMapToolBarSubMenuGround();});
@@ -23,30 +19,30 @@ define(function() {
 	function showMapToolBarSubMenuGround() {
 	    document.getElementById('mapToolBarSubMenu').innerHTML = document.getElementById("mapToolBarSubMenu_GroundType").innerHTML;
 	    
-		document.getElementById('mapToolBarSubMenuItem_Grass').addEventListener('click', function() {_setCurrentSelection("0", "0");});
-		document.getElementById('mapToolBarSubMenuItem_Ground').addEventListener('click', function() {_setCurrentSelection("1", "0");});
-		document.getElementById('mapToolBarSubMenuItem_Ocean').addEventListener('click', function() {_setCurrentSelection("2", "0");});
-		document.getElementById('mapToolBarSubMenuItem_Sand').addEventListener('click', function() {_setCurrentSelection("3", "0");});
-		document.getElementById('mapToolBarSubMenuItem_GrassAll').addEventListener('click', function() {_setCurrentSelection("0", "0");});
-		document.getElementById('mapToolBarSubMenuItem_GroundAll').addEventListener('click', function() {_setCurrentSelection("1", "0");});
-		document.getElementById('mapToolBarSubMenuItem_OceanAll').addEventListener('click', function() {_setCurrentSelection("2", "0");});
-		document.getElementById('mapToolBarSubMenuItem_SandAll').addEventListener('click', function() {_setCurrentSelection("3", "0");});
+		document.getElementById('mapToolBarSubMenuItem_Grass').addEventListener('click', function() {_setCurrentSelection(0, 0, false);});
+		document.getElementById('mapToolBarSubMenuItem_Ground').addEventListener('click', function() {_setCurrentSelection(1, 0, false);});
+		document.getElementById('mapToolBarSubMenuItem_Ocean').addEventListener('click', function() {_setCurrentSelection(2, 0, false);});
+		document.getElementById('mapToolBarSubMenuItem_Sand').addEventListener('click', function() {_setCurrentSelection(3, 0, false);});
+		document.getElementById('mapToolBarSubMenuItem_GrassAll').addEventListener('click', function() {_setCurrentSelection(0, 0, true);});
+		document.getElementById('mapToolBarSubMenuItem_GroundAll').addEventListener('click', function() {_setCurrentSelection(1, 0, true);});
+		document.getElementById('mapToolBarSubMenuItem_OceanAll').addEventListener('click', function() {_setCurrentSelection(2, 0, true);});
+		document.getElementById('mapToolBarSubMenuItem_SandAll').addEventListener('click', function() {_setCurrentSelection(3, 0, true);});
 	  }
 	function showMapToolBarSubMenuBuildings() {
 	    document.getElementById('mapToolBarSubMenu').innerHTML = document.getElementById("mapToolBarSubMenu_Buildings").innerHTML;
 	    
-		document.getElementById('mapToolBarSubMenuItem_Castle').addEventListener('click', function() {_setCurrentSelection("1", "1");});
+		document.getElementById('mapToolBarSubMenuItem_Castle').addEventListener('click', function() {_setCurrentSelection(1, 1, false);});
 	  }
 	function showMapToolBarSubMenuResources() {
 	    document.getElementById('mapToolBarSubMenu').innerHTML = document.getElementById("mapToolBarSubMenu_Resources").innerHTML;
 	    
-		document.getElementById('mapToolBarSubMenuItem_Flours').addEventListener('click', function() {_setCurrentSelection("1", "2");});
+		document.getElementById('mapToolBarSubMenuItem_Flours').addEventListener('click', function() {_setCurrentSelection(1, 2, false);});
 	  }
 	function showMapToolBarSubMenuTroops() {
 	    document.getElementById('mapToolBarSubMenu').innerHTML = document.getElementById("mapToolBarSubMenu_Troops").innerHTML;
 
-		document.getElementById('mapToolBarSubMenuItem_Dragon').addEventListener('click', function() {_setCurrentSelection("1", "3");});
-		document.getElementById('mapToolBarSubMenuItem_Unicorn').addEventListener('click', function() {_setCurrentSelection("2", "3");});
+		document.getElementById('mapToolBarSubMenuItem_Dragon').addEventListener('click', function() {_setCurrentSelection(1, 3, false);});
+		document.getElementById('mapToolBarSubMenuItem_Unicorn').addEventListener('click', function() {_setCurrentSelection(2, 3, false);});
 	  }
 	
 	
@@ -59,33 +55,45 @@ define(function() {
     return {
     	
 
-    	setGroundTypeFocus: function(groundValue) {
-          return _setGroundTypeFocus(groundValue);
-        },
-
-        setAllGroundType: function(groundValue) {
-          return _setAllGroundType(groundValue);
-        },
-
-        updateGround: function(mapLayers, coords) {
-          return _updateGround(mapLayers, coords);
-        },
-        
         updateTile: function(mapLayers, coords) {
             return _updateTile(mapLayers, coords);
-          },
-        
-        getTitle: function() {
-            return title;
-          },
+          }
     }
     
     function _updateTile(mapLayers, coords)
     {
     	
-		newTile = (newTileValueGlobal != undefined) ? newTileValueGlobal : 1;
+    	// Get the current mouse location from X & Y Coords
+		tile_coordinates = mapLayers[layerNumberGlobal].applyMouseFocus(coords.x,
+				coords.y); 
 		
-		if (layerNumberGlobal == 0 && allGround)
+		newTileValue = (newTileValueGlobal != undefined) ? newTileValueGlobal : 1;
+		
+		switch(layerNumberGlobal) {
+		//Ground
+		  case 0:
+				newTile = newTileValue;
+		    break;
+		    //Buildings
+		  case 1:
+			  newTile = {health: 0, state: 0, type: newTileValue, xCoord:tile_coordinates.x + map.beginXCoord, yCoord:tile_coordinates.y + map.beginYCoord};
+		    break;
+		    //Resources
+		  case 2:
+			  newTile = {xCoord:tile_coordinates.x + map.beginXCoord, yCoord:tile_coordinates.y + map.beginYCoord, type: newTileValue, quantity: 1};
+		    break;
+		    //Troops
+		  case 3:
+			  newUnit = [{unitType:newTileValue, experience: 0, health:1,unitNumber:1}];
+			  newTile = {xCoord:tile_coordinates.x + map.beginXCoord, yCoord:tile_coordinates.y + map.beginYCoord, units:newUnit};
+		    break;
+		  default:
+				newTile = (newTileValueGlobal != undefined) ? newTileValueGlobal : 1;
+		    break;
+		}
+		
+		
+		if (layerNumberGlobal === 0 && allGroundGlobal === true)
 		{
 			for (var i = 0; i < 0 + map.xSize; i++) 
 			{
@@ -98,10 +106,6 @@ define(function() {
 
 		else
 			{
-				tile_coordinates = mapLayers[layerNumberGlobal].applyMouseFocus(coords.x,
-						coords.y); // Get the current mouse location from X & Y Coords
-				
-
 				mapLayers[layerNumberGlobal].setTile(tile_coordinates.x, tile_coordinates.y, newTile); // Force the changing of tile graphic
 				
 //				mapLayers[layerNumber]
@@ -112,77 +116,17 @@ define(function() {
 //												tile_coordinates.y) + 0); // Increase heightmap tile 
 				
 			}
-    	
     }
     
     
-    function _updateGround(mapLayers, coords)
-    {
-    	
-		newTile = (groundValueGlobal != undefined) ? groundValueGlobal : 1;
-		
-		if (allGround)
-		{
-			for (var i = 0; i < 0 + map.xSize; i++) 
-			{
-				for (var j = 0; j < 0 + map.xSize; j++) 
-				{
-					mapLayers[0].setTile(i, j, newTile); // Force the changing of tile graphic
-				}
-			}
-		}
-
-		else
-			{
-				tile_coordinates = mapLayers[0].applyMouseFocus(coords.x,
-						coords.y); // Get the current mouse location from X & Y Coords
-				mapLayers[0]
-						.setHeightmapTile(tile_coordinates.x,
-								tile_coordinates.y, mapLayers[0]
-										.getHeightMapTile(
-												tile_coordinates.x,
-												tile_coordinates.y) + 0); // Increase heightmap tile 
-				
-				mapLayers[0].setTile(tile_coordinates.x, tile_coordinates.y, newTile); // Force the changing of tile graphic
-			}
-		
-
-    	
-    }
     
-    
-	function _setCurrentSelection(newTileValue, layerNumber)
+	function _setCurrentSelection(newTileValue, layerNumber, allGround)
 	{
-		console.log("newTileValue = " + newTileValue);
-		console.log("layerNumber = " + layerNumber);
 		newTileValueGlobal = newTileValue;
 		layerNumberGlobal = layerNumber;
+		allGroundGlobal = allGround;
 	}
     
-    
-	function _setGroundTypeFocus(groundValue)
-	{
-		console.log("groundValue = " + groundValue);
-    	
-		groundValueGlobal = groundValue;
-		allGround = false;
-	}
-	
 
-	function _setToto(groundValue, toto2)
-	{
-		console.log("groundValue = " + groundValue);
-		console.log("toto2 = " + toto2);
-    	
-		groundValueGlobal = groundValue;
-		allGround = false;
-	}
-
-
-	function _setAllGroundType(groundValue)
-	{
-		groundValueGlobal = groundValue;
-		allGround = true;
-	}
         
 });

@@ -1,6 +1,7 @@
 package org.terrehostile.web.admincontrolers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.terrehostile.business.map.MapView;
@@ -70,9 +72,12 @@ public class MapEditorControler {
 	}
 
 	@RequestMapping(value = "/admin/mapEditorSaveMap", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void saveMap(@RequestBody MapView map) {
 
 		mapViewService.save(map);
+
+		System.out.println(map.toString());
 
 	}
 

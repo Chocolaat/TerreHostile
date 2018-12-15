@@ -48,11 +48,11 @@ public class MapView {
 		this.xSize = xSize;
 		this.ySize = ySize;
 
-		ground = new int[ySize][xSize];
-		height = new int[ySize][xSize];
-		buildings = new Building[ySize][xSize];
-		resources = new Resource[ySize][xSize];
-		troops = new Troop[ySize][xSize];
+		ground = new int[xSize][ySize];
+		height = new int[xSize][ySize];
+		buildings = new Building[xSize][ySize];
+		resources = new Resource[xSize][ySize];
+		troops = new Troop[xSize][ySize];
 
 		for (Tile currentTile : tileList) {
 
@@ -63,11 +63,11 @@ public class MapView {
 			newX = (newX > Constants.XMAX) ? newX - Constants.XCOUNT : newX;
 			newY = (newY > Constants.YMAX) ? newY - Constants.YCOUNT : newY;
 
-			ground[newY][newX] = currentTile.getBackground().ordinal();
-			height[newY][newX] = currentTile.getHeight();
-			resources[newY][newX] = currentTile.getResource();
-			buildings[newY][newX] = currentTile.getBuilding();
-			troops[newY][newX] = currentTile.getTroops();
+			ground[newX][newY] = currentTile.getBackground().ordinal();
+			height[newX][newY] = currentTile.getHeight();
+			resources[newX][newY] = currentTile.getResource();
+			buildings[newX][newY] = currentTile.getBuilding();
+			troops[newX][newY] = currentTile.getTroops();
 		}
 
 	}
@@ -77,7 +77,7 @@ public class MapView {
 
 		for (int x = 0; x < xSize; x++) {
 			for (int y = 0; y < ySize; y++) {
-				mapTileList.add(new Tile(x + this.beginXCoord, y + this.beginYCoord, GroundType.values()[ground[y][x]],
+				mapTileList.add(new Tile(x + this.beginXCoord, y + this.beginYCoord, GroundType.values()[ground[x][y]],
 						height[x][y], resources[x][y], buildings[x][y], troops[x][y]));
 			}
 		}
@@ -92,13 +92,13 @@ public class MapView {
 		resultMapView.beginYCoord = beginYCoord;
 		resultMapView.xSize = xSize;
 		resultMapView.ySize = ySize;
-		resultMapView.ground = new int[ySize][xSize];
-		resultMapView.height = new int[ySize][xSize];
+		resultMapView.ground = new int[xSize][ySize];
+		resultMapView.height = new int[xSize][ySize];
 
 		for (int x = 0; x < xSize; x++) {
 			for (int y = 0; y < ySize; y++) {
-				resultMapView.ground[y][x] = ThreadLocalRandom.current().nextInt(0, 3);
-				resultMapView.height[y][x] = 0;
+				resultMapView.ground[x][y] = ThreadLocalRandom.current().nextInt(0, 3);
+				resultMapView.height[x][y] = 0;
 			}
 		}
 		return resultMapView;

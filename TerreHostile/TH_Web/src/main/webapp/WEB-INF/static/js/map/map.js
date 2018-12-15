@@ -18,7 +18,6 @@ require(
 						};
 			})();
 
-
 			// Global variables used to display and update map
 			var mapLayers = [];
 			var sizeMapToLoad = 70;
@@ -33,15 +32,6 @@ require(
 			
 			function saveJsonView()
 			{
-				map.ground = mapLayers[0].getLayout();
-				map.height = mapLayers[0].getHeightLayout();
-
-				console.log("mapLayers[0].getLayout()");
-				console.log(mapLayers[0].getLayout());
-				console.log("mapLayers[1].getLayout()");
-				console.log(mapLayers[1].getLayout());
-				
-				
 				 $.ajax({
 				        type: "POST",
 				        url: "/TH_Web/admin/mapEditorSaveMap",
@@ -50,9 +40,10 @@ require(
 			            contentType : "application/json",
 				        success: function (result) {
 				        },
-				        error: function (result) {
-				        	console.log("saveJsonView FAIL");
-				        	console.log(result);
+				        error: function(xhr, textStatus, error){
+				            console.log(xhr.statusText);
+				            console.log(textStatus);
+				            console.log(error);
 				        }
 				    });
 			}
@@ -106,9 +97,6 @@ require(
 
 			
 			function launch() {
-								
-				console.log("map");
-				console.log(map);
 				
 				jsonLoader(['../json/imageFiles.json'])
 						.then(
@@ -230,35 +218,7 @@ require(
 			}
 
 			function main(x, y, size, playerImages) {
-								
-				var mapMonsters = 
-					[
-//			            {
-//			              id: 0,
-//			              image: playerImages.files["Dragon.png"],
-//			              xPos: 8,
-//			              yPos: 2
-//			            },
-//			            {
-//			              id: 1,
-//			              image: playerImages.files["Dragon.png"],
-//			              xPos: 2,
-//			              yPos: 8
-//			            },
-//			            {
-//			              id: 2,
-//			              image: playerImages.files["Unicorn.png"],
-//			              xPos: 7,
-//			              yPos: 8
-//			            },
-			            {
-			              id: 3,
-			              image: playerImages.files["Unicorn.png"],
-			              xPos: 4,
-			              yPos: 6
-			            }
-			          ];
-				
+					
 				self = this;
 							
 		        var context = CanvasControl.create("mapViewCanvas", 4000, 2000, {}, "mapView");
@@ -465,12 +425,6 @@ require(
 								if (layer.getTitle() === "Ground" || layer.getTitle() === "Resources" || layer.getTitle() === "Buildings" || layer.getTitle() === "Troops") {
 									layer.draw(i, j); // Draw the graphics layer
 								}
-								
-				                  mapMonsters.map(function(monster) {
-				                      if (i === monster.xPos  && j === monster.yPos  && layer.getTitle() === "Troops") {
-				                        layer.draw(i, j, monster.image);
-				                      }
-				                    });   
 							});
 						}
 					}
