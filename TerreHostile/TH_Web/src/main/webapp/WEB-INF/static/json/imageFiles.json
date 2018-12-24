@@ -10,9 +10,5 @@
   ],
     "resources": [
     "../img/resources/Flours.png"
-  ],
-    "troops": [
-    "../img/troops/monsters/Dragon.png",
-    "../img/troops/monsters/Unicorn.png"
   ]
 }

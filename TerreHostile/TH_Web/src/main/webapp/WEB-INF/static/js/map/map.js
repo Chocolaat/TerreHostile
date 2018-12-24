@@ -97,11 +97,39 @@ require(
 
 			
 			function launch() {
+
+				console.log("-------");
+				console.log("unitConfigurations");
+				console.log(unitConfigurations);
+				console.log("-------");
+
+				console.log("-------");
+				console.log("unitConfigurationPropertyList");
+				console.log(unitConfigurationPropertyList);
+				console.log("-------");
 				
-				jsonLoader(['../json/imageFiles.json'])
+				console.log("-------");
+				console.log("JSON.stringify(unitConfigurationPropertyList)");
+				console.log(JSON.stringify(unitConfigurationPropertyList));
+				console.log("-------");
+				
+				
+				
+				jsonLoader(['../json/imageFiles.json', JSON.stringify(unitConfigurationPropertyList)])
 						.then(
 								function(jsonResponse) 
 								{
+									console.log("-------");
+									console.log("jsonResponse[0].troops");
+									console.log(jsonResponse[0].troops);
+									console.log("-------");
+									
+
+									console.log("-------");
+									console.log("jsonResponse[1].imgPaths");
+									console.log(jsonResponse[1].imgPaths);
+									console.log("-------");
+									
 						            var images = [
 							              {
 							            	graphics:jsonResponse[0].ground
@@ -113,13 +141,27 @@ require(
 								            	graphics:jsonResponse[0].resources
 								          },
 							              {
-								                graphics:jsonResponse[0].troops
+								                graphics:jsonResponse[1].imgPaths
 								          }
 							            ];
 						            				            	  		
 									imgLoader(images)
 											.then(
-													function(imgResponse) {													
+													function(imgResponse) {	
+														console.log("-------");
+														console.log("imgResponse[0]");
+														console.log(imgResponse[0]);
+														console.log("-------");	
+														
+														console.log("-------");
+														console.log("imgResponse[2]");
+														console.log(imgResponse[2]);
+														console.log("-------");	
+														
+														console.log("-------");
+														console.log("imgResponse[3]");
+														console.log(imgResponse[3]);
+														console.log("-------");
 														
 														game = new main(0,
 																0, map.xSize,

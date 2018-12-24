@@ -63,6 +63,9 @@ define(function() {
     function _updateTile(mapLayers, coords)
     {
     	
+    	console.log("mapLayers[layerNumberGlobal]");
+    	console.log(mapLayers[layerNumberGlobal].getLayout());
+    	
     	// Get the current mouse location from X & Y Coords
 		tile_coordinates = mapLayers[layerNumberGlobal].applyMouseFocus(coords.x,
 				coords.y); 

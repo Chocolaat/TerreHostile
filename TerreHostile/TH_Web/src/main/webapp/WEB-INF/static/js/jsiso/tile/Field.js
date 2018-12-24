@@ -261,7 +261,8 @@ function(EffectLoader, Emitter, utils) {
     	  {
 	  	  	if (mapLayout[i][j].units != undefined) 
 	  		{
-	  			graphicValue = mapLayout[i][j].units[0].unitType;
+	  			graphicValue = mapLayout[i][j].units[0].unitType + 1;
+	  			
 	  		}
 	  	  	else if (mapLayout[i][j].type != undefined) 
     	  		{
@@ -314,7 +315,7 @@ function(EffectLoader, Emitter, utils) {
       if ((!zeroIsBlank) || (zeroIsBlank && graphicValue) || tileImageOverwite) {
         if (zeroIsBlank) {
           if (Number(graphicValue) >= 0) {
-            graphicValue--;
+             graphicValue--;
           }
         }
         if(tilesHide && graphicValue >= hideSettings.hideStart && graphicValue <= hideSettings.hideEnd) {

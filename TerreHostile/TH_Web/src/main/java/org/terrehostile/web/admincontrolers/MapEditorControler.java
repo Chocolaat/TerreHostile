@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.terrehostile.UnitConfigurationPropertyList;
 import org.terrehostile.business.map.MapView;
 import org.terrehostile.services.MapViewService;
 
@@ -20,6 +21,9 @@ public class MapEditorControler {
 
 	@Autowired
 	private MapViewService mapViewService;
+
+	@Autowired
+	private UnitConfigurationPropertyList unitsConfiguration;
 
 	// getMapByXYAndSize from form
 	@RequestMapping(value = { "/admin/mapEditor" }, method = RequestMethod.GET)
@@ -30,6 +34,9 @@ public class MapEditorControler {
 		MapView map = mapViewService.getMapByXYAndSize(beginX, beginY, size, size);
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("map", map);
+		modelAndView.addObject("unitConfigurationPropertyList", unitsConfiguration.getUnitConfigurationPropertyList());
+		modelAndView.addObject("unitConfigurations", unitsConfiguration.getUnitConfigurations());
+
 		modelAndView.setViewName("admin/homeMapEditor");
 
 		return modelAndView;
@@ -41,9 +48,9 @@ public class MapEditorControler {
 	public MapView getMapByXYAndSize(@RequestParam int beginX, int beginY, int size) {
 
 		MapView map = mapViewService.getMapByXYAndSize(beginX, beginY, size, size);
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("fragments/map/mapView");
-		modelAndView.addObject("map", map);
+		// ModelAndView modelAndView = new ModelAndView();
+		// modelAndView.setViewName("fragments/map/mapView");
+		// modelAndView.addObject("map", map);
 
 		return map;
 	}
