@@ -12,55 +12,31 @@ define(['mustache'], function(Mustache) {
 	var allGroundGlobal = false;
 		
 	
-	document.getElementById('mapToolBarItemGroundType').addEventListener('click', function() {showMapToolBarSubMenuGround();});
-	document.getElementById('mapToolBarItemBuildings').addEventListener('click', function() {showMapToolBarSubMenuBuildings();});
-	document.getElementById('mapToolBarItemTroops').addEventListener('click', function() {showMapToolBarSubMenuTroops();});
-	document.getElementById('mapToolBarItemResources').addEventListener('click', function() {showMapToolBarSubMenuResources();});
-	
-
-
-	
-	function showMapToolBarSubMenuGround() {
+	document.getElementById('mapToolBarItemGroundType').addEventListener('click', function() {showMapToolBarSubMenu(groundConfigurations, 0);});
+	document.getElementById('mapToolBarItemBuildings').addEventListener('click', function() {showMapToolBarSubMenu(buildingConfigurations, 1);});
+	document.getElementById('mapToolBarItemTroops').addEventListener('click', function() {showMapToolBarSubMenu(resourceConfigurations, 2);});
+	document.getElementById('mapToolBarItemResources').addEventListener('click', function() {showMapToolBarSubMenu(unitConfigurations, 3);});
+		
+	function showMapToolBarSubMenu(configuration, layerValue) {
 		
 		$('#mapToolBarSubMenu').html("");
 		var mapToolBarSubMenuItemButtonTemplate = $('#mapToolBarSubMenuItemButtonTemplate').html();
 				
-				$.each(groundConfigurations, function( index, value ) 
+				$.each(configuration, function( index, value ) 
 				{
-					var htmlButton = Mustache.to_html(mapToolBarSubMenuItemButtonTemplate, value);
-					var id = "mapToolBarSubMenuItem_" + value.name;
-					$('#mapToolBarSubMenu').append(htmlButton);
-					$('#' + id).click(function() 
+					if(value.name != "Delete")
 					{
-						_setCurrentSelection(value.type, 0, false);
-					});
+						var htmlButton = Mustache.to_html(mapToolBarSubMenuItemButtonTemplate, value);
+						var id = "mapToolBarSubMenuItem_" + value.name;
+						$('#mapToolBarSubMenu').append(htmlButton);
+						$('#' + id).click(function() 
+						{
+							_setCurrentSelection(value.type, layerValue, false);
+						});
+					}
 				});
-	
 	}
 	
-	function showMapToolBarSubMenuBuildings() {
-	    document.getElementById('mapToolBarSubMenu').innerHTML = document.getElementById("mapToolBarSubMenu_Buildings").innerHTML;
-	    
-		document.getElementById('mapToolBarSubMenuItem_Castle').addEventListener('click', function() {_setCurrentSelection(1, 1, false);});
-	  }
-	function showMapToolBarSubMenuResources() {
-	    document.getElementById('mapToolBarSubMenu').innerHTML = document.getElementById("mapToolBarSubMenu_Resources").innerHTML;
-	    
-		document.getElementById('mapToolBarSubMenuItem_Flours').addEventListener('click', function() {_setCurrentSelection(1, 2, false);});
-	  }
-	function showMapToolBarSubMenuTroops() {
-	    document.getElementById('mapToolBarSubMenu').innerHTML = document.getElementById("mapToolBarSubMenu_Troops").innerHTML;
-
-		document.getElementById('mapToolBarSubMenuItem_Dragon').addEventListener('click', function() {_setCurrentSelection(1, 3, false);});
-		document.getElementById('mapToolBarSubMenuItem_Unicorn').addEventListener('click', function() {_setCurrentSelection(2, 3, false);});
-	  }
-	
-	
-	
-	
-	function showMapToolBarSubMenu(param_div_id) {
-	    document.getElementById('mapToolBarSubMenu').innerHTML = document.getElementById(param_div_id).innerHTML;
-	  }
  
     return {
     	
