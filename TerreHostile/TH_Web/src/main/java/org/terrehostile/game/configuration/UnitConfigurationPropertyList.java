@@ -1,4 +1,4 @@
-package org.terrehostile;
+package org.terrehostile.game.configuration;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,7 +14,7 @@ import org.springframework.core.env.Environment;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Configuration
-@PropertySource("classpath:units.properties")
+@PropertySource("/WEB-INF/configuration/units.properties")
 @ConfigurationProperties(prefix = "units")
 public class UnitConfigurationPropertyList {
 

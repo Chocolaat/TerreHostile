@@ -21,9 +21,9 @@ THE SOFTWARE.
 */
 
 define([
-  'jsiso/particles/Emitter',
-  'jsiso/particles/Effect',
-  'jsiso/utils'
+  'libs/jsiso/particles/Emitter',
+  'libs/jsiso/particles/Effect',
+  'libs/jsiso/utils'
 ],
 
 function(Emitter, Effect, utils) {

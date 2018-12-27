@@ -3,7 +3,9 @@
  */
 
 
-define(function() {
+				
+define(['mustache'], function(Mustache) {
+	
 	
 	var newTileValueGlobal;
 	var layerNumberGlobal;
@@ -16,18 +18,26 @@ define(function() {
 	document.getElementById('mapToolBarItemResources').addEventListener('click', function() {showMapToolBarSubMenuResources();});
 	
 
+
+	
 	function showMapToolBarSubMenuGround() {
-	    document.getElementById('mapToolBarSubMenu').innerHTML = document.getElementById("mapToolBarSubMenu_GroundType").innerHTML;
-	    
-		document.getElementById('mapToolBarSubMenuItem_Grass').addEventListener('click', function() {_setCurrentSelection(0, 0, false);});
-		document.getElementById('mapToolBarSubMenuItem_Ground').addEventListener('click', function() {_setCurrentSelection(1, 0, false);});
-		document.getElementById('mapToolBarSubMenuItem_Ocean').addEventListener('click', function() {_setCurrentSelection(2, 0, false);});
-		document.getElementById('mapToolBarSubMenuItem_Sand').addEventListener('click', function() {_setCurrentSelection(3, 0, false);});
-		document.getElementById('mapToolBarSubMenuItem_GrassAll').addEventListener('click', function() {_setCurrentSelection(0, 0, true);});
-		document.getElementById('mapToolBarSubMenuItem_GroundAll').addEventListener('click', function() {_setCurrentSelection(1, 0, true);});
-		document.getElementById('mapToolBarSubMenuItem_OceanAll').addEventListener('click', function() {_setCurrentSelection(2, 0, true);});
-		document.getElementById('mapToolBarSubMenuItem_SandAll').addEventListener('click', function() {_setCurrentSelection(3, 0, true);});
-	  }
+		
+		$('#mapToolBarSubMenu').html("");
+		var mapToolBarSubMenuItemButtonTemplate = $('#mapToolBarSubMenuItemButtonTemplate').html();
+				
+				$.each(groundConfigurations, function( index, value ) 
+				{
+					var htmlButton = Mustache.to_html(mapToolBarSubMenuItemButtonTemplate, value);
+					var id = "mapToolBarSubMenuItem_" + value.name;
+					$('#mapToolBarSubMenu').append(htmlButton);
+					$('#' + id).click(function() 
+					{
+						_setCurrentSelection(value.type, 0, false);
+					});
+				});
+	
+	}
+	
 	function showMapToolBarSubMenuBuildings() {
 	    document.getElementById('mapToolBarSubMenu').innerHTML = document.getElementById("mapToolBarSubMenu_Buildings").innerHTML;
 	    
@@ -62,10 +72,7 @@ define(function() {
     
     function _updateTile(mapLayers, coords)
     {
-    	
-    	console.log("mapLayers[layerNumberGlobal]");
-    	console.log(mapLayers[layerNumberGlobal].getLayout());
-    	
+    	    	
     	// Get the current mouse location from X & Y Coords
 		tile_coordinates = mapLayers[layerNumberGlobal].applyMouseFocus(coords.x,
 				coords.y); 
@@ -133,3 +140,4 @@ define(function() {
 
         
 });
+		

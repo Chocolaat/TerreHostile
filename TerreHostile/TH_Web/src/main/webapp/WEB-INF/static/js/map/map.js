@@ -1,8 +1,8 @@
 
 require(
-		[ 'jsiso/canvas/Control', 'jsiso/canvas/Input', 'jsiso/img/load',
-				'jsiso/json/load', 'jsiso/tile/Field',
-				'jsiso/pathfind/pathfind', 'map/mapTileItem'],
+		[ 'libs/jsiso/canvas/Control', 'libs/jsiso/canvas/Input', 'libs/jsiso/img/load',
+				'libs/jsiso/json/load', 'libs/jsiso/tile/Field',
+				'libs/jsiso/pathfind/pathfind', 'map/mapTileItem'],
 		function(CanvasControl, CanvasInput, imgLoader, jsonLoader, TileField,
 				pathfind, MapTileItem) {
 			
@@ -17,7 +17,7 @@ require(
 							window.setTimeout(callback, 1000 / 60);
 						};
 			})();
-
+			
 			// Global variables used to display and update map
 			var mapLayers = [];
 			var sizeMapToLoad = 70;
@@ -97,71 +97,29 @@ require(
 
 			
 			function launch() {
-
-				console.log("-------");
-				console.log("unitConfigurations");
-				console.log(unitConfigurations);
-				console.log("-------");
-
-				console.log("-------");
-				console.log("unitConfigurationPropertyList");
-				console.log(unitConfigurationPropertyList);
-				console.log("-------");
 				
-				console.log("-------");
-				console.log("JSON.stringify(unitConfigurationPropertyList)");
-				console.log(JSON.stringify(unitConfigurationPropertyList));
-				console.log("-------");
-				
-				
-				
-				jsonLoader(['../json/imageFiles.json', JSON.stringify(unitConfigurationPropertyList)])
+				jsonLoader([JSON.stringify(groundConfigurationPropertyList), JSON.stringify(buildingConfigurationPropertyList), JSON.stringify(resourceConfigurationPropertyList), JSON.stringify(unitConfigurationPropertyList), '../json/imageFiles.json'])
 						.then(
 								function(jsonResponse) 
 								{
-									console.log("-------");
-									console.log("jsonResponse[0].troops");
-									console.log(jsonResponse[0].troops);
-									console.log("-------");
-									
-
-									console.log("-------");
-									console.log("jsonResponse[1].imgPaths");
-									console.log(jsonResponse[1].imgPaths);
-									console.log("-------");
-									
 						            var images = [
 							              {
-							            	graphics:jsonResponse[0].ground
+							            	graphics:jsonResponse[0].imgPaths
 							              },
 							              {
-							            	graphics:jsonResponse[0].buildings
+							            	graphics:jsonResponse[1].imgPaths
 							              },
 							              {
-								            	graphics:jsonResponse[0].resources
+								            	graphics:jsonResponse[2].imgPaths
 								          },
 							              {
-								                graphics:jsonResponse[1].imgPaths
+								                graphics:jsonResponse[3].imgPaths
 								          }
 							            ];
 						            				            	  		
 									imgLoader(images)
 											.then(
-													function(imgResponse) {	
-														console.log("-------");
-														console.log("imgResponse[0]");
-														console.log(imgResponse[0]);
-														console.log("-------");	
-														
-														console.log("-------");
-														console.log("imgResponse[2]");
-														console.log(imgResponse[2]);
-														console.log("-------");	
-														
-														console.log("-------");
-														console.log("imgResponse[3]");
-														console.log(imgResponse[3]);
-														console.log("-------");
+													function(imgResponse) {
 														
 														game = new main(0,
 																0, map.xSize,

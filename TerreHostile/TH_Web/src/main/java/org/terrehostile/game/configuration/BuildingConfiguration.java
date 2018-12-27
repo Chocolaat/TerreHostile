@@ -1,20 +1,19 @@
-package org.terrehostile;
+package org.terrehostile.game.configuration;
 
-public class UnitConfiguration {
+public class BuildingConfiguration {
 
 	private String name;
 	private String imgPath;
 	private int type;
 
 	private int vision;
-	private int movement;
 
 	private int totalHealth;
 	private int power;
 	private int armor;
 	private int range;
 
-	public UnitConfiguration() {
+	public BuildingConfiguration() {
 	}
 
 	public String getName() {
@@ -47,14 +46,6 @@ public class UnitConfiguration {
 
 	public void setVision(int vision) {
 		this.vision = vision;
-	}
-
-	public int getMovement() {
-		return movement;
-	}
-
-	public void setMovement(int movement) {
-		this.movement = movement;
 	}
 
 	public int getTotalHealth() {
@@ -91,9 +82,8 @@ public class UnitConfiguration {
 
 	@Override
 	public String toString() {
-		return "UnitConfiguration [name=" + name + ", imgPath=" + imgPath + ", type=" + type + ", vision=" + vision
-				+ ", movement=" + movement + ", totalHealth=" + totalHealth + ", power=" + power + ", armor=" + armor
-				+ ", range=" + range + "]";
+		return "BuildingConfiguration [name=" + name + ", imgPath=" + imgPath + ", type=" + type + ", vision=" + vision
+				+ ", totalHealth=" + totalHealth + ", power=" + power + ", armor=" + armor + ", range=" + range + "]";
 	}
 
 }

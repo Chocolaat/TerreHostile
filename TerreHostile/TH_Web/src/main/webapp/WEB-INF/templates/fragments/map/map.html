@@ -21,16 +21,10 @@
 	
 	<div id="mapToolBarSubMenu"> </div>
 	
-	<div id = "mapToolBarSubMenu_GroundType" style='display:none'> 
-		<button type="button" class="mapToolBarSubMenuItem" id="mapToolBarSubMenuItem_Grass">Herbe</button>
-		<button type="button" class="mapToolBarSubMenuItem" id="mapToolBarSubMenuItem_Ground">Terre</button>
-		<button type="button" class="mapToolBarSubMenuItem" id="mapToolBarSubMenuItem_Ocean">Océan</button>
-		<button type="button" class="mapToolBarSubMenuItem" id="mapToolBarSubMenuItem_Sand">Sable</button>
-		<button type="button" class="mapToolBarSubMenuItem" id="mapToolBarSubMenuItem_GrassAll">Herbe (tous)</button>
-		<button type="button" class="mapToolBarSubMenuItem" id="mapToolBarSubMenuItem_GroundAll">Terre (tous)</button>
-		<button type="button" class="mapToolBarSubMenuItem" id="mapToolBarSubMenuItem_OceanAll">Océan (tous)</button>
-		<button type="button" class="mapToolBarSubMenuItem" id="mapToolBarSubMenuItem_SandAll">Sable (tous)</button>
-	</div>	
+	<script id="mapToolBarSubMenuItemButtonTemplate" type="text/template">
+	<button type='button' class='mapToolBarSubMenuItem' id='mapToolBarSubMenuItem_{{name}}' style='--backgroundImageUrl:url({{imgPathSquare}});'>{{name}}</button>
+	</script>
+	
 	
 	<div id="mapToolBarSubMenu_Buildings"  style='display:none'>  
 		<button type="button" class="mapToolBarSubMenuItem" id="mapToolBarSubMenuItem_Castle">Château</button>
@@ -44,42 +38,24 @@
 	<div id="mapToolBarSubMenu_Resources"  style='display:none'>  
 		<button type="button" class="mapToolBarSubMenuItem" id="mapToolBarSubMenuItem_Flours">Fleurs</button>
 	</div>
-	
-	
-	
-	  
+		  
 	<!-- Initialisation variables from html/server to javascript -->
 	<script th:inline="javascript">
     	var map = /*[[${map}]]*/ "map";  
     	var unitConfigurations = /*[[${unitConfigurations}]]*/ "unitConfigurations"; 
     	var unitConfigurationPropertyList = /*[[${unitConfigurationPropertyList}]]*/ "unitConfigurationPropertyList"; 
+    	var buildingConfigurationPropertyList = /*[[${buildingConfigurationPropertyList}]]*/ "buildingConfigurationPropertyList"; 
+    	var buildingConfigurations = /*[[${buildingConfigurations}]]*/ "buildingConfigurations"; 
+    	var resourceConfigurationPropertyList = /*[[${resourceConfigurationPropertyList}]]*/ "resourceConfigurationPropertyList"; 
+    	var resourceConfigurations = /*[[${resourceConfigurations}]]*/ "resourceConfigurations"; 
+    	var groundConfigurationPropertyList = /*[[${groundConfigurationPropertyList}]]*/ "groundConfigurationPropertyList"; 
+    	var groundConfigurations = /*[[${groundConfigurations}]]*/ "groundConfigurations"; 
     </script>
 
 <!-- Load  scripts and librairies -->
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 
-<script th:attr="data-main=@{/js/config.js}" th:src="@{/js/requirejs/require.js}"></script>
-<script > 
-require([
-    'jsiso/canvas/Control',
-    'jsiso/canvas/Input',
-    'jsiso/img/load',
-    'jsiso/json/load',
-    'jsiso/tile/Field',
-    'jsiso/particles/Effect',
-    'jsiso/particles/EffectLoader',
-    'jsiso/particles/Emitter',
-    'jsiso/particles/Particle',
-    'jsiso/pathfind/pathfind',
-    'jsiso/pathfind/worker',
-    'jsiso/tile/Camera',
-    'jsiso/url/url',
-    'jsiso/utils',
-    'map/mapTileItem',
-    'map/map',
-    'requirejs/domReady!'
-	  ])
-</script> 
+<script th:attr="data-main=@{/js/libs/requirejs/config}" th:src="@{/js/libs/requirejs/require.js}"></script>
 
 </section>

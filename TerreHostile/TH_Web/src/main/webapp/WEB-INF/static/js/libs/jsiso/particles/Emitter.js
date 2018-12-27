@@ -21,8 +21,8 @@ THE SOFTWARE.
 */
 
 define([
-  'jsiso/particles/Particle',
-  'jsiso/utils'
+  'libs/jsiso/particles/Particle',
+  'libs/jsiso/utils'
 ],
 
 function(Particle, utils) {

@@ -21,7 +21,7 @@ THE SOFTWARE.
 */
 
 define([
-  'jsiso/utils'
+  'libs/jsiso/utils'
 ],
 
 function(utils) {

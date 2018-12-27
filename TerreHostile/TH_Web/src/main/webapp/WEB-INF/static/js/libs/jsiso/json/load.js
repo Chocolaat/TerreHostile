@@ -39,7 +39,6 @@ define(function() {
     function _jsonPromise(path) {
        return new Promise(function(resolve, reject) {
     	   //path is json
-
     	   if (path.startsWith("{"))
     		   {
     		   		resolve(JSON.parse(path));

@@ -19,9 +19,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE. */
 
 define([
-  'jsiso/particles/EffectLoader',
-  'jsiso/particles/Emitter',
-  'jsiso/utils'
+  'libs/jsiso/particles/EffectLoader',
+  'libs/jsiso/particles/Emitter',
+  'libs/jsiso/utils'
 ],
 
 function(EffectLoader, Emitter, utils) {
@@ -266,7 +266,7 @@ function(EffectLoader, Emitter, utils) {
 	  		}
 	  	  	else if (mapLayout[i][j].type != undefined) 
     	  		{
-    	  			graphicValue = mapLayout[i][j].type;
+    	  			graphicValue = mapLayout[i][j].type + 1;
     	  		}
     	  	else
     	  		{
