@@ -39,7 +39,7 @@ public class Troop implements Serializable {
 	@Column(name = "y_coord", nullable = false)
 	private int yCoord;
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "troop_id", referencedColumnName = "id")
 	private List<Unit> units;
 

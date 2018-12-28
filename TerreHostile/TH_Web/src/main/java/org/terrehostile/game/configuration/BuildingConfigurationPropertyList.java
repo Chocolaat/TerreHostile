@@ -14,7 +14,7 @@ import org.springframework.core.env.Environment;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Configuration
-@PropertySource("/WEB-INF/configuration/buildings.properties")
+@PropertySource("classpath:/gameConfiguration/buildings.properties")
 @ConfigurationProperties(prefix = "buildings")
 public class BuildingConfigurationPropertyList {
 

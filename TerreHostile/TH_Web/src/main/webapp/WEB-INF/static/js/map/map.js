@@ -102,9 +102,10 @@ require(
 						.then(
 								function(jsonResponse) 
 								{
+									console.log(jsonResponse[0]);
 						            var images = [
 							              {
-							            	graphics:jsonResponse[0].imgPaths
+							            	graphics:jsonResponse[0].imgPathsGround
 							              },
 							              {
 							            	graphics:jsonResponse[1].imgPaths

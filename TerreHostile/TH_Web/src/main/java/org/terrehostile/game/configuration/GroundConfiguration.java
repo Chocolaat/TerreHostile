@@ -4,7 +4,7 @@ public class GroundConfiguration {
 
 	private String name;
 	private String imgPath;
-	private String imgPathSquare;
+	private String imgPathGround;
 	private int type;
 
 	private int movement;
@@ -28,12 +28,12 @@ public class GroundConfiguration {
 		this.imgPath = imgPath;
 	}
 
-	public String getImgPathSquare() {
-		return imgPathSquare;
+	public String getImgPathGround() {
+		return imgPathGround;
 	}
 
-	public void setImgPathSquare(String imgPathSquare) {
-		this.imgPathSquare = imgPathSquare;
+	public void setImgPathGround(String imgPathGround) {
+		this.imgPathGround = imgPathGround;
 	}
 
 	public int getType() {
@@ -54,7 +54,7 @@ public class GroundConfiguration {
 
 	@Override
 	public String toString() {
-		return "GroundConfiguration [name=" + name + ", imgPath=" + imgPath + ", imgPathSquare=" + imgPathSquare
+		return "GroundConfiguration [name=" + name + ", imgPath=" + imgPath + ", imgPathGround=" + imgPathGround
 				+ ", type=" + type + ", movement=" + movement + "]";
 	}
 

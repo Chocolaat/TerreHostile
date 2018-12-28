@@ -2,6 +2,8 @@ package org.terrehostile;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.terrehostile.business.map.Tile;
+import org.terrehostile.business.mapTileItem.Building;
 import org.terrehostile.game.configuration.UnitConfigurationPropertyList;
 import org.terrehostile.repository.TileRepository;
 import org.terrehostile.services.MapViewService;
@@ -22,32 +24,6 @@ public class TestSch {
 
 	public void launch() {
 
-		System.out.println("unitsConfiguration");
-
-		System.out.println("----");
-		System.out.println("unitsConfiguration.getNames");
-		System.out.println(unitsConfiguration.getNames());
-		System.out.println("----");
-		System.out.println("unitsConfiguration.getImgPaths");
-		System.out.println(unitsConfiguration.getImgPaths());
-		System.out.println("----");
-		System.out.println("unitsConfiguration.getTypes");
-		System.out.println(unitsConfiguration.getTypes());
-		System.out.println("----");
-//
-//		int unitType = 1;
-//
-//		System.out.println("----");
-//		System.out.println("unitName = " + unitsConfiguration.getName(unitType));
-//		System.out.println("uniImg = " + unitsConfiguration.getImgPath(unitType));
-//		System.out.println("type = " + unitsConfiguration.getType(unitType));
-//		System.out.println("vision = " + unitsConfiguration.getVision(unitType));
-//		System.out.println("----");
-//
-//		UnitConfiguration uc = unitsConfiguration.getUnitConfiguration(0);
-//		UnitConfiguration uc2 = unitsConfiguration.getUnitConfiguration(1);
-//		// UnitConfiguration uc3 = unitsConfiguration.getUnitConfiguration(3);
-//
 //		System.out.println("----");
 //		System.out.println("uc = " + uc.toString());
 //		System.out.println("uc2 = " + uc2.toString());
@@ -113,9 +89,37 @@ public class TestSch {
 //		tileItemService.save(t);
 //
 //		System.out.println("tsecond save = " + t.toString());
-//
-////		Tile tile = tileRepository.findByXCoordAndYCoord(5, 5);
-////		System.out.println("t = " + tile.toString());
+
+		Tile tile542;
+		Tile tile42;
+
+		tile542 = tileRepository.findByXCoordAndYCoord(542, 542);
+		System.out.println("tile542 = " + tile542.toString());
+
+		tile42 = tileRepository.findByXCoordAndYCoord(42, 42);
+		System.out.println("tile42 = " + tile42.toString());
+
+		System.out.println("********");
+
+		Building b = tile542.getBuilding();
+
+		b.setxCoord(42);
+		b.setyCoord(42);
+
+		tileItemService.save(b);
+		tile542.setBuilding(null);
+		tileItemService.save(tile542);
+
+		System.out.println("********");
+
+		tile542 = tileRepository.findByXCoordAndYCoord(542, 542);
+		System.out.println("tile542 = " + tile542.toString());
+
+		tile42 = tileRepository.findByXCoordAndYCoord(42, 42);
+		System.out.println("tile42 = " + tile42.toString());
+
+//		tile.setBuilding(null);
+//		tileRepository.save(tile);
 
 	}
 

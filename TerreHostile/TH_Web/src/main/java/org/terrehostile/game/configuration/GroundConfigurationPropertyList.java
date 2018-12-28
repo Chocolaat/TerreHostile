@@ -14,7 +14,7 @@ import org.springframework.core.env.Environment;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Configuration
-@PropertySource("/WEB-INF/configuration/grounds.properties")
+@PropertySource("classpath:/gameConfiguration/grounds.properties")
 @ConfigurationProperties(prefix = "grounds")
 public class GroundConfigurationPropertyList {
 
@@ -26,7 +26,7 @@ public class GroundConfigurationPropertyList {
 
 	private List<String> imgPaths = new ArrayList<String>();
 
-	private List<String> imgPathsSquare = new ArrayList<String>();
+	private List<String> imgPathsGround = new ArrayList<String>();
 
 	private List<Integer> types = new ArrayList<Integer>();
 
@@ -42,8 +42,12 @@ public class GroundConfigurationPropertyList {
 		return imgPaths;
 	}
 
-	public List<String> getImgPathsSquare() {
-		return imgPathsSquare;
+	public List<String> getImgPathsGround() {
+		return imgPathsGround;
+	}
+
+	public void setImgPathsGround(List<String> imgPathsGround) {
+		this.imgPathsGround = imgPathsGround;
 	}
 
 	public void setImgPaths(List<String> imgPaths) {
@@ -63,7 +67,7 @@ public class GroundConfigurationPropertyList {
 		GroundConfiguration res = new GroundConfiguration();
 		res.setName(env.getProperty("grounds.names[" + groundType + "]"));
 		res.setImgPath(env.getProperty("grounds.imgPaths[" + groundType + "]"));
-		res.setImgPathSquare(env.getProperty("grounds.imgPathsSquare[" + groundType + "]"));
+		res.setImgPathGround(env.getProperty("grounds.imgPathsGround[" + groundType + "]"));
 		res.setType(Integer.parseInt(env.getProperty("grounds.types[" + groundType + "]")));
 
 		res.setMovement(Integer.parseInt(env.getProperty("grounds.movement[" + groundType + "]")));
@@ -80,7 +84,7 @@ public class GroundConfigurationPropertyList {
 			GroundConfiguration currentGroundCfg = new GroundConfiguration();
 			currentGroundCfg.setName(env.getProperty("grounds.names[" + groundType + "]"));
 			currentGroundCfg.setImgPath(env.getProperty("grounds.imgPaths[" + groundType + "]"));
-			currentGroundCfg.setImgPathSquare(env.getProperty("grounds.imgPathsSquare[" + groundType + "]"));
+			currentGroundCfg.setImgPathGround(env.getProperty("grounds.imgPathsGround[" + groundType + "]"));
 			currentGroundCfg.setType(Integer.parseInt(env.getProperty("grounds.types[" + groundType + "]")));
 
 			currentGroundCfg.setMovement(Integer.parseInt(env.getProperty("grounds.movement[" + groundType + "]")));
@@ -96,6 +100,7 @@ public class GroundConfigurationPropertyList {
 	public GroundConfigurationPropertyList getGroundConfigurationPropertyList() {
 		GroundConfigurationPropertyList res = new GroundConfigurationPropertyList();
 		res.setImgPaths(imgPaths);
+		res.setImgPathsGround(imgPathsGround);
 		res.setNames(names);
 		res.setTypes(types);
 		return res;
@@ -103,8 +108,8 @@ public class GroundConfigurationPropertyList {
 
 	@Override
 	public String toString() {
-		return "UnitsConfiguration [env=" + env + ", names=" + names + ", imgPaths=" + imgPaths + ", types=" + types
-				+ "]";
+		return "GroundConfigurationPropertyList [env=" + env + ", names=" + names + ", imgPaths=" + imgPaths
+				+ ", imgPathsGround=" + imgPathsGround + ", types=" + types + "]";
 	}
 
 }

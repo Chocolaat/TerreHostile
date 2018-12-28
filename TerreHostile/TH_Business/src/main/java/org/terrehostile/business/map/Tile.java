@@ -38,19 +38,19 @@ public class Tile {
 	private int height;
 
 	/** Resource */
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumns({ @JoinColumn(name = "x_coord", referencedColumnName = "x_coord"),
 			@JoinColumn(name = "y_coord", referencedColumnName = "y_coord") })
 	private Resource resource;
 
 	/** Buildings */
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumns({ @JoinColumn(name = "x_coord", referencedColumnName = "x_coord"),
 			@JoinColumn(name = "y_coord", referencedColumnName = "y_coord") })
 	private Building building;
 
 	/** Troops */
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumns({ @JoinColumn(name = "x_coord", referencedColumnName = "x_coord"),
 			@JoinColumn(name = "y_coord", referencedColumnName = "y_coord") })
 	private Troop troops;
