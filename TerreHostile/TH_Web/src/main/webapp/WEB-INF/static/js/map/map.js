@@ -22,6 +22,8 @@ require(
 			var mapLayers = [];
 			var sizeMapToLoad = 70;
 			var moveCountReloadTrigger = 3;
+			var beginTile;
+			var currentTile;
 			
 			map.currentXCoord = map.beginXCoord;
 			map.currentYCoord = map.beginYCoord;
@@ -226,19 +228,74 @@ require(
 		        		        
 				var input = new CanvasInput(document, CanvasControl());
 
-				input.mouse_action(function(coords) {
+								
+//				var funcOnClicDownMove = function(coords)
+//				{
+//
+//					tileCoord = mapLayers[0].getXYCoords(coords.x,
+//					coords.y);
+//					
+//					console.log("funcOnClicDownMove BEGIN");
+//					console.log("coordList ***");
+//					console.log(coordList);
+//					console.log("coordList ***");
+//					console.log("tileCoord ***");
+//					console.log(tileCoord);
+//					console.log("tileCoord ***");
+//					console.log("funcOnClicDownMove BEGIN");
+//					
+//					
+//					console.log("coordList.indexOf(tileCoord) = " + coordList.indexOf(tileCoord));
+//			
+//					if (coordList.indexOf(tileCoord)==-1) 
+//					{ 
+//						coordList.push(tileCoord);
+//					}
+//
+//					console.log("funcOnClicDownMove END");
+//					console.log("coordList ***");
+//					console.log(coordList);
+//					console.log("coordList ***");
+//					console.log("tileCoord ***");
+//					console.log(tileCoord);
+//					console.log("tileCoord ***");
+//					console.log("funcOnClicDownMove END");
+//				};
+				
+				console.log("HOY");
+				
+				input.mouse_action(function(coords) 
+					{
+						
 					
-					MapTileItem.updateTile(mapLayers, coords);
-
-				});
-
-				input.mouse_move(function(coords) {
+					beginTile =  mapLayers[0].getXYCoords(coords.x,
+							coords.y);
+						
+						
+					});
+				
+				input.mouse_up(function(coords) 
+						{
+							MapTileItem.updateTile(mapLayers, coords);
+							beginTile = null;
+							currentTile = null;
+						});
+				
+							
+				input.mouse_move(function(coords) {			
 					mapLayers.map(function(layer) {
-						tile_coordinates = layer.applyMouseFocus(coords.x,
-								coords.y); // Apply mouse rollover via mouse location X & Y
+						currentTile =  mapLayers[0].getXYCoords(coords.x,
+								coords.y);
+						
+						layer.applyFocus(currentTile.x, currentTile.y); // Apply mouse rollover via mouse location X & Y
+						
+						if(beginTile && currentTile)
+							{
+								layer.applyLargeFocus(beginTile.x, currentTile.x, beginTile.y, currentTile.y); // Apply mouse rollover via mouse location X & Y
+							}
 					});
 				});
-				
+								
 
 		        input.keyboard(function(pressed, keydown, event) {
 					var mapViewWidth = document.getElementById('mapView').offsetWidth;

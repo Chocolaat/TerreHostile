@@ -49,8 +49,10 @@ define(['mustache'], function(Mustache) {
     	console.log(mapLayers[layerNumberGlobal].getLayout());
     	    	
     	// Get the current mouse location from X & Y Coords
-		tile_coordinates = mapLayers[layerNumberGlobal].applyMouseFocus(coords.x,
+		tile_coordinates = mapLayers[layerNumberGlobal].getXYCoords(coords.x,
 				coords.y); 
+		
+		console.log(tile_coordinates);
 		
 		newTileValue = (newTileValueGlobal != undefined) ? newTileValueGlobal : 1;
 		

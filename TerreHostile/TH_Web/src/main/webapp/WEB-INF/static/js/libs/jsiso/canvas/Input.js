@@ -177,8 +177,42 @@ define(function() {
           event.preventDefault();
           _mouseInput(event, callback);
         }, false);
-      }
+      },
 
+
+      /**
+      * Public method for adding mouse up detection
+      * @param {Function} Callback function
+      */
+      mouse_up: function(callback) {
+        // Callback returns when mouse is moved
+        canvas.addEventListener('mouseup', function(event) {
+          event.preventDefault();
+          _mouseInput(event, callback);
+        }, false);
+      },
+
+
+      /**
+      * Public method for adding eventListener
+      * @param {Function} Callback function
+      */
+      addListener: function(eventName, callback) {
+        // Callback returns when mouse is moved
+    	  console.log("ADD");
+        canvas.addEventListener(eventName, callback, false);
+      },
+
+
+      /**
+      * Public method for removing eventListener
+      * @param {Function} Callback function
+      */
+      removeListener: function(eventName, callback) {
+        // Callback returns when mouse is moved
+    	  console.log("REMOVE");
+        canvas.removeEventListener(eventName, callback, false);
+      }
     };
 
   };

@@ -60,6 +60,10 @@ function(EffectLoader, Emitter, utils) {
     var applyInteractions = false;
     var focusTilePosX = 0;
     var focusTilePosY = 0;
+    var focusTilePosXBegin = 0;
+    var focusTilePosXEnd = 0;
+    var focusTilePosYBegin = 0;
+    var focusTilePosYEnd = 0;
 
     var alphaWhenFocusBehind =  {}; // Used for applying alpha to objects infront of focus 
 
@@ -539,7 +543,7 @@ function(EffectLoader, Emitter, utils) {
         }
       }
       if (mouseUsed && applyInteractions) {
-        if (i === focusTilePosX && j === focusTilePosY) {
+        if (i >= focusTilePosXBegin && i <= focusTilePosXEnd && j >= focusTilePosYBegin && j <= focusTilePosYEnd) {
           // Apply mouse over tile coloring
           _drawHorizontalColorOverlay(xpos, ypos, ('(255, 255, 120, 0.7)'), k - 1, resizedTileHeight);
         }
@@ -756,9 +760,23 @@ function(EffectLoader, Emitter, utils) {
     }
 
     function _applyFocus(xPos, yPos) {
+    	mouseUsed = true;
       focusTilePosX = xPos;
       focusTilePosY = yPos;
+      
+      focusTilePosXBegin = xPos;
+      focusTilePosXEnd = xPos;
+      focusTilePosYBegin = yPos;
+      focusTilePosYEnd = yPos;
     }
+    
+    function _applyLargeFocus(xPosBegin, xPosEnd, yPosBegin, yPosEnd) {
+    	mouseUsed = true;
+        focusTilePosXBegin = xPosBegin;
+        focusTilePosXEnd = xPosEnd;
+        focusTilePosYBegin = yPosBegin;
+        focusTilePosYEnd = yPosEnd;
+      }
 
     function _align(position, screenDimension, size, offset) {
       switch(position) {
@@ -905,6 +923,10 @@ function(EffectLoader, Emitter, utils) {
 
       applyFocus: function(tileX, tileY) {
         return _applyFocus(tileX, tileY);
+      },
+
+      applyLargeFocus: function(xBegin, xEnd, yBegin, yEnd) {
+        return _applyLargeFocus(xBegin, xEnd, yBegin, yEnd);
       },
 
       align: function(position, screenDimension, size, offset) {
