@@ -8,8 +8,7 @@ define(['mustache'], function(Mustache) {
 	
 	
 	var newTileValueGlobal;
-	var layerNumberGlobal;
-	var allGroundGlobal = false;
+	var layerNumberGlobal = 0;
 		
 	
 	document.getElementById('mapToolBarItemGroundType').addEventListener('click', function() {showMapToolBarSubMenu(groundConfigurations, 0);});
@@ -38,21 +37,18 @@ define(['mustache'], function(Mustache) {
     return {
     	
 
-        updateTile: function(mapLayers, coords) {
-            return _updateTile(mapLayers, coords);
+        updateTile: function(mapLayers, coords, beginTile, currentTile) {
+            return _updateTile(mapLayers, coords, beginTile, currentTile);
           }
     }
     
-    function _updateTile(mapLayers, coords)
+    function _updateTile(mapLayers, coords, beginTile, currentTile)
     {
     	
-    	console.log(mapLayers[layerNumberGlobal].getLayout());
     	    	
     	// Get the current mouse location from X & Y Coords
 		tile_coordinates = mapLayers[layerNumberGlobal].getXYCoords(coords.x,
 				coords.y); 
-		
-		console.log(tile_coordinates);
 		
 		newTileValue = (newTileValueGlobal != undefined) ? newTileValueGlobal : 1;
 		
@@ -86,18 +82,23 @@ define(['mustache'], function(Mustache) {
 			    break;
 			}
 		}
-			
 		
-		if (layerNumberGlobal === 0 && allGroundGlobal === true)
-		{
-			for (var i = 0; i < 0 + map.xSize; i++) 
+		if ((layerNumberGlobal === 0 || layerNumberGlobal === 2) && beginTile && currentTile)
 			{
-				for (var j = 0; j < 0 + map.xSize; j++) 
+				var xBegin = Math.min(beginTile.x, currentTile.x)
+				var xEnd = Math.max(beginTile.x, currentTile.x);;
+				var yBegin = Math.min(beginTile.y, currentTile.y);
+				var yEnd = Math.max(beginTile.y, currentTile.y);
+				
+				
+				for (var i = xBegin; i <= xEnd; i++) 
 				{
-					mapLayers[layerNumberGlobal].setTile(i, j, newTile); // Force the changing of tile graphic
+					for (var j = yBegin; j <= yEnd; j++) 
+					{
+						mapLayers[layerNumberGlobal].setTile(i, j, newTile); // Force the changing of tile graphic
+					}
 				}
 			}
-		}
 
 		else
 			{

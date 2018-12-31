@@ -199,7 +199,6 @@ define(function() {
       */
       addListener: function(eventName, callback) {
         // Callback returns when mouse is moved
-    	  console.log("ADD");
         canvas.addEventListener(eventName, callback, false);
       },
 
@@ -210,7 +209,6 @@ define(function() {
       */
       removeListener: function(eventName, callback) {
         // Callback returns when mouse is moved
-    	  console.log("REMOVE");
         canvas.removeEventListener(eventName, callback, false);
       }
     };

@@ -104,7 +104,6 @@ require(
 						.then(
 								function(jsonResponse) 
 								{
-									console.log(jsonResponse[0]);
 						            var images = [
 							              {
 							            	graphics:jsonResponse[0].imgPathsGround
@@ -228,41 +227,6 @@ require(
 		        		        
 				var input = new CanvasInput(document, CanvasControl());
 
-								
-//				var funcOnClicDownMove = function(coords)
-//				{
-//
-//					tileCoord = mapLayers[0].getXYCoords(coords.x,
-//					coords.y);
-//					
-//					console.log("funcOnClicDownMove BEGIN");
-//					console.log("coordList ***");
-//					console.log(coordList);
-//					console.log("coordList ***");
-//					console.log("tileCoord ***");
-//					console.log(tileCoord);
-//					console.log("tileCoord ***");
-//					console.log("funcOnClicDownMove BEGIN");
-//					
-//					
-//					console.log("coordList.indexOf(tileCoord) = " + coordList.indexOf(tileCoord));
-//			
-//					if (coordList.indexOf(tileCoord)==-1) 
-//					{ 
-//						coordList.push(tileCoord);
-//					}
-//
-//					console.log("funcOnClicDownMove END");
-//					console.log("coordList ***");
-//					console.log(coordList);
-//					console.log("coordList ***");
-//					console.log("tileCoord ***");
-//					console.log(tileCoord);
-//					console.log("tileCoord ***");
-//					console.log("funcOnClicDownMove END");
-//				};
-				
-				console.log("HOY");
 				
 				input.mouse_action(function(coords) 
 					{
@@ -276,7 +240,7 @@ require(
 				
 				input.mouse_up(function(coords) 
 						{
-							MapTileItem.updateTile(mapLayers, coords);
+							MapTileItem.updateTile(mapLayers, coords, beginTile, currentTile);
 							beginTile = null;
 							currentTile = null;
 						});

@@ -543,7 +543,7 @@ function(EffectLoader, Emitter, utils) {
         }
       }
       if (mouseUsed && applyInteractions) {
-        if (i >= focusTilePosXBegin && i <= focusTilePosXEnd && j >= focusTilePosYBegin && j <= focusTilePosYEnd) {
+        if ( ((i >= focusTilePosXBegin && i <= focusTilePosXEnd) || (i <= focusTilePosXBegin && i >= focusTilePosXEnd)) && ((j >= focusTilePosYBegin && j <= focusTilePosYEnd) || (j <= focusTilePosYBegin && j >= focusTilePosYEnd))) {
           // Apply mouse over tile coloring
           _drawHorizontalColorOverlay(xpos, ypos, ('(255, 255, 120, 0.7)'), k - 1, resizedTileHeight);
         }
