@@ -6,20 +6,15 @@
 
 <body>
 
-	<nav th:replace="fragments/pageStructure :: nav"></nav>
 
-	<section class="pageWithoutNav">
-
-		<header th:replace="fragments/pageStructure :: header"></header>
+		<header th:replace="fragments/pageStructure :: header">
+		</header>
 
 		<section class="pageContent">
 			<h1>Accueil</h1>
 			<p>Bienvenu sur la page d'accueil</p>
 		</section>
-
+	
 		<footer th:replace="fragments/pageStructure :: footer"></footer>
-
-
-	</section>
 </body>
 </html>
