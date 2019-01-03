@@ -5,23 +5,17 @@
 <head th:replace="fragments/pageStructure :: head"></head>
 <meta charset="ISO-8859-1" />
 
+<link rel="stylesheet" th:href="@{/css/map.css}" />
+
+
+
 <body>
-	<nav th:replace="fragments/pageStructure :: nav"></nav>
-
-	<section class="pageWithoutNav">
-
 		<header th:replace="fragments/pageStructure :: header"></header>
 
-		<!-- //TO SPECIALIZE -->
-		<section class="pageContent">
-			<h1>Editeur de carte</h1>
-			<p>Bienvenu sur l'éditeur de carte</p>
+		<section class="pageContent" id="pageContentMapEditor">
 		</section>
-		<!-- //TO SPECIALIZE -->
 
 		<footer th:replace="fragments/pageStructure :: footer"></footer>
-		
-	</section>
 
 </body>
 
