@@ -4,7 +4,7 @@
 
 
 body {
-	background-image: url("../img/parchemin.jpg");
+	background-image: url("../img/backgrounds/parchemin_main.jpg");
 	background-attachment: fixed; /* Le fond restera fixe */
 	background-repeat: no-repeat;
 	display: flex;
@@ -41,6 +41,21 @@ section {
     flex: 5;
 }
 
+.loginBox
+{
+	background-image: url("../img/backgrounds/parchemin_box_with_borders.png");
+	background-size:     cover;                      
+    background-repeat:   no-repeat;
+    background-position: center center;
+	padding: 0px 30px 15px 30px;
+}
+
+
+
+
+/**********************
+	Navigation
+**********************/
 
 nav{
   width: 100%;
@@ -48,24 +63,44 @@ nav{
   nav ul{
     list-style: none;
     position: relative;
-    margin-right: 100px;
     display: inline-table;
+        padding: 0px 0px;
   }
-    nav ul li{
+  
+      nav > ul > li{
       float: left;
-      -webkit-transition: all .2s ease-in-out;
-      -moz-transition: all .2s ease-in-out;
-      transition: all .2s ease-in-out;
+      background-image: url("../img/backgrounds/menu/parchemin_header.png");
+	background-size:     cover;                      
+    background-repeat:   no-repeat;
+    background-position: center center;
     }
-
-    nav ul li:hover{background: rgba(0,0,0,.15);}
+    nav > ul > li:hover{
+      float: left;
+      background-image: url("../img/backgrounds/menu/parchemin_header_hover.png");
+    }
+    
+             nav ul li ul li {
+   	 background-image: url("../img/backgrounds/menu/parchemin_middle.png");
+	background-size:     cover;                      
+    background-repeat:   no-repeat;
+    background-position: center center;
+          }	
+          nav ul li ul li:hover {
+   	 background-image: url("../img/backgrounds/menu/parchemin_middle_hover.png");
+          }	 
+    
+     nav ul li ul li:last-child {
+   	 background-image: url("../img/backgrounds/menu/parchemin_footer.png");
+	background-size:     cover;                      
+    background-repeat:   no-repeat;
+    background-position: center center;
+          }	
+      nav ul li ul li:last-child:hover {
+   	 background-image: url("../img/backgrounds/menu/parchemin_footer_hover.png");
+          }	 
+    
     nav ul li:hover > ul{display: block;}
-    nav ul li{
-      float: left;
-      -webkit-transition: all .2s ease-in-out;
-      -moz-transition: all .2s ease-in-out;
-      transition: all .2s ease-in-out;
-    }
+        
       nav ul li a{
         display: block; 
         padding: 30px 20px;
@@ -74,22 +109,30 @@ nav{
         letter-spacing: 1px;
         text-decoration: none;
         text-transform: uppercase;
+        width: 200px;
+        text-align: center;
       }
+      
+      
       nav ul ul{
         display: none;
-        background: #fff;
         position: absolute; 
         top: 100%;
-        box-shadow: -3px 3px 10px -2px rgba(0,0,0,.1);
-        border: 1px solid rgba(0,0,0,.1);
       }
-        nav ul ul li{float: none; position: relative;}
-          nav ul ul li a {
-            padding: 15px 30px; 
+      
+     nav ul ul li
+       {float: none; position: relative;
+       }
+      
+     nav ul ul li a {
             border-bottom: 1px solid rgba(0,0,0,.05);
           }
-          nav ul ul ul {
+     nav ul ul ul {
             position: absolute; 
             left: 100%; 
             top:0;
           }	
+          
+/**********************
+	Navigation
+**********************/
