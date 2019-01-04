@@ -1,61 +1,36 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
-	
-<head th:replace="fragments/pageStructure :: head"></head>
-<meta charset="ISO-8859-1" />
 
 
+<section id="mapFragment" th:fragment="map">
 
-<section id="mapContainer" th:fragment="map">
 
 	<div id="mapView"></div>
 	
-
-	<div id="mapToolBar"> 
-	<button type="button" class="mapToolBarItem" id="mapToolBarItemGroundType">Type de terrain</button>
-	<button type="button" class="mapToolBarItem" id="mapToolBarItemBuildings">Bâtiments</button>
-	<button type="button" class="mapToolBarItem" id="mapToolBarItemTroops">Troupes</button>
-	<button type="button" class="mapToolBarItem" id="mapToolBarItemResources">Ressources</button>
-	</div>
 	
-	<div id="mapToolBarSubMenu"> </div>
-	
-		<script id="mapToolBarSubMenuItemButtonTemplate" type="text/template">
-	<button type='button' class='mapToolBarSubMenuItem' id='mapToolBarSubMenuItem_{{name}}' style='--backgroundImageUrl:url({{imgPath}});'>{{name}}</button>
-	</script>
-	
-	
-	<div id="mapToolBarSubMenu_Buildings"  style='display:none'>  
-		<button type="button" class="mapToolBarSubMenuItem" id="mapToolBarSubMenuItem_Castle">Château</button>
-	</div>
-	
-	<div id="mapToolBarSubMenu_Troops"  style='display:none'>  
-		<button type="button" class="mapToolBarSubMenuItem" id="mapToolBarSubMenuItem_Dragon">Dragon</button>
-		<button type="button" class="mapToolBarSubMenuItem" id="mapToolBarSubMenuItem_Unicorn">Licorne</button>
-	</div>
-	
-	<div id="mapToolBarSubMenu_Resources"  style='display:none'>  
-		<button type="button" class="mapToolBarSubMenuItem" id="mapToolBarSubMenuItem_Flours">Fleurs</button>
-	</div>
-		  
 	<!-- Initialisation variables from html/server to javascript -->
 	<script th:inline="javascript">
-    	var map = /*[[${map}]]*/ "map";  
-    	var unitConfigurations = /*[[${unitConfigurations}]]*/ "unitConfigurations"; 
-    	var unitConfigurationPropertyList = /*[[${unitConfigurationPropertyList}]]*/ "unitConfigurationPropertyList"; 
-    	var buildingConfigurationPropertyList = /*[[${buildingConfigurationPropertyList}]]*/ "buildingConfigurationPropertyList"; 
-    	var buildingConfigurations = /*[[${buildingConfigurations}]]*/ "buildingConfigurations"; 
-    	var resourceConfigurationPropertyList = /*[[${resourceConfigurationPropertyList}]]*/ "resourceConfigurationPropertyList"; 
-    	var resourceConfigurations = /*[[${resourceConfigurations}]]*/ "resourceConfigurations"; 
-    	var groundConfigurationPropertyList = /*[[${groundConfigurationPropertyList}]]*/ "groundConfigurationPropertyList"; 
-    	var groundConfigurations = /*[[${groundConfigurations}]]*/ "groundConfigurations"; 
-    </script>
+		var map = /*[[${map}]]*/"map";
+		
+			var unitConfigurations = /*[[${unitConfigurations}]]*/"unitConfigurations";
+			var unitConfigurationPropertyList = /*[[${unitConfigurationPropertyList}]]*/"unitConfigurationPropertyList";
+			var buildingConfigurationPropertyList = /*[[${buildingConfigurationPropertyList}]]*/"buildingConfigurationPropertyList";
+			var buildingConfigurations = /*[[${buildingConfigurations}]]*/"buildingConfigurations";
+			var resourceConfigurationPropertyList = /*[[${resourceConfigurationPropertyList}]]*/"resourceConfigurationPropertyList";
+			var resourceConfigurations = /*[[${resourceConfigurations}]]*/"resourceConfigurations";
+			var groundConfigurationPropertyList = /*[[${groundConfigurationPropertyList}]]*/"groundConfigurationPropertyList";
+			var groundConfigurations = /*[[${groundConfigurations}]]*/"groundConfigurations";
 
-<!-- Load  scripts and librairies -->
+	</script>
 
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 
-<script th:attr="data-main=@{/js/libs/requirejs/config}" th:src="@{/js/libs/requirejs/require.js}"></script>
+	<!-- Load  scripts and librairies -->
+
+	<script type="text/javascript"
+		src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+ 
+<!-- 	<script th:attr="data-main=@{/js/libs/requirejs/config}"
+		th:src="@{/js/libs/requirejs/require.js}"></script>  -->
 
 </section>

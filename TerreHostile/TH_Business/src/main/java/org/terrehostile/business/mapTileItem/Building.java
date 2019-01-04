@@ -32,6 +32,9 @@ public class Building {
 	@Column(name = "y_coord", nullable = false)
 	private int yCoord;
 
+	@Column(name = "user_id")
+	private Integer user_id;
+
 	@Column(name = "type", nullable = false)
 	private int type;
 
@@ -92,10 +95,18 @@ public class Building {
 		this.state = state;
 	}
 
+	public Integer getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(Integer user_id) {
+		this.user_id = user_id;
+	}
+
 	@Override
 	public String toString() {
-		return "Building [id=" + id + ", xCoord=" + xCoord + ", yCoord=" + yCoord + ", type=" + type + ", health="
-				+ health + ", state=" + state + "]";
+		return "Building [id=" + id + ", xCoord=" + xCoord + ", yCoord=" + yCoord + ", user_id=" + user_id + ", type="
+				+ type + ", health=" + health + ", state=" + state + "]";
 	}
 
 }

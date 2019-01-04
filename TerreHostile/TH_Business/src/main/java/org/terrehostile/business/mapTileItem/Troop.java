@@ -39,6 +39,9 @@ public class Troop implements Serializable {
 	@Column(name = "y_coord", nullable = false)
 	private int yCoord;
 
+	@Column(name = "user_id")
+	private Integer user_id;
+
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "troop_id", referencedColumnName = "id")
 	private List<Unit> units;
@@ -80,9 +83,18 @@ public class Troop implements Serializable {
 		this.units = units;
 	}
 
+	public Integer getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(Integer user_id) {
+		this.user_id = user_id;
+	}
+
 	@Override
 	public String toString() {
-		return "Troop [id=" + id + ", xCoord=" + xCoord + ", yCoord=" + yCoord + ", units=" + units + "]";
+		return "Troop [id=" + id + ", xCoord=" + xCoord + ", yCoord=" + yCoord + ", user_id=" + user_id + ", units="
+				+ units + "]";
 	}
 
 }

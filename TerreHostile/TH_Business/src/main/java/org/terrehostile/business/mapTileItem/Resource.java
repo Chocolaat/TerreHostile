@@ -29,6 +29,9 @@ public class Resource {
 	@Column(name = "y_coord", nullable = false)
 	private int yCoord;
 
+	@Column(name = "user_id")
+	private Integer user_id;
+
 	@Column(name = "type", nullable = false)
 	private int type;
 
@@ -78,10 +81,18 @@ public class Resource {
 		this.quantity = quantity;
 	}
 
+	public Integer getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(Integer user_id) {
+		this.user_id = user_id;
+	}
+
 	@Override
 	public String toString() {
-		return "Resource [id=" + id + ", xCoord=" + xCoord + ", yCoord=" + yCoord + ", type=" + type + ", quantity="
-				+ quantity + "]";
+		return "Resource [id=" + id + ", xCoord=" + xCoord + ", yCoord=" + yCoord + ", user_id=" + user_id + ", type="
+				+ type + ", quantity=" + quantity + "]";
 	}
 
 }

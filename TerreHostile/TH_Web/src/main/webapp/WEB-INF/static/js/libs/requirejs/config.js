@@ -5,4 +5,4 @@ requirejs.config({
         }
 });
 
-requirejs(["map/map"]);
+console.log("toto");

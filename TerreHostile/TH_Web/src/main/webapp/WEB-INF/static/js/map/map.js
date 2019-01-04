@@ -1,10 +1,16 @@
+requirejs.config({
+	baseUrl: "http://localhost:8082/TH_Web/js/",
+        paths: {
+        	mustache: "libs/mustache/mustache-wrap"
+        }
+});
 
 require(
 		[ 'libs/jsiso/canvas/Control', 'libs/jsiso/canvas/Input', 'libs/jsiso/img/load',
 				'libs/jsiso/json/load', 'libs/jsiso/tile/Field',
-				'libs/jsiso/pathfind/pathfind', 'map/mapTileItem'],
+				'libs/jsiso/pathfind/pathfind', 'map/mapEditorMouseEvent', 'map/mapViewMouseEvent'],
 		function(CanvasControl, CanvasInput, imgLoader, jsonLoader, TileField,
-				pathfind, MapTileItem) {
+				pathfind, mapEditorMouseEvent, mapViewMouseEvent) {
 			
 			// -- FPS --------------------------------
 			window.requestAnimFrame = (function() {
@@ -22,68 +28,11 @@ require(
 			var mapLayers = [];
 			var sizeMapToLoad = 70;
 			var moveCountReloadTrigger = 3;
-			var beginTile;
-			var currentTile;
 			
 			map.currentXCoord = map.beginXCoord;
 			map.currentYCoord = map.beginYCoord;
-
-			document.getElementById('mapEditorGetMapByXYAndSize').addEventListener("click", mapEditorGetMapByXYAndSizeButton);
-			document.getElementById('saveJsonViewForm').addEventListener("click", saveJsonView);
 			
 			
-			function saveJsonView()
-			{
-				 $.ajax({
-				        type: "POST",
-				        url: "/TH_Web/admin/mapEditorSaveMap",
-				        data: JSON.stringify(map),
-				        dataType : "json" ,
-			            contentType : "application/json",
-				        success: function (result) {
-				        },
-				        error: function(xhr, textStatus, error){
-				            console.log(xhr.statusText);
-				            console.log(textStatus);
-				            console.log(error);
-				        }
-				    });
-			}
-
-			
-			function mapEditorGetMapByXYAndSizeButton()
-			{		
-				
-				var parameters = { 
-						beginX : map.currentXCoord,
-						beginY : map.currentYCoord,
-						size : sizeMapToLoad
-					}
-				
-				 $.ajax({
-				        type: "GET",
-				        url: "/TH_Web/admin/mapEditorGetMapByXYAndSize",
-				        data: parameters,
-				        success: function (result) {
-				        	
-				        	map = result;
-							mapLayers[0].setLayout(result.ground);
-							mapLayers[0].setHeightLayout(result.height);
-							
-							map.currentXCoord = map.beginXCoord;
-							map.currentYCoord = map.beginYCoord;
-																					
-							for (var i = 0; i < 0 + mapLayers.length; i++) {
-								centerView(mapLayers[i]);
-							};
-				        },
-				        error: function (result) {
-				        	console.log("mapEditorGetMapByXYAndSize FAIL");
-				        	console.log(result);
-				        }
-				    });
-			}
-
 
 			function updateCurrentCenterXY (x, y)
 			{ 
@@ -99,7 +48,8 @@ require(
 
 			
 			function launch() {
-				
+
+
 				jsonLoader([JSON.stringify(groundConfigurationPropertyList), JSON.stringify(buildingConfigurationPropertyList), JSON.stringify(resourceConfigurationPropertyList), JSON.stringify(unitConfigurationPropertyList)])
 						.then(
 								function(jsonResponse) 
@@ -226,39 +176,17 @@ require(
 		        var context = CanvasControl.create("mapViewCanvas", 4000, 2000, {}, "mapView");
 		        		        
 				var input = new CanvasInput(document, CanvasControl());
-
 				
-				input.mouse_action(function(coords) 
+				if (mapLoadedFrom == "mapView")
 					{
-						
-					
-					beginTile =  mapLayers[0].getXYCoords(coords.x,
-							coords.y);
-						
-						
-					});
+						mapViewMouseEvent.setInputEvents(input, mapLayers);
+					}
+				else if (mapLoadedFrom == "mapEditor")
+				{
+					mapEditorMouseEvent.setInputEvents(input, mapLayers);
+				}
 				
-				input.mouse_up(function(coords) 
-						{
-							MapTileItem.updateTile(mapLayers, coords, beginTile, currentTile);
-							beginTile = null;
-							currentTile = null;
-						});
 				
-							
-				input.mouse_move(function(coords) {			
-					mapLayers.map(function(layer) {
-						currentTile =  mapLayers[0].getXYCoords(coords.x,
-								coords.y);
-						
-						layer.applyFocus(currentTile.x, currentTile.y); // Apply mouse rollover via mouse location X & Y
-						
-						if(beginTile && currentTile)
-							{
-								layer.applyLargeFocus(beginTile.x, currentTile.x, beginTile.y, currentTile.y); // Apply mouse rollover via mouse location X & Y
-							}
-					});
-				});
 								
 
 		        input.keyboard(function(pressed, keydown, event) {
