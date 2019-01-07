@@ -135,7 +135,10 @@ define(['mustache'], function(Mustache) {
 	
 	
 	
-
+	
+	//TO REFACTOR : when mapView, elements are not defined.
+	try {	
+		
 	document.getElementById('mapEditorGetMapByXYAndSize').addEventListener("click", mapEditorGetMapByXYAndSizeButton);
 	document.getElementById('saveJsonViewForm').addEventListener("click", saveJsonView);
 	
@@ -144,6 +147,13 @@ define(['mustache'], function(Mustache) {
 	document.getElementById('mapToolBarItemResources').addEventListener('click', function() {showMapToolBarSubMenu(resourceConfigurations, 2);});
 	document.getElementById('mapToolBarItemTroops').addEventListener('click', function() {showMapToolBarSubMenu(unitConfigurations, 3);});
 		
+		}
+		catch(err) {
+			// do nothing
+		}
+	
+
+
 	
 	
 	function saveJsonView()
@@ -164,39 +174,6 @@ define(['mustache'], function(Mustache) {
 		    });
 	}
 
-	
-	function mapEditorGetMapByXYAndSizeButton()
-	{		
-		
-		var parameters = { 
-				beginX : map.currentXCoord,
-				beginY : map.currentYCoord,
-				size : sizeMapToLoad
-			}
-		
-		 $.ajax({
-		        type: "GET",
-		        url: "/TH_Web/admin/mapEditorGetMapByXYAndSize",
-		        data: parameters,
-		        success: function (result) {
-		        	
-		        	map = result;
-					mapLayers[0].setLayout(result.ground);
-					mapLayers[0].setHeightLayout(result.height);
-					
-					map.currentXCoord = map.beginXCoord;
-					map.currentYCoord = map.beginYCoord;
-																			
-					for (var i = 0; i < 0 + mapLayers.length; i++) {
-						centerView(mapLayers[i]);
-					};
-		        },
-		        error: function (result) {
-		        	console.log("mapEditorGetMapByXYAndSize FAIL");
-		        	console.log(result);
-		        }
-		    });
-	}
 	
 
 	 

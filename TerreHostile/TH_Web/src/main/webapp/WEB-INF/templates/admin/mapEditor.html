@@ -47,9 +47,6 @@
 			
 		</script>
 
-		<script th:attr="data-main=@{/js/map/mapEditor}"
-		th:src="@{/js/libs/requirejs/require.js}"></script>
-	
 	
 	
 	<section id="mapContainer">
@@ -57,6 +54,9 @@
 		<section th:replace="fragments/map/mapEditorToolbar :: section"></section>
 	</section>
 
+
+		<script th:attr="data-main=@{/js/map/mapEditor}"
+		th:src="@{/js/libs/requirejs/require.js}"></script>
 	
 	</section>
 	
