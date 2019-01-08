@@ -65,6 +65,10 @@ require(
 				        	map = result;
 							mapLayers[0].setLayout(result.ground);
 							mapLayers[0].setHeightLayout(result.height);
+
+							mapLayers[1].setLayout(result.buildings);
+							mapLayers[2].setLayout(result.resources);
+							mapLayers[3].setLayout(result.troops);
 							
 							map.currentXCoord = map.beginXCoord;
 							map.currentYCoord = map.beginYCoord;
