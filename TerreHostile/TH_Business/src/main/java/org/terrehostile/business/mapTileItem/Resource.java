@@ -17,8 +17,8 @@ public class Resource {
 	public final static int TYPE_FISH = 2;
 	public final static int TYPE_GOLD = 3;
 
-	@Column(name = "id", nullable = false)
-	private int id;
+	@Column(name = "resourceId", nullable = false)
+	private int resourceId;
 
 	/** Coordinates */
 	@Id
@@ -29,8 +29,8 @@ public class Resource {
 	@Column(name = "y_coord", nullable = false)
 	private int yCoord;
 
-	@Column(name = "user_id")
-	private Integer user_id;
+	@Column(name = "userId")
+	private Integer userId;
 
 	@Column(name = "type", nullable = false)
 	private int type;
@@ -41,12 +41,12 @@ public class Resource {
 	public Resource() {
 	}
 
-	public int getId() {
-		return id;
+	public int getResourceId() {
+		return resourceId;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setResourceId(int resourceId) {
+		this.resourceId = resourceId;
 	}
 
 	public int getxCoord() {
@@ -81,18 +81,18 @@ public class Resource {
 		this.quantity = quantity;
 	}
 
-	public Integer getUser_id() {
-		return user_id;
+	public Integer getUserId() {
+		return userId;
 	}
 
-	public void setUser_id(Integer user_id) {
-		this.user_id = user_id;
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 
 	@Override
 	public String toString() {
-		return "Resource [id=" + id + ", xCoord=" + xCoord + ", yCoord=" + yCoord + ", user_id=" + user_id + ", type="
-				+ type + ", quantity=" + quantity + "]";
+		return "Resource [resourceId=" + resourceId + ", xCoord=" + xCoord + ", yCoord=" + yCoord + ", userId=" + userId
+				+ ", type=" + type + ", quantity=" + quantity + "]";
 	}
 
 }

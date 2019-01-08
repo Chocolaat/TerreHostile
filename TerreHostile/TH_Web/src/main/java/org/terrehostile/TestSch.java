@@ -2,8 +2,7 @@ package org.terrehostile;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.terrehostile.business.map.Tile;
-import org.terrehostile.business.mapTileItem.Building;
+import org.terrehostile.business.map.MapView;
 import org.terrehostile.game.configuration.UnitConfigurationPropertyList;
 import org.terrehostile.repository.TileRepository;
 import org.terrehostile.services.MapViewService;
@@ -23,6 +22,10 @@ public class TestSch {
 	UnitConfigurationPropertyList unitsConfiguration;
 
 	public void launch() {
+
+		MapView m = mapViewService.getMapByXYAndSize(500, 500, 20, 20);
+
+		System.out.println(m.toString());
 
 //		System.out.println("----");
 //		System.out.println("uc = " + uc.toString());
@@ -90,33 +93,33 @@ public class TestSch {
 //
 //		System.out.println("tsecond save = " + t.toString());
 
-		Tile tile542;
-		Tile tile42;
-
-		tile542 = tileRepository.findByXCoordAndYCoord(542, 542);
-		System.out.println("tile542 = " + tile542.toString());
-
-		tile42 = tileRepository.findByXCoordAndYCoord(42, 42);
-		System.out.println("tile42 = " + tile42.toString());
-
-		System.out.println("********");
-
-		Building b = tile542.getBuilding();
-
-		b.setxCoord(42);
-		b.setyCoord(42);
-
-		tileItemService.save(b);
-		tile542.setBuilding(null);
-		tileItemService.save(tile542);
-
-		System.out.println("********");
-
-		tile542 = tileRepository.findByXCoordAndYCoord(542, 542);
-		System.out.println("tile542 = " + tile542.toString());
-
-		tile42 = tileRepository.findByXCoordAndYCoord(42, 42);
-		System.out.println("tile42 = " + tile42.toString());
+//		Tile tile542;
+//		Tile tile42;
+//
+//		Tile tile542 = tileRepository.findByXCoordAndYCoord(542, 542);
+//		System.out.println("tile542 = " + tile542.toString());
+//
+//		tile42 = tileRepository.findByXCoordAndYCoord(42, 42);
+//		System.out.println("tile42 = " + tile42.toString());
+//
+//		System.out.println("********");
+//
+//		Building b = tile542.getBuilding();
+//
+//		b.setxCoord(42);
+//		b.setyCoord(42);
+//
+//		tileItemService.save(b);
+//		tile542.setBuilding(null);
+//		tileItemService.save(tile542);
+//
+//		System.out.println("********");
+//
+//		tile542 = tileRepository.findByXCoordAndYCoord(542, 542);
+//		System.out.println("tile542 = " + tile542.toString());
+//
+//		tile42 = tileRepository.findByXCoordAndYCoord(42, 42);
+//		System.out.println("tile42 = " + tile42.toString());
 
 //		tile.setBuilding(null);
 //		tileRepository.save(tile);

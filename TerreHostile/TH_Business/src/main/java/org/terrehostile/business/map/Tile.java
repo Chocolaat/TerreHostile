@@ -3,7 +3,6 @@ package org.terrehostile.business.map;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
@@ -38,19 +37,19 @@ public class Tile {
 	private int height;
 
 	/** Resource */
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumns({ @JoinColumn(name = "x_coord", referencedColumnName = "x_coord"),
 			@JoinColumn(name = "y_coord", referencedColumnName = "y_coord") })
 	private Resource resource;
 
 	/** Buildings */
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumns({ @JoinColumn(name = "x_coord", referencedColumnName = "x_coord"),
 			@JoinColumn(name = "y_coord", referencedColumnName = "y_coord") })
 	private Building building;
 
 	/** Troops */
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumns({ @JoinColumn(name = "x_coord", referencedColumnName = "x_coord"),
 			@JoinColumn(name = "y_coord", referencedColumnName = "y_coord") })
 	private Troop troops;
@@ -67,6 +66,13 @@ public class Tile {
 		this.resource = resource;
 		this.building = building;
 		this.troops = troops;
+	}
+
+	public Tile(int xCoord, int yCoord, GroundType background, int height) {
+		this.xCoord = xCoord;
+		this.yCoord = yCoord;
+		this.background = background;
+		this.height = height;
 	}
 
 	public int getxCoord() {

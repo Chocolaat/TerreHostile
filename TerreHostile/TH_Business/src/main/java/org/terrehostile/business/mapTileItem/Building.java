@@ -20,8 +20,8 @@ public class Building {
 	public final static int STATE_UNDER_CONSTRUCTION = 2;
 	public final static int STATE_BUILT = 3;
 
-	@Column(name = "id", nullable = false)
-	private int id;
+	@Column(name = "buildingId", nullable = false)
+	private int buildingId;
 
 	/** Coordinates */
 	@Id
@@ -32,8 +32,8 @@ public class Building {
 	@Column(name = "y_coord", nullable = false)
 	private int yCoord;
 
-	@Column(name = "user_id")
-	private Integer user_id;
+	@Column(name = "userId")
+	private Integer userId;
 
 	@Column(name = "type", nullable = false)
 	private int type;
@@ -45,14 +45,6 @@ public class Building {
 	private int state;
 
 	public Building() {
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public int getxCoord() {
@@ -95,18 +87,26 @@ public class Building {
 		this.state = state;
 	}
 
-	public Integer getUser_id() {
-		return user_id;
+	public int getBuildingId() {
+		return buildingId;
 	}
 
-	public void setUser_id(Integer user_id) {
-		this.user_id = user_id;
+	public void setBuildingId(int buildingId) {
+		this.buildingId = buildingId;
+	}
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 
 	@Override
 	public String toString() {
-		return "Building [id=" + id + ", xCoord=" + xCoord + ", yCoord=" + yCoord + ", user_id=" + user_id + ", type="
-				+ type + ", health=" + health + ", state=" + state + "]";
+		return "Building [buildingId=" + buildingId + ", xCoord=" + xCoord + ", yCoord=" + yCoord + ", userId=" + userId
+				+ ", type=" + type + ", health=" + health + ", state=" + state + "]";
 	}
 
 }

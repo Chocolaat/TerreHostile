@@ -12,18 +12,22 @@ import javax.persistence.Table;
 public class Role {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id")
-	private int id;
+	@Column(name = "roleId")
+	private int roleId;
 
 	@Column(name = "role")
 	private String role;
 
-	public int getId() {
-		return id;
+	public Role() {
+
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public int getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(int roleId) {
+		this.roleId = roleId;
 	}
 
 	public String getRole() {
@@ -32,6 +36,11 @@ public class Role {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	@Override
+	public String toString() {
+		return "Role [roleId=" + roleId + ", role=" + role + "]";
 	}
 
 }

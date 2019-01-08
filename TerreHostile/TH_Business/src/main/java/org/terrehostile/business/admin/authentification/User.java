@@ -29,8 +29,8 @@ public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id")
-	private int id;
+	@Column(name = "userId")
+	private int userId;
 	@Column(name = "email")
 	@Email(message = "*Please provide a valid Email")
 	@NotEmpty(message = "*Please provide an email")
@@ -50,8 +50,8 @@ public class User {
 	private int active;
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "user_role", joinColumns = {
-			@JoinColumn(name = "user_id", referencedColumnName = "id") }, inverseJoinColumns = {
-					@JoinColumn(name = "role_id", referencedColumnName = "id") })
+			@JoinColumn(name = "userId", referencedColumnName = "userId") }, inverseJoinColumns = {
+					@JoinColumn(name = "roleId", referencedColumnName = "roleId") })
 	private Set<Role> roles;
 
 	@Column(name = "startXCoord", nullable = false)
@@ -61,23 +61,51 @@ public class User {
 	private int startYCoord;
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "user_id", referencedColumnName = "id")
+	@JoinColumn(name = "userId", referencedColumnName = "userId")
 	private List<Building> buildings;
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "user_id", referencedColumnName = "id")
+	@JoinColumn(name = "userId", referencedColumnName = "userId")
 	private List<Troop> troops;
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "user_id", referencedColumnName = "id")
+	@JoinColumn(name = "userId", referencedColumnName = "userId")
 	private List<Resource> resources;
 
-	public int getId() {
-		return id;
+	public User() {
+
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	public List<Building> getBuildings() {
+		return buildings;
+	}
+
+	public void setBuildings(List<Building> buildings) {
+		this.buildings = buildings;
+	}
+
+	public List<Troop> getTroops() {
+		return troops;
+	}
+
+	public void setTroops(List<Troop> troops) {
+		this.troops = troops;
+	}
+
+	public List<Resource> getResources() {
+		return resources;
+	}
+
+	public void setResources(List<Resource> resources) {
+		this.resources = resources;
 	}
 
 	public String getPassword() {
@@ -146,9 +174,10 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", email=" + email + ", password=" + password + ", name=" + name + ", lastName="
-				+ lastName + ", active=" + active + ", roles=" + roles + ", startXCoord=" + startXCoord
-				+ ", startYCoord=" + startYCoord + "]";
+		return "User [userId=" + userId + ", email=" + email + ", password=" + password + ", name=" + name
+				+ ", lastName=" + lastName + ", active=" + active + ", roles=" + roles + ", startXCoord=" + startXCoord
+				+ ", startYCoord=" + startYCoord + ", buildings=" + buildings + ", troops=" + troops + ", resources="
+				+ resources + "]";
 	}
 
 }

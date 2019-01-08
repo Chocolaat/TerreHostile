@@ -45,6 +45,8 @@ require(
 					}
 			}	
 			
+			
+			//DUPLICATED  mapEditorMouseEvent.js
 			function mapEditorGetMapByXYAndSizeButton()
 			{		
 				
@@ -209,7 +211,7 @@ require(
 		        var context = CanvasControl.create("mapViewCanvas", 4000, 2000, {}, "mapView");
 		        		        
 				var input = new CanvasInput(document, CanvasControl());
-								
+												
 				if (mapLoadedFrom == "mapView")
 					{
 						mapViewMouseEvent.setInputEvents(input, mapLayers);

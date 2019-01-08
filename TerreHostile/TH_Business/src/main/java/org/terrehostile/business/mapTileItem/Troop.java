@@ -27,8 +27,8 @@ public class Troop implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Column(name = "id", nullable = false)
-	private String id;
+	@Column(name = "troopId", nullable = false)
+	private String troopId;
 
 	/** Coordinates */
 	@Id
@@ -39,24 +39,16 @@ public class Troop implements Serializable {
 	@Column(name = "y_coord", nullable = false)
 	private int yCoord;
 
-	@Column(name = "user_id")
-	private Integer user_id;
+	@Column(name = "userId")
+	private Integer userId;
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "troop_id", referencedColumnName = "id")
+	@JoinColumn(name = "troopId", referencedColumnName = "troopId")
 	private List<Unit> units;
 
 	public Troop() {
 		units = new ArrayList<>();
-		id = UUID.randomUUID().toString();
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
+		troopId = UUID.randomUUID().toString();
 	}
 
 	public int getxCoord() {
@@ -83,18 +75,30 @@ public class Troop implements Serializable {
 		this.units = units;
 	}
 
-	public Integer getUser_id() {
-		return user_id;
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
-	public void setUser_id(Integer user_id) {
-		this.user_id = user_id;
+	public String getTroopId() {
+		return troopId;
+	}
+
+	public void setTroopId(String troopId) {
+		this.troopId = troopId;
+	}
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 
 	@Override
 	public String toString() {
-		return "Troop [id=" + id + ", xCoord=" + xCoord + ", yCoord=" + yCoord + ", user_id=" + user_id + ", units="
-				+ units + "]";
+		return "Troop [troopId=" + troopId + ", xCoord=" + xCoord + ", yCoord=" + yCoord + ", userId=" + userId
+				+ ", units=" + units + "]";
 	}
 
 }

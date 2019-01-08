@@ -14,9 +14,9 @@ public class Unit {
 
 	@Id
 	@GeneratedValue
-	private int id;
+	private int unitId;
 
-	private String troop_id;
+	private String troopId;
 
 	private int unitType;
 	private int unitNumber;
@@ -26,20 +26,20 @@ public class Unit {
 	public Unit() {
 	}
 
-	public int getId() {
-		return id;
+	public int getUnitId() {
+		return unitId;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setUnitId(int unitId) {
+		this.unitId = unitId;
 	}
 
-	public String getTroop_id() {
-		return troop_id;
+	public String getTroopId() {
+		return troopId;
 	}
 
-	public void setTroop_id(String troop_id) {
-		this.troop_id = troop_id;
+	public void setTroopId(String troopId) {
+		this.troopId = troopId;
 	}
 
 	public int getUnitType() {
@@ -76,8 +76,8 @@ public class Unit {
 
 	@Override
 	public String toString() {
-		return "Unit [id=" + id + ", troop_id=" + troop_id + ", unitType=" + unitType + ", unitNumber=" + unitNumber
-				+ ", health=" + health + ", experience=" + experience + "]";
+		return "Unit [unitId=" + unitId + ", troopId=" + troopId + ", unitType=" + unitType + ", unitNumber="
+				+ unitNumber + ", health=" + health + ", experience=" + experience + "]";
 	}
 
 }

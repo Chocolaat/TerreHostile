@@ -44,7 +44,6 @@
 		<script th:inline="javascript">
 			<!-- Initialisation constant variables -->
 			var mapLoadedFrom = "mapEditor";
-			
 		</script>
 
 	
@@ -53,7 +52,6 @@
 		<section th:replace="fragments/map/map :: section"></section>
 		<section th:replace="fragments/map/mapEditorToolbar :: section"></section>
 	</section>
-
 
 		<script th:attr="data-main=@{/js/map/mapEditor}"
 		th:src="@{/js/libs/requirejs/require.js}"></script>

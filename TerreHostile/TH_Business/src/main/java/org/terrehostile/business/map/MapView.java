@@ -42,7 +42,8 @@ public class MapView {
 		this.ySize = ySize;
 	}
 
-	public MapView(int beginXCoord, int beginYCoord, int xSize, int ySize, List<Tile> tileList) {
+	public MapView(int beginXCoord, int beginYCoord, int xSize, int ySize, List<Tile> tileList,
+			List<Resource> resourceList, List<Building> buildingList, List<Troop> troopList) {
 		this.beginXCoord = beginXCoord;
 		this.beginYCoord = beginYCoord;
 		this.xSize = xSize;
@@ -65,9 +66,40 @@ public class MapView {
 
 			ground[newX][newY] = currentTile.getBackground().ordinal();
 			height[newX][newY] = currentTile.getHeight();
-			resources[newX][newY] = currentTile.getResource();
-			buildings[newX][newY] = currentTile.getBuilding();
-			troops[newX][newY] = currentTile.getTroops();
+		}
+
+		for (Resource currentResource : resourceList) {
+
+			int newX = currentResource.getxCoord() - beginXCoord;
+			int newY = currentResource.getyCoord() - beginYCoord;
+			newX = (newX < 0) ? newX + Constants.XCOUNT : newX;
+			newY = (newY < 0) ? newY + Constants.YCOUNT : newY;
+			newX = (newX > Constants.XMAX) ? newX - Constants.XCOUNT : newX;
+			newY = (newY > Constants.YMAX) ? newY - Constants.YCOUNT : newY;
+
+			resources[newX][newY] = currentResource;
+		}
+		for (Building currentBuilding : buildingList) {
+
+			int newX = currentBuilding.getxCoord() - beginXCoord;
+			int newY = currentBuilding.getyCoord() - beginYCoord;
+			newX = (newX < 0) ? newX + Constants.XCOUNT : newX;
+			newY = (newY < 0) ? newY + Constants.YCOUNT : newY;
+			newX = (newX > Constants.XMAX) ? newX - Constants.XCOUNT : newX;
+			newY = (newY > Constants.YMAX) ? newY - Constants.YCOUNT : newY;
+
+			buildings[newX][newY] = currentBuilding;
+		}
+		for (Troop currentTroop : troopList) {
+
+			int newX = currentTroop.getxCoord() - beginXCoord;
+			int newY = currentTroop.getyCoord() - beginYCoord;
+			newX = (newX < 0) ? newX + Constants.XCOUNT : newX;
+			newY = (newY < 0) ? newY + Constants.YCOUNT : newY;
+			newX = (newX > Constants.XMAX) ? newX - Constants.XCOUNT : newX;
+			newY = (newY > Constants.YMAX) ? newY - Constants.YCOUNT : newY;
+
+			troops[newX][newY] = currentTroop;
 		}
 
 	}
