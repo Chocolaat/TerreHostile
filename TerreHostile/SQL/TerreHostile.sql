@@ -1,5 +1,7 @@
  CREATE TABLE mapView (x_coord INT NOT NULL, y_coord INT NOT NULL, background INT, height INT, PRIMARY KEY (x_coord, y_coord));
  
+ REPLACE INTO `role` VALUES (1,'ADMIN');
+ 
  TRUNCATE TABLE mapView;
   DROP TABLE mapView;
  
@@ -27,4 +29,4 @@
  END$$
 DELIMITER ;
 
-CALL createPoints(0, 1000);
+CALL createPoints(0, 5000);

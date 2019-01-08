@@ -59,6 +59,19 @@
 	</section>
 	
 	<footer th:replace="fragments/pageStructure :: footer"></footer>
+	
+	
+		
+						<script>
+		            	$(':input[type="number"]').keydown(function(event) {
+			            	event.stopPropagation();
+			            });
+		            	$(':input[type="number"]').keyup(function(event) {
+			            	event.stopPropagation();
+			            });
+				
+				
+				</script>
 
 </body>
 
