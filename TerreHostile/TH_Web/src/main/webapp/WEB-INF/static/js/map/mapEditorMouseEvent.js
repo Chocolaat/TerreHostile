@@ -47,7 +47,7 @@ define(['mustache'], function(Mustache) {
 			    //Troops
 			  case 3:
 				  newUnit = [{unitType:newTileValue, experience: 0, health:1,unitNumber:1}];
-				  newTile = {xCoord:tile_coordinates.x + map.beginXCoord, yCoord:tile_coordinates.y + map.beginYCoord, units:newUnit};
+				  newTile = {xCoord:tile_coordinates.x + map.beginXCoord, yCoord:tile_coordinates.y + map.beginYCoord, units:newUnit, userId:0};
 			    break;
 			  default:
 					newTile = (newTileValueGlobal != undefined) ? newTileValueGlobal : 1;
