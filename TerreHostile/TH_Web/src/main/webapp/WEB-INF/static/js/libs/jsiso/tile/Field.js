@@ -456,6 +456,8 @@ function(EffectLoader, Emitter, utils) {
 
                       if (Number(graphicValue) >= 0) {
                         // reset stackGraphic
+                        
+                    	  // DISPLAY TILEITEM HERE
 
                         stackGraphic = tileImages[tileImagesDictionary[graphicValue]];
                         ctx.drawImage(stackGraphic, 0, 0, stackGraphic.width, stackGraphic.height, xpos, ypos + ((k - 1) * ((tileHeight - heightOffset - resizedTileHeight) * curZoom)), (tileWidth * curZoom), (stackGraphic.height / (stackGraphic.width / tileWidth) * curZoom));
