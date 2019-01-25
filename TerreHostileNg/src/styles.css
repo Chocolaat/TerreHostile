@@ -1,0 +1,33 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+	background-image: url("/assets/images/backgrounds/parchemin_main.jpg");
+	background-attachment: fixed; /* Le fond restera fixe */
+	background-repeat: no-repeat;
+	display: flex;
+	flex-direction: column;
+}
+
+body, html {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+	box-sizing: border-box;
+}
+
+.header {
+	display: flex;
+}
+
+.pageContent>h1 {
+	color: red;
+}
+
+.pageContent {
+	display: flex;
+	flex-direction: column;
+	flex: 5;
+}

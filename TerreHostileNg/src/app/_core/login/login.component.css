@@ -1,0 +1,14 @@
+.loginBox {
+	background-image:
+		url("/assets/images/backgrounds/parchemin_box_with_borders.png");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+	padding: 0px 30px 15px 30px;
+}
+
+.loginBox Label {
+	font-size: 15;
+	color: red;
+	font-weight: bold;
+	}
