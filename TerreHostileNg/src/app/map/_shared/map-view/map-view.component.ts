@@ -1,6 +1,9 @@
+import { JsIsoJsonComponent } from './../../../_libs/jsiso/json/json.component';
+import { JsIsoImgComponent } from './../../../_libs/jsiso/img/img.component';
+import { JsIsoCanvasInputComponent } from './../../../_libs/jsiso/canvas/canvasInput.component';
+import { JsIsoCanvasControlComponent } from './../../../_libs/jsiso/canvas/canvasControl.component';
+import { AppModule } from './../../../app.module';
 import { Component, OnInit } from '@angular/core';
-import { initDomAdapter } from '@angular/platform-browser/src/browser';
-
 @Component({
   selector: 'app-map-view',
   template: `
@@ -29,38 +32,47 @@ export class MapViewComponent implements OnInit {
     //     };
     // })();
 
-    // Global variables used to display and update map
+    // Global letiables used to display and update map
     const mapLayers = [];
     const sizeMapToLoad = 70;
     const moveCountReloadTrigger = 3;
 
-    const mapStr =  '{"ground":[[0,0,0,3,3,0,0,0,0,0],[2,2,2,2,2,2,2,0,0,0],[2,2,2,2,2,2,2,0,0,0],[2,2,2,2,2,2,2,0,0,0],[0,0,2,2,2,2,1,0,0,0],[0,0,2,2,2,2,2,2,1,0],[0,0,2,2,2,2,2,2,1,0],[0,0,2,2,2,2,2,2,1,0],[0,2,0,2,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0]],"height":[[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0]],"resources":[[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null],[null,null,{"resourceId":0,"xCoord":537,"yCoord":532,"userId":null,"type":1,"quantity":1},null,{"resourceId":0,"xCoord":537,"yCoord":534,"userId":null,"type":1,"quantity":1},null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null]],"buildings":[[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null],[null,null,null,{"buildingId":0,"xCoord":534,"yCoord":533,"userId":null,"type":1,"health":0,"state":0},{"buildingId":0,"xCoord":534,"yCoord":534,"userId":null,"type":1,"health":0,"state":0},null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,{"buildingId":0,"xCoord":536,"yCoord":535,"userId":null,"type":1,"health":0,"state":0},null,null,null,null],[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null]],"troops":[[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,{"troopId":"08d45166-7b77-4f78-a34e-0ba7e3f1321a","xCoord":533,"yCoord":536,"userId":0,"units":[{"unitId":155,"troopId":"08d45166-7b77-4f78-a34e-0ba7e3f1321a","unitType":2,"unitNumber":1,"health":1,"experience":0}]},null,null,null],[null,null,null,{"troopId":"0869de72-1302-4b18-a540-b71e1854ed54","xCoord":534,"yCoord":533,"userId":null,"units":[{"unitId":115,"troopId":"0869de72-1302-4b18-a540-b71e1854ed54","unitType":1,"unitNumber":1,"health":1,"experience":0}]},null,null,{"troopId":"957b0785-f67a-49a1-bfad-9e04ee89b6c4","xCoord":534,"yCoord":536,"userId":0,"units":[{"unitId":156,"troopId":"957b0785-f67a-49a1-bfad-9e04ee89b6c4","unitType":2,"unitNumber":1,"health":1,"experience":0}]},null,null,null],[null,{"troopId":"2a666ccd-c0b5-49de-86c6-5c9efdba19ad","xCoord":535,"yCoord":531,"userId":null,"units":[{"unitId":116,"troopId":"2a666ccd-c0b5-49de-86c6-5c9efdba19ad","unitType":1,"unitNumber":1,"health":1,"experience":0}]},null,{"troopId":"367fac0c-bf25-4b33-9504-c0078d59c0ec","xCoord":535,"yCoord":533,"userId":null,"units":[{"unitId":117,"troopId":"367fac0c-bf25-4b33-9504-c0078d59c0ec","unitType":2,"unitNumber":1,"health":1,"experience":0}]},null,null,null,null,null,null],[null,null,null,{"troopId":"89ce9804-5355-4262-b1be-a29ea189c322","xCoord":536,"yCoord":533,"userId":null,"units":[{"unitId":118,"troopId":"89ce9804-5355-4262-b1be-a29ea189c322","unitType":1,"unitNumber":1,"health":1,"experience":0}]},null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null]],"beginXCoord":530,"beginYCoord":530,"xSize":10,"ySize":10,"currentXCoord":530,"currentYCoord":530}';
+    const mapStr = '{"ground":[[0,0,0,3,3,0,0,0,0,0],[2,2,2,2,2,2,2,0,0,0],[2,2,2,2,2,2,2,0,0,0],[2,2,2,2,2,2,2,0,0,0],[0,0,2,2,2,2,1,0,0,0],[0,0,2,2,2,2,2,2,1,0],[0,0,2,2,2,2,2,2,1,0],[0,0,2,2,2,2,2,2,1,0],[0,2,0,2,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0]],"height":[[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0]],"resources":[[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null],[null,null,{"resourceId":0,"xCoord":537,"yCoord":532,"userId":null,"type":1,"quantity":1},null,{"resourceId":0,"xCoord":537,"yCoord":534,"userId":null,"type":1,"quantity":1},null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null]],"buildings":[[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null],[null,null,null,{"buildingId":0,"xCoord":534,"yCoord":533,"userId":null,"type":1,"health":0,"state":0},{"buildingId":0,"xCoord":534,"yCoord":534,"userId":null,"type":1,"health":0,"state":0},null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,{"buildingId":0,"xCoord":536,"yCoord":535,"userId":null,"type":1,"health":0,"state":0},null,null,null,null],[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null]],"troops":[[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,{"troopId":"08d45166-7b77-4f78-a34e-0ba7e3f1321a","xCoord":533,"yCoord":536,"userId":0,"units":[{"unitId":155,"troopId":"08d45166-7b77-4f78-a34e-0ba7e3f1321a","unitType":2,"unitNumber":1,"health":1,"experience":0}]},null,null,null],[null,null,null,{"troopId":"0869de72-1302-4b18-a540-b71e1854ed54","xCoord":534,"yCoord":533,"userId":null,"units":[{"unitId":115,"troopId":"0869de72-1302-4b18-a540-b71e1854ed54","unitType":1,"unitNumber":1,"health":1,"experience":0}]},null,null,{"troopId":"957b0785-f67a-49a1-bfad-9e04ee89b6c4","xCoord":534,"yCoord":536,"userId":0,"units":[{"unitId":156,"troopId":"957b0785-f67a-49a1-bfad-9e04ee89b6c4","unitType":2,"unitNumber":1,"health":1,"experience":0}]},null,null,null],[null,{"troopId":"2a666ccd-c0b5-49de-86c6-5c9efdba19ad","xCoord":535,"yCoord":531,"userId":null,"units":[{"unitId":116,"troopId":"2a666ccd-c0b5-49de-86c6-5c9efdba19ad","unitType":1,"unitNumber":1,"health":1,"experience":0}]},null,{"troopId":"367fac0c-bf25-4b33-9504-c0078d59c0ec","xCoord":535,"yCoord":533,"userId":null,"units":[{"unitId":117,"troopId":"367fac0c-bf25-4b33-9504-c0078d59c0ec","unitType":2,"unitNumber":1,"health":1,"experience":0}]},null,null,null,null,null,null],[null,null,null,{"troopId":"89ce9804-5355-4262-b1be-a29ea189c322","xCoord":536,"yCoord":533,"userId":null,"units":[{"unitId":118,"troopId":"89ce9804-5355-4262-b1be-a29ea189c322","unitType":1,"unitNumber":1,"health":1,"experience":0}]},null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null]],"beginXCoord":530,"beginYCoord":530,"xSize":10,"ySize":10,"currentXCoord":530,"currentYCoord":530}';
+
+    const groundConfigurationPropertyList = null;
+    const buildingConfigurationPropertyList = null;
+    const resourceConfigurationPropertyList = null;
+    const unitConfigurationPropertyList = null;
+
 
     const map = JSON.parse(mapStr);
 
     map.currentXCoord = map.beginXCoord;
     map.currentYCoord = map.beginYCoord;
 
-
-
     function updateCurrentCenterXY(x, y) {
       map.currentXCoord = x;
       map.currentYCoord = y;
 
-      if (map.currentXCoord <= map.beginXCoord - (10 * moveCountReloadTrigger) || map.currentYCoord <= map.beginYCoord - (10 * moveCountReloadTrigger) || map.currentXCoord >= map.beginXCoord + (10 * moveCountReloadTrigger) || map.currentYCoord >= map.beginYCoord + (10 * moveCountReloadTrigger)) {
+      if (map.currentXCoord <= map.beginXCoord - (10 * moveCountReloadTrigger)
+        || map.currentYCoord <= map.beginYCoord - (10 * moveCountReloadTrigger)
+        || map.currentXCoord >= map.beginXCoord + (10 * moveCountReloadTrigger)
+        || map.currentYCoord >= map.beginYCoord + (10 * moveCountReloadTrigger)) {
         mapEditorGetMapByXYAndSizeButton();
       }
     }
 
 
-    //DUPLICATED  mapEditorMouseEvent.js
+    // DUPLICATED  mapEditorMouseEvent.js
     function mapEditorGetMapByXYAndSizeButton() {
 
-      var parameters = {
+      const parameters = {
         beginX: map.currentXCoord,
         beginY: map.currentYCoord,
         size: sizeMapToLoad
-      }
+      };
+
+      console.log(parameters);
 
       // $.ajax({
       //   type: "GET",
@@ -79,7 +91,7 @@ export class MapViewComponent implements OnInit {
       //     map.currentXCoord = map.beginXCoord;
       //     map.currentYCoord = map.beginYCoord;
 
-      //     for (var i = 0; i < 0 + mapLayers.length; i++) {
+      //     for (let i = 0; i < 0 + mapLayers.length; i++) {
       //       centerView(mapLayers[i]);
       //     };
       //   },
@@ -94,11 +106,13 @@ export class MapViewComponent implements OnInit {
 
     function launch() {
 
-
-      jsonLoader([JSON.stringify(groundConfigurationPropertyList), JSON.stringify(buildingConfigurationPropertyList), JSON.stringify(resourceConfigurationPropertyList), JSON.stringify(unitConfigurationPropertyList)])
-        .then(
+      new JsIsoJsonComponent().load(
+        [JSON.stringify(groundConfigurationPropertyList),
+        JSON.stringify(buildingConfigurationPropertyList),
+        JSON.stringify(resourceConfigurationPropertyList),
+        JSON.stringify(unitConfigurationPropertyList)]).then(
           function (jsonResponse) {
-            var images = [
+            const images = [
               {
                 graphics: jsonResponse[0].imgPathsGround
               },
@@ -113,18 +127,18 @@ export class MapViewComponent implements OnInit {
               }
             ];
 
-            imgLoader(images)
+
+            new JsIsoImgComponent().load(images)
               .then(
                 function (imgResponse) {
-
-                  game = new main(0,
+                  const game = new main(0,
                     0, map.xSize,
                     imgResponse[3]); // X & Y drawing position, and tile span to draw
 
                   game
                     .init([
                       {
-                        title: "Ground",
+                        title: 'Ground',
                         layout: map.ground,
                         graphics: imgResponse[0].files,
                         graphicsDictionary: imgResponse[0].dictionary,
@@ -132,7 +146,7 @@ export class MapViewComponent implements OnInit {
                         heightMap: {
                           map: map.height,
                           offset: 0,
-                          heightTile: imgResponse[0].files["ground.png"],
+                          heightTile: imgResponse[0].files['ground.png'],
                         },
                         tileHeight: 50,
                         tileWidth: 100,
@@ -144,20 +158,20 @@ export class MapViewComponent implements OnInit {
                         }
                       },
                       {
-                        title: "Buildings",
+                        title: 'Buildings',
                         layout: map.buildings,
                         graphics: imgResponse[1].files,
                         graphicsDictionary: imgResponse[1].dictionary,
                         zeroIsBlank: true,
-                        //															                alphaWhenFocusBehind: {
-                        //															                    objectApplied: imgResponse[2].files["main.png"],
-                        //															                    apply: true
-                        //															                  },
-                        //															                  shadowDistance: {
-                        //															                    color: false,
-                        //															                    distance: 4,
-                        //															                    darkness: 1
-                        //															                  },
+                        // 															                alphaWhenFocusBehind: {
+                        // 															                    objectApplied: imgResponse[2].files["main.png"],
+                        // 															                    apply: true
+                        // 															                  },
+                        // 															                  shadowDistance: {
+                        // 															                    color: false,
+                        // 															                    distance: 4,
+                        // 															                    darkness: 1
+                        // 															                  },
                         heightMap: {
                           map: map.height,
                           offset: 0,
@@ -167,7 +181,7 @@ export class MapViewComponent implements OnInit {
                         tileWidth: 100
                       },
                       {
-                        title: "Resources",
+                        title: 'Resources',
                         layout: map.resources,
                         graphics: imgResponse[2].files,
                         graphicsDictionary: imgResponse[2].dictionary,
@@ -181,7 +195,7 @@ export class MapViewComponent implements OnInit {
                         tileWidth: 100
                       },
                       {
-                        title: "Troops",
+                        title: 'Troops',
                         layout: map.troops,
                         graphics: imgResponse[3].files,
                         graphicsDictionary: imgResponse[3].dictionary,
@@ -204,21 +218,22 @@ export class MapViewComponent implements OnInit {
     }
 
     function centerView(layer) {
-      var mapViewWidth = document.getElementById('mapView').offsetWidth;
-      var mapViewHeight = document.getElementById('mapView').offsetHeight;
-      layer.align("h-center",
+      const mapViewWidth = document.getElementById('mapView').offsetWidth;
+      const mapViewHeight = document.getElementById('mapView').offsetHeight;
+      layer.align('h-center',
         mapViewWidth, map.xSize, 0);
-      layer.align("v-center",
+      layer.align('v-center',
         mapViewHeight, map.xSize, 0);
     }
 
-    function main(x, y, size, playerImages) {
+    function main(x, y, size, playerImages): void {
 
       self = this;
 
-      var context = CanvasControl.create("mapViewCanvas", 4000, 2000, {}, "mapView");
+     // const context = CanvasControl.create("mapViewCanvas", 4000, 2000, {}, "mapView");
+     const context = new JsIsoCanvasControlComponent()._create('mapViewCanvas', 4000, 2000, {}, 'mapView', 0);
 
-      var input = new CanvasInput(document, CanvasControl());
+      const input = new CanvasInput(document, CanvasControl());
 
       if (mapLoadedFrom == "mapView") {
         mapViewMouseEvent.setInputEvents(input, mapLayers);
@@ -231,8 +246,8 @@ export class MapViewComponent implements OnInit {
 
 
       input.keyboard(function (pressed, keydown, event) {
-        var mapViewWidth = document.getElementById('mapView').offsetWidth;
-        var mapViewHeight = document.getElementById('mapView').offsetHeight;
+        let mapViewWidth = document.getElementById('mapView').offsetWidth;
+        let mapViewHeight = document.getElementById('mapView').offsetHeight;
         if (!keydown) {
           switch (pressed) {
             case 81:
@@ -254,7 +269,7 @@ export class MapViewComponent implements OnInit {
                   layer.rotate("right");
                 }
                 else {
-                  for (var i = 0; i < 10; i++) {
+                  for (let i = 0; i < 10; i++) {
                     layer.move("left");
                     layer.move("down");
                   }
@@ -274,7 +289,7 @@ export class MapViewComponent implements OnInit {
                   centerView(layer);
                 }
                 else {
-                  for (var i = 0; i < 10; i++) {
+                  for (let i = 0; i < 10; i++) {
                     layer.move("down");
                     layer.move("up");
                   }
@@ -293,7 +308,7 @@ export class MapViewComponent implements OnInit {
                   centerView(layer);
                 }
                 else {
-                  for (var i = 0; i < 10; i++) {
+                  for (let i = 0; i < 10; i++) {
                     layer.move("left");
                     layer.move("right");
                   }
@@ -310,7 +325,7 @@ export class MapViewComponent implements OnInit {
                   layer.rotate("left");
                 }
                 else {
-                  for (var i = 0; i < 10; i++) {
+                  for (let i = 0; i < 10; i++) {
                     layer.move("right");
                     layer.move("up");
                   }
@@ -323,7 +338,7 @@ export class MapViewComponent implements OnInit {
             // numpad 1 (bas gauche)
             case 97:
               mapLayers.map(function (layer) {
-                for (var i = 0; i < 5; i++) {
+                for (let i = 0; i < 5; i++) {
                   layer.move("right");
                   layer.move("up");
                   layer.move("left");
@@ -335,7 +350,7 @@ export class MapViewComponent implements OnInit {
             // numpad 3 bas droite
             case 99:
               mapLayers.map(function (layer) {
-                for (var i = 0; i < 5; i++) {
+                for (let i = 0; i < 5; i++) {
                   layer.move("left");
                   layer.move("right");
                   layer.move("left");
@@ -347,7 +362,7 @@ export class MapViewComponent implements OnInit {
             // numpad 7 haut gauche
             case 103:
               mapLayers.map(function (layer) {
-                for (var i = 0; i < 5; i++) {
+                for (let i = 0; i < 5; i++) {
                   layer.move("down");
                   layer.move("up");
                   layer.move("right");
@@ -359,7 +374,7 @@ export class MapViewComponent implements OnInit {
             // numpad 9 haut droite
             case 105:
               mapLayers.map(function (layer) {
-                for (var i = 0; i < 5; i++) {
+                for (let i = 0; i < 5; i++) {
                   layer.move("down");
                   layer.move("up");
                   layer.move("left");
@@ -409,7 +424,7 @@ export class MapViewComponent implements OnInit {
 
       return {
         init: function (layers) {
-          for (var i = 0; i < 0 + layers.length; i++) {
+          for (let i = 0; i < 0 + layers.length; i++) {
             mapLayers[i] = new TileField(context,
               CanvasControl().height,
               CanvasControl().width);

@@ -1,3 +1,4 @@
+import { JsisoModule } from './_libs/jsiso/jsiso.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -18,7 +19,8 @@ import { UserMapViewComponent } from './map/user-map-view/user-map-view.componen
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    JsisoModule
   ],
   providers: [],
   bootstrap: [AppComponent]
