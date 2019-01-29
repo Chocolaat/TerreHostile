@@ -1,6 +1,7 @@
 import { JsisoModule } from './_libs/jsiso/jsiso.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { WindowRef } from './_core/window.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,7 +23,7 @@ import { UserMapViewComponent } from './map/user-map-view/user-map-view.componen
     AppRoutingModule,
     JsisoModule
   ],
-  providers: [],
+  providers: [ WindowRef ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

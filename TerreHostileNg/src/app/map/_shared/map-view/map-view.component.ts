@@ -1,3 +1,4 @@
+import { WindowRef } from './../../../_core/window.service';
 import { JsIsoJsonComponent } from './../../../_libs/jsiso/json/json.component';
 import { JsIsoImgComponent } from './../../../_libs/jsiso/img/img.component';
 import { JsIsoCanvasInputComponent } from './../../../_libs/jsiso/canvas/canvasInput.component';
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-map-view',
   template: `
-  <div id="mapView">MapView</div>
+  <div id='mapView'>MapView</div>
   `,
   styleUrls: ['./map-view.component.css']
 })
@@ -43,6 +44,8 @@ export class MapViewComponent implements OnInit {
     const buildingConfigurationPropertyList = null;
     const resourceConfigurationPropertyList = null;
     const unitConfigurationPropertyList = null;
+
+    const mapLoadedFrom = true;
 
 
     const map = JSON.parse(mapStr);
@@ -233,171 +236,172 @@ export class MapViewComponent implements OnInit {
      // const context = CanvasControl.create("mapViewCanvas", 4000, 2000, {}, "mapView");
      const context = new JsIsoCanvasControlComponent()._create('mapViewCanvas', 4000, 2000, {}, 'mapView', 0);
 
-      const input = new CanvasInput(document, CanvasControl());
+      // const input = new CanvasInput(document, CanvasControl());
 
-      if (mapLoadedFrom == "mapView") {
-        mapViewMouseEvent.setInputEvents(input, mapLayers);
-      }
-      else if (mapLoadedFrom == "mapEditor") {
-        mapEditorMouseEvent.setInputEvents(input, mapLayers);
-      }
+
+      const wr: WindowRef = new WindowRef();
+      const input = new JsIsoCanvasInputComponent(wr);
+
+
+      // if (this.mapLoadedFrom === 'mapView') {
+      //  mapViewMouseEvent.setInputEvents(input, mapLayers);
+     // }
+     // else if (mapLoadedFrom == 'mapEditor') {
+      //  mapEditorMouseEvent.setInputEvents(input, mapLayers);
+      // }
 
 
 
 
       input.keyboard(function (pressed, keydown, event) {
-        let mapViewWidth = document.getElementById('mapView').offsetWidth;
-        let mapViewHeight = document.getElementById('mapView').offsetHeight;
+        const mapViewWidth = document.getElementById('mapView').offsetWidth;
+        const mapViewHeight = document.getElementById('mapView').offsetHeight;
         if (!keydown) {
           switch (pressed) {
             case 81:
               mapLayers.map(function (layer) {
-                layer.rotate("right");
+                layer.rotate('right');
               });
               break;
             case 87:
               mapLayers.map(function (layer) {
-                layer.rotate("left");
+                layer.rotate('left');
               });
               break;
-            //flech droite ou numpad 6
+            // flech droite ou numpad 6
             case 39:
             case 102:
 
               mapLayers.map(function (layer) {
                 if (event.ctrlKey) {
-                  layer.rotate("right");
-                }
-                else {
+                  layer.rotate('right');
+                } else {
                   for (let i = 0; i < 10; i++) {
-                    layer.move("left");
-                    layer.move("down");
+                    layer.move('left');
+                    layer.move('down');
                   }
 
-                  if (layer.getTitle() === "Ground") { updateCurrentCenterXY(map.currentXCoord - 10, map.currentYCoord + 10) };
+                  if (layer.getTitle() === 'Ground') { updateCurrentCenterXY(map.currentXCoord - 10, map.currentYCoord + 10); }
 
                 }
               });
               //    startY ++;
               break;
-            //fleche haut ou numpad8
+            // fleche haut ou numpad8
             case 38:
             case 104:
               mapLayers.map(function (layer) {
                 if (event.ctrlKey) {
-                  layer.setZoom("in");
+                  layer.setZoom('in');
                   centerView(layer);
-                }
-                else {
+                } else {
                   for (let i = 0; i < 10; i++) {
-                    layer.move("down");
-                    layer.move("up");
+                    layer.move('down');
+                    layer.move('up');
                   }
-                  if (layer.getTitle() === "Ground") { updateCurrentCenterXY(map.currentXCoord - 10, map.currentYCoord - 10) };
+                  if (layer.getTitle() === 'Ground') { updateCurrentCenterXY(map.currentXCoord - 10, map.currentYCoord - 10); }
                 }
 
               });
               //    startX --;
               break;
-            //fleche bas ou numpad 2
+            // fleche bas ou numpad 2
             case 40:
             case 98:
               mapLayers.map(function (layer) {
                 if (event.ctrlKey) {
-                  layer.setZoom("out");
+                  layer.setZoom('out');
                   centerView(layer);
-                }
-                else {
+                } else {
                   for (let i = 0; i < 10; i++) {
-                    layer.move("left");
-                    layer.move("right");
+                    layer.move('left');
+                    layer.move('right');
                   }
-                  if (layer.getTitle() === "Ground") { updateCurrentCenterXY(map.currentXCoord + 10, map.currentYCoord + 10) };
+                  if (layer.getTitle() === 'Ground') { updateCurrentCenterXY(map.currentXCoord + 10, map.currentYCoord + 10); }
                 }
               });
               //     startX ++;
               break;
-            //fleche gauche ou numpad 4
+            // fleche gauche ou numpad 4
             case 37:
             case 100:
               mapLayers.map(function (layer) {
                 if (event.ctrlKey) {
-                  layer.rotate("left");
-                }
-                else {
+                  layer.rotate('left');
+                } else {
                   for (let i = 0; i < 10; i++) {
-                    layer.move("right");
-                    layer.move("up");
+                    layer.move('right');
+                    layer.move('up');
                   }
-                  if (layer.getTitle() === "Ground") { updateCurrentCenterXY(map.currentXCoord + 10, map.currentYCoord - 10) };
+                  if (layer.getTitle() === 'Ground') { updateCurrentCenterXY(map.currentXCoord + 10, map.currentYCoord - 10); }
                 }
 
               });
-              //		                startY --;
+              // startY --;
               break;
             // numpad 1 (bas gauche)
             case 97:
               mapLayers.map(function (layer) {
                 for (let i = 0; i < 5; i++) {
-                  layer.move("right");
-                  layer.move("up");
-                  layer.move("left");
-                  layer.move("right");
+                  layer.move('right');
+                  layer.move('up');
+                  layer.move('left');
+                  layer.move('right');
                 }
-                if (layer.getTitle() === "Ground") { updateCurrentCenterXY(map.currentXCoord + 10, map.currentYCoord) };
+                if (layer.getTitle() === 'Ground') { updateCurrentCenterXY(map.currentXCoord + 10, map.currentYCoord); }
               });
               break;
             // numpad 3 bas droite
             case 99:
               mapLayers.map(function (layer) {
                 for (let i = 0; i < 5; i++) {
-                  layer.move("left");
-                  layer.move("right");
-                  layer.move("left");
-                  layer.move("down");
+                  layer.move('left');
+                  layer.move('right');
+                  layer.move('left');
+                  layer.move('down');
                 }
-                if (layer.getTitle() === "Ground") { updateCurrentCenterXY(map.currentXCoord, map.currentYCoord + 10) };
+                if (layer.getTitle() === 'Ground') { updateCurrentCenterXY(map.currentXCoord, map.currentYCoord + 10); }
               });
               break;
             // numpad 7 haut gauche
             case 103:
               mapLayers.map(function (layer) {
                 for (let i = 0; i < 5; i++) {
-                  layer.move("down");
-                  layer.move("up");
-                  layer.move("right");
-                  layer.move("up");
+                  layer.move('down');
+                  layer.move('up');
+                  layer.move('right');
+                  layer.move('up');
                 }
-                if (layer.getTitle() === "Ground") { updateCurrentCenterXY(map.currentXCoord, map.currentYCoord - 10) };
+                if (layer.getTitle() === 'Ground') { updateCurrentCenterXY(map.currentXCoord, map.currentYCoord - 10); }
               });
               break;
             // numpad 9 haut droite
             case 105:
               mapLayers.map(function (layer) {
                 for (let i = 0; i < 5; i++) {
-                  layer.move("down");
-                  layer.move("up");
-                  layer.move("left");
-                  layer.move("down");
+                  layer.move('down');
+                  layer.move('up');
+                  layer.move('left');
+                  layer.move('down');
                 }
-                if (layer.getTitle() === "Ground") { updateCurrentCenterXY(map.currentXCoord - 10, map.currentYCoord) };
+                if (layer.getTitle() === 'Ground') { updateCurrentCenterXY(map.currentXCoord - 10, map.currentYCoord); }
               });
               break;
             case 107:
               mapLayers.map(function (layer) {
-                layer.setZoom("in");
+                layer.setZoom('in');
                 centerView(layer);
 
               });
-              //			                startY --;
+              // startY --;
               break;
             case 109:
               mapLayers.map(function (layer) {
-                layer.setZoom("out");
+                layer.setZoom('out');
                 centerView(layer);
 
               });
-              //			                startY --;
+              // startY --;
               break;
           }
         }
@@ -406,37 +410,40 @@ export class MapViewComponent implements OnInit {
 
 
       function draw() {
-        context.clearRect(0, 0, CanvasControl().width,
-          CanvasControl().height);
+        context.clearRect(0, 0, new JsIsoCanvasControlComponent().width,
+        new JsIsoCanvasControlComponent().height);
 
-        for (i = 0; i < 0 + size; i++) {
-          for (j = 0; j < 0 + size; j++) {
+        for (let i = 0; i < 0 + size; i++) {
+          for (let j = 0; j < 0 + size; j++) {
             mapLayers.map(function (layer) {
-              if (layer.getTitle() === "Ground" || layer.getTitle() === "Resources" || layer.getTitle() === "Buildings" || layer.getTitle() === "Troops") {
+              if (layer.getTitle() === 'Ground' ||
+              layer.getTitle() === 'Resources' ||
+              layer.getTitle() === 'Buildings' ||
+              layer.getTitle() === 'Troops') {
                 layer.draw(i, j); // Draw the graphics layer
               }
             });
           }
         }
 
-        requestAnimFrame(draw);
+       // requestAnimFrame(draw);
       }
 
-      return {
-        init: function (layers) {
-          for (let i = 0; i < 0 + layers.length; i++) {
-            mapLayers[i] = new TileField(context,
-              CanvasControl().height,
-              CanvasControl().width);
-            mapLayers[i].setup(layers[i]);
+      function init(layers) {
+        for (let i = 0; i < 0 + layers.length; i++) {
+          mapLayers[i] = new TileField(context,
+            new JsIsoCanvasControlComponent().height,
+            new JsIsoCanvasControlComponent().width);
+          mapLayers[i].setup(layers[i]);
 
-            mapLayers[i].setZoom(0.8);
+          mapLayers[i].setZoom(0.8);
 
-            centerView(mapLayers[i]);
-          };
-          draw();
+          centerView(mapLayers[i]);
         }
+        draw();
       }
+
+
     }
 
     launch();
