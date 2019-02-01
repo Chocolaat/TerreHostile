@@ -3,7 +3,7 @@ import { JsIsoParticlesEmitterComponent } from './../particles/particlesEmitter.
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  template: ''
+  template: ``
 })
 export class JsIsoTileFieldComponent implements OnInit {
 
@@ -55,7 +55,7 @@ export class JsIsoTileFieldComponent implements OnInit {
     let focusTilePosYBegin = 0;
     let focusTilePosYEnd = 0;
 
-    let alphaWhenFocusBehind = {}; // Used for applying alpha to objects infront of focus
+    let alphaWhenFocusBehind: any = {}; // Used for applying alpha to objects infront of focus
 
     let tilesHide = null;
     let hideSettings = null;
@@ -198,15 +198,15 @@ export class JsIsoTileFieldComponent implements OnInit {
 
 
     // Used for drawing vertical shadows on top of tiles in isometric view if switched on
-    function _drawVeritcalColorOverlay(shadowXpos, shadowYpos, graphicValue, currStack, nextStack, resizedTileHeight, shadowSettings) {
-      const shadowHeight = tileHeight - shadowSettings.offset || 1;
+    function _drawVeritcalColorOverlay(shadowXpos, shadowYpos, graphicValue, currStack, nextStack, resizedTileHeight, shadowSettingsParam) {
+      const shadowHeight = tileHeight - shadowSettingsParam.offset || 1;
       ctx.fillStyle = 'rgba' + graphicValue;
       ctx.beginPath();
       ctx.moveTo(shadowXpos + (tileHeight * curZoom), shadowYpos + ((currStack - 1) * ((tileHeight - resizedTileHeight) * curZoom)));
       ctx.lineTo(shadowXpos + (tileHeight * curZoom), shadowYpos - ((nextStack - 1) * ((shadowHeight) /
-        ((shadowHeight) / shadowSettings.offset) * curZoom)));
+        ((shadowHeight) / shadowSettingsParam.offset) * curZoom)));
       ctx.lineTo(shadowXpos + (tileHeight * curZoom) * 2, shadowYpos - ((nextStack - 1) * (shadowHeight)
-        / ((shadowHeight) / shadowSettings.offset) * curZoom) + (tileHeight * curZoom) / 2);
+        / ((shadowHeight) / shadowSettingsParam.offset) * curZoom) + (tileHeight * curZoom) / 2);
       ctx.lineTo(shadowXpos + (tileHeight * curZoom) * 2, shadowYpos + ((currStack - 1) *
         ((tileHeight - resizedTileHeight) * curZoom)) + (tileHeight * curZoom) / 2);
       ctx.fill();
@@ -225,6 +225,7 @@ export class JsIsoTileFieldComponent implements OnInit {
               // particleMapHolder[i][j] = new Emitter(ctx, 0, 0, particleEffects[particleMap[i][j]].pcount,
               // particleEffects[particleMap[i][j]].loop, utils.range(0, mapHeight), utils.range(0, mapWidth));
               particleMapHolder[i][j] = new JsIsoParticlesEmitterComponent();
+              particleMapHolder[i][j].ctx
               // TODO PASS PARAMS
 
               //  for (let partK in particleEffects[particleMap[i][j]]) {
@@ -733,8 +734,8 @@ export class JsIsoTileFieldComponent implements OnInit {
         let lightDist = 0;
         // Calculate which light source is closest
         for (let light = 0; light < lightMap.length; light++) {
-          lightI = Math.round(tileX - lightMap[light][0]);
-          lightJ = Math.round(tileY - lightMap[light][1]);
+          const lightI = Math.round(tileX - lightMap[light][0]);
+          const lightJ = Math.round(tileY - lightMap[light][1]);
           lightDist = Math.sqrt(lightI * lightI + lightJ * lightJ);
           if (distanceLighting / (shadowDistance.darkness * shadowDistance.distance) > lightDist / (light[2] * light[3])) {
             distanceLighting = lightDist;
@@ -1016,45 +1017,44 @@ export class JsIsoTileFieldComponent implements OnInit {
           if (direction === 'up') {
             drawY += distance * curZoom;
             // Offset moving for particle effect particles
-            for (const particle of particleMapHolder) {
-              for (const subPart of particleMapHolder[particle]) {
+            for (particle of particleMapHolder) {
+              for (subPart of particleMapHolder[particle]) {
                 particleMapHolder[particle][subPart].ShiftBy(0, distance * curZoom);
               }
           }
 
-            for (const particle of particleMapHolder) {
-              for (const subPart of particleMapHolder[particle]) {
+            for (particle of particleMapHolder) {
+              for (subPart of particleMapHolder[particle]) {
                 particleMapHolder[particle][subPart].ShiftBy(0, distance * curZoom);
               }
             }
           } else if (direction === 'down') {
             drawY -= distance * curZoom;
             // Offset moving for particle effect particles
-            for (const particle of particleMapHolder) {
-              for (const subPart of particleMapHolder[particle]) {
+            for (particle of particleMapHolder) {
+              for (subPart of particleMapHolder[particle]) {
                 particleMapHolder[particle][subPart].ShiftBy(0, -distance * curZoom);
               }
             }
           } else if (direction === 'left') {
             drawX += distance * curZoom;
             // Offset moving for particle effect particles
-            for (const particle of particleMapHolder) {
-              for (const subPart of particleMapHolder[particle]) {
+            for (particle of particleMapHolder) {
+              for (subPart of particleMapHolder[particle]) {
                 particleMapHolder[particle][subPart].ShiftBy(distance * curZoom, 0);
               }
             }
           } else if (direction === 'right') {
             drawX -= distance * curZoom;
             // Offset moving for particle effect particles
-            for (const particle of particleMapHolder) {
-              for (const subPart of particleMapHolder[particle]) {
+            for (particle of particleMapHolder) {
+              for (subPart of particleMapHolder[particle]) {
                 particleMapHolder[particle][subPart].ShiftBy(-distance * curZoom, 0);
               }
             }
           }
         }
       }
-    };
-
-
+   };
   }
+}

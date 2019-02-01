@@ -1,3 +1,4 @@
+import { JsIsoTileFieldComponent } from './../../../_libs/jsiso/tile/tileField.component';
 import { WindowRef } from './../../../_core/window.service';
 import { JsIsoJsonComponent } from './../../../_libs/jsiso/json/json.component';
 import { JsIsoImgComponent } from './../../../_libs/jsiso/img/img.component';
@@ -431,10 +432,12 @@ export class MapViewComponent implements OnInit {
 
       function init(layers) {
         for (let i = 0; i < 0 + layers.length; i++) {
-          mapLayers[i] = new TileField(context,
-            new JsIsoCanvasControlComponent().height,
-            new JsIsoCanvasControlComponent().width);
-          mapLayers[i].setup(layers[i]);
+  //        mapLayers[i] = new TileField(context,
+   //         new JsIsoCanvasControlComponent().height,
+    //        new JsIsoCanvasControlComponent().width);
+   //       mapLayers[i].setup(layers[i]);
+
+          mapLayers[i] = new JsIsoTileFieldComponent();
 
           mapLayers[i].setZoom(0.8);
 

@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class JsIsoParticlesEmitterComponent implements OnInit {
 
-  @Input() ctx: any;
+ // ctx@Input() : any;
   @Input() x: any;
   @Input() y: any;
   @Input() pcount: any;
@@ -95,9 +95,9 @@ export class JsIsoParticlesEmitterComponent implements OnInit {
     if (x) { this.x = x; }
     if (y) { this.y = y; }
     if (this.loaded && !this.pause) {
-      this.ctx.save();
+   //   this.ctx.save();
 
-      this.ctx.globalCompositeOperation = this.composite;
+   //   this.ctx.globalCompositeOperation = this.composite;
 
       for (let i = 0, tmpsize = this.particles.length; i < tmpsize; i++) {
 
@@ -105,7 +105,7 @@ export class JsIsoParticlesEmitterComponent implements OnInit {
 
         this.particles[i].y += this.yshiftOffset;
 
-        this.particles[i].Draw(this.ctx);
+      //  this.particles[i].Draw(this.ctx);
 
         if (this.loop && this.loop !== 'false' && !this.particles[i].active) {
 
@@ -115,7 +115,7 @@ export class JsIsoParticlesEmitterComponent implements OnInit {
 
       }
 
-      this.ctx.restore();
+     // this.ctx.restore();
 
       this.xshiftOffset = 0;
       this.yshiftOffset = 0;

@@ -54,10 +54,9 @@ export class JsIsoCanvasControlComponent implements OnInit {
       this.canvasElement.id = name;
       this.canvasElement.tabindex = '1';
 
-      // TODO
-      // for (let s in style) {
-      //  this.canvasElement.style[s] = style[s];
-      // }
+       for (const s of style) {
+        this.canvasElement.style[s] = style[s];
+       }
 
 
       canvasType = '2d';

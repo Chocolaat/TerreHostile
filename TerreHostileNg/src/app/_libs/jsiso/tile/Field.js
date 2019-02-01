@@ -65,7 +65,7 @@ function(EffectLoader, Emitter, utils) {
     var focusTilePosYBegin = 0;
     var focusTilePosYEnd = 0;
 
-    var alphaWhenFocusBehind =  {}; // Used for applying alpha to objects infront of focus 
+    var alphaWhenFocusBehind =  {}; // Used for applying alpha to objects infront of focus
 
     var tilesHide = null;
     var hideSettings = null;
@@ -116,7 +116,7 @@ function(EffectLoader, Emitter, utils) {
       if(settings.particleEffects) {
         particleEffects = settings.particleEffects;
       }
-      
+
       if (settings.width) {
         var row = [];
         var col = 0;
@@ -136,8 +136,8 @@ function(EffectLoader, Emitter, utils) {
           }
         }
       }
-      
-      alphaWhenFocusBehind = settings.alphaWhenFocusBehind;
+
+      alphaWhenFocusBehind:any = settings.alphaWhenFocusBehind;
     }
 
 
@@ -257,18 +257,18 @@ function(EffectLoader, Emitter, utils) {
       var resizedTileHeight;
       var stackGraphic = null;
 
-      
-     
+
+
 
       var graphicValue = 0;
       if (mapLayout[i] && mapLayout[i][j])
     	  {
-	  	  	if (mapLayout[i][j].units != undefined) 
+	  	  	if (mapLayout[i][j].units != undefined)
 	  		{
 	  			graphicValue = mapLayout[i][j].units[0].unitType + 1;
-	  			
+
 	  		}
-	  	  	else if (mapLayout[i][j].type != undefined) 
+	  	  	else if (mapLayout[i][j].type != undefined)
     	  		{
     	  			graphicValue = mapLayout[i][j].type + 1;
     	  		}
@@ -277,7 +277,7 @@ function(EffectLoader, Emitter, utils) {
     	  			graphicValue = mapLayout[i][j]
     	  		}
     	  }
- 
+
       var distanceLighting = null;
       var distanceLightingSettings;
       var k = 0;
@@ -341,7 +341,7 @@ function(EffectLoader, Emitter, utils) {
             }
           }
         }
-        
+
         resizedTileHeight = 0;
         if (stackGraphic) {
           resizedTileHeight =  stackGraphic.height / (stackGraphic.width / tileWidth);
@@ -394,16 +394,16 @@ function(EffectLoader, Emitter, utils) {
           }
         }
         else {
-          
+
           if (heightMapOnTop) {
 
-            // If tile is to be placed on top of heightmap 
+            // If tile is to be placed on top of heightmap
 
             if (!distanceLightingSettings || ( distanceLightingSettings && distanceLighting < distanceLightingSettings.darkness)) {
               if (tileImageOverwite) {
 
                 // Draw overwriting image on top of height map
-                  
+
                 ctx.drawImage(tileImageOverwite, 0, 0, tileImageOverwite.width, tileImageOverwite.height, xpos, ypos + ((stack - 1) *(tileHeight - heightOffset - tileHeight)) * curZoom - (resizedTileHeight  - tileHeight) * curZoom, (tileWidth * curZoom), (resizedTileHeight * curZoom));
               }
               else {
@@ -456,7 +456,7 @@ function(EffectLoader, Emitter, utils) {
 
                       if (Number(graphicValue) >= 0) {
                         // reset stackGraphic
-                        
+
                     	  // DISPLAY TILEITEM HERE
 
                         stackGraphic = tileImages[tileImagesDictionary[graphicValue]];
@@ -603,7 +603,7 @@ function(EffectLoader, Emitter, utils) {
         mapLayout = data;
       }
     }
-    
+
     function _setHeightLayout(data, width) {
         if (width) {
           var row = [];
@@ -709,7 +709,7 @@ function(EffectLoader, Emitter, utils) {
         focusTilePosX = Math.round((x - (tileHeight * curZoom) / 2)/ (tileHeight * curZoom));
       }
       else {
-    	  
+
         focusTilePosY = (2 * (y - drawY) - x + drawX) / 2;
         focusTilePosX = x + focusTilePosY - drawX - (tileHeight * curZoom);
         focusTilePosY = Math.round(focusTilePosY / (tileHeight * curZoom));
@@ -765,13 +765,13 @@ function(EffectLoader, Emitter, utils) {
     	mouseUsed = true;
       focusTilePosX = xPos;
       focusTilePosY = yPos;
-      
+
       focusTilePosXBegin = xPos;
       focusTilePosXEnd = xPos;
       focusTilePosYBegin = yPos;
       focusTilePosYEnd = yPos;
     }
-    
+
     function _applyLargeFocus(xPosBegin, xPosEnd, yPosBegin, yPosEnd) {
     	mouseUsed = true;
         focusTilePosXBegin = xPosBegin;
@@ -865,7 +865,7 @@ function(EffectLoader, Emitter, utils) {
       setLayout: function(data, width) {
         _setLayout(data, width);
       },
-      
+
       setHeightLayout: function(data, width) {
           _setHeightLayout(data, width);
         },

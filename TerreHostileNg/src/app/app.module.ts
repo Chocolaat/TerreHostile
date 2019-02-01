@@ -1,4 +1,3 @@
-import { JsisoModule } from './_libs/jsiso/jsiso.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { WindowRef } from './_core/window.service';
@@ -16,12 +15,11 @@ import { UserMapViewComponent } from './map/user-map-view/user-map-view.componen
     HeaderComponent,
     LoginComponent,
     MapViewComponent,
-    UserMapViewComponent
+    UserMapViewComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    JsisoModule
+    AppRoutingModule
   ],
   providers: [ WindowRef ],
   bootstrap: [AppComponent]
