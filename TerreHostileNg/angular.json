@@ -25,7 +25,7 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": ["src/assets/js/requireLauncher.js"]
+            "scripts": ["src/assets/js/libs/requirejs/require.js", "src/assets/js/requireLauncher.js"]
           },
           "configurations": {
             "production": {
