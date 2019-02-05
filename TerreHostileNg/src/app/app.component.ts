@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-root',
   template: `
       <app-header></app-header>
-      <app-user-map-view></app-user-map-view>
+      <app-map-view></app-map-view>
   `,
    styleUrls: ['./app.component.css']
 })

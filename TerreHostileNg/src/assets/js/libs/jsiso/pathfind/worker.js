@@ -1,4 +1,4 @@
-/*  
+/*
 Copyright (c) 2013 Iain Hamilton & Edward Smyth
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -17,7 +17,7 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE. 
+THE SOFTWARE.
 */
 
 /*
@@ -74,7 +74,7 @@ self.addEventListener('message', function(evt) {
 	s = new node(s[0], s[1], -1, -1, -1, -1); // Start Node
 	e = new node(e[0], e[1], -1, -1, -1, -1); // End Node
 
-	/* 
+	/*
 		Set-up Variables
 	*/
 	var cols = m.length-1, // Get number of rows from map
@@ -112,7 +112,7 @@ self.addEventListener('message', function(evt) {
 		// Check if end point has been reached
 		if (current.x === e.x && current.y === e.y) {
 
-			var path = [{x: e.x, y: e.y}]; // Create Path 
+			var path = [{x: e.x, y: e.y}]; // Create Path
 			// Loop back through parents to complete the path
 			while (current.p !== -1) {
 				current = c[current.p];

@@ -3,17 +3,16 @@ import {AfterViewInit, ElementRef} from '@angular/core';
 declare function launchRequire(): any;
 
 @Component({
-  selector: 'app-user-map-view',
+  selector: 'app-map-view',
   template: `
 
   <p>
   user-map-view works!
 </p>
 <div id="mapView"></div>
-  `,
-  styleUrls: ['./user-map-view.component.css']
+  `
 })
-export class UserMapViewComponent implements OnInit {
+export class MapViewComponent implements OnInit {
 
   constructor() { }
 
