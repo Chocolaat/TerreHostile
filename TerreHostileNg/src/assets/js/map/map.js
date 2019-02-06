@@ -87,6 +87,7 @@ require(
 
 			function launch() {
 
+        console.log("MAPMAPMAP");
 
 				jsonLoader([JSON.stringify(groundConfigurationPropertyList), JSON.stringify(buildingConfigurationPropertyList), JSON.stringify(resourceConfigurationPropertyList), JSON.stringify(unitConfigurationPropertyList)])
 						.then(

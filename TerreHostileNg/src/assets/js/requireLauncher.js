@@ -14,8 +14,19 @@ function launchRequire()
     }
 });
 
+function launchMap()
+{
+  require(
+		[ "map/map" ],
+		function() {
+      console.log("RequireLauncher launched MAP");
+		});
+
+}
+}
+
 require(
-		[ 'map/map'],
+		[],
 		function() {
       console.log("RequireLauncher launched MAP");
 		});

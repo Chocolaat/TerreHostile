@@ -6,19 +6,19 @@ import { Component, OnInit } from '@angular/core';
   <app-login></app-login>
   <nav role='navigation'>
   <ul>
-    <li><a th:href="@{/home}">Accueil</a></li>
+    <li><a routerLink="/home" routerLinkActive="myactive">Accueil</a></li>
     <li><a>Administration</a>
       <ul>
-        <li><a th:href="@{/admin/mapEditor}">Éditeur de carte</a></li>
-        <li><a th:href="@{/admin/mapEditor}">Forum</a></li>
-        <li><a th:href="@{/admin/mapEditor}">Monstres</a></li>
-        <li><a th:href="@{/admin/mapEditor}">Ressources</a></li>
-        <li><a th:href="@{/admin/mapEditor}">Configuration</a></li>
+        <li><a routerLink="/mapEditor" routerLinkActive="myactive">Éditeur de carte</a></li>
+        <li><a routerLink="/mapEditor" routerLinkActive="myactive">Forum</a></li>
+        <li><a routerLink="/mapEditor" routerLinkActive="myactive">Monstres</a></li>
+        <li><a routerLink="/mapEditor" routerLinkActive="myactive">Ressources</a></li>
+        <li><a routerLink="/mapEditor" routerLinkActive="myactive">Configuration</a></li>
       </ul>
     </li>
     <li><a>Joueurs</a>
       <ul>
-        <li><a th:href="@{/user/mapView}">Carte du monde</a></li>
+        <li><a routerLink="/mapPlayer" routerLinkActive="myactive">Carte du monde</a></li>
       </ul>
     </li>
     <li><a href="#">Contact Us</a></li>
