@@ -209,7 +209,7 @@ require(
 
 			function main(x, y, size, playerImages) {
 
-		        var context = CanvasControl.create("mapViewCanvas", 4000, 2000, {}, "mapView");
+		        var context = CanvasControl.create("mapViewCanvas", undefined, undefined, {}, "mapView");
 
         var input = new CanvasInput(document, CanvasControl());
 

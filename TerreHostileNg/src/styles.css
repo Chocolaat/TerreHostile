@@ -2,6 +2,23 @@
 	box-sizing: border-box;
 }
 
+app-root {
+  display: block;
+  height: 100%;
+	border: dashed rgb(107, 0, 128);
+}
+
+app-header {
+  display: block;
+  height: 20%;
+	border: dashed yellow;
+}
+app-map-view {
+  display: block;
+  height: 80%;
+	border: dashed green;
+}
+
 body {
 	background-image: url("/assets/images/backgrounds/parchemin_main.jpg");
 	background-attachment: fixed; /* Le fond restera fixe */

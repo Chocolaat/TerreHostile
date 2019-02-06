@@ -1,4 +1,4 @@
-/*  
+/*
 Copyright (c) 2013 Iain Hamilton
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -17,7 +17,7 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE. 
+THE SOFTWARE.
 */
 
 define(function() {
@@ -50,7 +50,7 @@ define(function() {
     return dpr / bsr;
   }
 
- 
+
   function _create(name, w, h, style, element, usePixelRatio) {
     var pxRatio = 1;
     var canvasType = null;
@@ -58,19 +58,25 @@ define(function() {
       if (usePixelRatio) {
         pxRatio = _getRatio();
       }
-      
-      canvasElement = document.createElement('canvas');
-      canvasElement.id = name;
+
+      // canvasElement = document.createElement('canvas');
+      // canvasElement.id = name;
+      canvasElement = document.getElementById(name)
       canvasElement.tabindex = "1";
       for (var s in style) {
         canvasElement.style[s] = style[s];
       }
-      
-      
+
+      console.log(canvasElement.parentElement.clientWidth);
+      console.log(canvasElement.parentElement.clientHeight);
+      console.log(pxRatio);
+
       canvasType = '2d';
-      canvasElement.width = w * pxRatio || window.innerWidth;
-      canvasElement.height = h * pxRatio || window.innerHeight;
-      canvasElement.getContext(canvasType).setTransform(pxRatio, 0, 0, pxRatio, 0, 0);
+      canvasElement.width = canvasElement.parentElement.clientWidth * pxRatio ;
+      canvasElement.height = canvasElement.parentElement.clientHeight * pxRatio ;
+
+
+      // canvasElement.getContext(canvasType).setTransform(pxRatio, 0, 0, pxRatio, 0, 0);
       if (!element) {
         // Append Canvas into document body
         return document.body.appendChild(canvasElement).getContext(canvasType);
@@ -89,7 +95,7 @@ define(function() {
       return document.body.appendChild(noCanvas);
     }
   }
-  
+
   function _createSizeNotFixed(name, element) {
 	    var pxRatio = 1;
 	    var canvasType = null;
@@ -98,16 +104,16 @@ define(function() {
 	      canvasElement = document.createElement('canvas');
 	      canvasElement.id = name;
 	      canvasElement.tabindex = "1";
-	      
+
 	      canvasType = '2d';
-	      
-	      
+
+
 	      // if high, vew from far
 //	      // if low, view from near
 	     // canvasElement.getContext(canvasType).setTransform(pxRatio, 0, 0, pxRatio, 0, 0);
-	      
+
 	      return document.getElementById(element).appendChild(canvasElement).getContext(canvasType);
-	      
+
 //	      if (!element) {
 //	        // Append Canvas into document body
 //	        return document.body.appendChild(canvasElement).getContext(canvasType);
@@ -144,7 +150,7 @@ define(function() {
     canvasElement.width = window.innerWidth;
     canvasElement.style.position = "absolute";
     canvasElement.style.zIndex = 100;
-    
+
     window.onresize = function(e){
       _update(0, 0);
       //I think we need a repaint here.

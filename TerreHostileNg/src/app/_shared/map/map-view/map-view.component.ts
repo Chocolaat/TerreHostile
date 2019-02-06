@@ -6,13 +6,9 @@ declare function launchRequire(): any;
   selector: 'app-map-view',
   template: `
 
-  <section id="mapContainer">
-  <section id="mapFragment">
 <div id="mapView">
 <canvas id="mapViewCanvas"></canvas>
 </div>
-</section>
-</section>
   `,
   styleUrls: ['./map-view.component.css']
 })
