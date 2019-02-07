@@ -21,7 +21,7 @@ import { Component, OnInit } from '@angular/core';
         <li><a routerLink="/mapPlayer" routerLinkActive="myactive">Carte du monde</a></li>
       </ul>
     </li>
-    <li><a href="#">Contact Us</a></li>
+    <li><a>Contact Us</a></li>
   </ul>
 </nav>
 `,

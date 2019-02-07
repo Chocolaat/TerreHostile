@@ -67,10 +67,6 @@ define(function() {
         canvasElement.style[s] = style[s];
       }
 
-      console.log(canvasElement.parentElement.clientWidth);
-      console.log(canvasElement.parentElement.clientHeight);
-      console.log(pxRatio);
-
       canvasType = '2d';
       canvasElement.width = canvasElement.parentElement.clientWidth * pxRatio ;
       canvasElement.height = canvasElement.parentElement.clientHeight * pxRatio ;

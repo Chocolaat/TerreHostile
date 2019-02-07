@@ -1,9 +1,9 @@
-require(
-		[ 'libs/jsiso/canvas/Control', 'libs/jsiso/canvas/Input', 'libs/jsiso/img/load',
-				'libs/jsiso/json/load', 'libs/jsiso/tile/Field',
-				'libs/jsiso/pathfind/pathfind', 'map/mapEditorMouseEvent', 'map/mapViewMouseEvent'],
-		function(CanvasControl, CanvasInput, imgLoader, jsonLoader, TileField,
-				pathfind, mapEditorMouseEvent, mapViewMouseEvent) {
+define([ 'libs/jsiso/canvas/Control', 'libs/jsiso/canvas/Input', 'libs/jsiso/img/load',
+'libs/jsiso/json/load', 'libs/jsiso/tile/Field', 'map/mapEditorMouseEvent', 'map/mapViewMouseEvent'], function(CanvasControl, CanvasInput, imgLoader, jsonLoader, TileField, mapEditorMouseEvent, mapViewMouseEvent) {
+
+  return {
+
+    launchGame: function () {
 
 			// -- FPS --------------------------------
 			window.requestAnimFrame = (function() {
@@ -83,11 +83,7 @@ require(
 				    });
 			}
 
-
-
 			function launch() {
-
-        console.log("MAPMAPMAP");
 
 				jsonLoader([JSON.stringify(groundConfigurationPropertyList), JSON.stringify(buildingConfigurationPropertyList), JSON.stringify(resourceConfigurationPropertyList), JSON.stringify(unitConfigurationPropertyList)])
 						.then(
@@ -441,5 +437,6 @@ require(
 			launch();
 
 
-
-		});
+    }
+  };
+});
