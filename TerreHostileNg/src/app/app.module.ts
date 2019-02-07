@@ -13,7 +13,6 @@ import { LoginComponent } from './_core/login/login.component';
 import { HomeComponent } from './modules/home/home/home.component';
 import { CoreModule } from './_core/core_module';
 import { SharedModule } from './_shared/shared.module';
-
 @NgModule({
   declarations: [
     AppComponent
