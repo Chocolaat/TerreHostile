@@ -1,0 +1,46 @@
+
+:host{
+  flex: 1 auto;
+  border: dashed red;
+}
+
+#mapEditorToolbar{
+  display:flex;
+}
+
+#mapToolBar
+{
+	display: inline-grid;
+ 	grid-template-columns: 100%;
+	grid-gap: 2px 2px;
+	padding: 0px;
+	color: #444;
+	overflow-y: auto;
+	overflow-x: hidden;
+  height:100%;
+  border: dashed rgb(92, 216, 102);
+}
+
+.mapToolBarItem {
+  color: #000;
+  border-radius: 5px;
+}
+
+
+#mapToolBarSubMenu {
+  display: inline-grid;
+  grid-template-columns: 50% 50%;
+  grid-gap: 2px 2px;
+  color: #444;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0px;
+}
+
+.mapToolBarSubMenuItem {
+  color: #FFFFFF;
+  border-radius: 5px;
+  padding: 2px;
+  background-repeat: repeat;
+  background-image: var(--backgroundImageUrl);
+}

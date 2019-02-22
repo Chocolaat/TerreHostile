@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-map-editor-toolbar',
   template: `
-  <section id="mapEditorToolbar" th:fragment="mapEditorToolbar">
+  <section id="mapEditorToolbar">
 		<div id="mapToolBar">
 			<button type="button" class="mapToolBarItem"
 				id="mapToolBarItemGroundType">Type de terrain</button>
