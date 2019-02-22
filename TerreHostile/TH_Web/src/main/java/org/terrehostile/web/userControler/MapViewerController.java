@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.terrehostile.business.map.MapView;
-import org.terrehostile.game.configuration.BuildingConfigurationPropertyList;
-import org.terrehostile.game.configuration.GroundConfigurationPropertyList;
-import org.terrehostile.game.configuration.ResourceConfigurationPropertyList;
-import org.terrehostile.game.configuration.UnitConfigurationPropertyList;
+import org.terrehostile.game.configuration.model.BuildingConfigurationPropertyList;
+import org.terrehostile.game.configuration.model.GroundConfigurationPropertyList;
+import org.terrehostile.game.configuration.model.ResourceConfigurationPropertyList;
+import org.terrehostile.game.configuration.model.UnitConfigurationPropertyList;
 import org.terrehostile.services.MapViewService;
 
 @Controller
@@ -35,21 +35,6 @@ public class MapViewerController {
 
 		MapView map = mapViewService.getMapByXYAndSize(beginX, beginY, size, size);
 		modelAndView.addObject("map", map);
-
-		modelAndView.addObject("unitConfigurationPropertyList", unitsConfiguration.getUnitConfigurationPropertyList());
-		modelAndView.addObject("unitConfigurations", unitsConfiguration.getUnitConfigurations());
-
-		modelAndView.addObject("buildingConfigurationPropertyList",
-				buildingsConfiguration.getBuildingConfigurationPropertyList());
-		modelAndView.addObject("buildingConfigurations", buildingsConfiguration.getBuildingConfigurations());
-
-		modelAndView.addObject("resourceConfigurationPropertyList",
-				resourcesConfiguration.getResourceConfigurationPropertyList());
-		modelAndView.addObject("resourceConfigurations", resourcesConfiguration.getResourceConfigurations());
-
-		modelAndView.addObject("groundConfigurationPropertyList",
-				groundsConfiguration.getGroundConfigurationPropertyList());
-		modelAndView.addObject("groundConfigurations", groundsConfiguration.getGroundConfigurations());
 
 		modelAndView.setViewName("user/mapView");
 

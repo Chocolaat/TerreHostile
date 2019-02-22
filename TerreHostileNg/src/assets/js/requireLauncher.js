@@ -8,11 +8,11 @@ function launchRequire()
 });
 }
 
-function launchMap()
+function launchMap(map)
 {
     require(
       [ 'map/map' ],
       function(Map) {
-        Map.launchGame();
+        Map.launchGame(map);
       });
 }

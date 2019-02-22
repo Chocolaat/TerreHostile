@@ -1,4 +1,4 @@
-package org.terrehostile.game.configuration;
+package org.terrehostile.game.configuration.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -17,6 +18,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @PropertySource("classpath:/gameConfiguration/resources.properties")
 @ConfigurationProperties(prefix = "resources")
 public class ResourceConfigurationPropertyList {
+
+	@Bean(name = "resourceConfigurations")
+	public Map<Integer, ResourceConfiguration> resourceConfigurations() {
+		return getResourceConfigurations();
+	}
 
 	@Autowired
 	@JsonIgnore
@@ -52,20 +58,7 @@ public class ResourceConfigurationPropertyList {
 		this.types = types;
 	}
 
-	@JsonIgnore
-	public ResourceConfiguration getResourceConfiguration(int resourceType) {
-		ResourceConfiguration res = new ResourceConfiguration();
-		res.setName(env.getProperty("resources.names[" + resourceType + "]"));
-		res.setImgPath(env.getProperty("resources.imgPaths[" + resourceType + "]"));
-		res.setType(Integer.parseInt(env.getProperty("resources.types[" + resourceType + "]")));
-
-		res.setRegeneration(Integer.parseInt(env.getProperty("resources.regeneration[" + resourceType + "]")));
-
-		return res;
-	}
-
-	@JsonIgnore
-	public Map<Integer, ResourceConfiguration> getResourceConfigurations() {
+	private Map<Integer, ResourceConfiguration> getResourceConfigurations() {
 
 		HashMap<Integer, ResourceConfiguration> res = new HashMap<>();
 
@@ -82,15 +75,6 @@ public class ResourceConfigurationPropertyList {
 
 		}
 
-		return res;
-	}
-
-	@JsonIgnore
-	public ResourceConfigurationPropertyList getResourceConfigurationPropertyList() {
-		ResourceConfigurationPropertyList res = new ResourceConfigurationPropertyList();
-		res.setImgPaths(imgPaths);
-		res.setNames(names);
-		res.setTypes(types);
 		return res;
 	}
 

@@ -1,4 +1,4 @@
-package org.terrehostile.game.configuration;
+package org.terrehostile.game.configuration.model;
 
 public class ResourceConfiguration {
 

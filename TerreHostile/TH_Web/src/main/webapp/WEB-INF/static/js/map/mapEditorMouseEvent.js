@@ -150,7 +150,23 @@ define(['mustache'], function(Mustache) {
 			// do nothing
 		}
 	
-
+		
+		function showMapToolBarSubMenu(configuration, layerValue) {
+			
+			$('#mapToolBarSubMenu').html("");
+			var mapToolBarSubMenuItemButtonTemplate = $('#mapToolBarSubMenuItemButtonTemplate').html();
+							
+					$.each(configuration, function( index, value ) 
+					{
+						var htmlButton = Mustache.to_html(mapToolBarSubMenuItemButtonTemplate, value);
+						var id = "mapToolBarSubMenuItem_" + value.name;
+						$('#mapToolBarSubMenu').append(htmlButton);
+						$('#' + id).click(function() 
+						{
+							_setCurrentSelection(value.type, layerValue, false);
+						});
+					});
+		}
 
 	
 	
@@ -215,23 +231,7 @@ define(['mustache'], function(Mustache) {
 		layerNumberGlobal = layerNumber;
 		allGroundGlobal = allGround;
 	}
-	
-	function showMapToolBarSubMenu(configuration, layerValue) {
-		
-		$('#mapToolBarSubMenu').html("");
-		var mapToolBarSubMenuItemButtonTemplate = $('#mapToolBarSubMenuItemButtonTemplate').html();
-						
-				$.each(configuration, function( index, value ) 
-				{
-					var htmlButton = Mustache.to_html(mapToolBarSubMenuItemButtonTemplate, value);
-					var id = "mapToolBarSubMenuItem_" + value.name;
-					$('#mapToolBarSubMenu').append(htmlButton);
-					$('#' + id).click(function() 
-					{
-						_setCurrentSelection(value.type, layerValue, false);
-					});
-				});
-	}
+
 	
 	
 	

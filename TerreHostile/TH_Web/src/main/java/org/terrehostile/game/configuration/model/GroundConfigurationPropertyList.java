@@ -1,4 +1,4 @@
-package org.terrehostile.game.configuration;
+package org.terrehostile.game.configuration.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -17,6 +18,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @PropertySource("classpath:/gameConfiguration/grounds.properties")
 @ConfigurationProperties(prefix = "grounds")
 public class GroundConfigurationPropertyList {
+
+	@Bean(name = "groundConfigurations")
+	public Map<Integer, GroundConfiguration> groundConfigurations() {
+		return getGroundConfigurations();
+	}
 
 	@Autowired
 	@JsonIgnore
@@ -62,21 +68,7 @@ public class GroundConfigurationPropertyList {
 		this.types = types;
 	}
 
-	@JsonIgnore
-	public GroundConfiguration getGroundConfiguration(int groundType) {
-		GroundConfiguration res = new GroundConfiguration();
-		res.setName(env.getProperty("grounds.names[" + groundType + "]"));
-		res.setImgPath(env.getProperty("grounds.imgPaths[" + groundType + "]"));
-		res.setImgPathGround(env.getProperty("grounds.imgPathsGround[" + groundType + "]"));
-		res.setType(Integer.parseInt(env.getProperty("grounds.types[" + groundType + "]")));
-
-		res.setMovement(Integer.parseInt(env.getProperty("grounds.movement[" + groundType + "]")));
-
-		return res;
-	}
-
-	@JsonIgnore
-	public Map<Integer, GroundConfiguration> getGroundConfigurations() {
+	private Map<Integer, GroundConfiguration> getGroundConfigurations() {
 
 		HashMap<Integer, GroundConfiguration> res = new HashMap<>();
 
@@ -93,16 +85,6 @@ public class GroundConfigurationPropertyList {
 
 		}
 
-		return res;
-	}
-
-	@JsonIgnore
-	public GroundConfigurationPropertyList getGroundConfigurationPropertyList() {
-		GroundConfigurationPropertyList res = new GroundConfigurationPropertyList();
-		res.setImgPaths(imgPaths);
-		res.setImgPathsGround(imgPathsGround);
-		res.setNames(names);
-		res.setTypes(types);
 		return res;
 	}
 

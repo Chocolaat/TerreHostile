@@ -3,7 +3,7 @@ package org.terrehostile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.terrehostile.business.map.MapView;
-import org.terrehostile.game.configuration.UnitConfigurationPropertyList;
+import org.terrehostile.game.configuration.model.UnitConfigurationPropertyList;
 import org.terrehostile.repository.TileRepository;
 import org.terrehostile.services.MapViewService;
 import org.terrehostile.services.TileItemService;

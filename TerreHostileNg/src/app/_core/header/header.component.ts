@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
     <li><a routerLink="/home" routerLinkActive="myactive">Accueil</a></li>
     <li><a>Administration</a>
       <ul>
-        <li><a routerLink="/mapEditor" routerLinkActive="myactive">Éditeur de carte</a></li>
+        <li><a routerLink="/mapEditor" routerLinkActive="myactive">Éditeur</a></li>
         <li><a routerLink="/mapEditor" routerLinkActive="myactive">Forum</a></li>
         <li><a routerLink="/mapEditor" routerLinkActive="myactive">Monstres</a></li>
         <li><a routerLink="/mapEditor" routerLinkActive="myactive">Ressources</a></li>

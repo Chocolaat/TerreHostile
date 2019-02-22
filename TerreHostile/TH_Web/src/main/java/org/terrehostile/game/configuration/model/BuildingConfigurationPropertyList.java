@@ -1,4 +1,4 @@
-package org.terrehostile.game.configuration;
+package org.terrehostile.game.configuration.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -17,6 +18,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @PropertySource("classpath:/gameConfiguration/buildings.properties")
 @ConfigurationProperties(prefix = "buildings")
 public class BuildingConfigurationPropertyList {
+
+	@Bean(name = "buildingConfigurations")
+	public Map<Integer, BuildingConfiguration> buildingConfigurations() {
+		return getBuildingConfigurations();
+	}
 
 	@Autowired
 	@JsonIgnore
@@ -52,25 +58,7 @@ public class BuildingConfigurationPropertyList {
 		this.types = types;
 	}
 
-	@JsonIgnore
-	public BuildingConfiguration getBuildingConfiguration(int buildingType) {
-		BuildingConfiguration res = new BuildingConfiguration();
-		res.setName(env.getProperty("buildings.names[" + buildingType + "]"));
-		res.setImgPath(env.getProperty("buildings.imgPaths[" + buildingType + "]"));
-		res.setType(Integer.parseInt(env.getProperty("buildings.types[" + buildingType + "]")));
-
-		res.setVision(Integer.parseInt(env.getProperty("buildings.vision[" + buildingType + "]")));
-
-		res.setTotalHealth(Integer.parseInt(env.getProperty("buildings.totalHealth[" + buildingType + "]")));
-		res.setPower(Integer.parseInt(env.getProperty("buildings.power[" + buildingType + "]")));
-		res.setArmor(Integer.parseInt(env.getProperty("buildings.armor[" + buildingType + "]")));
-		res.setRange(Integer.parseInt(env.getProperty("buildings.range[" + buildingType + "]")));
-
-		return res;
-	}
-
-	@JsonIgnore
-	public Map<Integer, BuildingConfiguration> getBuildingConfigurations() {
+	private Map<Integer, BuildingConfiguration> getBuildingConfigurations() {
 
 		HashMap<Integer, BuildingConfiguration> res = new HashMap<>();
 
@@ -92,15 +80,6 @@ public class BuildingConfigurationPropertyList {
 
 		}
 
-		return res;
-	}
-
-	@JsonIgnore
-	public BuildingConfigurationPropertyList getBuildingConfigurationPropertyList() {
-		BuildingConfigurationPropertyList res = new BuildingConfigurationPropertyList();
-		res.setImgPaths(imgPaths);
-		res.setNames(names);
-		res.setTypes(types);
 		return res;
 	}
 

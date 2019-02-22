@@ -10,7 +10,7 @@ nav {
 
 nav ul {
 	list-style: none;
-	position: relative;
+	position: absolute;
 	display: inline-table;
 	padding: 0px 0px;
 }
