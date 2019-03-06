@@ -15,31 +15,14 @@ import { Component, OnInit } from '@angular/core';
       id="mapToolBarItemResources">Ressources</button>
   </div>
 
-		<div id="mapToolBarSubMenu"></div>
+    <div id="mapToolBarSubMenu" ng-show="showSubMenu()">
+      <ul ng-repeat="thing in things">
+        <li>
+          <button>Toto</button>
+        </li>
+   </ul>
+  </div>
 
-		<script id="mapToolBarSubMenuItemButtonTemplate" type="text/template">
-  <button type='button' class='mapToolBarSubMenuItem' id='mapToolBarSubMenuItem_{{name}}'
-  style='--backgroundImageUrl:url({{imgPath}});'>
-  {{name}}</button>
-	</script>
-
-
-		<div id="mapToolBarSubMenu_Buildings" style='display: none'>
-			<button type="button" class="mapToolBarSubMenuItem"
-				id="mapToolBarSubMenuItem_Castle">Château</button>
-		</div>
-
-		<div id="mapToolBarSubMenu_Troops" style='display: none'>
-			<button type="button" class="mapToolBarSubMenuItem"
-				id="mapToolBarSubMenuItem_Dragon">Dragon</button>
-			<button type="button" class="mapToolBarSubMenuItem"
-				id="mapToolBarSubMenuItem_Unicorn">Licorne</button>
-		</div>
-
-		<div id="mapToolBarSubMenu_Resources" style='display: none'>
-			<button type="button" class="mapToolBarSubMenuItem"
-				id="mapToolBarSubMenuItem_Flours">Fleurs</button>
-		</div>
 	</section>
   `,
   styleUrls: ['./mapEditorToolbar.component.css']

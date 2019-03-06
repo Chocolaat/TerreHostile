@@ -1,12 +1,14 @@
-export class BuildingConfiguration {
+export class UnitConfiguration {
   name: string;
-  imgPath: String;
+  imgPath: string;
   type: number;
 
   vision: number;
+  movement: number;
 
   totalHealth: number;
   power: number;
   armor: number;
   range: number;
 }
+
