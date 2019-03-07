@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -35,24 +36,28 @@ public class GameConfigurationController {
 		return Arrays.asList("building", "resource", "unit", "ground");
 	}
 
+	@CrossOrigin
 	@RequestMapping(value = { "/gameConfigurations/building" }, method = RequestMethod.GET)
 	@ResponseBody
 	public Map<Integer, BuildingConfiguration> getBuildingConfigurations() {
 		return buildingConfigurations;
 	}
 
+	@CrossOrigin
 	@RequestMapping(value = { "/gameConfigurations/resource" }, method = RequestMethod.GET)
 	@ResponseBody
 	public Map<Integer, ResourceConfiguration> getResourceConfigurations() {
 		return resourceConfigurations;
 	}
 
+	@CrossOrigin
 	@RequestMapping(value = { "/gameConfigurations/unit" }, method = RequestMethod.GET)
 	@ResponseBody
 	public Map<Integer, UnitConfiguration> getUnitConfigurations() {
 		return unitConfigurations;
 	}
 
+	@CrossOrigin
 	@RequestMapping(value = { "/gameConfigurations/ground" }, method = RequestMethod.GET)
 	@ResponseBody
 	public Map<Integer, GroundConfiguration> getGroundConfigurations() {
