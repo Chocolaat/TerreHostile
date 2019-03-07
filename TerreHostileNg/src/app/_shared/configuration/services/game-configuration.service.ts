@@ -11,26 +11,38 @@ import { ResourceConfiguration } from '../model/resourceConfiguration';
 export class GameConfigurationService {
 
   // buildingConfiguration: Map<number, BuildingConfiguration> = new Map<number, BuildingConfiguration>();
-  buildingConfiguration: Map<number, BuildingConfiguration>;
-  resourceConfiguration: Map<number, ResourceConfiguration>;
-  unitConfiguration: Map<number, UnitConfiguration>;
-  groundConfiguration: Map<number, GroundConfiguration>;
+  buildingConfiguration: Observable<Map<number, BuildingConfiguration>>;
+  resourceConfiguration: Observable<Map<number, ResourceConfiguration>>;
+  unitConfiguration: Observable<Map<number, UnitConfiguration>>;
+  groundConfiguration: Observable<Map<number, GroundConfiguration>>;
 
   constructor(private  httpClient: HttpClient) { }
 
-  getBuildingConfiguration(): Observable<BuildingConfiguration> {
-    return this.httpClient.get<any>('/gameConfigurations/building');
+  getBuildingConfiguration(): Observable<Map<number, BuildingConfiguration>> {
+    if (!this.buildingConfiguration) {
+      this.buildingConfiguration = this.httpClient.get<any>('http://localhost:8082/TH_Web/gameConfigurations/building');
+    }
+    return this.buildingConfiguration;
   }
 
-  getResourceConfiguration(): Observable<ResourceConfiguration> {
-    return this.httpClient.get<any>('/gameConfigurations/resource');
+  getResourceConfiguration(): Observable<Map<number, ResourceConfiguration>> {
+    if (!this.resourceConfiguration) {
+      this.resourceConfiguration = this.httpClient.get<any>('http://localhost:8082/TH_Web/gameConfigurations/resource');
+    }
+    return this.resourceConfiguration;
   }
 
-  getUnitConfiguration(): Observable<UnitConfiguration> {
-    return this.httpClient.get<any>('/gameConfigurations/unit');
+  getUnitConfiguration(): Observable<Map<number, UnitConfiguration>> {
+    if (!this.unitConfiguration) {
+      this.unitConfiguration = this.httpClient.get<any>('http://localhost:8082/TH_Web/gameConfigurations/unit');
+    }
+    return this.unitConfiguration;
   }
 
-  getGroundConfiguration(): Observable<GroundConfiguration> {
-    return this.httpClient.get<any>('/gameConfigurations/ground');
+  getGroundConfiguration(): Observable<Map<number, GroundConfiguration>> {
+    if (!this.groundConfiguration) {
+      this.groundConfiguration = this.httpClient.get<any>('http://localhost:8082/TH_Web/gameConfigurations/ground');
+    }
+    return this.groundConfiguration;
   }
 }

@@ -1,5 +1,5 @@
-import { MapEditorComponent } from './modules/mapEditor/mapEditor.component';
-import { MapPlayerComponent } from './modules/mapPlayer/mapPlayer.component';
+import { MapPlayerComponent } from './modules/game/mapPlayer/mapPlayer.component';
+import { MapEditorComponent } from './modules/admin/mapEditor/mapEditor.component';
 import { HomeComponent } from './modules/home/home/home.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
