@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -84,6 +85,11 @@ public class WebMvcConfig implements WebMvcConfigurer {
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/img/**", "/css/**", "/js/**").addResourceLocations("/WEB-INF/static/img/",
 				"/WEB-INF/static/css/", "/WEB-INF/static/js/");
+	}
+
+	@Override
+	public void addCorsMappings(CorsRegistry registry) {
+		registry.addMapping("/**");
 	}
 
 }

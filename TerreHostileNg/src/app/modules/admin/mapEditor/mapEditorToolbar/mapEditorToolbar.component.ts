@@ -10,28 +10,35 @@ import { UnitConfiguration } from 'src/app/_shared/configuration/model/unitConfi
   template: `
   <section id="mapEditorToolbar">
   <div id="mapToolBar">
-    <button type="button" class="mapToolBarItem"
-    id="mapToolBarItemGroundType" (click)="showMapToolBarSubMenu()"> Type de terrain</button>
-    <button type="button" class="mapToolBarItem"
-      id="mapToolBarItemBuildings">Bâtiments</button>
-    <button type="button" class="mapToolBarItem"
-      id="mapToolBarItemTroops">Troupes</button>
-    <button type="button" class="mapToolBarItem"
-      id="mapToolBarItemResources">Ressources</button>
+    <button type="button" class="mapToolBarItem" id="mapToolBarItemGroundType"
+    (click)="showMapToolBarSubMenu('ground')">Type de terrain</button>
+    <button type="button" class="mapToolBarItem" id="mapToolBarItemBuildings"
+    (click)="showMapToolBarSubMenu('building')">Bâtiments</button>
+    <button type="button" class="mapToolBarItem" id="mapToolBarItemTroops"
+    (click)="showMapToolBarSubMenu('unit')">Unités</button>
+    <button type="button" class="mapToolBarItem" id="mapToolBarItemResources"
+    (click)="showMapToolBarSubMenu('resource')">Ressources</button>
   </div>
 
-    <div id="mapToolBarSubMenu" *ngIf="displaySubMenu">
-      <ul ng-repeat="thing in things">
-        <li>
-          <button>Toto</button>
-        </li>
-   </ul>
+  <div id="mapToolBarSubMenu_Buildings" style='display: none'>
+  <button type="button" class="mapToolBarSubMenuItem"
+    id="mapToolBarSubMenuItem_Castle">Château</button>
+</div>
 
-   <ul>
-   <li *ngFor="let building of buildingConfiguration | keyvalue">
-       {{building.key}} --> {{building.value}}
-   </li>
-</ul>
+  <div id="mapToolBarSubMenu" *ngIf="currentSubMenu">
+    <div *ngIf="currentSubMenu == 'building'">
+        <button class="mapToolBarSubMenuItem" *ngFor="let building of buildingConfigurations | keyvalue">{{building.value.name}}</button>
+    </div>
+    <div *ngIf="currentSubMenu == 'resource'">
+        <button class="mapToolBarSubMenuItem" *ngFor="let resource of resourceConfigurations | keyvalue">{{resource.value.name}}</button>
+    </div>
+    <div *ngIf="currentSubMenu == 'unit'">
+        <button class="mapToolBarSubMenuItem" *ngFor="let unit of unitConfigurations | keyvalue">{{unit.value.name}}</button>
+    </div>
+    <div *ngIf="currentSubMenu == 'ground'">
+        <button class="mapToolBarSubMenuItem"  *ngFor="let ground of groundConfigurations | keyvalue">{{ground.value.name}}</button>
+    </div>
+
 
   </div>
 
@@ -41,11 +48,11 @@ import { UnitConfiguration } from 'src/app/_shared/configuration/model/unitConfi
 })
 export class MapEditorToolbarComponent implements OnInit {
 
-  displaySubMenu: boolean;
-  buildingConfiguration: Map<number, BuildingConfiguration>;
-  resourceConfiguration: Map<number, ResourceConfiguration>;
-  unitConfiguration: Map<number, UnitConfiguration>;
-  groundConfiguration: Map<number, GroundConfiguration>;
+  currentSubMenu: string;
+  buildingConfigurations: Map<number, BuildingConfiguration>;
+  resourceConfigurations: Map<number, ResourceConfiguration>;
+  unitConfigurations: Map<number, UnitConfiguration>;
+  groundConfigurations: Map<number, GroundConfiguration>;
 
 
   constructor(private gameConfigurationService: GameConfigurationService) { }
@@ -54,13 +61,42 @@ export class MapEditorToolbarComponent implements OnInit {
   }
 
 
-  showMapToolBarSubMenu() {
-    this.gameConfigurationService.getBuildingConfiguration().subscribe(
-      (gameConf) => {
-        this.buildingConfiguration = gameConf;
-        console.log(gameConf);
-        this.displaySubMenu = true;
-    });
+  showMapToolBarSubMenu(subMenuToDisplay: string) {
+    switch (subMenuToDisplay) {
+      case 'building': {
+        this.gameConfigurationService.getBuildingConfiguration().subscribe(
+          (gameConf) => {
+            this.buildingConfigurations = gameConf;
+        });
+         break;
+      }
+      case 'unit': {
+        this.gameConfigurationService.getUnitConfiguration().subscribe(
+          (unitConf) => {
+            this.unitConfigurations = unitConf;
+        });
+         break;
+      }
+      case 'ground': {
+        this.gameConfigurationService.getGroundConfiguration().subscribe(
+          (groundConf) => {
+            this.groundConfigurations = groundConf;
+        });
+         break;
+      }
+      case 'resource': {
+        this.gameConfigurationService.getResourceConfiguration().subscribe(
+          (resourceConf) => {
+            this.resourceConfigurations = resourceConf;
+        });
+         break;
+      }
+      default: {
+        this.currentSubMenu = undefined;
+         break;
+      }
+   }
+    this.currentSubMenu = subMenuToDisplay;
   }
 
 }
