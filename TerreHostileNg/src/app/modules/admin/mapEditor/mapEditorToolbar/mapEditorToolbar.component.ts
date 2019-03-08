@@ -25,22 +25,25 @@ import { UnitConfiguration } from 'src/app/_shared/configuration/model/unitConfi
     id="mapToolBarSubMenuItem_Castle">Château</button>
 </div>
 
-  <div id="mapToolBarSubMenu" *ngIf="currentSubMenu">
-    <div *ngIf="currentSubMenu == 'building'">
-        <button class="mapToolBarSubMenuItem" *ngFor="let building of buildingConfigurations | keyvalue">{{building.value.name}}</button>
+    <div id="mapToolBarSubMenu" *ngIf="currentSubMenu == 'building'">
+        <button class="mapToolBarSubMenuItem" *ngFor="let building of buildingConfigurations | keyvalue"
+        background-image: [ngStyle]="{'background-image': 'url('+ building.value.imgPath +')'}">{{building.value.name}}</button>
     </div>
-    <div *ngIf="currentSubMenu == 'resource'">
-        <button class="mapToolBarSubMenuItem" *ngFor="let resource of resourceConfigurations | keyvalue">{{resource.value.name}}</button>
+    <div id="mapToolBarSubMenu" *ngIf="currentSubMenu == 'resource'">
+    <button class="mapToolBarSubMenuItem" *ngFor="let resource of resourceConfigurations | keyvalue"
+    background-image: [ngStyle]="{'background-image': 'url('+ resource.value.imgPath +')'}">{{resource.value.name}}</button>
     </div>
-    <div *ngIf="currentSubMenu == 'unit'">
-        <button class="mapToolBarSubMenuItem" *ngFor="let unit of unitConfigurations | keyvalue">{{unit.value.name}}</button>
+    <div id="mapToolBarSubMenu" *ngIf="currentSubMenu == 'unit'">
+        <button class="mapToolBarSubMenuItem" *ngFor="let unit of unitConfigurations | keyvalue"
+        background-image: [ngStyle]="{'background-image': 'url('+ unit.value.imgPath +')'}">{{unit.value.name}}</button>
     </div>
-    <div *ngIf="currentSubMenu == 'ground'">
-        <button class="mapToolBarSubMenuItem"  *ngFor="let ground of groundConfigurations | keyvalue">{{ground.value.name}}</button>
+    <div id="mapToolBarSubMenu" *ngIf="currentSubMenu == 'ground'">
+        <button class="mapToolBarSubMenuItem"  *ngFor="let ground of groundConfigurations | keyvalue"
+        background-image: [ngStyle]="{'background-image': 'url('+ ground.value.imgPath +')'}">{{ground.value.name}}</button>
     </div>
 
 
-  </div>
+
 
 	</section>
   `,
