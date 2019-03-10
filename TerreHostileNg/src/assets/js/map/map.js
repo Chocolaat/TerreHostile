@@ -200,8 +200,8 @@ define([ 'libs/jsiso/canvas/Control', 'libs/jsiso/canvas/Input', 'libs/jsiso/img
 
 			function centerView(layer)
 			{
-				var mapViewWidth = document.getElementById('mapView').offsetWidth;
-				var mapViewHeight = document.getElementById('mapView').offsetHeight;
+				var mapViewWidth = document.getElementById('mapContainer').offsetWidth;
+				var mapViewHeight = document.getElementById('mapContainer').offsetHeight;
             	layer.align("h-center",
 						mapViewWidth, map.xSize, 0);
             	layer.align("v-center",

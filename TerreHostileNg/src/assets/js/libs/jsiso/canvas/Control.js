@@ -68,8 +68,8 @@ define(function() {
       }
 
       canvasType = '2d';
-      canvasElement.width = canvasElement.parentElement.clientWidth * pxRatio ;
-      canvasElement.height = canvasElement.parentElement.clientHeight * pxRatio ;
+      canvasElement.width = 2500;
+      canvasElement.height = 1500 ;
 
 
       // canvasElement.getContext(canvasType).setTransform(pxRatio, 0, 0, pxRatio, 0, 0);

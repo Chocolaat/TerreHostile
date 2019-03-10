@@ -1,18 +1,15 @@
 :host {
-  flex: 0 80%;
-  flex-grow : 1;
+  border: dashed #800080;
   display: flex;
-  border: dashed peru;
 }
 
 #mapView
 {
-  flex: 0 100%;
   border: dashed black;
 }
 
 #mapViewCanvas
-{
+{ 
   border: dashed cyan;
+  
 }
-
