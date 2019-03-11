@@ -8,6 +8,7 @@
 
 #mapContainer
 {
+  display: flex;
   flex: 0 auto;
   overflow: hidden;
   border: dashed yellow;

@@ -1,6 +1,7 @@
 :host {
   border: dashed #800080;
   display: flex;
+  width: 80%;
 }
 
 #mapView
@@ -9,7 +10,7 @@
 }
 
 #mapViewCanvas
-{ 
+{
   border: dashed cyan;
-  
+
 }
