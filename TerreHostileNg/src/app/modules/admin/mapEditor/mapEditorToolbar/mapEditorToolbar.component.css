@@ -10,7 +10,7 @@
 
 #mapToolBar
 {
-  width:50%;
+  width:20%;
   height:100%;
 	display: inline-grid;
  	grid-template-columns: 100%;
@@ -29,7 +29,7 @@
 
 
 #mapToolBarSubMenu {
-  width:100%;
+  flex-grow: 1;
 	display: inline-grid;
   grid-template-columns: 50% 50%;
 	grid-gap: 2px 2px;
