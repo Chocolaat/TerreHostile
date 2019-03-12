@@ -1,6 +1,5 @@
 :host {
   display: flex;
-  flex-grow : 1;
   flex-direction: column;
   border: dashed green;
 }
@@ -9,7 +8,5 @@
 #mapContainer
 {
   display: flex;
-  flex: 0 auto;
-  overflow: hidden;
   border: dashed yellow;
 }

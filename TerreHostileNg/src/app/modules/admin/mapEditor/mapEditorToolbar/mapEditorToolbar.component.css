@@ -1,13 +1,11 @@
-
-:host{
-  flex: 1 auto;
-  border: dashed red;
+:host {
+  flex: 1;
+  height: 20%;
 }
 
 #mapEditorToolbar{
   display:flex;
   border: dashed darkblue;
-  height:100%;
 }
 
 #mapToolBar
@@ -18,7 +16,7 @@
  	grid-template-columns: 100%;
 	grid-gap: 2px 2px;
 	padding: 0px;
-	color: #444;
+	color: rgb(134, 19, 19);
 	overflow-y: auto;
 	overflow-x: hidden;
   border: dashed rgb(92, 216, 102);
@@ -31,8 +29,7 @@
 
 
 #mapToolBarSubMenu {
-  width:50%;
-  height:100%;
+  width:100%;
 	display: inline-grid;
   grid-template-columns: 50% 50%;
 	grid-gap: 2px 2px;
@@ -44,9 +41,12 @@
 }
 
 .mapToolBarSubMenuItem {
-  color: #000000;
-  border-radius: 5px;
-  padding: 2px;
+  background-repeat: no-repeat;
+  background-position: center; 
+  background-color: Transparent;
+}
+.mapToolBarSubMenuItemGround {
   background-repeat: repeat;
-  background-image: var(--backgroundImageUrl);
+  background-position: center; 
+  background-color: Transparent;
 }

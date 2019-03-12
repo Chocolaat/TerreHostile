@@ -20,10 +20,6 @@ import { UnitConfiguration } from 'src/app/_shared/configuration/model/unitConfi
     (click)="showMapToolBarSubMenu('resource')">Ressources</button>
   </div>
 
-  <div id="mapToolBarSubMenu_Buildings" style='display: none'>
-  <button type="button" class="mapToolBarSubMenuItem"
-    id="mapToolBarSubMenuItem_Castle">Château</button>
-</div>
 
     <div id="mapToolBarSubMenu" *ngIf="currentSubMenu == 'building'">
         <button class="mapToolBarSubMenuItem" *ngFor="let building of buildingConfigurations | keyvalue"
@@ -37,11 +33,10 @@ import { UnitConfiguration } from 'src/app/_shared/configuration/model/unitConfi
         <button class="mapToolBarSubMenuItem" *ngFor="let unit of unitConfigurations | keyvalue"
         background-image: [ngStyle]="{'background-image': 'url('+ unit.value.imgPath +')'}">{{unit.value.name}}</button>
     </div>
-    <div id="mapToolBarSubMenu" *ngIf="currentSubMenu == 'ground'">
-        <button class="mapToolBarSubMenuItem"  *ngFor="let ground of groundConfigurations | keyvalue"
+     <div id="mapToolBarSubMenu" *ngIf="currentSubMenu == 'ground'">
+        <button class="mapToolBarSubMenuItemGround"  *ngFor="let ground of groundConfigurations | keyvalue"
         background-image: [ngStyle]="{'background-image': 'url('+ ground.value.imgPath +')'}">{{ground.value.name}}</button>
-    </div>
-
+    </div> 
 
 
 
