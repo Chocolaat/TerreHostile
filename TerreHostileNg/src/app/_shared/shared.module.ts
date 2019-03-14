@@ -1,3 +1,4 @@
+import { MouseEventDirective } from './map/map-view/mouse-event/mouse-event.directive';
 import { GameConfigurationService } from './configuration/services/game-configuration.service';
 import { CoreModule } from 'src/app/_core/core_module';
 import { MapViewComponent } from './map/map-view/map-view.component';
@@ -7,7 +8,8 @@ import { NgModule } from '@angular/core';
 
 @NgModule({
   declarations: [
-    MapViewComponent
+    MapViewComponent,
+    MouseEventDirective
   ],
   imports: [
     BrowserModule,
@@ -16,7 +18,8 @@ import { NgModule } from '@angular/core';
   exports: [
     MapViewComponent,
     CoreModule,
-    BrowserModule
+    BrowserModule,
+    MouseEventDirective
   ]
 })
 export class SharedModule { }
