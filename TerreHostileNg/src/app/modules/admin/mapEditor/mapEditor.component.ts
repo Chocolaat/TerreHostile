@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-map-editor',
@@ -16,6 +16,13 @@ export class MapEditorComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+
+  @HostListener('nav:mousedown', ['$event'])
+  onKeyUp(ev: MouseEvent) {
+    // do something meaningful with it
+    console.log(`The user just pressed ${ev.button}!`);
   }
 
 }

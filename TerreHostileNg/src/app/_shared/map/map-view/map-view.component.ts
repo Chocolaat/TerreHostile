@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 declare function launchMap(map): any;
 
 @Component({
@@ -14,6 +14,7 @@ declare function launchMap(map): any;
 export class MapViewComponent implements OnInit {
 
   constructor() { }
+
 
   ngOnInit() {
 

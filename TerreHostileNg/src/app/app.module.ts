@@ -5,9 +5,11 @@ import { NgModule } from '@angular/core';
 import { WindowRef } from './_core/window.service';
 import { AppComponent } from './app.component';
 import { SharedModule } from './_shared/shared.module';
+import { MouseEventComponent } from './_shared/map/map-view/mouse-event/mouse-event.component';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MouseEventComponent
   ],
   imports: [
     SharedModule,
