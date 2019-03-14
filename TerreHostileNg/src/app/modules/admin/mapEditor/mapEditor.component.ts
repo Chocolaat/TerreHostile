@@ -5,7 +5,7 @@ import { Component, OnInit, HostListener } from '@angular/core';
   template: `
   <div> Éditeur de carte </div>
   <section id="mapContainer">
-    <app-map-view></app-map-view>
+    <app-map-view appMouseEvent (onFocusOut)='appMouseEvent($event)'></app-map-view>
     <app-map-editor-toolbar></app-map-editor-toolbar>
   </section>
   `,
@@ -18,11 +18,14 @@ export class MapEditorComponent implements OnInit {
   ngOnInit() {
   }
 
+  appMouseEvent(event: any)
+  {
+    console.log('appMouseEvent');
+    console.log(event);
 
-  @HostListener('nav:mousedown', ['$event'])
-  onKeyUp(ev: MouseEvent) {
-    // do something meaningful with it
-    console.log(`The user just pressed ${ev.button}!`);
+    
   }
+
+
 
 }

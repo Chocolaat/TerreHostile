@@ -3,6 +3,11 @@ define([ 'libs/jsiso/canvas/Control', 'libs/jsiso/canvas/Input', 'libs/jsiso/img
 
   return {
 
+		updateTile: function(coords)
+		{
+			console.log("updateTile coords");
+			console.log(coords);
+		},
     launchGame: function (map) {
 
       console.log("--------");
@@ -511,6 +516,6 @@ define([ 'libs/jsiso/canvas/Control', 'libs/jsiso/canvas/Input', 'libs/jsiso/img
 			launch();
 
 
-    }
+		}
   };
 });
