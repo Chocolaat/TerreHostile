@@ -1,18 +1,18 @@
 import { Directive, Output, EventEmitter, HostListener } from '@angular/core';
 
 @Directive({
-  selector: '[appMouseEvent]'
+  selector: '[appMouseEventDirective]'
 })
 export class MouseEventDirective {
 
   constructor() { }
 
-  @Output() onFocusOut: EventEmitter<MouseEvent> = new EventEmitter();
+  @Output() mouseUp: EventEmitter<MouseEvent> = new EventEmitter();
 
-  @HostListener("mouseup", ["$event"])
+  @HostListener('mouseup', ['$event'])
   public onListenerTriggered(event: any): void {
-      this.onFocusOut.emit(event);
+      this.mouseUp.emit(event);
   }
-  
+
 
 }

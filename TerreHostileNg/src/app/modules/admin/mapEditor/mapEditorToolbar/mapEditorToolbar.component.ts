@@ -36,7 +36,7 @@ import { UnitConfiguration } from 'src/app/_shared/configuration/model/unitConfi
      <div id="mapToolBarSubMenu" *ngIf="currentSubMenu == 'ground'">
         <button class="mapToolBarSubMenuItemGround"  *ngFor="let ground of groundConfigurations | keyvalue"
         background-image: [ngStyle]="{'background-image': 'url('+ ground.value.imgPath +')'}">{{ground.value.name}}</button>
-    </div> 
+    </div>
 
 
 

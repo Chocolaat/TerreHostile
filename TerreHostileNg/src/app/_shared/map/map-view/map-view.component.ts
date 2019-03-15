@@ -1,5 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
-declare function launchMap(): any;
+import * as MapJsModule from 'src/assets/js/map/map.js';
+
 
 @Component({
   selector: 'app-map-view',
@@ -14,6 +15,10 @@ declare function launchMap(): any;
 export class MapViewComponent implements OnInit {
 
   constructor() { }
+
+  start(map: any) {
+    MapJsModule.launchGame(map);
+  }
 
 
   ngOnInit() {
@@ -292,15 +297,7 @@ export class MapViewComponent implements OnInit {
       currentYCoord: 530
     };
 
-    let jsmap = launchMap();
-
-    console.log('jsmap = ' + jsmap);
-
-    jsmap.launchGame(map);
-
-    console.log('launched');
-
-    jsmap.updateTile('toto');
+    this.start(map);
   }
 
 }

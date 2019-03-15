@@ -1,4 +1,4 @@
-﻿/*  
+﻿/*
 Copyright (c) 2014 Iain Hamilton
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -17,11 +17,11 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE. 
+THE SOFTWARE.
 */
 
 define([
-  'libs/jsiso/utils'
+  '../../../libs/jsiso/utils'
 ],
 
 function(utils) {
@@ -32,7 +32,7 @@ function(utils) {
     var age = 0;
 
     return {
-    
+
       active: false, // draw or not
 
       drawdelay: -1, // how old before the particle can start drawing
@@ -88,7 +88,7 @@ function(utils) {
             // Draw the particle
 
             if (Number(this.x) !== undefined &&  Number(this.y) !== undefined) {
-              
+
               if (this.x > this.minxb || this.x < this.maxxb || this.y > this.minyb || this.y < this.maxyb) {
                 var p = context.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.radius);
                 p.addColorStop(0, rgbstr);

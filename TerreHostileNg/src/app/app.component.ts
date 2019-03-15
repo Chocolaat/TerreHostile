@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-declare function launchRequire(): any;
 
 
 @Component({
@@ -14,7 +13,6 @@ export class AppComponent implements OnInit {
   title = 'TerreHostileNg';
 
   ngOnInit(): void {
-    launchRequire();
   }
 
 }
