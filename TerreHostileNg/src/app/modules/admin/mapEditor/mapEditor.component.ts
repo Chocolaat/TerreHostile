@@ -7,6 +7,7 @@ import { MapEditorSelection } from './model/mapEditorSelection';
   template: `
   <div> Éditeur de carte </div>
   <section id="mapContainer">
+    <app-map-editor-header></app-map-editor-header>
     <app-map-view appMouseEventDirective (mouseUp)='mouseUp($event)'></app-map-view>
     <app-map-editor-toolbar 
     (mapEditorToolbarLayerSelectionEvent)="onLayerSelection($event)" 
@@ -31,6 +32,7 @@ export class MapEditorComponent implements OnInit {
   onLayerSelection(event: number)
   {
     this.currentMapEditorSelection.currentLayerSelected = event;
+    this.currentMapEditorSelection.currentTypeSelected = 0;
   }
   onTypeSelection(event: number)
   {
