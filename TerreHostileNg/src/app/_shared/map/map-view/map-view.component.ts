@@ -1,5 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import * as MapJsModule from 'src/assets/js/map/map.js';
+import { MapService } from '../services/map.service';
 
 
 @Component({
@@ -14,12 +15,16 @@ import * as MapJsModule from 'src/assets/js/map/map.js';
 })
 export class MapViewComponent implements OnInit {
 
-  constructor() { }
+  constructor(private mapService: MapService) { }
 
   start(map: any) {
-    MapJsModule.launchGame(map);
+    map = this.mapService.getMapByXYAndSize(500, 500, 30).subscribe(
+      (map) => {
+        MapJsModule.launchGame(map);
+    });
+    
   }
-
+ 
 
   ngOnInit() {
 

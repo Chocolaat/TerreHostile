@@ -5,6 +5,7 @@ import { MapViewComponent } from './map/map-view/map-view.component';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { MapService } from './map/services/map.service';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,9 @@ import { NgModule } from '@angular/core';
     CoreModule,
     BrowserModule,
     MouseEventDirective
+  ],
+  providers: [
+    MapService
   ]
 })
 export class SharedModule { }

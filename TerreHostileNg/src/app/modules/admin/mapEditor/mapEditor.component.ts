@@ -26,7 +26,9 @@ export class MapEditorComponent implements OnInit {
 
 
   mouseUp(event: any) {
-    MapJsModule.updateTile(event, this.currentMapEditorSelection.currentLayerSelected, this.currentMapEditorSelection.currentTypeSelected);
+    if (this.currentMapEditorSelection.currentLayerSelected != undefined && this.currentMapEditorSelection.currentTypeSelected != undefined ) {
+      MapJsModule.updateTile(event, this.currentMapEditorSelection.currentLayerSelected, this.currentMapEditorSelection.currentTypeSelected);
+    }
   }
 
   onLayerSelection(event: number)
