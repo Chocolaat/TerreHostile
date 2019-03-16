@@ -424,6 +424,7 @@ define(["require", "exports", '../libs/jsiso/canvas/Control', '../libs/jsiso/can
 
     launch();
 
+    exports.map =      map;
 
   exports.updateTile =       function _updateTile(event, layerNumber, newValue)
   {

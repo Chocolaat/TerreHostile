@@ -13,4 +13,10 @@ export class MapService {
     return this.httpClient.get<any>('/api/admin/mapEditorGetMapByXYAndSize' + params);
   }
 
+  saveMap(map: any): Observable<any> {
+
+    return this.httpClient.post<any>('/api/admin/mapEditorSaveMap', map);
+  }
+
+
 }

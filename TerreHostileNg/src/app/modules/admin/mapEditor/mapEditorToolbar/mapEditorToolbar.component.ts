@@ -80,11 +80,6 @@ export class MapEditorToolbarComponent implements OnInit {
   ngOnInit() {
   }
 
-  layerAndTypeSelection(layer:number, type:number)
-  {
-    this.mapEditorToolbarLayerSelectionEvent.emit(layer);
-  }
-
   showMapToolBarSubMenu(subMenuToDisplay: string) {
     switch (subMenuToDisplay) {
       case 'ground': {
