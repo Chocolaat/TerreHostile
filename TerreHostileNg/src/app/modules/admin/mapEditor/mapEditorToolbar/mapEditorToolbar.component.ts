@@ -23,7 +23,7 @@ import { MapEditorSelection } from '../model/mapEditorSelection';
     </div>
 
     <div id="mapToolBarSubMenu" *ngIf="currentSubMenu == 'ground'">
-      <button 
+      <button
       class="mapToolBarSubMenuItemGround"  *ngFor="let ground of groundConfigurations | keyvalue"
       background-image: [ngStyle]="{'background-image': 'url('+ ground.value.imgPath +')'}"
       (click)=this.mapEditorToolbarTypeSelectionEvent.emit(ground.value.type)>

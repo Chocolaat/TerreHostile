@@ -8,9 +8,9 @@ import { MapEditorSelection } from './model/mapEditorSelection';
   <div> Éditeur de carte </div>
   <section id="mapContainer">
     <app-map-editor-header></app-map-editor-header>
-    <app-map-view appMouseEventDirective (mouseUp)='mouseUp($event)'></app-map-view>
-    <app-map-editor-toolbar 
-    (mapEditorToolbarLayerSelectionEvent)="onLayerSelection($event)" 
+    <app-map-view appInputEventDirective (mouseEvent)='mouseClick($event)'></app-map-view>
+    <app-map-editor-toolbar
+    (mapEditorToolbarLayerSelectionEvent)="onLayerSelection($event)"
     (mapEditorToolbarTypeSelectionEvent)="onTypeSelection($event)">
     </app-map-editor-toolbar>
   </section>
@@ -19,25 +19,21 @@ import { MapEditorSelection } from './model/mapEditorSelection';
 })
 export class MapEditorComponent implements OnInit {
 
-  
   currentMapEditorSelection: MapEditorSelection = new MapEditorSelection();
 
   constructor() { }
 
-
-  mouseUp(event: any) {
-    if (this.currentMapEditorSelection.currentLayerSelected != undefined && this.currentMapEditorSelection.currentTypeSelected != undefined ) {
+  mouseClick(event: MouseEvent) {
+    if (this.currentMapEditorSelection.currentLayerSelected !== undefined && this.currentMapEditorSelection.currentTypeSelected !== undefined ) {
       MapJsModule.updateTile(event, this.currentMapEditorSelection.currentLayerSelected, this.currentMapEditorSelection.currentTypeSelected);
     }
   }
 
-  onLayerSelection(event: number)
-  {
+  onLayerSelection(event: number) {
     this.currentMapEditorSelection.currentLayerSelected = event;
     this.currentMapEditorSelection.currentTypeSelected = 0;
   }
-  onTypeSelection(event: number)
-  {
+  onTypeSelection(event: number) {
     this.currentMapEditorSelection.currentTypeSelected = event;
   }
 

@@ -4,6 +4,7 @@ import { MapEditorComponent } from './mapEditor.component';
 import { NgModule } from '@angular/core';
 import { GameConfigurationService } from 'src/app/_shared/configuration/services/game-configuration.service';
 import { MapEditorHeaderComponent } from './mapEditorHeader/mapEditorHeader.component';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -12,10 +13,12 @@ import { MapEditorHeaderComponent } from './mapEditorHeader/mapEditorHeader.comp
     MapEditorHeaderComponent
   ],
   imports: [
-    SharedModule
+    SharedModule,
+    MatSnackBarModule
   ],
   providers: [
-    GameConfigurationService
+    GameConfigurationService,
+    MatSnackBar
   ]
 })
 export class MapEditorModule { }

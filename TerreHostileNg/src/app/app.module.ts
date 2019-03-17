@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { WindowRef } from './_core/window.service';
 import { AppComponent } from './app.component';
 import { SharedModule } from './_shared/shared.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent
@@ -13,7 +14,8 @@ import { SharedModule } from './_shared/shared.module';
     SharedModule,
     HomeModule,
     MapPlayerModule,
-    MapEditorModule
+    MapEditorModule,
+    BrowserAnimationsModule
   ],
   providers: [ WindowRef ],
   bootstrap: [AppComponent]

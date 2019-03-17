@@ -210,7 +210,7 @@ define(["require", "exports", '../libs/jsiso/canvas/Control', '../libs/jsiso/can
           input.keyboard(function(pressed, keydown, event) {
         var mapViewWidth = document.getElementById('mapView').offsetWidth;
         var mapViewHeight = document.getElementById('mapView').offsetHeight;
-            if (!keydown) {
+            if (!keydown && false) {
               switch(pressed) {
                 case 81:
                   mapLayers.map(function(layer) {
@@ -425,6 +425,20 @@ define(["require", "exports", '../libs/jsiso/canvas/Control', '../libs/jsiso/can
     launch();
 
     exports.map =      map;
+
+    exports.mapLayers =      mapLayers;
+    
+    exports.setMap =     function _setMap(newMap)
+    {
+      map = newMap;
+      mapLayers[0].setLayout(newMap.ground);
+      mapLayers[0].setHeightLayout(newMap.height);
+
+      mapLayers[1].setLayout(newMap.buildings);
+      mapLayers[2].setLayout(newMap.resources);
+      mapLayers[3].setLayout(newMap.troops);
+
+    };
 
   exports.updateTile =       function _updateTile(event, layerNumber, newValue)
   {

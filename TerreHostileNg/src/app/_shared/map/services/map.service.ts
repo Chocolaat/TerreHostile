@@ -10,12 +10,12 @@ export class MapService {
   getMapByXYAndSize(beginX:number, beginY: number, size: number): Observable<any> {
 
     let params = '?beginX=' + beginX + '&beginY=' + beginY + '&size=' + size;
-    return this.httpClient.get<any>('/api/admin/mapEditorGetMapByXYAndSize' + params);
+    return this.httpClient.get<any>('/api/map' + params);
   }
 
   saveMap(map: any): Observable<any> {
 
-    return this.httpClient.post<any>('/api/admin/mapEditorSaveMap', map);
+    return this.httpClient.post<any>('/api/map', map);
   }
 
 
