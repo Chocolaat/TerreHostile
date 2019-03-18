@@ -3,7 +3,7 @@
 body {
 	background-image: url("/assets/images/backgrounds/parchemin_main.jpg");
 	background-attachment: fixed; /* Le fond restera fixe */
-  background-repeat: no-repeat;
+  background-repeat: repeat;
   margin: 0;
 }
 

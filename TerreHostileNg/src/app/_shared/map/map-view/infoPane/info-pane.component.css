@@ -1,6 +1,15 @@
 :host {
-    background-color:#ddd;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#infoPanelText {
+    margin-top:20px;
+    display: flex;
     position: absolute;
-    top: 1%;
-    left: 50%;
 }  
+
+#infoPanelPicture {
+    position: absolute;
+}
