@@ -1,8 +1,6 @@
 :host {
     background-color:#ddd;
-    position: fixed;
-    padding: 2em;
+    position: absolute;
+    top: 1%;
     left: 50%;
-    top: 5%;
-    transform: translate(-50%, -50%);
 }  

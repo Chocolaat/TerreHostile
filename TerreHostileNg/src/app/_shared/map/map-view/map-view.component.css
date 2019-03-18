@@ -6,6 +6,7 @@
 #mapView
 {
   border: dashed black;
+  position: relative;
 }
 
 #mapViewCanvas
