@@ -51,14 +51,16 @@ export class MapEditorHeaderComponent implements OnInit {
   }
   getMap(beginX: number, beginY: number, size: number) {
     this.mapEditorHeaderDisabled = true;
-    this.mapService.getMapByXYAndSize(beginX, beginY, size).subscribe(
+
+    this.mapService.updateMap();
+/*     this.mapService.getMapByXYAndSize(beginX, beginY, size).subscribe(
       (map) => {
         MapJsModule.setMap(map);
         this.mapEditorHeaderDisabled = false;
         this.snackBar.open('Saved', 'OK', {
           duration: 2000,
         });
-    });
+    }); */
   }
 
 }

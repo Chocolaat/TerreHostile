@@ -8,6 +8,7 @@ import { MapService } from '../services/map.service';
   template: `
 
 <div id='mapView'>
+<p>Yolo = {{message}}</p>
 <app-map-info-pane></app-map-info-pane>
 <canvas id='mapViewCanvas' tabindex='0' appInputEventDirective (keyboardEvent)='keyboardEvent($event)'></canvas>
 </div>
@@ -16,11 +17,18 @@ import { MapService } from '../services/map.service';
 })
 export class MapViewComponent implements OnInit {
 
+
+
+  message: string;
+
   constructor(private mapService: MapService) {
 
   }
 
   ngOnInit() {
+
+    this.mapService.currentMessage.subscribe(message => this.message = message);
+
     this.mapService.getMapByXYAndSize(500, 500, 30).subscribe(
       (map) => {
         MapJsModule.launchGame(map);

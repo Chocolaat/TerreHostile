@@ -1,3 +1,4 @@
+import { MapService } from 'src/app/_shared/map/services/map.service';
 import { GroundConfiguration } from './../../../../_shared/configuration/model/groundConfiguration';
 import { BuildingConfiguration } from './../../../../_shared/configuration/model/buildingConfiguration';
 import { GameConfigurationService } from './../../../../_shared/configuration/services/game-configuration.service';
@@ -10,53 +11,51 @@ import { MapEditorSelection } from '../model/mapEditorSelection';
 @Component({
   selector: 'app-map-editor-toolbar',
   template: `
+  <p>Hey {{message}}</p>
   <section id="mapEditorToolbar">
-    <div id="mapToolBar">
-      <button type="button" class="mapToolBarItem" id="mapToolBarItemGroundType"
-      (click)="showMapToolBarSubMenu('ground')">Type de terrain</button>
-      <button type="button" class="mapToolBarItem" id="mapToolBarItemBuildings"
-      (click)="showMapToolBarSubMenu('building')">Bâtiments</button>
-      <button type="button" class="mapToolBarItem" id="mapToolBarItemTroops"
-      (click)="showMapToolBarSubMenu('unit')">Unités</button>
-      <button type="button" class="mapToolBarItem" id="mapToolBarItemResources"
-      (click)="showMapToolBarSubMenu('resource')">Ressources</button>
-    </div>
+  <div id="mapToolBar">
+  <button type="button" class="mapToolBarItem" id="mapToolBarItemGroundType"
+  (click)="showMapToolBarSubMenu('ground')">Type de terrain</button>
+  <button type="button" class="mapToolBarItem" id="mapToolBarItemBuildings"
+  (click)="showMapToolBarSubMenu('building')">Bâtiments</button>
+  <button type="button" class="mapToolBarItem" id="mapToolBarItemTroops"
+  (click)="showMapToolBarSubMenu('unit')">Unités</button>
+  <button type="button" class="mapToolBarItem" id="mapToolBarItemResources"
+  (click)="showMapToolBarSubMenu('resource')">Ressources</button>
+</div>
 
-    <div id="mapToolBarSubMenu" *ngIf="currentSubMenu == 'ground'">
-      <button
-      class="mapToolBarSubMenuItemGround"  *ngFor="let ground of groundConfigurations | keyvalue"
-      background-image: [ngStyle]="{'background-image': 'url('+ ground.value.imgPath +')'}"
-      (click)=this.mapEditorToolbarTypeSelectionEvent.emit(ground.value.type)>
-      {{ground.value.name}}
-      </button>
-    </div>
+<div id="mapToolBarSubMenu" *ngIf="currentSubMenu == 'ground'">
+  <button
+  class="mapToolBarSubMenuItemGround"  *ngFor="let ground of groundConfigurations | keyvalue"
+  background-image: [ngStyle]="{'background-image': 'url('+ ground.value.imgPath +')'}"
+  (click)=this.mapEditorToolbarTypeSelectionEvent.emit(ground.value.type)>
+  {{ground.value.name}}
+  </button>
+</div>
 
-    <div id="mapToolBarSubMenu" *ngIf="currentSubMenu == 'building'">
-        <button class="mapToolBarSubMenuItem" *ngFor="let building of buildingConfigurations | keyvalue"
-        background-image: [ngStyle]="{'background-image': 'url('+ building.value.imgPath +')'}"
-        (click)="this.mapEditorToolbarTypeSelectionEvent.emit(building.value.type)">
-        {{building.value.name}}
-        </button>
-    </div>
+<div id="mapToolBarSubMenu" *ngIf="currentSubMenu == 'building'">
+    <button class="mapToolBarSubMenuItem" *ngFor="let building of buildingConfigurations | keyvalue"
+    background-image: [ngStyle]="{'background-image': 'url('+ building.value.imgPath +')'}"
+    (click)="this.mapEditorToolbarTypeSelectionEvent.emit(building.value.type)">
+    {{building.value.name}}
+    </button>
+</div>
 
-    <div id="mapToolBarSubMenu" *ngIf="currentSubMenu == 'resource'">
-      <button class="mapToolBarSubMenuItem" *ngFor="let resource of resourceConfigurations | keyvalue"
-      background-image: [ngStyle]="{'background-image': 'url('+ resource.value.imgPath +')'}"
-      (click)="this.mapEditorToolbarTypeSelectionEvent.emit(resource.value.type)">
-      {{resource.value.name}}
-      </button>
-    </div>
+<div id="mapToolBarSubMenu" *ngIf="currentSubMenu == 'resource'">
+  <button class="mapToolBarSubMenuItem" *ngFor="let resource of resourceConfigurations | keyvalue"
+  background-image: [ngStyle]="{'background-image': 'url('+ resource.value.imgPath +')'}"
+  (click)="this.mapEditorToolbarTypeSelectionEvent.emit(resource.value.type)">
+  {{resource.value.name}}
+  </button>
+</div>
 
-    <div id="mapToolBarSubMenu" *ngIf="currentSubMenu == 'unit'">
-        <button class="mapToolBarSubMenuItem" *ngFor="let unit of unitConfigurations | keyvalue"
-        background-image: [ngStyle]="{'background-image': 'url('+ unit.value.imgPath +')'}"
-        (click)=this.mapEditorToolbarTypeSelectionEvent.emit(unit.value.type)>
-        {{unit.value.name}}
-        </button>
-    </div>
-
-
-
+<div id="mapToolBarSubMenu" *ngIf="currentSubMenu == 'unit'">
+    <button class="mapToolBarSubMenuItem" *ngFor="let unit of unitConfigurations | keyvalue"
+    background-image: [ngStyle]="{'background-image': 'url('+ unit.value.imgPath +')'}"
+    (click)="this.mapEditorToolbarTypeSelectionEvent.emit(unit.value.type)">
+    {{unit.value.name}}
+    </button>
+</div>
 
 
 	</section>
@@ -75,12 +74,17 @@ export class MapEditorToolbarComponent implements OnInit {
   groundConfigurations: Map<number, GroundConfiguration>;
 
 
-  constructor(private gameConfigurationService: GameConfigurationService) { }
+  message: string;
+
+  constructor(private gameConfigurationService: GameConfigurationService, private mapService: MapService) { }
+
 
   ngOnInit() {
+    this.mapService.currentMessage.subscribe(message => this.message = message);
   }
 
   showMapToolBarSubMenu(subMenuToDisplay: string) {
+    this.mapService.changeMessage('Hello from Sibling');
     switch (subMenuToDisplay) {
       case 'ground': {
         this.gameConfigurationService.getGroundConfiguration().subscribe(
