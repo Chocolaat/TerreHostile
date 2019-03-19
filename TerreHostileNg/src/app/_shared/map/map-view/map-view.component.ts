@@ -27,11 +27,31 @@ export class MapViewComponent implements OnInit {
 
   ngOnInit() {
 
-    this.mapService.currentMessage.subscribe(message => this.message = message);
-
-    this.mapService.getMapByXYAndSize(500, 500, 30).subscribe(
+      this.mapService.getMapByXYAndSize(500, 500, 30).subscribe(
       (map) => {
         MapJsModule.launchGame(map);
+  //MapJsModule.setMap(map);
+      });
+
+     this.mapService.currentMessage.subscribe(message => this.message = this.message + message + 'Hoy');
+     this.mapService.currentMap.subscribe(map => {
+       console.log('VIEW RECEIV MAP');
+       console.log(map);
+      if (MapJsModule.setMap) {
+        MapJsModule.setMap(map);
+      }
+     });
+
+/*     this.mapService.getMapByXYAndSize(500, 500, 30).subscribe(
+      (map) => {
+        MapJsModule.launchGame(map);
+      }); */
+  }
+
+  loadMap(beginX: number, beginY: number, size: number) {
+    this.mapService.getMapByXYAndSize(beginX, beginY, size).subscribe(
+      (map) => {
+        MapJsModule.setMap(map);
       });
   }
 

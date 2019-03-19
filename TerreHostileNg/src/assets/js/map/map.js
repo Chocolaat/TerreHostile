@@ -425,6 +425,9 @@ define(["require", "exports", '../libs/jsiso/canvas/Control', '../libs/jsiso/can
     launch();
 
     exports.map =      map;
+    console.log('map');
+    console.log(map);
+    console.log('map');
 
     exports.mapLayers =      mapLayers;
     
