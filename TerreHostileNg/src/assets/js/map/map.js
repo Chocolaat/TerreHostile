@@ -382,10 +382,10 @@ define(["require", "exports", '../libs/jsiso/canvas/Control', '../libs/jsiso/can
           });
 
 
-
       function draw() {
         context.clearRect(0, 0, CanvasControl().width,
             CanvasControl().height);
+
 
         for (i = 0; i < 0 + size; i++) {
           for (j = 0; j < 0 + size; j++) {
@@ -430,7 +430,7 @@ define(["require", "exports", '../libs/jsiso/canvas/Control', '../libs/jsiso/can
     console.log('map');
 
     exports.mapLayers =      mapLayers;
-    
+
     exports.setMap =     function _setMap(newMap)
     {
       map = newMap;

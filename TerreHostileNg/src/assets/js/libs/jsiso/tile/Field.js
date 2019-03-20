@@ -284,6 +284,20 @@ function(EffectLoader, Emitter, utils) {
 
       var stack = 0;
       if (heightMap) {
+ if (heightMap[i] != '0' && !heightMap[i])
+ {
+  console.log("heightMap[i] = " + heightMap[i]);
+  console.log(heightMap);
+  console.log(i);
+ }
+ if (heightMap[i][j] != '0' && !heightMap[i][j])
+ {
+  console.log("heightMap[i][j] = " + heightMap[i][j]);
+  console.log(heightMap);
+  console.log(i);
+  console.log(j);
+ }
+
         stack = Math.round(Number(heightMap[i][j]));
         k = stack;
       }

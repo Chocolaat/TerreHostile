@@ -1,7 +1,8 @@
 export class MapView {
     beginXCoord: number;
     beginYCoord: number;
-    size: number;
+    xSize: number;
+    ySize: number;
     buildings: Object;
     ground: Object;
     height: Object;
@@ -11,7 +12,8 @@ export class MapView {
     constructor() {
         this.beginXCoord = 0;
         this.beginYCoord = 0;
-        this.size = 0;
+        this.xSize = 0;
+        this.ySize = 0;
         this.buildings = {};
         this.ground = {};
         this.height = {};

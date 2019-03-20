@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-header',
   template: `
-  <app-login></app-login>
+ <!-- <app-login></app-login> -->
   <nav role='navigation'>
   <ul>
     <li><a routerLink="/home" routerLinkActive="myactive">Accueil</a></li>

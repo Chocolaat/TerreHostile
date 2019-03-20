@@ -1,3 +1,4 @@
+import { MapView } from './../model/mapView';
 import { Component, OnInit, HostListener } from '@angular/core';
 import * as MapJsModule from 'src/assets/js/map/map.js';
 import { MapService } from '../services/map.service';
@@ -8,8 +9,11 @@ import { MapService } from '../services/map.service';
   template: `
 
 <div id='mapView'>
-<p>Yolo = {{message}}</p>
-<app-map-info-pane></app-map-info-pane>
+<app-map-info-pane
+  [beginXCoord]="this.currentMap.beginXCoord"
+  [beginYCoord]="this.currentMap.beginYCoord"
+  [size]="this.currentMap.xSize"
+  ></app-map-info-pane>
 <canvas id='mapViewCanvas' tabindex='0' appInputEventDirective (keyboardEvent)='keyboardEvent($event)'></canvas>
 </div>
   `,
@@ -17,9 +21,7 @@ import { MapService } from '../services/map.service';
 })
 export class MapViewComponent implements OnInit {
 
-
-
-  message: string;
+  currentMap: MapView = new MapView();
 
   constructor(private mapService: MapService) {
 
@@ -29,30 +31,16 @@ export class MapViewComponent implements OnInit {
 
       this.mapService.getMapByXYAndSize(500, 500, 30).subscribe(
       (map) => {
-        MapJsModule.launchGame(map);
-  //MapJsModule.setMap(map);
+          MapJsModule.launchGame(map);
+          this.currentMap = map;
       });
 
-     this.mapService.currentMessage.subscribe(message => this.message = this.message + message + 'Hoy');
      this.mapService.currentMap.subscribe(map => {
-       console.log('VIEW RECEIV MAP');
-       console.log(map);
       if (MapJsModule.setMap) {
         MapJsModule.setMap(map);
+        this.currentMap = map;
       }
      });
-
-/*     this.mapService.getMapByXYAndSize(500, 500, 30).subscribe(
-      (map) => {
-        MapJsModule.launchGame(map);
-      }); */
-  }
-
-  loadMap(beginX: number, beginY: number, size: number) {
-    this.mapService.getMapByXYAndSize(beginX, beginY, size).subscribe(
-      (map) => {
-        MapJsModule.setMap(map);
-      });
   }
 
   keyboardEvent(event: KeyboardEvent) {

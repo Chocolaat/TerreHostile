@@ -3,15 +3,24 @@
   flex: 0 20%;
 }
 
-nav {    
+nav {
 	display: flex;
     flex-direction: row;
     justify-content: center;
 }
 
-nav ul {
-	list-style: none;
+nav ul:first-child {
 	position: absolute;
+	list-style: none;
+	display: inline-table;
+  margin: 0px 0px 0px 0px;
+	padding: 0px 0px;
+}
+
+
+nav ul {
+	position: absolute;
+	list-style: none;
 	z-index: 999;
 	display: inline-table;
 	padding: 0px 0px;

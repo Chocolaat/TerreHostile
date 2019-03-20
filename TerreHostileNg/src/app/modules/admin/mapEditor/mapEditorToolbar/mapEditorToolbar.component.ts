@@ -11,7 +11,6 @@ import { MapEditorSelection } from '../model/mapEditorSelection';
 @Component({
   selector: 'app-map-editor-toolbar',
   template: `
-  <p>Hey {{message}}</p>
   <section id="mapEditorToolbar">
   <div id="mapToolBar">
   <button type="button" class="mapToolBarItem" id="mapToolBarItemGroundType"
@@ -73,18 +72,13 @@ export class MapEditorToolbarComponent implements OnInit {
   unitConfigurations: Map<number, UnitConfiguration>;
   groundConfigurations: Map<number, GroundConfiguration>;
 
-
-  message: string;
-
   constructor(private gameConfigurationService: GameConfigurationService, private mapService: MapService) { }
 
 
   ngOnInit() {
-    this.mapService.currentMessage.subscribe(message => this.message = message);
   }
 
   showMapToolBarSubMenu(subMenuToDisplay: string) {
-    this.mapService.changeMessage('Hello from Sibling');
     switch (subMenuToDisplay) {
       case 'ground': {
         this.gameConfigurationService.getGroundConfiguration().subscribe(
