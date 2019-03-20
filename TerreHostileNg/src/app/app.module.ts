@@ -6,7 +6,7 @@ import { WindowRef } from './_core/window.service';
 import { AppComponent } from './app.component';
 import { SharedModule } from './_shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MapService } from './_shared/map/services/map.service';
+
 @NgModule({
   declarations: [
     AppComponent

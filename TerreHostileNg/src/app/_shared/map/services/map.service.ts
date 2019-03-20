@@ -11,11 +11,17 @@ export class MapService {
   private mapSource = new BehaviorSubject(new MapView());
   currentMap = this.mapSource.asObservable();
 
+
   updateMap(beginX: number, beginY: number, size: number) {
-    this.getMapByXYAndSize(beginX, beginY, size).subscribe(
-      (map) => {
-        this.mapSource.next(map);
-      });
+      return new Observable<any>((observer) => {
+
+        this.getMapByXYAndSize(beginX, beginY, size).subscribe(
+          (map) => {
+            this.mapSource.next(map);
+            observer.next();
+            observer.complete();
+          });
+    });
   }
 
   getMapByXYAndSize(beginX: number, beginY: number, size: number): Observable<any> {

@@ -3,7 +3,7 @@ export class MapView {
     beginYCoord: number;
     xSize: number;
     ySize: number;
-    buildings: Object;
+    buildings: number[][];
     ground: Object;
     height: Object;
     resources: Object;
@@ -14,11 +14,11 @@ export class MapView {
         this.beginYCoord = 0;
         this.xSize = 0;
         this.ySize = 0;
-        this.buildings = {};
-        this.ground = {};
-        this.height = {};
-        this.resources = {};
-        this.troops = {};
+        this.buildings =  [[0]];
+        this.ground =  [[0]];
+        this.height =  [[0]];
+        this.resources =  [[0]];
+        this.troops =  [[0]];
     }
 }
 

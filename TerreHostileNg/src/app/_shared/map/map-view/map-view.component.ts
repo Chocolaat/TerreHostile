@@ -10,9 +10,9 @@ import { MapService } from '../services/map.service';
 
 <div id='mapView'>
 <app-map-info-pane
-  [beginXCoord]="this.currentMap.beginXCoord"
-  [beginYCoord]="this.currentMap.beginYCoord"
-  [size]="this.currentMap.xSize"
+[beginXCoord]="this.currentMap.beginXCoord"
+[beginYCoord]="this.currentMap.beginYCoord"
+[size]="this.currentMap.xSize"
   ></app-map-info-pane>
 <canvas id='mapViewCanvas' tabindex='0' appInputEventDirective (keyboardEvent)='keyboardEvent($event)'></canvas>
 </div>
@@ -29,7 +29,7 @@ export class MapViewComponent implements OnInit {
 
   ngOnInit() {
 
-      this.mapService.getMapByXYAndSize(500, 500, 30).subscribe(
+      this.mapService.getMapByXYAndSize(500, 500, 50).subscribe(
       (map) => {
           MapJsModule.launchGame(map);
           this.currentMap = map;

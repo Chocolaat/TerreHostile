@@ -5,7 +5,6 @@ import { GameConfigurationService } from './../../../../_shared/configuration/se
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ResourceConfiguration } from 'src/app/_shared/configuration/model/resourceConfiguration';
 import { UnitConfiguration } from 'src/app/_shared/configuration/model/unitConfiguration';
-import { MapEditorSelection } from '../model/mapEditorSelection';
 
 
 @Component({

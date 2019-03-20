@@ -1,6 +1,4 @@
-import { MapEditorSelection } from 'src/app/modules/admin/mapEditor/model/mapEditorSelection';
 import { Component, AfterViewInit, OnInit, Input } from '@angular/core';
-import * as MapJsModule from 'src/assets/js/map/map.js';
 import { MapService } from '../../services/map.service';
 
 
@@ -20,21 +18,11 @@ export class InfoPaneComponent implements OnInit {
   @Input() beginYCoord: number;
   @Input() size: number;
 
-/*   currentXCoord: number;
-  currentYCoord: number;
-  size: number; */
 
   constructor(private mapService: MapService) {
   }
 
   ngOnInit() {
-/*
-    this.mapService.currentMap.subscribe(map => {
-      this.currentXCoord = map.beginXCoord;
-      this.currentYCoord = map.beginYCoord;
-      this.size = map.xSize;
-    });
- */
   }
 
 }
