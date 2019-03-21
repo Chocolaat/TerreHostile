@@ -29,7 +29,7 @@ export class MapViewComponent implements OnInit {
 
   ngOnInit() {
 
-      this.mapService.getMapByXYAndSize(500, 500, 50).subscribe(
+      this.mapService.getMapByXYAndSize(500, 500, 100).subscribe(
       (map) => {
           MapJsModule.launchGame(map);
           this.currentMap = map;
@@ -57,11 +57,9 @@ export class MapViewComponent implements OnInit {
               layer.move('left');
               layer.move('down');
             }
-
-            // TODOTODO    if (layer.getTitle() === 'Ground') {updateCurrentCenterXY(map.currentXCoord - 10, map.currentYCoord + 10)};
-
           }
         });
+        MapJsModule.incOrDecXYChunkCoords(-10, +10);
         //    startY ++;
         break;
       case '8':
@@ -75,10 +73,10 @@ export class MapViewComponent implements OnInit {
               layer.move('down');
               layer.move('up');
             }
-            // TODOTODO   if (layer.getTitle() === 'Ground') {updateCurrentCenterXY(map.currentXCoord - 10, map.currentYCoord -10)};
           }
-
         });
+
+        if (!event.ctrlKey) { MapJsModule.incOrDecXYChunkCoords(-10, -10);}
         //    startX --;
         break;
       // fleche bas ou numpad 2
@@ -93,10 +91,10 @@ export class MapViewComponent implements OnInit {
               layer.move('left');
               layer.move('right');
             }
-            // TODOTODO     if (layer.getTitle() === 'Ground') { updateCurrentCenterXY(map.currentXCoord +10, map.currentYCoord + 10)};
           }
         });
         //     startX ++;
+        if (!event.ctrlKey) { MapJsModule.incOrDecXYChunkCoords(+10, +10);}
         break;
       // fleche gauche ou numpad 4
       case '4':
@@ -109,10 +107,10 @@ export class MapViewComponent implements OnInit {
               layer.move('right');
               layer.move('up');
             }
-            // TODOTODO          if (layer.getTitle() === 'Ground') { updateCurrentCenterXY(map.currentXCoord + 10, map.currentYCoord - 10)};
           }
 
         });
+        MapJsModule.incOrDecXYChunkCoords(+10, -10);
         // 		                startY --;
         break;
       // numpad 1 (bas gauche)
@@ -124,8 +122,8 @@ export class MapViewComponent implements OnInit {
             layer.move('left');
             layer.move('right');
           }
-          // TODOTODO        if (layer.getTitle() === 'Ground') {updateCurrentCenterXY(map.currentXCoord + 10, map.currentYCoord)};
         });
+        MapJsModule.incOrDecXYChunkCoords(+10, 0);
         break;
       // numpad 3 bas droite
       case '3':
@@ -136,8 +134,8 @@ export class MapViewComponent implements OnInit {
             layer.move('left');
             layer.move('down');
           }
-          // TODOTODO         if (layer.getTitle() === 'Ground') {updateCurrentCenterXY(map.currentXCoord, map.currentYCoord  + 10)};
         });
+        MapJsModule.incOrDecXYChunkCoords(0, +10);
         break;
       // numpad 7 haut gauche
       case '7':
@@ -148,8 +146,8 @@ export class MapViewComponent implements OnInit {
             layer.move('right');
             layer.move('up');
           }
-          // TODOTODO        if (layer.getTitle() === 'Ground') {updateCurrentCenterXY(map.currentXCoord, map.currentYCoord - 10)};
         });
+        MapJsModule.incOrDecXYChunkCoords(0, -10);
         break;
       // numpad 9 haut droite
       case '9':
@@ -160,8 +158,8 @@ export class MapViewComponent implements OnInit {
             layer.move('left');
             layer.move('down');
           }
-          // TODOTODO         if (layer.getTitle() === 'Ground') {updateCurrentCenterXY(map.currentXCoord - 10, map.currentYCoord)};
         });
+        MapJsModule.incOrDecXYChunkCoords(-10, 0);
         break;
       case '+':
         MapJsModule.mapLayers.map(function (layer) {

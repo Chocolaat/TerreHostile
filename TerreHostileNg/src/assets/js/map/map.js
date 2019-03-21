@@ -28,6 +28,12 @@ define(["require", "exports", '../libs/jsiso/canvas/Control', '../libs/jsiso/can
     map.currentXCoord = map.beginXCoord;
     map.currentYCoord = map.beginYCoord;
 
+    var mapChunkCurrentXCoord = map.xSize / 2;
+    var mapChunkCurrentYCoord = map.ySize / 2;
+
+    
+    var yolo = 0;
+
 
 
     function updateCurrentCenterXY (x, y)
@@ -193,8 +199,10 @@ define(["require", "exports", '../libs/jsiso/canvas/Control', '../libs/jsiso/can
 
     function centerView(layer)
     {
-      var mapViewWidth = document.getElementById('mapContainer').offsetWidth;
-      var mapViewHeight = document.getElementById('mapContainer').offsetHeight;
+
+      var mapViewWidth = document.getElementsByTagName('app-map-view').item(0).offsetWidth;
+      var mapViewHeight = document.getElementsByTagName('app-map-view').item(0).offsetHeight;
+
             layer.align("h-center",
           mapViewWidth, map.xSize, 0);
             layer.align("v-center",
@@ -383,12 +391,26 @@ define(["require", "exports", '../libs/jsiso/canvas/Control', '../libs/jsiso/can
 
 
       function draw() {
-        context.clearRect(0, 0, CanvasControl().width,
-            CanvasControl().height);
+
+        var mapViewWidth = document.getElementsByTagName('app-map-view').item(0).offsetWidth;
+        var mapViewHeight = document.getElementsByTagName('app-map-view').item(0).offsetHeight;
+
+        context.clearRect(0, 0, mapViewWidth, mapViewHeight);
+
+        // Calcul approximatif pour dessiner uniquement les tile effectivement affichées dans le canvas
+       // var milieu = size / 2;
+       var milieu = mapChunkCurrentXCoord;
+        var nbTileWidth = mapViewWidth / 37; 
+        var nbTileHeight = mapViewHeight / 18; 
+
+        var iDeb = mapChunkCurrentYCoord - nbTileHeight / 2;
+        var iFin = mapChunkCurrentYCoord + nbTileHeight / 2; 
+        var jDeb = mapChunkCurrentXCoord - nbTileWidth / 2;
+        var jFin = mapChunkCurrentXCoord + nbTileWidth / 2;
 
 
-        for (i = 0; i < 0 + size; i++) {
-          for (j = 0; j < 0 + size; j++) {
+        for (i = iDeb; i < iFin; i++) {
+          for (j = jDeb; j < jFin; j++) {
             mapLayers.map(function(layer) {
               if (layer.getTitle() === "Ground" || layer.getTitle() === "Resources" || layer.getTitle() === "Buildings" || layer.getTitle() === "Troops") {
                 layer.draw(i, j); // Draw the graphics layer
@@ -424,9 +446,17 @@ define(["require", "exports", '../libs/jsiso/canvas/Control', '../libs/jsiso/can
 
     launch();
 
+    console.log(map);
+
     exports.map =      map;
 
     exports.mapLayers =      mapLayers;
+
+    exports.incOrDecXYChunkCoords =     function _incOrDecXYChunkCoords(offsetX, offsetY)
+    {
+      mapChunkCurrentXCoord = mapChunkCurrentXCoord + offsetX;
+      mapChunkCurrentYCoord = mapChunkCurrentYCoord + offsetY;
+    };
 
     exports.setMap =     function _setMap(newMap)
     {
