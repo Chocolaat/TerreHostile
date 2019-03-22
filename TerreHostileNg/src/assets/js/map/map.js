@@ -17,73 +17,15 @@ define(["require", "exports", '../libs/jsiso/canvas/Control', '../libs/jsiso/can
 
     // Global variables used to display and update map
     var mapLayers = [];
-    var sizeMapToLoad = 70;
-    var moveCountReloadTrigger = 3;
 
     var groundConfigurationPropertyList = {"names":["Grass","Ground","Ocean","Sand"],"imgPaths":["../assets/img/grounds/grass_square.png","../assets/img/grounds/ground_square.png","../assets/img/grounds/ocean_square.png","../assets/img/grounds/sand_square.png"],"imgPathsGround":["../assets/img/grounds/grass.png","../assets/img/grounds/ground.png","../assets/img/grounds/ocean.png","../assets/img/grounds/sand.png"],"types":[0,1,2,3]};
     var buildingConfigurationPropertyList = {"names":["Delete","Castle"],"imgPaths":["../assets/img/pictograms/delete_cross.png","../assets/img/buildings/castle.png"],"types":[0,1]};
     var resourceConfigurationPropertyList = {"names":["Delete","Flours"],"imgPaths":["../assets/img/pictograms/delete_cross.png","../assets/img/resources/flours.png"],"types":[0,1]};
     var unitConfigurationPropertyList = {"names":["Delete","Dragon","Unicorn"],"imgPaths":["../assets/img/pictograms/delete_cross.png","../assets/img/troops/monsters/dragon.png","../assets/img/troops/monsters/unicorn.png"],"types":[0,1,2]};
 
-    //map.currentXCoord = map.beginXCoord;
-    //map.currentYCoord = map.beginYCoord;
-
-    //var mapCurrentXCoord = map.xSize / 2;
-    //var mapurrentYCoord = map.ySize / 2;
 
     var mapChunkCurrentXCoord = map.xSize / 2;
     var mapChunkCurrentYCoord = map.ySize / 2;
-
-
-    function updateCurrentCenterXY (x, y)
-    {
-      map.currentXCoord = x;
-      map.currentYCoord = y;
-
-        if (map.currentXCoord <= map.beginXCoord - (10 * moveCountReloadTrigger) || map.currentYCoord <= map.beginYCoord - (10 * moveCountReloadTrigger) || map.currentXCoord >= map.beginXCoord + (10 * moveCountReloadTrigger) || map.currentYCoord >= map.beginYCoord + (10 * moveCountReloadTrigger))
-        {
-          mapEditorGetMapByXYAndSizeButton();
-        }
-    }
-
-
-    //DUPLICATED  mapEditorMouseEvent.js
-    function mapEditorGetMapByXYAndSizeButton()
-    {
-
-      var parameters = {
-          beginX : map.currentXCoord,
-          beginY : map.currentYCoord,
-          size : sizeMapToLoad
-        }
-
-       $.ajax({
-              type: "GET",
-              url: "/TH_Web/admin/mapEditorGetMapByXYAndSize",
-              data: parameters,
-              success: function (result) {
-
-                map = result;
-            mapLayers[0].setLayout(result.ground);
-            mapLayers[0].setHeightLayout(result.height);
-
-            mapLayers[1].setLayout(result.buildings);
-            mapLayers[2].setLayout(result.resources);
-            mapLayers[3].setLayout(result.troops);
-
-            map.currentXCoord = map.beginXCoord;
-            map.currentYCoord = map.beginYCoord;
-
-            for (var i = 0; i < 0 + mapLayers.length; i++) {
-              centerView(mapLayers[i]);
-            };
-              },
-              error: function (result) {
-                console.log("mapEditorGetMapByXYAndSize FAIL");
-                console.log(result);
-              }
-          });
-    }
 
     function launch() {
 
@@ -212,182 +154,6 @@ define(["require", "exports", '../libs/jsiso/canvas/Control', '../libs/jsiso/can
 
           var context = CanvasControl.create("mapViewCanvas", undefined, undefined, {}, "mapView");
 
-      var input = new CanvasInput(document, CanvasControl());
-
-          input.keyboard(function(pressed, keydown, event) {
-        var mapViewWidth = document.getElementById('mapView').offsetWidth;
-        var mapViewHeight = document.getElementById('mapView').offsetHeight;
-            if (!keydown && false) {
-              switch(pressed) {
-                case 81:
-                  mapLayers.map(function(layer) {
-                      layer.rotate("right");
-                  });
-                break;
-                case 87:
-                  mapLayers.map(function(layer) {
-                    layer.rotate("left");
-                  });
-                break;
-                //flech droite ou numpad 6
-                case 39:
-                case 102:
-
-                  mapLayers.map(function(layer) {
-                    if (event.ctrlKey)
-                      {
-                        layer.rotate("right");
-                      }
-                    else
-                      {
-                        for (var i = 0 ; i < 10; i++)
-                        {
-                          layer.move("left");
-                          layer.move("down");
-                        }
-
-                        if (layer.getTitle() === "Ground") {updateCurrentCenterXY(map.currentXCoord - 10, map.currentYCoord + 10)};
-
-                      }
-                  });
-              //    startY ++;
-                break;
-                  //fleche haut ou numpad8
-                case 38:
-                case 104:
-                  mapLayers.map(function(layer) {
-                    if (event.ctrlKey)
-                    {
-                      layer.setZoom("in");
-                      centerView(layer);
-                    }
-                    else
-                      {
-                        for (var i = 0 ; i < 10; i++)
-                        {
-                            layer.move("down");
-                            layer.move("up");
-                        }
-                        if (layer.getTitle() === "Ground") {updateCurrentCenterXY(map.currentXCoord - 10, map.currentYCoord -10)};
-                      }
-
-                  });
-              //    startX --;
-                break;
-              //fleche bas ou numpad 2
-                case 40:
-                case 98:
-                  mapLayers.map(function(layer) {
-                    if (event.ctrlKey)
-                    {
-                      layer.setZoom("out");
-                      centerView(layer);
-                    }
-                    else
-                      {
-                        for (var i = 0 ; i < 10; i++)
-                        {
-                            layer.move("left");
-                            layer.move("right");
-                        }
-                        if (layer.getTitle() === "Ground") { updateCurrentCenterXY(map.currentXCoord +10, map.currentYCoord + 10)};
-                      }
-                  });
-             //     startX ++;
-                break;
-                //fleche gauche ou numpad 4
-                case 37:
-                case 100:
-                  mapLayers.map(function(layer) {
-                    if (event.ctrlKey)
-                    {
-                      layer.rotate("left");
-                    }
-                    else
-                      {
-                        for (var i = 0 ; i < 10; i++)
-                        {
-                            layer.move("right");
-                            layer.move("up");
-                        }
-                        if (layer.getTitle() === "Ground") { updateCurrentCenterXY(map.currentXCoord + 10, map.currentYCoord - 10)};
-                      }
-
-                  });
-//		                startY --;
-                break;
-                // numpad 1 (bas gauche)
-                case 97:
-                  mapLayers.map(function(layer) {
-                    for (var i = 0 ; i < 5; i++)
-                    {
-                        layer.move("right");
-                        layer.move("up");
-                        layer.move("left");
-                        layer.move("right");
-                    }
-                    if (layer.getTitle() === "Ground") {updateCurrentCenterXY(map.currentXCoord + 10, map.currentYCoord)};
-                  });
-                break;
-             // numpad 3 bas droite
-                case 99:
-                    mapLayers.map(function(layer) {
-                      for (var i = 0 ; i < 5; i++)
-                      {
-                          layer.move("left");
-                          layer.move("right");
-                          layer.move("left");
-                          layer.move("down");
-                      }
-                      if (layer.getTitle() === "Ground") {updateCurrentCenterXY(map.currentXCoord, map.currentYCoord  + 10)};
-                    });
-                  break;
-             // numpad 7 haut gauche
-                case 103:
-                    mapLayers.map(function(layer) {
-                      for (var i = 0 ; i < 5; i++)
-                      {
-                          layer.move("down");
-                          layer.move("up");
-                          layer.move("right");
-                          layer.move("up");
-                      }
-                      if (layer.getTitle() === "Ground") {updateCurrentCenterXY(map.currentXCoord, map.currentYCoord - 10)};
-                    });
-                  break;
-             // numpad 9 haut droite
-                case 105:
-                    mapLayers.map(function(layer) {
-                      for (var i = 0 ; i < 5; i++)
-                      {
-                          layer.move("down");
-                          layer.move("up");
-                          layer.move("left");
-                          layer.move("down");
-                      }
-                      if (layer.getTitle() === "Ground") {updateCurrentCenterXY(map.currentXCoord - 10, map.currentYCoord)};
-                    });
-                  break;
-                case 107:
-                    mapLayers.map(function(layer) {
-                      layer.setZoom("in");
-                      centerView(layer);
-
-                    });
-//			                startY --;
-                  break;
-                case 109:
-                    mapLayers.map(function(layer) {
-                      layer.setZoom("out");
-                      centerView(layer);
-
-                    });
-//			                startY --;
-                  break;
-              }
-            }
-          });
-
 
       function draw() {
 
@@ -457,11 +223,6 @@ define(["require", "exports", '../libs/jsiso/canvas/Control', '../libs/jsiso/can
       mapChunkCurrentYCoord = mapChunkCurrentYCoord + offsetY;
 
       let newX; let newY;
-      let update = false;
-
-      console.log("Begin = (" + map.beginXCoord + ", " + map.beginXCoord + ")");
-
-      console.log("Current = (" + mapChunkCurrentXCoord + ", " + mapChunkCurrentYCoord + ")");
 
       if (mapChunkCurrentXCoord <= map.xSize / 2) {newX = map.beginXCoord - (map.xSize / 2 - mapChunkCurrentXCoord);}
       else {newX = map.beginXCoord + (mapChunkCurrentXCoord - map.xSize / 2)}
@@ -479,35 +240,10 @@ define(["require", "exports", '../libs/jsiso/canvas/Control', '../libs/jsiso/can
         return undefined;
       }
 
-
-/*
-      if (mapChunkCurrentXCoord <= 10) { newX = map.beginXCoord - (map.xSize / 2 - mapChunkCurrentXCoord); update = true;}
-      if (mapChunkCurrentXCoord >= map.xSize - 10) { newX = map.beginXCoord + (mapChunkCurrentXCoord - map.xSize / 2); update = true;}
-
-      if (mapChunkCurrentYCoord <= 10) { newY = map.beginYCoord - (map.ySize / 2 - mapChunkCurrentYCoord); update = true;}
-      if (mapChunkCurrentYCoord >= map.xSize - 10) { newY = map.beginYCoord + (mapChunkCurrentYCoord - map.ySize / 2); update = true;} */
-/*       if (update)
-        {
-          return {"newX" : newX, "newY" : newY};
-        }
-      else
-        {
-          return undefined;
-        } */
-
-
-/*       if (mapChunkCurrentXCoord <= 10 || mapChunkCurrentYCoord <= 10 ||
-          mapChunkCurrentXCoord >= map.xSize - 10 || mapChunkCurrentYCoord >= map.ySize - 10)
-          {
-            return {"mapChunkCurrentXCoord" : mapChunkCurrentXCoord, "mapChunkCurrentYCoord" : mapChunkCurrentYCoord};
-          }
-          return undefined; */
     };
 
     exports.setMap =     function _setMap(newMap)
     {
-
-      console.log('SET NEW MAP');
 
       map = newMap;
       mapLayers[0].setLayout(newMap.ground);
@@ -532,13 +268,7 @@ define(["require", "exports", '../libs/jsiso/canvas/Control', '../libs/jsiso/can
   tile_coordinates = mapLayers[layerNumber].getXYCoords(event.offsetX,
     event.offsetY);
 
-// let tile_coordinates = {};
-
-//   tile_coordinates.x = xCoord;
-//   tile_coordinates.y = yCoord;
   let beginTile;
-  let currenTile;
-
 
   newTileValue = (newValue != undefined) ? newValue : 1;
 

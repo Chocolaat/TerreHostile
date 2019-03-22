@@ -29,14 +29,13 @@ export class MapViewComponent implements OnInit {
 
   ngOnInit() {
 
-      this.mapService.getMapByXYAndSize(500, 500, 100).subscribe(
+      this.mapService.getMapByXYAndSize(500, 500, 200).subscribe(
       (map) => {
           MapJsModule.launchGame(map);
           this.currentMap = map;
       });
 
      this.mapService.currentMap.subscribe(map => {
-      console.log('MAPVIEW BEING UPDATED');
       if (MapJsModule.setMap) {
         MapJsModule.setMap(map);
         this.currentMap = map;
@@ -49,11 +48,8 @@ export class MapViewComponent implements OnInit {
 
     let incOrDecXYChunkCoordsResult: any;
     incOrDecXYChunkCoordsResult = MapJsModule.incOrDecXYChunkCoords(xOffset, yOffset);
-    console.log('UPDATE NEEDED');
 
      if (incOrDecXYChunkCoordsResult) {
-      console.log('UPDATE NEEDED');
-      console.log('Old coord = (');
       this.mapService.updateMap(
         incOrDecXYChunkCoordsResult.newX, incOrDecXYChunkCoordsResult.newY, this.currentMap.xSize).subscribe();
     }
