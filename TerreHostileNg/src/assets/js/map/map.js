@@ -25,15 +25,14 @@ define(["require", "exports", '../libs/jsiso/canvas/Control', '../libs/jsiso/can
     var resourceConfigurationPropertyList = {"names":["Delete","Flours"],"imgPaths":["../assets/img/pictograms/delete_cross.png","../assets/img/resources/flours.png"],"types":[0,1]};
     var unitConfigurationPropertyList = {"names":["Delete","Dragon","Unicorn"],"imgPaths":["../assets/img/pictograms/delete_cross.png","../assets/img/troops/monsters/dragon.png","../assets/img/troops/monsters/unicorn.png"],"types":[0,1,2]};
 
-    map.currentXCoord = map.beginXCoord;
-    map.currentYCoord = map.beginYCoord;
+    //map.currentXCoord = map.beginXCoord;
+    //map.currentYCoord = map.beginYCoord;
+
+    //var mapCurrentXCoord = map.xSize / 2;
+    //var mapurrentYCoord = map.ySize / 2;
 
     var mapChunkCurrentXCoord = map.xSize / 2;
     var mapChunkCurrentYCoord = map.ySize / 2;
-
-    
-    var yolo = 0;
-
 
 
     function updateCurrentCenterXY (x, y)
@@ -400,13 +399,13 @@ define(["require", "exports", '../libs/jsiso/canvas/Control', '../libs/jsiso/can
         // Calcul approximatif pour dessiner uniquement les tile effectivement affichées dans le canvas
        // var milieu = size / 2;
        var milieu = mapChunkCurrentXCoord;
-        var nbTileWidth = mapViewWidth / 37; 
-        var nbTileHeight = mapViewHeight / 18; 
+        var nbTileWidth = mapViewWidth / 37;
+        var nbTileHeight = mapViewHeight / 18;
 
-        var iDeb = mapChunkCurrentYCoord - nbTileHeight / 2;
-        var iFin = mapChunkCurrentYCoord + nbTileHeight / 2; 
-        var jDeb = mapChunkCurrentXCoord - nbTileWidth / 2;
-        var jFin = mapChunkCurrentXCoord + nbTileWidth / 2;
+        var iDeb = mapChunkCurrentXCoord - nbTileHeight / 2;
+        var iFin = mapChunkCurrentXCoord + nbTileHeight / 2;
+        var jDeb = mapChunkCurrentYCoord - nbTileWidth / 2;
+        var jFin = mapChunkCurrentYCoord + nbTileWidth / 2;
 
 
         for (i = iDeb; i < iFin; i++) {
@@ -456,10 +455,60 @@ define(["require", "exports", '../libs/jsiso/canvas/Control', '../libs/jsiso/can
     {
       mapChunkCurrentXCoord = mapChunkCurrentXCoord + offsetX;
       mapChunkCurrentYCoord = mapChunkCurrentYCoord + offsetY;
+
+      let newX; let newY;
+      let update = false;
+
+      console.log("Begin = (" + map.beginXCoord + ", " + map.beginXCoord + ")");
+
+      console.log("Current = (" + mapChunkCurrentXCoord + ", " + mapChunkCurrentYCoord + ")");
+
+      if (mapChunkCurrentXCoord <= map.xSize / 2) {newX = map.beginXCoord - (map.xSize / 2 - mapChunkCurrentXCoord);}
+      else {newX = map.beginXCoord + (mapChunkCurrentXCoord - map.xSize / 2)}
+
+      if (mapChunkCurrentYCoord <= map.ySize / 2) {newY = map.beginYCoord - (map.ySize / 2 - mapChunkCurrentYCoord);}
+      else {newY = map.beginYCoord + (mapChunkCurrentYCoord - map.ySize / 2)}
+
+
+      if (mapChunkCurrentXCoord <= 10 || mapChunkCurrentXCoord >= map.xSize - 10 || mapChunkCurrentYCoord <= 10 || mapChunkCurrentYCoord >= map.xSize - 10)
+      {
+        return {"newX" : newX, "newY" : newY}
+      }
+      else
+      {
+        return undefined;
+      }
+
+
+/*
+      if (mapChunkCurrentXCoord <= 10) { newX = map.beginXCoord - (map.xSize / 2 - mapChunkCurrentXCoord); update = true;}
+      if (mapChunkCurrentXCoord >= map.xSize - 10) { newX = map.beginXCoord + (mapChunkCurrentXCoord - map.xSize / 2); update = true;}
+
+      if (mapChunkCurrentYCoord <= 10) { newY = map.beginYCoord - (map.ySize / 2 - mapChunkCurrentYCoord); update = true;}
+      if (mapChunkCurrentYCoord >= map.xSize - 10) { newY = map.beginYCoord + (mapChunkCurrentYCoord - map.ySize / 2); update = true;} */
+/*       if (update)
+        {
+          return {"newX" : newX, "newY" : newY};
+        }
+      else
+        {
+          return undefined;
+        } */
+
+
+/*       if (mapChunkCurrentXCoord <= 10 || mapChunkCurrentYCoord <= 10 ||
+          mapChunkCurrentXCoord >= map.xSize - 10 || mapChunkCurrentYCoord >= map.ySize - 10)
+          {
+            return {"mapChunkCurrentXCoord" : mapChunkCurrentXCoord, "mapChunkCurrentYCoord" : mapChunkCurrentYCoord};
+          }
+          return undefined; */
     };
 
     exports.setMap =     function _setMap(newMap)
     {
+
+      console.log('SET NEW MAP');
+
       map = newMap;
       mapLayers[0].setLayout(newMap.ground);
       mapLayers[0].setHeightLayout(newMap.height);
@@ -467,6 +516,13 @@ define(["require", "exports", '../libs/jsiso/canvas/Control', '../libs/jsiso/can
       mapLayers[1].setLayout(newMap.buildings);
       mapLayers[2].setLayout(newMap.resources);
       mapLayers[3].setLayout(newMap.troops);
+
+      mapChunkCurrentXCoord = map.xSize / 2;
+      mapChunkCurrentYCoord = map.ySize / 2;
+
+      mapLayers.map(function(layer) {
+         centerView(layer);
+        });
 
     };
 

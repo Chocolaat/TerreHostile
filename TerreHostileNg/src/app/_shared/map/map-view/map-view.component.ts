@@ -36,6 +36,7 @@ export class MapViewComponent implements OnInit {
       });
 
      this.mapService.currentMap.subscribe(map => {
+      console.log('MAPVIEW BEING UPDATED');
       if (MapJsModule.setMap) {
         MapJsModule.setMap(map);
         this.currentMap = map;
@@ -43,13 +44,28 @@ export class MapViewComponent implements OnInit {
      });
   }
 
+
+  updateChunkXYCoords(xOffset: number, yOffset: number) {
+
+    let incOrDecXYChunkCoordsResult: any;
+    incOrDecXYChunkCoordsResult = MapJsModule.incOrDecXYChunkCoords(xOffset, yOffset);
+    console.log('UPDATE NEEDED');
+
+     if (incOrDecXYChunkCoordsResult) {
+      console.log('UPDATE NEEDED');
+      console.log('Old coord = (');
+      this.mapService.updateMap(
+        incOrDecXYChunkCoordsResult.newX, incOrDecXYChunkCoordsResult.newY, this.currentMap.xSize).subscribe();
+    }
+  }
+
   keyboardEvent(event: KeyboardEvent) {
+
 
     switch (event.key) {
       case '6':
       case 'ArrowRight':
-
-        MapJsModule.mapLayers.map(function (layer) {
+        MapJsModule.mapLayers.map(function (layer: any) {
           if (event.ctrlKey) {
             layer.rotate('right');
           } else {
@@ -59,12 +75,11 @@ export class MapViewComponent implements OnInit {
             }
           }
         });
-        MapJsModule.incOrDecXYChunkCoords(-10, +10);
-        //    startY ++;
+        if (!event.ctrlKey) { this.updateChunkXYCoords(+10, -10); }
         break;
       case '8':
       case 'ArrowUp':
-        MapJsModule.mapLayers.map(function (layer) {
+        MapJsModule.mapLayers.map(function (layer: any) {
           if (event.ctrlKey) {
             layer.setZoom('in');
             // TODOTODO  centerView(layer);
@@ -75,14 +90,11 @@ export class MapViewComponent implements OnInit {
             }
           }
         });
-
-        if (!event.ctrlKey) { MapJsModule.incOrDecXYChunkCoords(-10, -10);}
-        //    startX --;
+        if (!event.ctrlKey) { this.updateChunkXYCoords(-10, -10); }
         break;
-      // fleche bas ou numpad 2
       case '2':
       case 'ArrowDown':
-        MapJsModule.mapLayers.map(function (layer) {
+        MapJsModule.mapLayers.map(function (layer: any) {
           if (event.ctrlKey) {
             layer.setZoom('out');
             // TODOTODO    centerView(layer);
@@ -93,13 +105,11 @@ export class MapViewComponent implements OnInit {
             }
           }
         });
-        //     startX ++;
-        if (!event.ctrlKey) { MapJsModule.incOrDecXYChunkCoords(+10, +10);}
+        if (!event.ctrlKey) { this.updateChunkXYCoords(+10, +10); }
         break;
-      // fleche gauche ou numpad 4
       case '4':
       case 'ArrowLeft':
-        MapJsModule.mapLayers.map(function (layer) {
+        MapJsModule.mapLayers.map(function (layer: any) {
           if (event.ctrlKey) {
             layer.rotate('left');
           } else {
@@ -110,12 +120,10 @@ export class MapViewComponent implements OnInit {
           }
 
         });
-        MapJsModule.incOrDecXYChunkCoords(+10, -10);
-        // 		                startY --;
+        if (!event.ctrlKey) { this.updateChunkXYCoords(-10, +10); }
         break;
-      // numpad 1 (bas gauche)
       case '1':
-        MapJsModule.mapLayers.map(function (layer) {
+        MapJsModule.mapLayers.map(function (layer: any) {
           for (let i = 0; i < 5; i++) {
             layer.move('right');
             layer.move('up');
@@ -123,11 +131,10 @@ export class MapViewComponent implements OnInit {
             layer.move('right');
           }
         });
-        MapJsModule.incOrDecXYChunkCoords(+10, 0);
+        if (!event.ctrlKey) { this.updateChunkXYCoords(0, +10); }
         break;
-      // numpad 3 bas droite
       case '3':
-        MapJsModule.mapLayers.map(function (layer) {
+        MapJsModule.mapLayers.map(function (layer: any) {
           for (let i = 0; i < 5; i++) {
             layer.move('left');
             layer.move('right');
@@ -135,11 +142,10 @@ export class MapViewComponent implements OnInit {
             layer.move('down');
           }
         });
-        MapJsModule.incOrDecXYChunkCoords(0, +10);
+        if (!event.ctrlKey) { this.updateChunkXYCoords(+10, 0); }
         break;
-      // numpad 7 haut gauche
       case '7':
-        MapJsModule.mapLayers.map(function (layer) {
+        MapJsModule.mapLayers.map(function (layer: any) {
           for (let i = 0; i < 5; i++) {
             layer.move('down');
             layer.move('up');
@@ -147,11 +153,10 @@ export class MapViewComponent implements OnInit {
             layer.move('up');
           }
         });
-        MapJsModule.incOrDecXYChunkCoords(0, -10);
+        if (!event.ctrlKey) { this.updateChunkXYCoords(-10, 0); }
         break;
-      // numpad 9 haut droite
       case '9':
-        MapJsModule.mapLayers.map(function (layer) {
+        MapJsModule.mapLayers.map(function (layer: any) {
           for (let i = 0; i < 5; i++) {
             layer.move('down');
             layer.move('up');
@@ -159,23 +164,19 @@ export class MapViewComponent implements OnInit {
             layer.move('down');
           }
         });
-        MapJsModule.incOrDecXYChunkCoords(-10, 0);
+        if (!event.ctrlKey) { this.updateChunkXYCoords(0, -10); }
         break;
       case '+':
-        MapJsModule.mapLayers.map(function (layer) {
+        MapJsModule.mapLayers.map(function (layer: any) {
           layer.setZoom('in');
           // TODOTODO       centerView(layer);
-
         });
-        // 			                startY --;
         break;
       case '-':
-        MapJsModule.mapLayers.map(function (layer) {
+        MapJsModule.mapLayers.map(function (layer: any) {
           layer.setZoom('out');
           // TODOTODO           centerView(layer);
-
         });
-        // 			                startY --;
         break;
     }
   }

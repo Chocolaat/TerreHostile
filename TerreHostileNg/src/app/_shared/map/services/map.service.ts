@@ -13,6 +13,7 @@ export class MapService {
 
 
   updateMap(beginX: number, beginY: number, size: number) {
+    console.log('LAUNCH UPDATE');
       return new Observable<any>((observer) => {
 
         this.getMapByXYAndSize(beginX, beginY, size).subscribe(
