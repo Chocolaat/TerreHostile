@@ -2,6 +2,7 @@ define(["require", "exports", '../libs/jsiso/canvas/Control', '../libs/jsiso/can
 '../libs/jsiso/json/load', '../libs/jsiso/tile/Field'], function(require, exports, CanvasControl, CanvasInput, imgLoader, jsonLoader, TileField){
 
   exports.launchGame = function (map) {
+    
 
     // -- FPS --------------------------------
     window.requestAnimFrame = (function() {
@@ -18,14 +19,22 @@ define(["require", "exports", '../libs/jsiso/canvas/Control', '../libs/jsiso/can
     // Global variables used to display and update map
     var mapLayers = [];
 
-    var groundConfigurationPropertyList = {"names":["Grass","Ground","Ocean","Sand"],"imgPaths":["../assets/img/grounds/grass_square.png","../assets/img/grounds/ground_square.png","../assets/img/grounds/ocean_square.png","../assets/img/grounds/sand_square.png"],"imgPathsGround":["../assets/img/grounds/grass.png","../assets/img/grounds/ground.png","../assets/img/grounds/ocean.png","../assets/img/grounds/sand.png"],"types":[0,1,2,3]};
-    var buildingConfigurationPropertyList = {"names":["Delete","Castle"],"imgPaths":["../assets/img/pictograms/delete_cross.png","../assets/img/buildings/castle.png"],"types":[0,1]};
-    var resourceConfigurationPropertyList = {"names":["Delete","Flours"],"imgPaths":["../assets/img/pictograms/delete_cross.png","../assets/img/resources/flours.png"],"types":[0,1]};
-    var unitConfigurationPropertyList = {"names":["Delete","Dragon","Unicorn"],"imgPaths":["../assets/img/pictograms/delete_cross.png","../assets/img/troops/monsters/dragon.png","../assets/img/troops/monsters/unicorn.png"],"types":[0,1,2]};
+//OK
+  // var groundConfigurationPropertyList = {"names":["Grass","Ground","Ocean","Sand"],"imgPaths":["../assets/img/grounds/grass_square.png","../assets/img/grounds/ground_square.png", ["../assets/img/grounds/sea1.png", "../assets/img/grounds/sea2.png"],"../assets/img/grounds/sand_yoyo.png"],"imgPathsGround":["../assets/img/grounds/grass.png","../assets/img/grounds/ground.png","../assets/img/grounds/ocean.png","../assets/img/grounds/sand.png", "../assets/img/grounds/sea1.png"],"types":[0,1,2,3]};
+  
+  //KO
+ //  var groundConfigurationPropertyList = {"names":["Grass","Ground","Ocean","Sand"],"imgPaths":["../assets/img/grounds/grass_square.png","../assets/img/grounds/ground_square.png", ["../assets/img/grounds/sea1.png", "../assets/img/grounds/sea2.png"],"../assets/img/grounds/sand_yoyo.png"],"imgPathsGround":["../assets/img/grounds/grass.png","../assets/img/grounds/ground.png","../assets/img/grounds/ocean.png","../assets/img/grounds/sand.png", ["../assets/img/grounds/sea1.png",]],"types":[0,1,2,3]};
+
+   var groundConfigurationPropertyList = {"names":["Grass","Ground","Ocean","Sand"],"imgPaths":["../assets/img/grounds/grass_square.png","../assets/img/grounds/ground_square.png", ["../assets/img/grounds/sea1.png", "../assets/img/grounds/sea2.png"],"../assets/img/grounds/sand_yoyo.png"],"imgPathsGround":[["../assets/img/grounds/grass.png"],["../assets/img/grounds/ground.png"],["../assets/img/grounds/sea1.png", "../assets/img/grounds/sea2.png"],["../assets/img/grounds/sand.png"], ["../assets/img/grounds/sea1.png", "../assets/img/grounds/sea2.png"]],"types":[0,1,2,3]};
+  var buildingConfigurationPropertyList = {"names":["Delete","Castle"],"imgPaths":[["../assets/img/pictograms/delete_cross.png"],["../assets/img/buildings/castle.png"]],"types":[0,1]};
+    var resourceConfigurationPropertyList = {"names":["Delete","Flours"],"imgPaths":[["../assets/img/pictograms/delete_cross.png"],["../assets/img/resources/flours.png"]],"types":[0,1]};
+    var unitConfigurationPropertyList = {"names":["Delete","Dragon","Unicorn"],"imgPaths":[["../assets/img/pictograms/delete_cross.png"],["../assets/img/troops/monsters/dragon.png"],["../assets/img/troops/monsters/unicorn.png"]],"types":[0,1,2]};
 
 
     var mapChunkCurrentXCoord = map.xSize / 2;
     var mapChunkCurrentYCoord = map.ySize / 2;
+    var frame = 0;
+    var waterIndex = 0;
 
     function launch() {
 
@@ -35,26 +44,25 @@ define(["require", "exports", '../libs/jsiso/canvas/Control', '../libs/jsiso/can
               {
                       var images = [
                           {
-                          graphics:jsonResponse[0].imgPathsGround
+                            graphics: jsonResponse[0].imgPathsGround
                           },
                           {
-                          graphics:jsonResponse[1].imgPaths
+                            graphics:jsonResponse[1].imgPaths
                           },
                           {
                             graphics:jsonResponse[2].imgPaths
-                        },
+                          },
                           {
-                              graphics:jsonResponse[3].imgPaths
-                        }
+                            graphics:jsonResponse[3].imgPaths
+                          }
                         ];
+
 
                 imgLoader(images)
                     .then(
                         function(imgResponse) {
-
                           game = new main(0,
-                              0, map.xSize,
-                              imgResponse[3]); // X & Y drawing position, and tile span to draw
+                              0, map.xSize); // X & Y drawing position, and tile span to draw
 
                           game
                               .init([
@@ -67,7 +75,7 @@ define(["require", "exports", '../libs/jsiso/canvas/Control', '../libs/jsiso/can
                                     heightMap : {
                                       map : map.height,
                                       offset : 0,
-                                      heightTile : imgResponse[0].files["ground.png"],
+                                      heightMapOnTop: true
                                     },
                                     tileHeight : 50,
                                     tileWidth : 100,
@@ -150,7 +158,7 @@ define(["require", "exports", '../libs/jsiso/canvas/Control', '../libs/jsiso/can
           mapViewHeight, map.xSize, 0);
     }
 
-    function main(x, y, size, playerImages) {
+    function main(x, y, size) {
 
           var context = CanvasControl.create("mapViewCanvas", undefined, undefined, {}, "mapView");
 
@@ -173,22 +181,35 @@ define(["require", "exports", '../libs/jsiso/canvas/Control', '../libs/jsiso/can
         var jDeb = mapChunkCurrentYCoord - nbTileWidth / 2;
         var jFin = mapChunkCurrentYCoord + nbTileWidth / 2;
 
+/*         frame++;
+        if (frame == 30 || frame == 60 || frame == 90) 
+        {
+          waterIndex +=1;
+        }
+        else if ((frame >= 120) ) {
+          waterIndex = 0;
+          frame = 0;
+        }
+ */
 
         for (i = iDeb; i < iFin; i++) {
           for (j = jDeb; j < jFin; j++) {
             mapLayers.map(function(layer) {
               if (layer.getTitle() === "Ground" || layer.getTitle() === "Resources" || layer.getTitle() === "Buildings" || layer.getTitle() === "Troops") {
-                layer.draw(i, j); // Draw the graphics layer
+                layer.draw(i, j, layer.getTitle()); // Draw the graphics layer
               }
             });
           }
         }
 
+/*         var offset = mapLayers[0].getOffset();
+        context.drawImage(testWater.files[waterIndex], 10 - testWater.files[0].width / 2 - 10 + offset.x, 10 - 20 - testWater.files[0].height / 2 + offset.y);
+ */
+/*         var offset = mapLayers[0].getOffset();
+        context.drawImage(testWater.files[directionFrame + charF], xpos - testWater.files[0].width / 2 - 10 + offset.x, ypos - 20 - testWater.files[0].height / 2 + offset.y); */
+
         requestAnimFrame(draw);
       }
-
-
-
 
 
       return {

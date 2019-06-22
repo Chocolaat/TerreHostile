@@ -29,7 +29,7 @@ export class MapViewComponent implements OnInit {
 
   ngOnInit() {
 
-      this.mapService.getMapByXYAndSize(500, 500, 200).subscribe(
+      this.mapService.getMapByXYAndSize(500, 500, 20).subscribe(
       (map) => {
           MapJsModule.launchGame(map);
           this.currentMap = map;

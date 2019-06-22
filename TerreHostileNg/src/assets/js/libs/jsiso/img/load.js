@@ -99,41 +99,66 @@ define(function() {
         var loading = 0; // Images total the preloader needs to load
 
         var images = [];
+        var dictionnaryKeys = [];
         loading += graphic.graphics.length;
        
-        graphic.graphics.map(function(img) {
-          imgName = img;
-          if (graphic.removePath === undefined || graphic.removePath === true) {        	  
-            imgName = img.split("/").pop();
-          }
-          images[imgName] = new Image();
-          images[imgName].src = img;
-          images[imgName].onload = function() {
-            loaded ++;
-            if (loaded === loading && !graphic.spritesheet) {
-              resolve({files: images, dictionary: graphic.graphics});
+
+        graphic.graphics.map(function(imgArray) {
+
+          let first = true;
+          var imagesArray = [];
+          var imagesArrayIdx = '';
+
+          imgArray.map(function(img) {
+
+            imgName = img;
+            if (graphic.removePath === undefined || graphic.removePath === true) {        	  
+              imgName = img.split("/").pop();
             }
-            else {
-              if (graphic.spritesheet) {
-                _splitSpriteSheet({
-                  files: images,
-                  dictionary: graphic.graphics,
-                  width: graphic.spritesheet.width,
-                  height: graphic.spritesheet.height,
-                  offsetX: (graphic.spritesheet.offsetX || 0),
-                  offsetY: (graphic.spritesheet.offsetY || 0),
-                  spacing: (graphic.spritesheet.spacing || 0),
-                  firstgid: (graphic.spritesheet.firstgid || 0)
-                }).then(function(response) {
-                  resolve(response);
-                });
+
+              if(first){
+                dictionnaryKeys.push(imgName)
+                imagesArrayIdx = imgName;
+                images[imagesArrayIdx] = [];
+              };
+
+              currentImage = new Image();
+              currentImage.src = img;
+              currentImage.onload = function() {
+              loaded ++;
+              if (loaded === loading && !graphic.spritesheet) {
+                resolve({files: images, dictionary: graphic.graphics});
               }
-            }
-          };
+              else {
+                if (graphic.spritesheet) {
+                  _splitSpriteSheet({
+                    files: images,
+                    dictionary: graphic.graphics,
+                    width: graphic.spritesheet.width,
+                    height: graphic.spritesheet.height,
+                    offsetX: (graphic.spritesheet.offsetX || 0),
+                    offsetY: (graphic.spritesheet.offsetY || 0),
+                    spacing: (graphic.spritesheet.spacing || 0),
+                    firstgid: (graphic.spritesheet.firstgid || 0)
+                  }).then(function(response) {
+                    resolve(response);
+                  });
+                }
+              }
+            };
+            first = false;
+            images[imagesArrayIdx].push(currentImage);
+          });
         });
+
+        resolve({files: images, dictionary: dictionnaryKeys});
+
         if (graphic.removePath === undefined || graphic.removePath === true) {
           for (var i = 0; i < graphic.graphics.length; i++) {
-            graphic.graphics[i] = graphic.graphics[i].split("/").pop();
+            if(graphic.graphics[i].split)
+            {
+              graphic.graphics[i] = graphic.graphics[i].split("/").pop();
+            }
           }
         }
       });

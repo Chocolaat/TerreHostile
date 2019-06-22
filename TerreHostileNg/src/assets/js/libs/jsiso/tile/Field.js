@@ -74,6 +74,10 @@ function(EffectLoader, Emitter, utils) {
     var particleMap = [];
     var particleMapHolder = [];
 
+    var frame = 1;
+    var currentFrameIdx = 0;
+    var idxImg = 0 ;
+
     var isometric = true;
 
     var tileImages = [];
@@ -243,6 +247,9 @@ function(EffectLoader, Emitter, utils) {
 
     function _draw(i, j, tileImageOverwite) {
 
+      let layerTitle = tileImageOverwite;
+      tileImageOverwite = undefined;
+
       var xpos, ypos;
       i = Math.round(i);
       j = Math.round(j);
@@ -258,6 +265,15 @@ function(EffectLoader, Emitter, utils) {
       var stackGraphic = null;
 
 
+      frame++;
+      if (frame % 50 == 0) 
+      {
+        currentFrameIdx +=1;
+      }
+      else if ((frame >= 499) ) {
+        currentFrameIdx = 0;
+        frame = 0;
+      }
 
 
       var graphicValue = 0;
@@ -284,19 +300,6 @@ function(EffectLoader, Emitter, utils) {
 
       var stack = 0;
       if (heightMap) {
- if (heightMap[i] != '0' && !heightMap[i])
- {
-  console.log("heightMap[i] = " + heightMap[i]);
-  console.log(heightMap);
-  console.log(i);
- }
- if (heightMap[i][j] != '0' && !heightMap[i][j])
- {
-  console.log("heightMap[i][j] = " + heightMap[i][j]);
-  console.log(heightMap);
-  console.log(i);
-  console.log(j);
- }
 
         stack = Math.round(Number(heightMap[i][j]));
         k = stack;
@@ -348,7 +351,8 @@ function(EffectLoader, Emitter, utils) {
           }
           else {
             if (Number(graphicValue) >= 0) {
-              stackGraphic = tileImages[tileImagesDictionary[graphicValue]];
+              idxImg = currentFrameIdx % tileImages[tileImagesDictionary[graphicValue]].length;
+              stackGraphic = tileImages[tileImagesDictionary[graphicValue]][idxImg];
             }
             else {
               stackGraphic = undefined;
@@ -471,9 +475,12 @@ function(EffectLoader, Emitter, utils) {
                       if (Number(graphicValue) >= 0) {
                         // reset stackGraphic
 
-                    	  // DISPLAY TILEITEM HERE
+                        // DISPLAY TILEITEM HERE
 
-                        stackGraphic = tileImages[tileImagesDictionary[graphicValue]];
+
+                        idxImg = currentFrameIdx % tileImages[tileImagesDictionary[graphicValue]].length;
+                        stackGraphic = tileImages[tileImagesDictionary[graphicValue]][idxImg];
+
                         ctx.drawImage(stackGraphic, 0, 0, stackGraphic.width, stackGraphic.height, xpos, ypos + ((k - 1) * ((tileHeight - heightOffset - resizedTileHeight) * curZoom)), (tileWidth * curZoom), (stackGraphic.height / (stackGraphic.width / tileWidth) * curZoom));
                       }
                       else if (graphicValue != - 1) {
