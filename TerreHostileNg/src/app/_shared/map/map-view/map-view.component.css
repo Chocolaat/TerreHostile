@@ -1,6 +1,7 @@
 :host {
   border: dashed #800080;
   overflow: hidden;
+  height: 100%;
 }
 
 #mapView

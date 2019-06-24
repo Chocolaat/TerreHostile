@@ -238,6 +238,8 @@ define(["require", "exports", '../libs/jsiso/canvas/Control', '../libs/jsiso/can
 
     exports.mapLayers =      mapLayers;
 
+    exports.TileField = TileField;
+
     exports.incOrDecXYChunkCoords =     function _incOrDecXYChunkCoords(offsetX, offsetY)
     {
       mapChunkCurrentXCoord = mapChunkCurrentXCoord + offsetX;
@@ -283,13 +285,11 @@ define(["require", "exports", '../libs/jsiso/canvas/Control', '../libs/jsiso/can
 
     };
 
-  exports.updateTile =       function _updateTile(event, layerNumber, newValue)
+  exports.updateTile =       function _updateTile(event, layerNumber, newValue, beginTile, currentTile)
   {
     // Get the current mouse location from X & Y Coords
   tile_coordinates = mapLayers[layerNumber].getXYCoords(event.offsetX,
     event.offsetY);
-
-  let beginTile;
 
   newTileValue = (newValue != undefined) ? newValue : 1;
 
