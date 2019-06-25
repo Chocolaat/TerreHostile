@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.terrehostile.business.map.MapView;
 import org.terrehostile.game.configuration.model.UnitConfigurationPropertyList;
+import org.terrehostile.game.map.services.MapViewService;
+import org.terrehostile.game.map.services.TileItemService;
 import org.terrehostile.repository.TileRepository;
-import org.terrehostile.services.MapViewService;
-import org.terrehostile.services.TileItemService;
 
 @Component
 public class TestSch {

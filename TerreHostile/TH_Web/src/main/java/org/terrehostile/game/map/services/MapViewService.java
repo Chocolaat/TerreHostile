@@ -1,4 +1,4 @@
-package org.terrehostile.services;
+package org.terrehostile.game.map.services;
 
 import java.util.ArrayList;
 import java.util.List;

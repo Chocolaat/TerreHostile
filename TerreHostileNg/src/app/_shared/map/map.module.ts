@@ -7,6 +7,7 @@ import { InfoPaneComponent } from './map-view/infoPane/info-pane.component';
 import { MapViewComponent } from './map-view/map-view.component';
 import { MapService } from './services/map.service';
 import { InputEventDirective } from './map-view/input-event/input-event.directive';
+import { UserService } from '../user/user.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { InputEventDirective } from './map-view/input-event/input-event.directiv
     InputEventDirective
   ],
   providers: [
-      MapService
+      MapService, 
+      UserService
   ]
 })
 export class MapModule { }

@@ -1,4 +1,4 @@
-package org.terrehostile.game.map;
+package org.terrehostile.game.map.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.terrehostile.business.map.MapView;
-import org.terrehostile.services.MapViewService;
+import org.terrehostile.game.map.services.MapViewService;
 
 @RestController
 public class MapViewControler {

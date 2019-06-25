@@ -1,4 +1,4 @@
-package org.terrehostile.services;
+package org.terrehostile.game.map.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
