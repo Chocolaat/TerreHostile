@@ -28,7 +28,7 @@ nav ul {
 
 nav>ul>li {
 	float: left;
-	background-image: url("/assets/images/backgrounds/menu/parchemin_header.png");
+	background-image: url("/assets/img/backgrounds/menu/parchemin_header.png");
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center center;
@@ -37,11 +37,11 @@ nav>ul>li {
 nav>ul>li:hover {
 	float: left;
 	background-image:
-		url("/assets/images/backgrounds/menu/parchemin_header_hover.png");
+		url("/assets/img/backgrounds/menu/parchemin_header_hover.png");
 }
 
 nav ul li ul li {
-	background-image: url("/assets/images/backgrounds/menu/parchemin_middle.png");
+	background-image: url("/assets/img/backgrounds/menu/parchemin_middle.png");
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center center;
@@ -49,11 +49,11 @@ nav ul li ul li {
 
 nav ul li ul li:hover {
 	background-image:
-		url("/assets/images/backgrounds/menu/parchemin_middle_hover.png");
+		url("/assets/img/backgrounds/menu/parchemin_middle_hover.png");
 }
 
 nav ul li ul li:last-child {
-	background-image: url("/assets/images/backgrounds/menu/parchemin_footer.png");
+	background-image: url("/assets/img/backgrounds/menu/parchemin_footer.png");
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center center;
@@ -61,7 +61,7 @@ nav ul li ul li:last-child {
 
 nav ul li ul li:last-child:hover {
 	background-image:
-		url("/assets/images/backgrounds/menu/parchemin_footer_hover.png");
+		url("/assets/img/backgrounds/menu/parchemin_footer_hover.png");
 }
 
 nav ul li:hover>ul {

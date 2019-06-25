@@ -2,7 +2,7 @@ define(["require", "exports", '../libs/jsiso/canvas/Control', '../libs/jsiso/can
 '../libs/jsiso/json/load', '../libs/jsiso/tile/Field'], function(require, exports, CanvasControl, CanvasInput, imgLoader, jsonLoader, TileField){
 
   exports.launchGame = function (map) {
-    
+
 
     // -- FPS --------------------------------
     window.requestAnimFrame = (function() {
@@ -21,14 +21,14 @@ define(["require", "exports", '../libs/jsiso/canvas/Control', '../libs/jsiso/can
 
 //OK
   // var groundConfigurationPropertyList = {"names":["Grass","Ground","Ocean","Sand"],"imgPaths":["../assets/img/grounds/grass_square.png","../assets/img/grounds/ground_square.png", ["../assets/img/grounds/sea1.png", "../assets/img/grounds/sea2.png"],"../assets/img/grounds/sand_yoyo.png"],"imgPathsGround":["../assets/img/grounds/grass.png","../assets/img/grounds/ground.png","../assets/img/grounds/ocean.png","../assets/img/grounds/sand.png", "../assets/img/grounds/sea1.png"],"types":[0,1,2,3]};
-  
+
   //KO
  //  var groundConfigurationPropertyList = {"names":["Grass","Ground","Ocean","Sand"],"imgPaths":["../assets/img/grounds/grass_square.png","../assets/img/grounds/ground_square.png", ["../assets/img/grounds/sea1.png", "../assets/img/grounds/sea2.png"],"../assets/img/grounds/sand_yoyo.png"],"imgPathsGround":["../assets/img/grounds/grass.png","../assets/img/grounds/ground.png","../assets/img/grounds/ocean.png","../assets/img/grounds/sand.png", ["../assets/img/grounds/sea1.png",]],"types":[0,1,2,3]};
 
-   var groundConfigurationPropertyList = {"names":["Grass","Ground","Ocean","Sand"],"imgPaths":["../assets/img/grounds/grass_square.png","../assets/img/grounds/ground_square.png", ["../assets/img/grounds/sea1.png", "../assets/img/grounds/sea2.png"],"../assets/img/grounds/sand_yoyo.png"],"imgPathsGround":[["../assets/img/grounds/grass.png"],["../assets/img/grounds/ground.png"],["../assets/img/grounds/sea1.png", "../assets/img/grounds/sea2.png"],["../assets/img/grounds/sand.png"], ["../assets/img/grounds/sea1.png", "../assets/img/grounds/sea2.png"]],"types":[0,1,2,3]};
-  var buildingConfigurationPropertyList = {"names":["Delete","Castle"],"imgPaths":[["../assets/img/pictograms/delete_cross.png"],["../assets/img/buildings/castle.png"]],"types":[0,1]};
-    var resourceConfigurationPropertyList = {"names":["Delete","Flours"],"imgPaths":[["../assets/img/pictograms/delete_cross.png"],["../assets/img/resources/flours.png"]],"types":[0,1]};
-    var unitConfigurationPropertyList = {"names":["Delete","Dragon","Unicorn"],"imgPaths":[["../assets/img/pictograms/delete_cross.png"],["../assets/img/troops/monsters/dragon.png"],["../assets/img/troops/monsters/unicorn.png"]],"types":[0,1,2]};
+   var groundConfigurationPropertyList = {"names":["Grass","Ground","Ocean","Sand"],"imgPaths":["../assets/img/game/grounds/grass_square.png","../assets/img/game/grounds/ground_square.png", ["../assets/img/game/grounds/sea1.png", "../assets/img/game/grounds/sea2.png"],"../assets/img/game/grounds/sand_yoyo.png"],"imgPathsGround":[["../assets/img/game/grounds/grass.png"],["../assets/img/game/grounds/ground.png"],["../assets/img/game/grounds/sea1.png", "../assets/img/game/grounds/sea2.png"],["../assets/img/game/grounds/sand.png"], ["../assets/img/game/grounds/sea1.png", "../assets/img/game/grounds/sea2.png"]],"types":[0,1,2,3]};
+  var buildingConfigurationPropertyList = {"names":["Delete","Castle"],"imgPaths":[["../assets/img/pictograms/delete_cross.png"],["../assets/img/game/buildings/castle.png"]],"types":[0,1]};
+    var resourceConfigurationPropertyList = {"names":["Delete","Flours"],"imgPaths":[["../assets/img/pictograms/delete_cross.png"],["../assets/img/game/resources/flours.png"]],"types":[0,1]};
+    var unitConfigurationPropertyList = {"names":["Delete","Dragon","Unicorn"],"imgPaths":[["../assets/img/pictograms/delete_cross.png"],["../assets/img/game/troops/monsters/dragon.png"],["../assets/img/game/troops/monsters/unicorn.png"]],"types":[0,1,2]};
 
 
     var mapChunkCurrentXCoord = map.xSize / 2;
@@ -182,7 +182,7 @@ define(["require", "exports", '../libs/jsiso/canvas/Control', '../libs/jsiso/can
         var jFin = mapChunkCurrentYCoord + nbTileWidth / 2;
 
 /*         frame++;
-        if (frame == 30 || frame == 60 || frame == 90) 
+        if (frame == 30 || frame == 60 || frame == 90)
         {
           waterIndex +=1;
         }
