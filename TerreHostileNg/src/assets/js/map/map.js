@@ -27,7 +27,7 @@ define(["require", "exports", '../libs/jsiso/canvas/Control', '../libs/jsiso/can
 
    var groundConfigurationPropertyList = {"names":["Grass","Ground","Ocean","Sand"],"imgPaths":["../assets/img/game/grounds/grass_square.png","../assets/img/game/grounds/ground_square.png", ["../assets/img/game/grounds/sea1.png", "../assets/img/game/grounds/sea2.png"],"../assets/img/game/grounds/sand_yoyo.png"],"imgPathsGround":[["../assets/img/game/grounds/grass.png"],["../assets/img/game/grounds/ground.png"],["../assets/img/game/grounds/sea1.png", "../assets/img/game/grounds/sea2.png"],["../assets/img/game/grounds/sand.png"], ["../assets/img/game/grounds/sea1.png", "../assets/img/game/grounds/sea2.png"]],"types":[0,1,2,3]};
   var buildingConfigurationPropertyList = {"names":["Delete","Castle"],"imgPaths":[["../assets/img/pictograms/delete_cross.png"],["../assets/img/game/buildings/castle.png"]],"types":[0,1]};
-    var resourceConfigurationPropertyList = {"names":["Delete","Flours"],"imgPaths":[["../assets/img/pictograms/delete_cross.png"],["../assets/img/game/resources/flours.png"]],"types":[0,1]};
+    var resourceConfigurationPropertyList = {"names":["Delete","Flours"],"imgPaths":[["../assets/img/pictograms/delete_cross.png"],["../assets/img/game/mapResources/flours.png"]],"types":[0,1]};
     var unitConfigurationPropertyList = {"names":["Delete","Dragon","Unicorn"],"imgPaths":[["../assets/img/pictograms/delete_cross.png"],["../assets/img/game/troops/monsters/dragon.png"],["../assets/img/game/troops/monsters/unicorn.png"]],"types":[0,1,2]};
 
 
@@ -62,18 +62,18 @@ define(["require", "exports", '../libs/jsiso/canvas/Control', '../libs/jsiso/can
                     .then(
                         function(imgResponse) {
                           game = new main(0,
-                              0, map.xSize); // X & Y drawing position, and tile span to draw
-
+                              0, map.xSize); // X & Y drawing position, ;nd tile span to draw
+                             heightMapTmp = map.tiles.map(tilex => tilex.map(tiley => tiley.height) );
                           game
                               .init([
                                   {
                                     title : "Ground",
-                                    layout : map.ground,
+                                    layout : map.tiles,
                                     graphics : imgResponse[0].files,
                                     graphicsDictionary : imgResponse[0].dictionary,
                                     isometric: true,
                                     heightMap : {
-                                      map : map.height,
+                                      map : heightMapTmp,
                                       offset : 0,
                                       heightMapOnTop: true
                                     },
@@ -102,7 +102,7 @@ define(["require", "exports", '../libs/jsiso/canvas/Control', '../libs/jsiso/can
 //															                    darkness: 1
 //															                  },
                                     heightMap : {
-                                      map : map.height,
+                                      map : heightMapTmp,
                                       offset : 0,
                                               heightMapOnTop: true
                                     },
@@ -116,7 +116,7 @@ define(["require", "exports", '../libs/jsiso/canvas/Control', '../libs/jsiso/can
                                     graphicsDictionary : imgResponse[2].dictionary,
                                     zeroIsBlank: true,
                                     heightMap : {
-                                      map : map.height,
+                                      map : heightMapTmp,
                                       offset : 0,
                                               heightMapOnTop: true
                                     },
@@ -130,7 +130,7 @@ define(["require", "exports", '../libs/jsiso/canvas/Control', '../libs/jsiso/can
                                     graphicsDictionary : imgResponse[3].dictionary,
                                     zeroIsBlank: true,
                                     heightMap : {
-                                      map : map.height,
+                                      map : heightMapTmp,
                                       offset : 0,
                                               heightMapOnTop: true
                                     },
@@ -192,10 +192,19 @@ define(["require", "exports", '../libs/jsiso/canvas/Control', '../libs/jsiso/can
         }
  */
 
+
         for (i = iDeb; i < iFin; i++) {
           for (j = jDeb; j < jFin; j++) {
             mapLayers.map(function(layer) {
               if (layer.getTitle() === "Ground" || layer.getTitle() === "Resources" || layer.getTitle() === "Buildings" || layer.getTitle() === "Troops") {
+/* 
+                console.log("Layout " + layer.getTitle());
+                  console.log(layer.getLayout());
+                  console.log("Height : ");
+                  console.log(layer.getHeightLayout());
+                  console.log("-----------------------------------------------------------");
+                  console.log("-----------------------------------------------------------"); */
+
                 layer.draw(i, j, layer.getTitle()); // Draw the graphics layer
               }
             });
@@ -269,8 +278,8 @@ define(["require", "exports", '../libs/jsiso/canvas/Control', '../libs/jsiso/can
     {
 
       map = newMap;
-      mapLayers[0].setLayout(newMap.ground);
-      mapLayers[0].setHeightLayout(newMap.height);
+      mapLayers[0].setLayout(newMap.tiles);
+      mapLayers[0].setHeightLayout(newMap.tiles.map(tilex => tilex.map(tiley => tiley.height)));
 
       mapLayers[1].setLayout(newMap.buildings);
       mapLayers[2].setLayout(newMap.resources);
@@ -303,7 +312,7 @@ define(["require", "exports", '../libs/jsiso/canvas/Control', '../libs/jsiso/can
     switch(layerNumber) {
     //Ground
       case 0:
-        newTile = newTileValue;
+        newTile = {background: newTileValue, height: 0, xCoord:tile_coordinates.x + map.beginXCoord, yCoord:tile_coordinates.y + map.beginYCoord};
         break;
         //Buildings
       case 1:

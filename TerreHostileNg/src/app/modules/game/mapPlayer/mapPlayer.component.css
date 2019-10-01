@@ -9,5 +9,7 @@
 #mapContainer
 {
   display: flex;
+  flex-direction: column;
   border: dashed yellow;
+  height: 100vh;
 }

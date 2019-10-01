@@ -1,7 +1,9 @@
 package org.terrehostile.game.map.services;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,20 +30,21 @@ public class MapViewService {
 	@Autowired
 	private TroopRepository troopRepository;
 
-	public void save(Tile tile) {
-		tileRepository.save(tile);
-	}
+	public void save(MapView map) {
+		tileRepository.saveAll(Arrays.stream(map.getTiles()).flatMap(Arrays::stream).collect(Collectors.toList()));
 
-	public void save(List<Tile> tiles) {
-		for (Tile tile : tiles) {
-			System.out.println(tile.toString());
-			System.out.println("*******");
-		}
-		tileRepository.saveAll(tiles);
-	}
+		List<Resource> res = Arrays.stream(map.getResources()).flatMap(Arrays::stream).filter(value -> value != null)
+				.collect(Collectors.toList());
 
-	public void save(MapView mapView) {
-		save(mapView.toTileList());
+		System.out.println(res.toString());
+
+		resourceRepository.saveAll(res);
+
+		buildingRepository.saveAll(Arrays.stream(map.getBuildings()).flatMap(Arrays::stream)
+				.filter(value -> value != null).collect(Collectors.toList()));
+
+		troopRepository.saveAll(Arrays.stream(map.getTroops()).flatMap(Arrays::stream).filter(value -> value != null)
+				.collect(Collectors.toList()));
 	}
 
 	public MapView getMapByXYAndSize(int x, int y, int xSize, int ySize) {

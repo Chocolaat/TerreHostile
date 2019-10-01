@@ -1,12 +1,15 @@
 package org.terrehostile;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.terrehostile.business.map.MapView;
+import org.terrehostile.business.mapTileItem.Building;
 import org.terrehostile.game.configuration.model.UnitConfigurationPropertyList;
 import org.terrehostile.game.map.services.MapViewService;
 import org.terrehostile.game.map.services.TileItemService;
-import org.terrehostile.repository.TileRepository;
 
 @Component
 public class TestSch {
@@ -15,17 +18,29 @@ public class TestSch {
 	MapViewService mapViewService;
 	@Autowired
 	TileItemService tileItemService;
-	@Autowired
-	TileRepository tileRepository;
 
 	@Autowired
 	UnitConfigurationPropertyList unitsConfiguration;
 
 	public void launch() {
 
-		MapView m = mapViewService.getMapByXYAndSize(500, 500, 20, 20);
+		Building[][] toto = new Building[3][3];
+		toto[0][0] = new Building();
+		toto[0][0].setBuildingId(12);
 
-		System.out.println(m.toString());
+		toto[1][0] = null;
+
+		toto[2][0] = new Building();
+		toto[2][0].setBuildingId(12);
+
+//		MapView m = mapViewService.getMapByXYAndSize(500, 500, 20, 20);
+
+		System.out.println(Arrays.asList(toto).toString());
+
+		List<Building> toto2 = Arrays.stream(toto).flatMap(Arrays::stream).filter(value -> value != null)
+				.collect(Collectors.toList());
+
+		System.out.println(toto2.toString());
 
 //		System.out.println("----");
 //		System.out.println("uc = " + uc.toString());
@@ -127,7 +142,7 @@ public class TestSch {
 	}
 
 	public static void main(String[] args) {
-
+		new TestSch().launch();
 	}
 
 }

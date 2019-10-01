@@ -1,6 +1,5 @@
 package org.terrehostile.business.map;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -12,8 +11,7 @@ import org.terrehostile.business.mapTileItem.Troop;
 
 public class MapView {
 
-	private int[][] ground;
-	private int[][] height;
+	private Tile[][] tiles;
 	private Resource[][] resources;
 	private Building[][] buildings;
 	private Troop[][] troops;
@@ -25,14 +23,22 @@ public class MapView {
 	private int ySize;
 
 	public MapView() {
-		ground = new int[xSize][ySize];
+
 	}
 
-	public MapView(int[][] ground, int[][] height, Resource[][] resources, Building[][] buildings, Troop[][] troops,
-			int beginXCoord, int beginYCoord, int xSize, int ySize) {
+	public MapView(int xSize, int ySize) {
+		this.tiles = new Tile[xSize][ySize];
+		for (int x = 0; x < xSize; x++) {
+			for (int y = 0; y < ySize; y++) {
+				this.tiles[x][y] = new Tile(x, y);
+			}
+		}
+	}
+
+	public MapView(Tile[][] tiles, Resource[][] resources, Building[][] buildings, Troop[][] troops, int beginXCoord,
+			int beginYCoord, int xSize, int ySize) {
 		super();
-		this.ground = ground;
-		this.height = height;
+		this.tiles = tiles;
 		this.resources = resources;
 		this.buildings = buildings;
 		this.troops = troops;
@@ -49,8 +55,7 @@ public class MapView {
 		this.xSize = xSize;
 		this.ySize = ySize;
 
-		ground = new int[xSize][ySize];
-		height = new int[xSize][ySize];
+		tiles = new Tile[xSize][ySize];
 		buildings = new Building[xSize][ySize];
 		resources = new Resource[xSize][ySize];
 		troops = new Troop[xSize][ySize];
@@ -64,8 +69,7 @@ public class MapView {
 			newX = (newX > Constants.XMAX) ? newX - Constants.XCOUNT : newX;
 			newY = (newY > Constants.YMAX) ? newY - Constants.YCOUNT : newY;
 
-			ground[newX][newY] = currentTile.getBackground().ordinal();
-			height[newX][newY] = currentTile.getHeight();
+			tiles[newX][newY] = currentTile;
 		}
 
 		for (Resource currentResource : resourceList) {
@@ -104,52 +108,21 @@ public class MapView {
 
 	}
 
-	public List<Tile> toTileList() {
-		List<Tile> mapTileList = new ArrayList<>();
-
-		for (int x = 0; x < xSize; x++) {
-			for (int y = 0; y < ySize; y++) {
-				mapTileList.add(new Tile(x + this.beginXCoord, y + this.beginYCoord, GroundType.values()[ground[x][y]],
-						height[x][y], resources[x][y], buildings[x][y], troops[x][y]));
-			}
-		}
-
-		return mapTileList;
-	}
-
 	public static MapView createMapViewWithRandomTiles(int beginXCoord, int beginYCoord, int xSize, int ySize) {
-		MapView resultMapView = new MapView();
+		MapView resultMapView = new MapView(xSize, ySize);
 
 		resultMapView.beginXCoord = beginXCoord;
 		resultMapView.beginYCoord = beginYCoord;
 		resultMapView.xSize = xSize;
 		resultMapView.ySize = ySize;
-		resultMapView.ground = new int[xSize][ySize];
-		resultMapView.height = new int[xSize][ySize];
 
 		for (int x = 0; x < xSize; x++) {
 			for (int y = 0; y < ySize; y++) {
-				resultMapView.ground[x][y] = ThreadLocalRandom.current().nextInt(0, 3);
-				resultMapView.height[x][y] = 0;
+				resultMapView.tiles[x][y].setBackground(GroundType.values()[ThreadLocalRandom.current().nextInt(0, 3)]);
+				resultMapView.tiles[x][y].setHeight(0);
 			}
 		}
 		return resultMapView;
-	}
-
-	public int[][] getGround() {
-		return ground;
-	}
-
-	public void setGround(int[][] ground) {
-		this.ground = ground;
-	}
-
-	public int[][] getHeight() {
-		return height;
-	}
-
-	public void setHeight(int[][] height) {
-		this.height = height;
 	}
 
 	public int getBeginXCoord() {
@@ -208,12 +181,19 @@ public class MapView {
 		this.buildings = buildings;
 	}
 
+	public Tile[][] getTiles() {
+		return tiles;
+	}
+
+	public void setTiles(Tile[][] tiles) {
+		this.tiles = tiles;
+	}
+
 	@Override
 	public String toString() {
-		return "MapView [ground=" + Arrays.toString(ground) + ", height=" + Arrays.toString(height) + ", resources="
-				+ Arrays.toString(resources) + ", buildings=" + Arrays.toString(buildings) + ", troops="
-				+ Arrays.toString(troops) + ", beginXCoord=" + beginXCoord + ", beginYCoord=" + beginYCoord + ", xSize="
-				+ xSize + ", ySize=" + ySize + "]";
+		return "MapView [tiles=" + Arrays.toString(tiles) + ", resources=" + Arrays.toString(resources) + ", buildings="
+				+ Arrays.toString(buildings) + ", troops=" + Arrays.toString(troops) + ", beginXCoord=" + beginXCoord
+				+ ", beginYCoord=" + beginYCoord + ", xSize=" + xSize + ", ySize=" + ySize + "]";
 	}
 
 }

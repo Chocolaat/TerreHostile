@@ -1,4 +1,4 @@
-export class MapEditorSelection {
+export class MapPlayerSelection {
   currentLayerSelected: number;
   currentTypeSelected: number;
 

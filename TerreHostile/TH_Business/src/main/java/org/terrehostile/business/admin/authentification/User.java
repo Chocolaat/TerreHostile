@@ -19,9 +19,8 @@ import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.Transient;
-import org.terrehostile.business.mapTileItem.Building;
-import org.terrehostile.business.mapTileItem.Resource;
 import org.terrehostile.business.mapTileItem.Troop;
+import org.terrehostile.business.player.Town;
 
 @Entity
 @Table(name = "user")
@@ -62,15 +61,11 @@ public class User {
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "userId", referencedColumnName = "userId")
-	private List<Building> buildings;
-
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "userId", referencedColumnName = "userId")
 	private List<Troop> troops;
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "userId", referencedColumnName = "userId")
-	private List<Resource> resources;
+	private List<Town> towns;
 
 	public User() {
 
@@ -84,28 +79,12 @@ public class User {
 		this.userId = userId;
 	}
 
-	public List<Building> getBuildings() {
-		return buildings;
-	}
-
-	public void setBuildings(List<Building> buildings) {
-		this.buildings = buildings;
-	}
-
 	public List<Troop> getTroops() {
 		return troops;
 	}
 
 	public void setTroops(List<Troop> troops) {
 		this.troops = troops;
-	}
-
-	public List<Resource> getResources() {
-		return resources;
-	}
-
-	public void setResources(List<Resource> resources) {
-		this.resources = resources;
 	}
 
 	public String getPassword() {
@@ -172,12 +151,19 @@ public class User {
 		this.startYCoord = startYCoord;
 	}
 
+	public List<Town> getTowns() {
+		return towns;
+	}
+
+	public void setTowns(List<Town> towns) {
+		this.towns = towns;
+	}
+
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", email=" + email + ", password=" + password + ", name=" + name
 				+ ", lastName=" + lastName + ", active=" + active + ", roles=" + roles + ", startXCoord=" + startXCoord
-				+ ", startYCoord=" + startYCoord + ", buildings=" + buildings + ", troops=" + troops + ", resources="
-				+ resources + "]";
+				+ ", startYCoord=" + startYCoord + ", troops=" + troops + ", towns=" + towns + "]";
 	}
 
 }

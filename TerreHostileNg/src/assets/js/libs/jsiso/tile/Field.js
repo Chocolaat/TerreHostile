@@ -276,6 +276,7 @@ function(EffectLoader, Emitter, utils) {
       }
 
 
+
       var graphicValue = 0;
       if (mapLayout[i] && mapLayout[i][j])
     	  {
@@ -290,7 +291,7 @@ function(EffectLoader, Emitter, utils) {
     	  		}
     	  	else
     	  		{
-    	  			graphicValue = mapLayout[i][j]
+    	  			graphicValue = mapLayout[i][j].background;
     	  		}
     	  }
 

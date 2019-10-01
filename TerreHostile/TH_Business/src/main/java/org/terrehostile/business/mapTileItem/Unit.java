@@ -2,6 +2,7 @@ package org.terrehostile.business.mapTileItem;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -13,14 +14,17 @@ public class Unit {
 	public final static int TYPE_UNICORN = 2;
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int unitId;
 
-	private String troopId;
+	private int troopId;
 
 	private int unitType;
+
 	private int unitNumber;
+
 	private int health;
+
 	private int experience;
 
 	public Unit() {
@@ -32,14 +36,6 @@ public class Unit {
 
 	public void setUnitId(int unitId) {
 		this.unitId = unitId;
-	}
-
-	public String getTroopId() {
-		return troopId;
-	}
-
-	public void setTroopId(String troopId) {
-		this.troopId = troopId;
 	}
 
 	public int getUnitType() {
@@ -74,9 +70,17 @@ public class Unit {
 		this.experience = experience;
 	}
 
+	public int getTroopID() {
+		return troopId;
+	}
+
+	public void setTroopID(int troopID) {
+		this.troopId = troopID;
+	}
+
 	@Override
 	public String toString() {
-		return "Unit [unitId=" + unitId + ", troopId=" + troopId + ", unitType=" + unitType + ", unitNumber="
+		return "Unit [unitId=" + unitId + ", troopID=" + troopId + ", unitType=" + unitType + ", unitNumber="
 				+ unitNumber + ", health=" + health + ", experience=" + experience + "]";
 	}
 

@@ -1,15 +1,12 @@
 package org.terrehostile.business.mapTileItem;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.Table;
 
-import org.terrehostile.business.map.CoordinatesKey;
-
 @Entity
-@IdClass(CoordinatesKey.class)
 @Table(name = "buildings")
 public class Building {
 
@@ -20,28 +17,18 @@ public class Building {
 	public final static int STATE_UNDER_CONSTRUCTION = 2;
 	public final static int STATE_BUILT = 3;
 
-	@Column(name = "buildingId", nullable = false)
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int buildingId;
 
 	/** Coordinates */
-	@Id
-	@Column(name = "x_coord", nullable = false)
 	private int xCoord;
-
-	@Id
-	@Column(name = "y_coord", nullable = false)
 	private int yCoord;
 
-	@Column(name = "userId")
-	private Integer userId;
+	private int townId;
 
-	@Column(name = "type", nullable = false)
 	private int type;
-
-	@Column(name = "health", nullable = false)
 	private int health;
-
-	@Column(name = "state", nullable = false)
 	private int state;
 
 	public Building() {
@@ -95,17 +82,17 @@ public class Building {
 		this.buildingId = buildingId;
 	}
 
-	public Integer getUserId() {
-		return userId;
+	public int getTownId() {
+		return townId;
 	}
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setTownId(int townId) {
+		this.townId = townId;
 	}
 
 	@Override
 	public String toString() {
-		return "Building [buildingId=" + buildingId + ", xCoord=" + xCoord + ", yCoord=" + yCoord + ", userId=" + userId
+		return "Building [buildingId=" + buildingId + ", xCoord=" + xCoord + ", yCoord=" + yCoord + ", townId=" + townId
 				+ ", type=" + type + ", health=" + health + ", state=" + state + "]";
 	}
 

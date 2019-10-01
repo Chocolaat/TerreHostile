@@ -88,6 +88,8 @@ export class MapEditorComponent implements OnInit {
   }
   onTypeSelection(event: number) {
     this.currentMapEditorSelection.currentTypeSelected = event;
+    console.log("layer = " + this.currentMapEditorSelection.currentLayerSelected);
+    console.log("type = " + this.currentMapEditorSelection.currentTypeSelected);
   }
 
 

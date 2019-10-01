@@ -3,22 +3,19 @@ package org.terrehostile.business.mapTileItem;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.terrehostile.business.map.CoordinatesKey;
-
 @Entity
-@IdClass(CoordinatesKey.class)
 @Table(name = "troops")
 public class Troop implements Serializable {
 
@@ -27,20 +24,21 @@ public class Troop implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Column(name = "troopId", nullable = false)
-	private String troopId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int troopId;
 
 	/** Coordinates */
-	@Id
 	@Column(name = "x_coord", nullable = false)
 	private int xCoord;
 
-	@Id
 	@Column(name = "y_coord", nullable = false)
 	private int yCoord;
 
-	@Column(name = "userId")
 	private Integer userId;
+
+	@Column(nullable = true)
+	private Integer townId;
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "troopId", referencedColumnName = "troopId")
@@ -48,7 +46,6 @@ public class Troop implements Serializable {
 
 	public Troop() {
 		units = new ArrayList<>();
-		troopId = UUID.randomUUID().toString();
 	}
 
 	public int getxCoord() {
@@ -79,11 +76,11 @@ public class Troop implements Serializable {
 		return serialVersionUID;
 	}
 
-	public String getTroopId() {
+	public int getTroopId() {
 		return troopId;
 	}
 
-	public void setTroopId(String troopId) {
+	public void setTroopId(int troopId) {
 		this.troopId = troopId;
 	}
 

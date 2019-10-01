@@ -1,15 +1,12 @@
 package org.terrehostile.business.mapTileItem;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.Table;
 
-import org.terrehostile.business.map.CoordinatesKey;
-
 @Entity
-@IdClass(CoordinatesKey.class)
 @Table(name = "resources")
 public class Resource {
 
@@ -17,25 +14,17 @@ public class Resource {
 	public final static int TYPE_FISH = 2;
 	public final static int TYPE_GOLD = 3;
 
-	@Column(name = "resourceId", nullable = false)
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int resourceId;
 
 	/** Coordinates */
-	@Id
-	@Column(name = "x_coord", nullable = false)
 	private int xCoord;
 
-	@Id
-	@Column(name = "y_coord", nullable = false)
 	private int yCoord;
 
-	@Column(name = "userId")
-	private Integer userId;
-
-	@Column(name = "type", nullable = false)
 	private int type;
 
-	@Column(name = "quantity", nullable = false)
 	private int quantity;
 
 	public Resource() {
@@ -81,18 +70,10 @@ public class Resource {
 		this.quantity = quantity;
 	}
 
-	public Integer getUserId() {
-		return userId;
-	}
-
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
-
 	@Override
 	public String toString() {
-		return "Resource [resourceId=" + resourceId + ", xCoord=" + xCoord + ", yCoord=" + yCoord + ", userId=" + userId
-				+ ", type=" + type + ", quantity=" + quantity + "]";
+		return "Resource [resourceId=" + resourceId + ", xCoord=" + xCoord + ", yCoord=" + yCoord + ", type=" + type
+				+ ", quantity=" + quantity + "]";
 	}
 
 }
