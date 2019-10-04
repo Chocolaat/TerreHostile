@@ -3,6 +3,7 @@ import { MapEditorComponent } from './modules/admin/mapEditor/mapEditor.componen
 import { HomeComponent } from './modules/home/home/home.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { LoginComponent } from './_core/login/login.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -14,7 +15,11 @@ const routes: Routes = [
   },
   {
     path: 'mapEditor', component: MapEditorComponent
+  },
+  {
+    path: 'login', component: LoginComponent
   }
+
 ];
 
 @NgModule({

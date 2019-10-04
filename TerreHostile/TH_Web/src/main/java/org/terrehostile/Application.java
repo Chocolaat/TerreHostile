@@ -5,7 +5,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.filter.CommonsRequestLoggingFilter;
 import org.terrehostile.game.configuration.model.BuildingConfigurationPropertyList;
@@ -33,12 +32,17 @@ public class Application extends SpringBootServletInitializer {
 
 	public static void main(String[] args) throws Exception {
 
-		// SpringApplication.run(Application.class, args);
+		SpringApplication.run(Application.class, args);
 
-		ConfigurableApplicationContext context = SpringApplication.run(Application.class, args);
-		context.getBean(TestSch.class).launch();
+//		ConfigurableApplicationContext context = SpringApplication.run(Application.class, args);
+//		context.getBean(TestSch.class).launch();
 
 	}
+
+//	@Bean
+//	protected Module module() {
+//		return new Hibernate5Module();
+//	}
 
 	@Bean
 	public CommonsRequestLoggingFilter requestLoggingFilter() {

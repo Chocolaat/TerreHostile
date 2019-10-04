@@ -21,16 +21,13 @@ export class InfoPaneComponent implements OnInit {
   @Input() beginYCoord: number;
   @Input() size: number;
 
-  user: User;
+  user: any;
 
 
   constructor(private mapService: MapService, private userService: UserService) {
   }
 
   ngOnInit() {
-    this.userService.getUserById(43).subscribe( u => {
-      this.user = u;
-    });
   }
 
 }

@@ -3,7 +3,13 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-header',
   template: `
- <!-- <app-login></app-login> -->
+
+<ul class="nav nav-pills">
+  <li><a routerLinkActive="active" routerLink="/home">Home</a></li>
+  <li><a routerLinkActive="active" routerLink="/login">Login</a></li>
+  <li><a (click)="logout()">Logout</a></li>
+</ul>
+
   <nav role='navigation'>
   <ul>
     <li><a routerLink="/home" routerLinkActive="myactive">Accueil</a></li>

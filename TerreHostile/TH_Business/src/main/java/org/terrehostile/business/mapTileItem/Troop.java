@@ -7,16 +7,18 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name = "troops")
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@troopId")
 public class Troop implements Serializable {
 
 	/**
@@ -40,8 +42,7 @@ public class Troop implements Serializable {
 	@Column(nullable = true)
 	private Integer townId;
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "troopId", referencedColumnName = "troopId")
+	@OneToMany(mappedBy = "troopId", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Unit> units;
 
 	public Troop() {
