@@ -3,7 +3,9 @@ import { MapEditorComponent } from './modules/admin/mapEditor/mapEditor.componen
 import { HomeComponent } from './modules/home/home/home.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from './_core/login/login.component';
+import { LoginComponent } from './_core/authentication/login/login/login.component';
+import { LogoutComponent } from './_core/authentication/logout/logout/logout.component';
+import { AuthGuardService } from './_core/authentication/authGuard.service';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -11,14 +13,17 @@ const routes: Routes = [
     path: 'home', component: HomeComponent
   },
   {
-    path: 'mapPlayer', component: MapPlayerComponent
+    path: 'mapPlayer', component: MapPlayerComponent, canActivate:[AuthGuardService]
   },
   {
-    path: 'mapEditor', component: MapEditorComponent
+    path: 'mapEditor', component: MapEditorComponent, canActivate:[AuthGuardService]
   },
   {
     path: 'login', component: LoginComponent
-  }
+  },
+  {
+    path: 'logout', component: LogoutComponent, canActivate:[AuthGuardService]
+  },
 
 ];
 

@@ -6,6 +6,8 @@ import { WindowRef } from './_core/window.service';
 import { AppComponent } from './app.component';
 import { SharedModule } from './_shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoginComponent } from './_core/authentication/login/login/login.component';
+import { CoreModule } from './_core/core_module';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HomeModule,
     MapPlayerModule,
     MapEditorModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    CoreModule
   ],
   providers: [ WindowRef ],
   bootstrap: [AppComponent]
