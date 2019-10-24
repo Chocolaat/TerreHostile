@@ -29,6 +29,12 @@
 		</dependency>
 
 		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.9.1</version>
+		</dependency>
+
+		<dependency>
 			<groupId>org.terrehostile</groupId>
 			<artifactId>TH_Business</artifactId>
 			<version>0.0.1-SNAPSHOT</version>

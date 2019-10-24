@@ -1,28 +1,23 @@
 package org.terrehostile;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.filter.CommonsRequestLoggingFilter;
-import org.terrehostile.game.configuration.model.BuildingConfigurationPropertyList;
-import org.terrehostile.game.configuration.model.GroundConfigurationPropertyList;
-import org.terrehostile.game.configuration.model.ResourceConfigurationPropertyList;
-import org.terrehostile.game.configuration.model.UnitConfigurationPropertyList;
 
 @SpringBootApplication
 public class Application extends SpringBootServletInitializer {
 
-	@Autowired
-	private UnitConfigurationPropertyList unitsConfiguration;
-	@Autowired
-	private BuildingConfigurationPropertyList buildingsConfiguration;
-	@Autowired
-	private ResourceConfigurationPropertyList resourcesConfiguration;
-	@Autowired
-	private GroundConfigurationPropertyList groundsConfiguration;
+//	@Autowired
+//	private UnitConfigurationPropertyList unitsConfiguration;
+//	@Autowired
+//	private BuildingConfigurationPropertyList buildingsConfiguration;
+//	@Autowired
+//	private ResourceConfigurationPropertyList resourcesConfiguration;
+//	@Autowired
+//	private GroundConfigurationPropertyList groundsConfiguration;
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {

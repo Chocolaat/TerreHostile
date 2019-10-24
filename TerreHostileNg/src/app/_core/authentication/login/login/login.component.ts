@@ -20,7 +20,7 @@ import { AuthenticationService } from '../../authentication.service';
 export class LoginComponent implements OnInit {
 
   username = 'javainuse';
-  password = '';
+  password = 'password';
   invalidLogin = false;
 
   constructor(private router: Router,
@@ -30,12 +30,18 @@ export class LoginComponent implements OnInit {
   }
 
   checkLogin() {
-    if (this.loginservice.authenticate(this.username, this.password)
-    ) {
-      this.router.navigate(['']);
-      this.invalidLogin = false;
-    } else {
-      this.invalidLogin = true;
-    }
+    (this.loginservice.authenticate(this.username, this.password).subscribe(
+      data => {
+        this.router.navigate(['']);
+        this.invalidLogin = false;
+      },
+      error => {
+        this.invalidLogin = true;
+        console.log('invalidLogin');
+
+      }
+    )
+    );
+
   }
 }

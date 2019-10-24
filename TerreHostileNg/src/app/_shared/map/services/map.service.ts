@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { MapView } from '../model/mapView';
 
 @Injectable()
@@ -26,11 +26,16 @@ export class MapService {
 
   getMapByXYAndSize(beginX: number, beginY: number, size: number): Observable<any> {
 
+    const username = 'toto';
+    const password = 'toto';
+
     const params = '?beginX=' + beginX + '&beginY=' + beginY + '&size=' + size;
     return this.httpClient.get<any>('/api/map' + params);
   }
 
   saveMap(map: any): Observable<any> {
+    const username = 'javainuse';
+    const password = 'password';
 
     return this.httpClient.post<any>('/api/map', map);
   }

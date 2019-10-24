@@ -8,6 +8,8 @@ import { SharedModule } from './_shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './_core/authentication/login/login/login.component';
 import { CoreModule } from './_core/core_module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { BasicAuthHtppInterceptorService } from './_core/authentication/basic-auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,11 @@ import { CoreModule } from './_core/core_module';
     BrowserAnimationsModule,
     CoreModule
   ],
-  providers: [ WindowRef ],
+  providers: [ WindowRef,
+    {
+      provide: HTTP_INTERCEPTORS, useClass: BasicAuthHtppInterceptorService, multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
