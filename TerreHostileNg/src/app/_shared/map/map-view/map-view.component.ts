@@ -1,7 +1,9 @@
 import { MapView } from './../model/mapView';
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, OnDestroy } from '@angular/core';
 import * as MapJsModule from 'src/assets/js/map/map.js';
 import { MapService } from '../services/map.service';
+import { first } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -19,28 +21,34 @@ import { MapService } from '../services/map.service';
   `,
   styleUrls: ['./map-view.component.css']
 })
-export class MapViewComponent implements OnInit {
+export class MapViewComponent implements OnInit, OnDestroy {
 
   currentMap: MapView = new MapView();
+  initialized = false;
+
+  subscription: Subscription;
 
   constructor(private mapService: MapService) {
 
   }
 
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
   ngOnInit() {
 
-      this.mapService.getMapByXYAndSize(500, 500, 50).subscribe(
-      (map) => {
-          MapJsModule.launchGame(map);
-          this.currentMap = map;
-      });
-
-     this.mapService.currentMap.subscribe(map => {
-      if (MapJsModule.setMap) {
-        MapJsModule.setMap(map);
+     this.subscription = this.mapService.currentMap.subscribe(map => {
+      if (map) {
         this.currentMap = map;
+        if (this.initialized) {
+          MapJsModule.setMap(map);
+        } else {
+          MapJsModule.launchGame(map);
+        }
       }
-     });
+    });
+    this.mapService.updateMap(500, 500, 50).subscribe();
   }
 
 

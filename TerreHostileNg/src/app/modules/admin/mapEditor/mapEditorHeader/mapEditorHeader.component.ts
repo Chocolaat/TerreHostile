@@ -31,6 +31,7 @@ export class MapEditorHeaderComponent implements OnInit {
   constructor(private mapService: MapService, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
+
   }
 
   saveMap() {
@@ -46,6 +47,7 @@ export class MapEditorHeaderComponent implements OnInit {
   getMap(beginX: number, beginY: number, size: number) {
     this.mapEditorHeaderDisabled = true;
     this.mapService.updateMap(beginX, beginY, size).subscribe(() => this.mapEditorHeaderDisabled = false);
+    // this.mapService.updateMap(beginX, beginY, size);
   }
 
 }

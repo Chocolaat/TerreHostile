@@ -3,7 +3,6 @@ define(["require", "exports", '../libs/jsiso/canvas/Control', '../libs/jsiso/can
 
   exports.launchGame = function (map) {
 
-
     // -- FPS --------------------------------
     window.requestAnimFrame = (function() {
       return window.requestAnimationFrame
@@ -165,6 +164,9 @@ define(["require", "exports", '../libs/jsiso/canvas/Control', '../libs/jsiso/can
 
       function draw() {
 
+        if (!document.getElementsByTagName('app-map-view').item(0)) {
+          return;
+        }
         var mapViewWidth = document.getElementsByTagName('app-map-view').item(0).offsetWidth;
         var mapViewHeight = document.getElementsByTagName('app-map-view').item(0).offsetHeight;
 
