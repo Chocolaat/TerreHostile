@@ -38,6 +38,17 @@ export class AuthenticationService {
     );
   }
 
+  register(name: string, password: string) {
+    return this.httpClient.post<any>('/api/register', {name, password}).pipe(
+     map(
+       userData => {
+        return userData;
+       }
+     )
+
+    );
+  }
+
   isUserLoggedIn() {
     const user = sessionStorage.getItem('username');
     return !(user === null);

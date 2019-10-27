@@ -1,5 +1,6 @@
 package org.terrehostile.business.admin.authentification;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -19,34 +20,36 @@ import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.Transient;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.terrehostile.business.mapTileItem.Troop;
 import org.terrehostile.business.player.Town;
 
 @Entity
 @Table(name = "user")
-public class User {
+public class User implements UserDetails {
+
+	private static final long serialVersionUID = -5849285432799077672L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "userId")
 	private int userId;
+
+	@Column(name = "name")
+	@NotEmpty(message = "*Please provide your name")
+	private String name;
+
 	@Column(name = "email")
 	@Email(message = "*Please provide a valid Email")
-	@NotEmpty(message = "*Please provide an email")
 	private String email;
+
 	@Column(name = "password")
 	@Length(min = 5, message = "*Your password must have at least 5 characters")
 	@NotEmpty(message = "*Please provide your password")
 	@Transient
 	private String password;
-	@Column(name = "name")
-	@NotEmpty(message = "*Please provide your name")
-	private String name;
-	@Column(name = "last_name")
-	@NotEmpty(message = "*Please provide your last name")
-	private String lastName;
-	@Column(name = "active")
-	private int active;
+
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "user_role", joinColumns = {
 			@JoinColumn(name = "userId", referencedColumnName = "userId") }, inverseJoinColumns = {
@@ -67,8 +70,39 @@ public class User {
 	@JoinColumn(name = "userId", referencedColumnName = "userId")
 	private List<Town> towns;
 
-	public User() {
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
+	@Override
+	public String getUsername() {
+		return this.name;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return true;
 	}
 
 	public int getUserId() {
@@ -103,28 +137,12 @@ public class User {
 		this.name = name;
 	}
 
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
 	public String getEmail() {
 		return email;
 	}
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public int getActive() {
-		return active;
-	}
-
-	public void setActive(int active) {
-		this.active = active;
 	}
 
 	public Set<Role> getRoles() {
@@ -159,11 +177,11 @@ public class User {
 		this.towns = towns;
 	}
 
-	@Override
-	public String toString() {
-		return "User [userId=" + userId + ", email=" + email + ", password=" + password + ", name=" + name
-				+ ", lastName=" + lastName + ", active=" + active + ", roles=" + roles + ", startXCoord=" + startXCoord
-				+ ", startYCoord=" + startYCoord + ", troops=" + troops + ", towns=" + towns + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "User [userId=" + userId + ", email=" + email + ", password=" + password + ", name=" + name + ", roles="
+//				+ roles + ", startXCoord=" + startXCoord + ", startYCoord=" + startYCoord + ", troops=" + troops
+//				+ ", towns=" + towns + "]";
+//	}
 
 }
