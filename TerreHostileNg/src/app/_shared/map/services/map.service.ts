@@ -14,7 +14,7 @@ export class MapService implements OnInit {
   currentMap: Observable<MapView> = this.mapSource.asObservable();
 
   constructor(private  httpClient: HttpClient) {
-
+    this.updateMap(500, 500, 50).subscribe();
    }
 
 
@@ -24,6 +24,7 @@ export class MapService implements OnInit {
 
   // Update the current map. Subscribe to know when update is finished.
   updateMap(beginX: number, beginY: number, size: number) {
+    console.log('updateMap');
        return new Observable<any>((observer) => {
 
         this.getMapByXYAndSize(beginX, beginY, size).subscribe(

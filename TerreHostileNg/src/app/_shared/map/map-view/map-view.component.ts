@@ -38,17 +38,21 @@ export class MapViewComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
+    console.log('ngOnInit');
      this.subscription = this.mapService.currentMap.subscribe(map => {
+       console.log('Hey');
       if (map) {
         this.currentMap = map;
         if (this.initialized) {
+          console.log('setMap');
           MapJsModule.setMap(map);
         } else {
+          console.log('launchGame');
           MapJsModule.launchGame(map);
+          this.initialized = true;
         }
       }
     });
-    this.mapService.updateMap(500, 500, 50).subscribe();
   }
 
 
