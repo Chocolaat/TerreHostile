@@ -3,6 +3,7 @@ package org.terrehostile.game.map.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.terrehostile.business.admin.authentification.User;
 import org.terrehostile.business.map.MapView;
 import org.terrehostile.game.map.services.MapViewService;
 
@@ -23,8 +25,9 @@ public class MapViewControler {
 	@ResponseBody
 	public MapView getMapByXYAndSize(@RequestParam int beginX, int beginY, int size) {
 
-		MapView map = mapViewService.getMapByXYAndSize(beginX, beginY, size, size);
+		User u = (User) (SecurityContextHolder.getContext().getAuthentication().getPrincipal());
 
+		MapView map = mapViewService.getMapByXYAndSize(beginX, beginY, size, size);
 		return map;
 	}
 

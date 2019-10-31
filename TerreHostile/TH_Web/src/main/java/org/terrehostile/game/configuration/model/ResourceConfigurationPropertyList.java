@@ -1,9 +1,7 @@
 package org.terrehostile.game.configuration.model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -20,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class ResourceConfigurationPropertyList {
 
 	@Bean(name = "resourceConfigurations")
-	public Map<Integer, ResourceConfiguration> resourceConfigurations() {
+	public List<ResourceConfiguration> resourceConfigurations() {
 		return getResourceConfigurations();
 	}
 
@@ -58,9 +56,9 @@ public class ResourceConfigurationPropertyList {
 		this.types = types;
 	}
 
-	private Map<Integer, ResourceConfiguration> getResourceConfigurations() {
+	private List<ResourceConfiguration> getResourceConfigurations() {
 
-		HashMap<Integer, ResourceConfiguration> res = new HashMap<>();
+		List<ResourceConfiguration> res = new ArrayList<>();
 
 		for (int resourceType : types) {
 			ResourceConfiguration currentResourceCfg = new ResourceConfiguration();
@@ -71,7 +69,7 @@ public class ResourceConfigurationPropertyList {
 			currentResourceCfg
 					.setRegeneration(Integer.parseInt(env.getProperty("resources.regeneration[" + resourceType + "]")));
 
-			res.put(resourceType, currentResourceCfg);
+			res.add(currentResourceCfg);
 
 		}
 

@@ -4,6 +4,7 @@ import * as MapJsModule from 'src/assets/js/map/map.js';
 import { MapService } from '../services/map.service';
 import { first } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { GameConfigurationService } from '../../configuration/services/game-configuration.service';
 
 
 @Component({
@@ -28,7 +29,7 @@ export class MapViewComponent implements OnInit, OnDestroy {
 
   subscription: Subscription;
 
-  constructor(private mapService: MapService) {
+  constructor(private mapService: MapService, private gameConfigurationService: GameConfigurationService) {
 
   }
 
@@ -38,23 +39,30 @@ export class MapViewComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    console.log('ngOnInit');
      this.subscription = this.mapService.currentMap.subscribe(map => {
-       console.log('Hey');
       if (map) {
         this.currentMap = map;
         if (this.initialized) {
-          console.log('setMap');
           MapJsModule.setMap(map);
         } else {
-          console.log('launchGame');
-          MapJsModule.launchGame(map);
+          this.gameConfigurationService.getBuildingConfiguration().subscribe((buildingConfiguration) => {
+            this.gameConfigurationService.getGroundConfiguration().subscribe((groundConfiguration) => {
+              this.gameConfigurationService.getUnitConfiguration().subscribe((unitConfiguration) => {
+                this.gameConfigurationService.getResourceConfiguration().subscribe((resourceConfiguration) => {
+                  const gameConfiguration = {buildings: buildingConfiguration,
+                    resources: resourceConfiguration, units: unitConfiguration, ground: groundConfiguration};
+                    MapJsModule.launchGame(map, gameConfiguration);
+                });
+              });
+            });
+          });
           this.initialized = true;
         }
       }
     });
   }
 
+  
 
   updateChunkXYCoords(xOffset: number, yOffset: number) {
 

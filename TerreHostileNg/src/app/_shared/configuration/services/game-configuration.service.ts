@@ -11,35 +11,35 @@ import { ResourceConfiguration } from '../model/resourceConfiguration';
 export class GameConfigurationService {
 
   // buildingConfiguration: Map<number, BuildingConfiguration> = new Map<number, BuildingConfiguration>();
-  buildingConfiguration: Observable<Map<number, BuildingConfiguration>>;
-  resourceConfiguration: Observable<Map<number, ResourceConfiguration>>;
-  unitConfiguration: Observable<Map<number, UnitConfiguration>>;
-  groundConfiguration: Observable<Map<number, GroundConfiguration>>;
+  buildingConfiguration: Observable<Array<BuildingConfiguration>>;
+  resourceConfiguration: Observable<Array<ResourceConfiguration>>;
+  unitConfiguration: Observable<Array<UnitConfiguration>>;
+  groundConfiguration: Observable<Array<GroundConfiguration>>;
 
   constructor(private  httpClient: HttpClient) { }
 
-  getBuildingConfiguration(): Observable<Map<number, BuildingConfiguration>> {
+  getBuildingConfiguration(): Observable<Array<BuildingConfiguration>> {
     if (!this.buildingConfiguration) {
       this.buildingConfiguration = this.httpClient.get<any>('/api/gameConfigurations/building');
     }
     return this.buildingConfiguration;
   }
 
-  getResourceConfiguration(): Observable<Map<number, ResourceConfiguration>> {
+  getResourceConfiguration(): Observable<Array<ResourceConfiguration>> {
     if (!this.resourceConfiguration) {
       this.resourceConfiguration = this.httpClient.get<any>('/api/gameConfigurations/resource');
     }
     return this.resourceConfiguration;
   }
 
-  getUnitConfiguration(): Observable<Map<number, UnitConfiguration>> {
+  getUnitConfiguration(): Observable<Array<UnitConfiguration>> {
     if (!this.unitConfiguration) {
       this.unitConfiguration = this.httpClient.get<any>('/api/gameConfigurations/unit');
     }
     return this.unitConfiguration;
   }
 
-  getGroundConfiguration(): Observable<Map<number, GroundConfiguration>> {
+  getGroundConfiguration(): Observable<Array<GroundConfiguration>> {
     if (!this.groundConfiguration) {
       this.groundConfiguration = this.httpClient.get<any>('/api/gameConfigurations/ground');
     }

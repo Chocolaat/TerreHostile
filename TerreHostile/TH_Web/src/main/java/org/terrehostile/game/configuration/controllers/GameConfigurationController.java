@@ -2,7 +2,6 @@ package org.terrehostile.game.configuration.controllers;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,16 +17,16 @@ import org.terrehostile.game.configuration.model.UnitConfiguration;
 public class GameConfigurationController {
 
 	@Autowired
-	Map<Integer, BuildingConfiguration> buildingConfigurations;
+	List<BuildingConfiguration> buildingConfigurations;
 
 	@Autowired
-	Map<Integer, ResourceConfiguration> resourceConfigurations;
+	List<ResourceConfiguration> resourceConfigurations;
 
 	@Autowired
-	Map<Integer, UnitConfiguration> unitConfigurations;
+	List<UnitConfiguration> unitConfigurations;
 
 	@Autowired
-	Map<Integer, GroundConfiguration> groundConfigurations;
+	List<GroundConfiguration> groundConfigurations;
 
 	@RequestMapping(value = { "/gameConfigurations" }, method = RequestMethod.GET)
 	@ResponseBody
@@ -37,25 +36,25 @@ public class GameConfigurationController {
 
 	@RequestMapping(value = { "/gameConfigurations/building" }, method = RequestMethod.GET)
 	@ResponseBody
-	public Map<Integer, BuildingConfiguration> getBuildingConfigurations() {
+	public List<BuildingConfiguration> getBuildingConfigurations() {
 		return buildingConfigurations;
 	}
 
 	@RequestMapping(value = { "/gameConfigurations/resource" }, method = RequestMethod.GET)
 	@ResponseBody
-	public Map<Integer, ResourceConfiguration> getResourceConfigurations() {
+	public List<ResourceConfiguration> getResourceConfigurations() {
 		return resourceConfigurations;
 	}
 
 	@RequestMapping(value = { "/gameConfigurations/unit" }, method = RequestMethod.GET)
 	@ResponseBody
-	public Map<Integer, UnitConfiguration> getUnitConfigurations() {
+	public List<UnitConfiguration> getUnitConfigurations() {
 		return unitConfigurations;
 	}
 
 	@RequestMapping(value = { "/gameConfigurations/ground" }, method = RequestMethod.GET)
 	@ResponseBody
-	public Map<Integer, GroundConfiguration> getGroundConfigurations() {
+	public List<GroundConfiguration> getGroundConfigurations() {
 		return groundConfigurations;
 	}
 

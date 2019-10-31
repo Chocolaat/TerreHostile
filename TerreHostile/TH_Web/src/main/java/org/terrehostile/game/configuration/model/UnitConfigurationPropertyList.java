@@ -1,9 +1,7 @@
 package org.terrehostile.game.configuration.model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -20,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class UnitConfigurationPropertyList {
 
 	@Bean(name = "unitConfigurations")
-	public Map<Integer, UnitConfiguration> unitConfigurations() {
+	public List<UnitConfiguration> unitConfigurations() {
 		return getUnitConfigurations();
 	}
 
@@ -58,9 +56,9 @@ public class UnitConfigurationPropertyList {
 		this.types = types;
 	}
 
-	private Map<Integer, UnitConfiguration> getUnitConfigurations() {
+	private List<UnitConfiguration> getUnitConfigurations() {
 
-		HashMap<Integer, UnitConfiguration> res = new HashMap<>();
+		List<UnitConfiguration> res = new ArrayList<>();
 
 		for (int unitType : types) {
 			UnitConfiguration currentUnitCfg = new UnitConfiguration();
@@ -76,7 +74,7 @@ public class UnitConfigurationPropertyList {
 			currentUnitCfg.setArmor(Integer.parseInt(env.getProperty("units.armor[" + unitType + "]")));
 			currentUnitCfg.setRange(Integer.parseInt(env.getProperty("units.range[" + unitType + "]")));
 
-			res.put(unitType, currentUnitCfg);
+			res.add(currentUnitCfg);
 
 		}
 

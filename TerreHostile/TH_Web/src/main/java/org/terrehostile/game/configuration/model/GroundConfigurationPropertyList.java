@@ -1,9 +1,7 @@
 package org.terrehostile.game.configuration.model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -20,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class GroundConfigurationPropertyList {
 
 	@Bean(name = "groundConfigurations")
-	public Map<Integer, GroundConfiguration> groundConfigurations() {
+	public List<GroundConfiguration> groundConfigurations() {
 		return getGroundConfigurations();
 	}
 
@@ -68,9 +66,9 @@ public class GroundConfigurationPropertyList {
 		this.types = types;
 	}
 
-	private Map<Integer, GroundConfiguration> getGroundConfigurations() {
+	private List<GroundConfiguration> getGroundConfigurations() {
 
-		HashMap<Integer, GroundConfiguration> res = new HashMap<>();
+		List<GroundConfiguration> res = new ArrayList<>();
 
 		for (int groundType : types) {
 			GroundConfiguration currentGroundCfg = new GroundConfiguration();
@@ -81,7 +79,7 @@ public class GroundConfigurationPropertyList {
 
 			currentGroundCfg.setMovement(Integer.parseInt(env.getProperty("grounds.movement[" + groundType + "]")));
 
-			res.put(groundType, currentGroundCfg);
+			res.add(currentGroundCfg);
 
 		}
 

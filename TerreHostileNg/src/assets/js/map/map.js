@@ -1,7 +1,7 @@
 define(["require", "exports", '../libs/jsiso/canvas/Control', '../libs/jsiso/canvas/Input', '../libs/jsiso/img/load',
 '../libs/jsiso/json/load', '../libs/jsiso/tile/Field'], function(require, exports, CanvasControl, CanvasInput, imgLoader, jsonLoader, TileField){
 
-  exports.launchGame = function (map) {
+  exports.launchGame = function (map, gameConfigurations) {
 
     // -- FPS --------------------------------
     window.requestAnimFrame = (function() {
@@ -18,17 +18,6 @@ define(["require", "exports", '../libs/jsiso/canvas/Control', '../libs/jsiso/can
     // Global variables used to display and update map
     var mapLayers = [];
 
-//OK
-  // var groundConfigurationPropertyList = {"names":["Grass","Ground","Ocean","Sand"],"imgPaths":["../assets/img/grounds/grass_square.png","../assets/img/grounds/ground_square.png", ["../assets/img/grounds/sea1.png", "../assets/img/grounds/sea2.png"],"../assets/img/grounds/sand_yoyo.png"],"imgPathsGround":["../assets/img/grounds/grass.png","../assets/img/grounds/ground.png","../assets/img/grounds/ocean.png","../assets/img/grounds/sand.png", "../assets/img/grounds/sea1.png"],"types":[0,1,2,3]};
-
-  //KO
- //  var groundConfigurationPropertyList = {"names":["Grass","Ground","Ocean","Sand"],"imgPaths":["../assets/img/grounds/grass_square.png","../assets/img/grounds/ground_square.png", ["../assets/img/grounds/sea1.png", "../assets/img/grounds/sea2.png"],"../assets/img/grounds/sand_yoyo.png"],"imgPathsGround":["../assets/img/grounds/grass.png","../assets/img/grounds/ground.png","../assets/img/grounds/ocean.png","../assets/img/grounds/sand.png", ["../assets/img/grounds/sea1.png",]],"types":[0,1,2,3]};
-
-   var groundConfigurationPropertyList = {"names":["Grass","Ground","Ocean","Sand"],"imgPaths":["../assets/img/game/grounds/grass_square.png","../assets/img/game/grounds/ground_square.png", ["../assets/img/game/grounds/sea1.png", "../assets/img/game/grounds/sea2.png"],"../assets/img/game/grounds/sand_yoyo.png"],"imgPathsGround":[["../assets/img/game/grounds/grass.png"],["../assets/img/game/grounds/ground.png"],["../assets/img/game/grounds/sea1.png", "../assets/img/game/grounds/sea2.png"],["../assets/img/game/grounds/sand.png"], ["../assets/img/game/grounds/sea1.png", "../assets/img/game/grounds/sea2.png"]],"types":[0,1,2,3]};
-  var buildingConfigurationPropertyList = {"names":["Delete","Castle"],"imgPaths":[["../assets/img/pictograms/delete_cross.png"],["../assets/img/game/buildings/castle.png"]],"types":[0,1]};
-    var resourceConfigurationPropertyList = {"names":["Delete","Flours"],"imgPaths":[["../assets/img/pictograms/delete_cross.png"],["../assets/img/game/mapResources/flours.png"]],"types":[0,1]};
-    var unitConfigurationPropertyList = {"names":["Delete","Dragon","Unicorn"],"imgPaths":[["../assets/img/pictograms/delete_cross.png"],["../assets/img/game/troops/monsters/dragon.png"],["../assets/img/game/troops/monsters/unicorn.png"]],"types":[0,1,2]};
-
 
     var mapChunkCurrentXCoord = map.xSize / 2;
     var mapChunkCurrentYCoord = map.ySize / 2;
@@ -37,25 +26,24 @@ define(["require", "exports", '../libs/jsiso/canvas/Control', '../libs/jsiso/can
 
     function launch() {
 
-      jsonLoader([JSON.stringify(groundConfigurationPropertyList), JSON.stringify(buildingConfigurationPropertyList), JSON.stringify(resourceConfigurationPropertyList), JSON.stringify(unitConfigurationPropertyList)])
-          .then(
-              function(jsonResponse)
-              {
+
+
+    
+                
                       var images = [
                           {
-                            graphics: jsonResponse[0].imgPathsGround
+                            graphics: gameConfigurations.ground.map(b => [b.imgPathGround])
                           },
                           {
-                            graphics:jsonResponse[1].imgPaths
+                            graphics:gameConfigurations.buildings.map(b => [b.imgPath])
                           },
                           {
-                            graphics:jsonResponse[2].imgPaths
+                            graphics:gameConfigurations.resources.map(b => [b.imgPath])
                           },
-                          {
-                            graphics:jsonResponse[3].imgPaths
+                          { 
+                            graphics:gameConfigurations.units.map(b => [b.imgPath])
                           }
                         ];
-
 
                 imgLoader(images)
                     .then(
@@ -139,8 +127,8 @@ define(["require", "exports", '../libs/jsiso/canvas/Control', '../libs/jsiso/can
                                   ]);
 
                         });
-              }
-              );
+         //     }
+        //      );
 
 
     }
@@ -199,13 +187,7 @@ define(["require", "exports", '../libs/jsiso/canvas/Control', '../libs/jsiso/can
           for (j = jDeb; j < jFin; j++) {
             mapLayers.map(function(layer) {
               if (layer.getTitle() === "Ground" || layer.getTitle() === "Resources" || layer.getTitle() === "Buildings" || layer.getTitle() === "Troops") {
-/* 
-                console.log("Layout " + layer.getTitle());
-                  console.log(layer.getLayout());
-                  console.log("Height : ");
-                  console.log(layer.getHeightLayout());
-                  console.log("-----------------------------------------------------------");
-                  console.log("-----------------------------------------------------------"); */
+
 
                 layer.draw(i, j, layer.getTitle()); // Draw the graphics layer
               }

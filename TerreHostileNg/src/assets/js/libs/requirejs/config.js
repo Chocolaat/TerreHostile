@@ -4,5 +4,3 @@ requirejs.config({
         	mustache: "libs/mustache/mustache-wrap"
         }
 });
-
-console.log("toto");

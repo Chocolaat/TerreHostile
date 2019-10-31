@@ -66,10 +66,10 @@ export class MapEditorToolbarComponent implements OnInit {
   @Output() mapEditorToolbarTypeSelectionEvent = new EventEmitter<number>();
 
   currentSubMenu: string;
-  buildingConfigurations: Map<number, BuildingConfiguration>;
-  resourceConfigurations: Map<number, ResourceConfiguration>;
-  unitConfigurations: Map<number, UnitConfiguration>;
-  groundConfigurations: Map<number, GroundConfiguration>;
+  buildingConfigurations: Array<BuildingConfiguration>;
+  resourceConfigurations: Array<ResourceConfiguration>;
+  unitConfigurations: Array<UnitConfiguration>;
+  groundConfigurations: Array<GroundConfiguration>;
 
   constructor(private gameConfigurationService: GameConfigurationService, private mapService: MapService) { }
 

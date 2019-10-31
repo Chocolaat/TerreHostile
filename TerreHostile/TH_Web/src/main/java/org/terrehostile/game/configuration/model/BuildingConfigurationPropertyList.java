@@ -1,9 +1,7 @@
 package org.terrehostile.game.configuration.model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -20,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class BuildingConfigurationPropertyList {
 
 	@Bean(name = "buildingConfigurations")
-	public Map<Integer, BuildingConfiguration> buildingConfigurations() {
+	public List<BuildingConfiguration> buildingConfigurations() {
 		return getBuildingConfigurations();
 	}
 
@@ -58,9 +56,9 @@ public class BuildingConfigurationPropertyList {
 		this.types = types;
 	}
 
-	private Map<Integer, BuildingConfiguration> getBuildingConfigurations() {
+	private List<BuildingConfiguration> getBuildingConfigurations() {
 
-		HashMap<Integer, BuildingConfiguration> res = new HashMap<>();
+		List<BuildingConfiguration> res = new ArrayList<>();
 
 		for (int buildingType : types) {
 			BuildingConfiguration currentBuildingCfg = new BuildingConfiguration();
@@ -76,7 +74,7 @@ public class BuildingConfigurationPropertyList {
 			currentBuildingCfg.setArmor(Integer.parseInt(env.getProperty("buildings.armor[" + buildingType + "]")));
 			currentBuildingCfg.setRange(Integer.parseInt(env.getProperty("buildings.range[" + buildingType + "]")));
 
-			res.put(buildingType, currentBuildingCfg);
+			res.add(currentBuildingCfg);
 
 		}
 
@@ -85,8 +83,8 @@ public class BuildingConfigurationPropertyList {
 
 	@Override
 	public String toString() {
-		return "UnitsConfiguration [env=" + env + ", names=" + names + ", imgPaths=" + imgPaths + ", types=" + types
-				+ "]";
+		return "BuildingConfigurationPropertyList [env=" + env + ", names=" + names + ", imgPaths=" + imgPaths
+				+ ", types=" + types + "]";
 	}
 
 }

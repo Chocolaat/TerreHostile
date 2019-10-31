@@ -37,7 +37,7 @@ export class MapPlayerToolbarComponent implements OnInit {
   @Output() mapPlayerToolbarTypeSelectionEvent = new EventEmitter<number>();
 
   currentSubMenu: string;
-  buildingConfigurations: Map<number, BuildingConfiguration>;
+  buildingConfigurations: Array<BuildingConfiguration>;
 
   constructor(private gameConfigurationService: GameConfigurationService, private mapService: MapService) { }
 
