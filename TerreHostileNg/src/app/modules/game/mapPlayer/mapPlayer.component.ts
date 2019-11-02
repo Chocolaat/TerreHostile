@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MapPlayerSelection } from './model/mapEditorSelection';
 import * as MapJsModule from 'src/assets/js/map/map.js';
+import { BuildingConfiguration } from 'src/app/_shared/configuration/model/buildingConfiguration';
 
 @Component({
   selector: 'app-map-player',
@@ -9,8 +10,7 @@ import * as MapJsModule from 'src/assets/js/map/map.js';
   <app-map-player-header></app-map-player-header>
   <app-map-view appInputEventDirective (mouseEvent)='mouseEvent($event)'></app-map-view>
   <app-map-player-toolbar
-  (mapPlayerToolbarLayerSelectionEvent)="onLayerSelection($event)"
-  (mapPlayerToolbarTypeSelectionEvent)="onTypeSelection($event)">
+  (mapPlayerToolbarBuildingSelectionEvent)="onBuildingSelection($event)">
   </app-map-player-toolbar>
 </section>
   `,
@@ -18,7 +18,7 @@ import * as MapJsModule from 'src/assets/js/map/map.js';
 })
 export class MapPlayerComponent implements OnInit {
 
-  currentMapPlayerSelection: MapPlayerSelection = new MapPlayerSelection();
+  currentBuildingSelection: BuildingConfiguration = new BuildingConfiguration();
 
   constructor() { }
 
@@ -39,10 +39,11 @@ export class MapPlayerComponent implements OnInit {
   }
 
   onClickEvent(event: MouseEvent) {
-     if (this.currentMapPlayerSelection.currentLayerSelected !== undefined && this.currentMapPlayerSelection.currentTypeSelected !== undefined) {
-      MapJsModule.updateTile(event, this.currentMapPlayerSelection.currentLayerSelected, this.currentMapPlayerSelection.currentTypeSelected);
+     if (this.currentBuildingSelection !== undefined) {
+      MapJsModule.updateTile(event, 1, this.currentBuildingSelection.type);
     }
   }
+
 
   onMouseUpEvent(event: MouseEvent) {
 /*     const currentTile = (MapJsModule.mapLayers[0].getXYCoords(event.offsetX, event.offsetY));
@@ -53,6 +54,8 @@ export class MapPlayerComponent implements OnInit {
   }
 
   onMouseDownEvent(event: MouseEvent) {
+
+
 /*     if (event.ctrlKey) {
       this.beginTileForSquareTerrainUpdate = MapJsModule.mapLayers[0].getXYCoords(event.offsetX,
         event.offsetY);
@@ -63,19 +66,19 @@ export class MapPlayerComponent implements OnInit {
 
   onMouseMove(event: MouseEvent) {
 
-    if (this.currentMapPlayerSelection.currentTypeSelected !== undefined) {
+    if (this.currentBuildingSelection !== undefined) {
       const currentTile = (MapJsModule.mapLayers[0].getXYCoords(event.offsetX, event.offsetY));
 
-      MapJsModule.mapLayers[0].applyFocus(currentTile.x, currentTile.y); // Apply mouse rollover via mouse location X & Y
+      // Apply mouse rollover via mouse location X & Y
+      MapJsModule.mapLayers[0].applyFocus(currentTile.x, currentTile.y);
+      // Apply mouse rollover via mouse location X & Y
+      MapJsModule.mapLayers[0].applyCircleFocus(currentTile.x, currentTile.y, this.currentBuildingSelection.vision);
     }
   }
 
-  onLayerSelection(event: number) {
-    this.currentMapPlayerSelection.currentLayerSelected = event;
-    // this.currentMapPlayerSelection.currentTypeSelected = 0;
-  }
-  onTypeSelection(event: number) {
-    this.currentMapPlayerSelection.currentTypeSelected = event;
+
+  onBuildingSelection(event: BuildingConfiguration) {
+    this.currentBuildingSelection = event;
   }
 
 

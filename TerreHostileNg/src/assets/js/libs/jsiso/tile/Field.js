@@ -28,6 +28,8 @@ function(EffectLoader, Emitter, utils) {
   return function(ctx, mapWidth, mapHeight, mapLayout) {
 
 
+    var debugCount = 0;
+
     var _horizontalTileCache = {}; // Holds the canvas rendered tiles that are drawn via paths
 
     var title = "";
@@ -64,6 +66,8 @@ function(EffectLoader, Emitter, utils) {
     var focusTilePosXEnd = 0;
     var focusTilePosYBegin = 0;
     var focusTilePosYEnd = 0;
+
+    var focusCoordinates = []; // array of coordinates to focus
 
     var alphaWhenFocusBehind =  {}; // Used for applying alpha to objects infront of focus
 
@@ -567,9 +571,24 @@ function(EffectLoader, Emitter, utils) {
         }
       }
       if (mouseUsed && applyInteractions) {
+    
+
+
         if ( ((i >= focusTilePosXBegin && i <= focusTilePosXEnd) || (i <= focusTilePosXBegin && i >= focusTilePosXEnd)) && ((j >= focusTilePosYBegin && j <= focusTilePosYEnd) || (j <= focusTilePosYBegin && j >= focusTilePosYEnd))) {
           // Apply mouse over tile coloring
           _drawHorizontalColorOverlay(xpos, ypos, ('(255, 255, 120, 0.7)'), k - 1, resizedTileHeight);
+        } else if (focusCoordinates) {
+
+
+          const currentPos = _getXYCoords(xpos, ypos);
+          for(let i = 0; i < focusCoordinates.length; i++){
+            if (focusCoordinates[i].xCoord == currentPos.x && focusCoordinates[i].yCoord == currentPos.y) {
+              if (debugCount < 120) {
+                debugCount++;
+              }
+              _drawHorizontalColorOverlay(xpos, ypos, ('(255, 255, 120, 0.7)'), k - 1, resizedTileHeight);
+            }
+         }
         }
       }
       if (particleTiles) {
@@ -794,6 +813,11 @@ function(EffectLoader, Emitter, utils) {
       focusTilePosYEnd = yPos;
     }
 
+    function _applyMultipleFocus(coords) {
+    	mouseUsed = true;
+      focusCoordinates = coords;
+    }
+
     function _applyLargeFocus(xPosBegin, xPosEnd, yPosBegin, yPosEnd) {
     	mouseUsed = true;
         focusTilePosXBegin = xPosBegin;
@@ -801,6 +825,39 @@ function(EffectLoader, Emitter, utils) {
         focusTilePosYBegin = yPosBegin;
         focusTilePosYEnd = yPosEnd;
       }
+
+    function _applyCircleFocus(centerX, centerY, radius) {
+
+        centerX --; // décalage d'une case, je ne sais pas pourquoi
+    
+        let d = (5 - radius * 4) / 4;
+        let x = 0;
+        let y = radius;
+    
+    
+        const coordFocus = [];
+    
+        do {
+          coordFocus.push({xCoord: centerX + x, yCoord: centerY + y});
+          coordFocus.push({xCoord: centerX + x, yCoord: centerY - y});
+          coordFocus.push({xCoord: centerX - x, yCoord: centerY + y});
+          coordFocus.push({xCoord: centerX - x, yCoord: centerY - y});
+          coordFocus.push({xCoord: centerX + y, yCoord: centerY + x});
+          coordFocus.push({xCoord: centerX + y, yCoord: centerY - x});
+          coordFocus.push({xCoord: centerX - y, yCoord: centerY + x});
+          coordFocus.push({xCoord: centerX - y, yCoord: centerY - x});
+    
+            if (d < 0) {
+                d = d + (4 * x) + 6;
+            } else {
+                d = d + 4 * (x - y) + 10;
+                y--;
+            }
+            x++;
+        } while (x <= y);
+    
+        _applyMultipleFocus(coordFocus);
+    }
 
     function _align(position, screenDimension, size, offset) {
       switch(position) {
@@ -951,6 +1008,14 @@ function(EffectLoader, Emitter, utils) {
 
       applyLargeFocus: function(xBegin, xEnd, yBegin, yEnd) {
         return _applyLargeFocus(xBegin, xEnd, yBegin, yEnd);
+      },
+
+      applyMultipleFocus: function(focusCoordinates) {
+        return _applyMultipleFocus(focusCoordinates);
+      },
+
+      applyCircleFocus: function(centerX, centerY, radius) {
+        return _applyCircleFocus(centerX, centerY, radius);
       },
 
       align: function(position, screenDimension, size, offset) {

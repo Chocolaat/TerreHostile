@@ -1,6 +1,6 @@
 export class MapPlayerSelection {
   currentLayerSelected: number;
-  currentTypeSelected: number;
+  currentObjectSelected: any;
 
   constructor() {
   }

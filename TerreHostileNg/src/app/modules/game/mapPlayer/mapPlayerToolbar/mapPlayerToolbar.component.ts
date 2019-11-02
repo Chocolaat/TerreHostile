@@ -15,12 +15,12 @@ import { UnitConfiguration } from 'src/app/_shared/configuration/model/unitConfi
   <button type="button" class="mapToolBarItem" id="mapToolBarItemBuildings"
   (click)="showMapToolBarSubMenu('building')">Bâtiments</button>
 </div>
-
+ 
 
 <div id="mapToolBarSubMenu" *ngIf="currentSubMenu == 'building'">
     <button class="mapToolBarSubMenuItem" *ngFor="let building of buildingConfigurations | keyvalue"
     background-image: [ngStyle]="{'background-image': 'url('+ building.value.imgPath +')'}"
-    (click)="this.mapPlayerToolbarTypeSelectionEvent.emit(building.value.type)">
+    (click)="this.mapPlayerToolbarBuildingSelectionEvent.emit(building.value)">
     {{building.value.name}}
     </button>
 </div>
@@ -33,8 +33,7 @@ import { UnitConfiguration } from 'src/app/_shared/configuration/model/unitConfi
 })
 export class MapPlayerToolbarComponent implements OnInit {
 
-  @Output() mapPlayerToolbarLayerSelectionEvent = new EventEmitter<number>();
-  @Output() mapPlayerToolbarTypeSelectionEvent = new EventEmitter<number>();
+  @Output() mapPlayerToolbarBuildingSelectionEvent = new EventEmitter<BuildingConfiguration>();
 
   currentSubMenu: string;
   buildingConfigurations: Array<BuildingConfiguration>;
@@ -52,7 +51,6 @@ export class MapPlayerToolbarComponent implements OnInit {
           (gameConf) => {
             this.buildingConfigurations = gameConf;
         });
-        this.mapPlayerToolbarLayerSelectionEvent.emit(1);
          break;
       }
       default: {
