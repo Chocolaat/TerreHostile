@@ -12,6 +12,13 @@ import org.springframework.core.env.Environment;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString
 @Configuration
 @PropertySource("classpath:/gameConfiguration/resources.properties")
 @ConfigurationProperties(prefix = "resources")
@@ -32,30 +39,6 @@ public class ResourceConfigurationPropertyList {
 
 	private List<Integer> types = new ArrayList<Integer>();
 
-	public List<String> getNames() {
-		return names;
-	}
-
-	public void setNames(List<String> names) {
-		this.names = names;
-	}
-
-	public List<String> getImgPaths() {
-		return imgPaths;
-	}
-
-	public void setImgPaths(List<String> imgPaths) {
-		this.imgPaths = imgPaths;
-	}
-
-	public List<Integer> getTypes() {
-		return types;
-	}
-
-	public void setTypes(List<Integer> types) {
-		this.types = types;
-	}
-
 	private List<ResourceConfiguration> getResourceConfigurations() {
 
 		List<ResourceConfiguration> res = new ArrayList<>();
@@ -74,12 +57,6 @@ public class ResourceConfigurationPropertyList {
 		}
 
 		return res;
-	}
-
-	@Override
-	public String toString() {
-		return "UnitsConfiguration [env=" + env + ", names=" + names + ", imgPaths=" + imgPaths + ", types=" + types
-				+ "]";
 	}
 
 }

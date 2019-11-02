@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum GroundType {
 
-	Grass, Ground, Ocean, Sand;
+	Grass, Ground, Ocean, Sand, Sea;
 
 	@JsonValue
 	public int toValue() {
