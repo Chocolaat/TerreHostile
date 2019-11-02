@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from 'src/app/_shared/user/user';
 import { map } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,27 +11,17 @@ export class AuthenticationService {
 
   constructor(private httpClient: HttpClient) { }
 
-/*   authenticate(username: string, password: string) {
-    return this.httpClient.get<User>('/api/validateLogin').pipe(
-     map(
-       userData => {
-        sessionStorage.setItem('username', username);
-        const authString = 'Basic ' + btoa(username + ':' + password);
-        sessionStorage.setItem('basicauth', authString);
-        return userData;
-       }
-     )
-
-    );
-  } */
+  private user = new BehaviorSubject(new User());
+  currentUser = this.user.asObservable();
 
   authenticate(username: string, password: string) {
     return this.httpClient.post<any>('/api/authenticate', {username, password}).pipe(
      map(
        userData => {
-        sessionStorage.setItem('username',username);
-        const tokenStr = 'Bearer ' + userData.token;
+        sessionStorage.setItem('username', username);
+        const tokenStr = 'Bearer ' + userData.jwttoken;
         sessionStorage.setItem('token', tokenStr);
+        this.user.next(userData.userDetails);
         return userData;
        }
      )

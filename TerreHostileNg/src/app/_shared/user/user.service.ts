@@ -8,10 +8,8 @@ export class UserService {
 
   constructor(private  httpClient: HttpClient) { }
 
-/*   private user = new BehaviorSubject(new User());
-  currentUser = this.user.asObservable(); */
 
-  user = this.getUserById(1);
+
 
   getUserById(id: number): Observable<any> {
     const params = '?id=' + id;

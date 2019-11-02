@@ -1,7 +1,7 @@
 export class User {
     id: number;
-    startxcoord: number;
-    startycoord: number;
+    startXCoord: number;
+    startYCoord: number;
 
     constructor() {
     }
