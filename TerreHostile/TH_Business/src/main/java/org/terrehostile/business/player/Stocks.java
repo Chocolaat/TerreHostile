@@ -6,6 +6,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString
 @Entity
 @Table(name = "stocks")
 public class Stocks {
@@ -33,51 +40,5 @@ public class Stocks {
 //		res.addToStock(new StockItem(StockItemType.WOOD, 100));
 //		return res;
 //	}
-
-	public int getTownId() {
-		return townId;
-	}
-
-	public void setTownId(int townId) {
-		this.townId = townId;
-	}
-
-	public int getWood() {
-		return wood;
-	}
-
-	public void setWood(int wood) {
-		this.wood = wood;
-	}
-
-	public int getStone() {
-		return stone;
-	}
-
-	public void setStone(int stone) {
-		this.stone = stone;
-	}
-
-	public int getGold() {
-		return gold;
-	}
-
-	public void setGold(int gold) {
-		this.gold = gold;
-	}
-
-	public int getStockId() {
-		return stockId;
-	}
-
-	public void setStockId(int stockId) {
-		this.stockId = stockId;
-	}
-
-	@Override
-	public String toString() {
-		return "Stocks [stockId=" + stockId + ", townId=" + townId + ", wood=" + wood + ", stone=" + stone + ", gold="
-				+ gold + "]";
-	}
 
 }

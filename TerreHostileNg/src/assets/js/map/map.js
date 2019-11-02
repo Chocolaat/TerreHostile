@@ -32,7 +32,7 @@ define(["require", "exports", '../libs/jsiso/canvas/Control', '../libs/jsiso/can
                 
                       var images = [
                           {
-                            graphics: gameConfigurations.ground.map(b => [b.imgPathGround])
+                            graphics: gameConfigurations.ground.map(b => b.imgPath)
                           },
                           {
                             graphics:gameConfigurations.buildings.map(b => [b.imgPath])

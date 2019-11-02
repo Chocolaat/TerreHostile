@@ -1,5 +1,6 @@
 package org.terrehostile;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -8,9 +9,13 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.event.EventListener;
 import org.springframework.web.filter.CommonsRequestLoggingFilter;
+import org.terrehostile.repository.UserRepository;
 
 @SpringBootApplication
 public class Application extends SpringBootServletInitializer {
+
+	@Autowired
+	UserRepository userRepo;
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
@@ -27,7 +32,12 @@ public class Application extends SpringBootServletInitializer {
 	@EventListener(ApplicationReadyEvent.class)
 	public void doSomethingAfterStartup() {
 
-		System.out.println("Started");
+//		System.out.println("Started");
+//
+//		User u = userRepo.findById(41).get();
+//		u.setStartXCoord(250);
+//		u.setStartYCoord(250);
+//		userRepo.save(u);
 
 	}
 

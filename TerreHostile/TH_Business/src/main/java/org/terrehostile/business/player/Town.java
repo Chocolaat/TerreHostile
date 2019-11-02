@@ -13,7 +13,14 @@ import javax.persistence.OneToOne;
 
 import org.terrehostile.business.mapTileItem.Building;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 @Entity
+@Getter
+@Setter
+@ToString
 public class Town {
 
 	@Id
@@ -30,42 +37,5 @@ public class Town {
 	private Stocks stocks;
 
 	private String name;
-
-	public int getTownId() {
-		return townId;
-	}
-
-	public void setTownId(int townId) {
-		this.townId = townId;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public List<Building> getBuildings() {
-		return buildings;
-	}
-
-	public void setBuildings(List<Building> buildings) {
-		this.buildings = buildings;
-	}
-
-	public Integer getUserId() {
-		return userId;
-	}
-
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
-
-	@Override
-	public String toString() {
-		return "Town [townId=" + townId + ", userId=" + userId + ", buildings=" + buildings + ", name=" + name + "]";
-	}
 
 }

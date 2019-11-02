@@ -25,7 +25,7 @@ import { UnitConfiguration } from 'src/app/_shared/configuration/model/unitConfi
 <div id="mapToolBarSubMenu" *ngIf="currentSubMenu == 'ground'">
   <button
   class="mapToolBarSubMenuItemGround"  *ngFor="let ground of groundConfigurations | keyvalue"
-  background-image: [ngStyle]="{'background-image': 'url('+ ground.value.imgPath +')'}"
+  background-image: [ngStyle]="{'background-image': 'url('+ ground.value.imgPath[0] +')'}"
   (click)=this.mapEditorToolbarTypeSelectionEvent.emit(ground.value.type)>
   {{ground.value.name}}
   </button>

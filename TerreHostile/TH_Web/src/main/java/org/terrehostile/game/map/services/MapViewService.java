@@ -36,8 +36,6 @@ public class MapViewService {
 		List<Resource> res = Arrays.stream(map.getResources()).flatMap(Arrays::stream).filter(value -> value != null)
 				.collect(Collectors.toList());
 
-		System.out.println(res.toString());
-
 		resourceRepository.saveAll(res);
 
 		buildingRepository.saveAll(Arrays.stream(map.getBuildings()).flatMap(Arrays::stream)
