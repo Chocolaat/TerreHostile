@@ -25,6 +25,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.terrehostile.business.mapTileItem.Troop;
 import org.terrehostile.business.player.Town;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Entity
 @Table(name = "user")
 public class User implements UserDetails {
@@ -44,6 +49,12 @@ public class User implements UserDetails {
 	@Email(message = "*Please provide a valid Email")
 	private String email;
 
+	@Column(name = "startXCoord", nullable = false)
+	private int startXCoord;
+
+	@Column(name = "startYCoord", nullable = false)
+	private int startYCoord;
+
 	@Column(name = "password")
 	@Length(min = 5, message = "*Your password must have at least 5 characters")
 	@NotEmpty(message = "*Please provide your password")
@@ -55,12 +66,6 @@ public class User implements UserDetails {
 			@JoinColumn(name = "userId", referencedColumnName = "userId") }, inverseJoinColumns = {
 					@JoinColumn(name = "roleId", referencedColumnName = "roleId") })
 	private Set<Role> roles;
-
-	@Column(name = "startXCoord", nullable = false)
-	private int startXCoord;
-
-	@Column(name = "startYCoord", nullable = false)
-	private int startYCoord;
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "userId", referencedColumnName = "userId")
@@ -74,11 +79,6 @@ public class User implements UserDetails {
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	public String getUsername() {
-		return this.name;
 	}
 
 	@Override
@@ -105,83 +105,9 @@ public class User implements UserDetails {
 		return true;
 	}
 
-	public int getUserId() {
-		return userId;
+	@Override
+	public String getUsername() {
+		return this.name;
 	}
-
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
-
-	public List<Troop> getTroops() {
-		return troops;
-	}
-
-	public void setTroops(List<Troop> troops) {
-		this.troops = troops;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public Set<Role> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
-	}
-
-	public int getStartXCoord() {
-		return startXCoord;
-	}
-
-	public void setStartXCoord(int startXCoord) {
-		this.startXCoord = startXCoord;
-	}
-
-	public int getStartYCoord() {
-		return startYCoord;
-	}
-
-	public void setStartYCoord(int startYCoord) {
-		this.startYCoord = startYCoord;
-	}
-
-	public List<Town> getTowns() {
-		return towns;
-	}
-
-	public void setTowns(List<Town> towns) {
-		this.towns = towns;
-	}
-
-//	@Override
-//	public String toString() {
-//		return "User [userId=" + userId + ", email=" + email + ", password=" + password + ", name=" + name + ", roles="
-//				+ roles + ", startXCoord=" + startXCoord + ", startYCoord=" + startYCoord + ", troops=" + troops
-//				+ ", towns=" + towns + "]";
-//	}
 
 }

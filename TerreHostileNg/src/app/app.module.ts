@@ -10,6 +10,8 @@ import { LoginComponent } from './_core/authentication/login/login/login.compone
 import { CoreModule } from './_core/core_module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BasicAuthHtppInterceptorService } from './_core/authentication/basic-auth-interceptor.service';
+import { AdminManagementComponent } from './modules/admin/management/admin-management.component';
+import { AdminManagementModule } from './modules/admin/management/admin-management.module';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,7 @@ import { BasicAuthHtppInterceptorService } from './_core/authentication/basic-au
     HomeModule,
     MapPlayerModule,
     MapEditorModule,
+    AdminManagementModule,
     BrowserAnimationsModule,
     CoreModule
   ],

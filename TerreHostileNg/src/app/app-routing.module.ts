@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './_core/authentication/login/login/login.component';
 import { LogoutComponent } from './_core/authentication/logout/logout/logout.component';
 import { AuthGuardService } from './_core/authentication/authGuard.service';
+import { AdminManagementComponent } from './modules/admin/management/admin-management.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -13,16 +14,19 @@ const routes: Routes = [
     path: 'home', component: HomeComponent
   },
   {
-    path: 'mapPlayer', component: MapPlayerComponent, canActivate:[AuthGuardService]
+    path: 'mapPlayer', component: MapPlayerComponent, canActivate: [AuthGuardService]
   },
   {
-    path: 'mapEditor', component: MapEditorComponent, canActivate:[AuthGuardService]
+    path: 'mapEditor', component: MapEditorComponent, canActivate: [AuthGuardService]
+  },
+  {
+    path: 'adminManagement', component: AdminManagementComponent, canActivate: [AuthGuardService]
   },
   {
     path: 'login', component: LoginComponent
   },
   {
-    path: 'logout', component: LogoutComponent, canActivate:[AuthGuardService]
+    path: 'logout', component: LogoutComponent, canActivate: [AuthGuardService]
   },
 
 ];

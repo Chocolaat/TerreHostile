@@ -6,6 +6,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AuthenticationModule } from './authentication/authentication.module';
+import { MatTableModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { AuthenticationModule } from './authentication/authentication.module';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    MatTableModule,
     AuthenticationModule
   ]
 })

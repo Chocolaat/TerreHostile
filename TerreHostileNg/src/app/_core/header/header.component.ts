@@ -13,7 +13,7 @@ import { AuthenticationService } from '../authentication/authentication.service'
       <li><a>Administration</a>
         <ul>
           <li><a routerLink="/mapEditor" routerLinkActive="myactive">Éditeur</a></li>
-          <li><a routerLink="/mapEditor" routerLinkActive="myactive">Forum</a></li>
+          <li><a routerLink="/adminManagement" routerLinkActive="myactive">Gestion</a></li>
           <li><a routerLink="/mapEditor" routerLinkActive="myactive">Monstres</a></li>
           <li><a routerLink="/mapEditor" routerLinkActive="myactive">Ressources</a></li>
           <li><a routerLink="/mapEditor" routerLinkActive="myactive">Configuration</a></li>
