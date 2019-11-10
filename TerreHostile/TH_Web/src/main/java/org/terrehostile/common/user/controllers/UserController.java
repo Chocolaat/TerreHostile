@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.terrehostile.business.admin.authentification.User;
 import org.terrehostile.common.user.services.UserService;
+import org.terrehostile.technic.FilterSortPaginateParams;
 
 @RestController
 public class UserController {
@@ -20,8 +21,19 @@ public class UserController {
 		return userService.getUserById(id);
 	}
 
+//	@RequestMapping(value = "/user/getAll", method = RequestMethod.GET)
+//	public List<User> getAllUsers() {
+//		;
+//		System.out.println("getAllUsers");
+//		System.out.println("getAllUsers");
+//		return userService.getAllUsers();
+//	}
+
 	@RequestMapping(value = "/user/getAll", method = RequestMethod.GET)
-	public List<User> getAllUsers() {
+	public List<User> getAllUsersForGrid(FilterSortPaginateParams params) {
+		System.out.println("params = " + params);
+		System.out.println("getAllUsersForGrid");
+		System.out.println("getAllUsersForGrid");
 		return userService.getAllUsers();
 	}
 

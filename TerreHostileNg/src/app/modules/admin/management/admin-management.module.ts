@@ -4,17 +4,22 @@ import { GameConfigurationService } from 'src/app/_shared/configuration/services
 import { MatSnackBar, MatSnackBarModule } from '@angular/material';
 import { AdminManagementComponent } from './admin-management.component';
 import { AdminManagementUsersComponent } from './users/admin-management-users.component';
+import { AdminManagementUsersEditComponent } from './users/admin-management-users-edit/admin-management-users-edit.component';
 
 @NgModule({
   declarations: [
     AdminManagementComponent,
-    AdminManagementUsersComponent
+    AdminManagementUsersComponent,
+    AdminManagementUsersEditComponent
   ],
   imports: [
     SharedModule
   ],
   providers: [
     GameConfigurationService
+  ],
+  entryComponents: [
+    AdminManagementUsersEditComponent
   ]
 })
 export class AdminManagementModule { }

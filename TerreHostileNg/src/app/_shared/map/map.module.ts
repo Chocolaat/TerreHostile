@@ -27,7 +27,7 @@ import { UserService } from '../user/user.service';
     InputEventDirective
   ],
   providers: [
-      MapService, 
+      MapService,
       UserService
   ]
 })
