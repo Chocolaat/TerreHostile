@@ -2,7 +2,9 @@ define(["require", "exports", '../libs/jsiso/canvas/Control', '../libs/jsiso/can
 '../libs/jsiso/json/load', '../libs/jsiso/tile/Field'], function(require, exports, CanvasControl, CanvasInput, imgLoader, jsonLoader, TileField){
 
   exports.launchGame = function (map, gameConfigurations) {
-
+console.log("MAP");
+console.log(map);
+console.log("MAP");
     // -- FPS --------------------------------
     window.requestAnimFrame = (function() {
       return window.requestAnimationFrame
@@ -44,13 +46,13 @@ define(["require", "exports", '../libs/jsiso/canvas/Control', '../libs/jsiso/can
                             graphics:gameConfigurations.units.map(b => [b.imgPath])
                           }
                         ];
-
                 imgLoader(images)
                     .then(
                         function(imgResponse) {
-                          game = new main(0,
+                          let game = new main(0,
                               0, map.xSize); // X & Y drawing position, ;nd tile span to draw
-                             heightMapTmp = map.tiles.map(tilex => tilex.map(tiley => tiley.height) );
+                             let heightMapTmp = map.tiles.map(tilex => tilex.map(tiley => tiley.height) );
+                             
                           game
                               .init([
                                   {
@@ -183,8 +185,8 @@ define(["require", "exports", '../libs/jsiso/canvas/Control', '../libs/jsiso/can
  */
 
 
-        for (i = iDeb; i < iFin; i++) {
-          for (j = jDeb; j < jFin; j++) {
+        for (let i = iDeb; i < iFin; i++) {
+          for (let j = jDeb; j < jFin; j++) {
             mapLayers.map(function(layer) {
               if (layer.getTitle() === "Ground" || layer.getTitle() === "Resources" || layer.getTitle() === "Buildings" || layer.getTitle() === "Troops") {
 
@@ -225,7 +227,6 @@ define(["require", "exports", '../libs/jsiso/canvas/Control', '../libs/jsiso/can
 
     launch();
 
-    console.log(map);
 
     exports.map =      map;
 
@@ -281,10 +282,11 @@ define(["require", "exports", '../libs/jsiso/canvas/Control', '../libs/jsiso/can
   exports.updateTile =       function _updateTile(event, layerNumber, newValue, beginTile, currentTile)
   {
     // Get the current mouse location from X & Y Coords
-  tile_coordinates = mapLayers[layerNumber].getXYCoords(event.offsetX,
+  let tile_coordinates = mapLayers[layerNumber].getXYCoords(event.offsetX,
     event.offsetY);
 
-  newTileValue = (newValue != undefined) ? newValue : 1;
+    let newTileValue = (newValue != undefined) ? newValue : 1;
+    let newTile = undefined;
 
   //if newTileValue = 0 : delete (ie set to null)
   if (!newTileValue)
@@ -308,7 +310,7 @@ define(["require", "exports", '../libs/jsiso/canvas/Control', '../libs/jsiso/can
         break;
         //Troops
       case 3:
-        newUnit = [{unitType:newTileValue, experience: 0, health:1,unitNumber:1}];
+        let newUnit = [{unitType:newTileValue, experience: 0, health:1, unitNumber:1}];
         newTile = {xCoord:tile_coordinates.x + map.beginXCoord, yCoord:tile_coordinates.y + map.beginYCoord, units:newUnit, userId:0};
         break;
       default:

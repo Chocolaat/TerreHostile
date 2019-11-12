@@ -29,6 +29,8 @@ public class MapViewService {
 	private BuildingRepository buildingRepository;
 	@Autowired
 	private TroopRepository troopRepository;
+	@Autowired
+	private TroopService troopService;
 
 	public void save(MapView map) {
 		tileRepository.saveAll(Arrays.stream(map.getTiles()).flatMap(Arrays::stream).collect(Collectors.toList()));
@@ -41,8 +43,10 @@ public class MapViewService {
 		buildingRepository.saveAll(Arrays.stream(map.getBuildings()).flatMap(Arrays::stream)
 				.filter(value -> value != null).collect(Collectors.toList()));
 
-		troopRepository.saveAll(Arrays.stream(map.getTroops()).flatMap(Arrays::stream).filter(value -> value != null)
-				.collect(Collectors.toList()));
+		List<Troop> troopList = Arrays.stream(map.getTroops()).flatMap(Arrays::stream).filter(value -> value != null)
+				.collect(Collectors.toList());
+
+		troopService.saveAll(troopList);
 	}
 
 	public MapView getMapByXYAndSize(int x, int y, int xSize, int ySize) {

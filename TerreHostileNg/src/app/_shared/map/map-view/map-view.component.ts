@@ -62,7 +62,7 @@ export class MapViewComponent implements OnInit, OnDestroy {
     });
   }
 
-  
+
 
   updateChunkXYCoords(xOffset: number, yOffset: number) {
 

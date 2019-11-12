@@ -34,9 +34,8 @@ export class AdminManagementUsersDataSource implements DataSource<User> {
         )
         .subscribe(users => {
             this.usersSubject.next(users);
-            console.log(users);
         });
     }
 }
- 
- */
+
+*/

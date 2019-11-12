@@ -284,7 +284,7 @@ function(EffectLoader, Emitter, utils) {
       var graphicValue = 0;
       if (mapLayout[i] && mapLayout[i][j])
     	  {
-	  	  	if (mapLayout[i][j].units != undefined)
+	  	  	if (mapLayout[i][j].units != undefined && mapLayout[i][j].units[0] != undefined)
 	  		{
 	  			graphicValue = mapLayout[i][j].units[0].unitType + 1;
 

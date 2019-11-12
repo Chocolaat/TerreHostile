@@ -44,7 +44,7 @@ export class UserService {
     return this.httpClient.post<any>('/api/user/create', user);
   }
 
-  deleteUser(user: User): Observable<any> {    console.log('user');
+  deleteUser(user: User): Observable<any> {
     return this.httpClient.post<any>('/api/user/delete', user);
   }
 

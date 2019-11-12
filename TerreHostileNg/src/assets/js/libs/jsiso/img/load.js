@@ -110,8 +110,8 @@ define(function() {
           var imagesArrayIdx = '';
 
           imgArray.map(function(img) {
-
-            imgName = img;
+             
+            let imgName = img;
             if (graphic.removePath === undefined || graphic.removePath === true) {        	  
               imgName = img.split("/").pop();
             }
@@ -122,7 +122,7 @@ define(function() {
                 images[imagesArrayIdx] = [];
               };
 
-              currentImage = new Image();
+              let currentImage = new Image();
               currentImage.src = img;
               currentImage.onload = function() {
               loaded ++;
