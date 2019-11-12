@@ -8,8 +8,9 @@ import lombok.ToString;
 @Setter
 @ToString
 public class FilterSortPaginateParams {
-	String filter;
-	String sortOrder;
 	int pageNumber;
 	int pageSize;
+	String sortName;
+	String sortOrder;
+	String filter;
 }

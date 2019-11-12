@@ -18,25 +18,12 @@ import { FilterSortPaginateParams } from './ui-components/grids/model/filterSort
   declarations: [
   ],
   imports: [
-    BrowserModule,
     CoreModule,
     BrowserAnimationsModule
   ],
   exports: [
     MapModule,
     CoreModule,
-    BrowserModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    MatTableModule,
-    MatDialogModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    HttpClientModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatProgressSpinnerModule
   ]
 })
 export class SharedModule { }

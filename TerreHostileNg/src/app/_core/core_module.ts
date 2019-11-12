@@ -6,7 +6,12 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AuthenticationModule } from './authentication/authentication.module';
-import { MatTableModule } from '@angular/material';
+import { MatTableModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatButtonModule} from '@angular/material';
+import { MatPaginatorModule, MatSortModule, MatProgressSpinnerModule } from '@angular/material';
+
+
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -24,7 +29,16 @@ import { MatTableModule } from '@angular/material';
     HttpClientModule,
     FormsModule,
     MatTableModule,
-    AuthenticationModule
+    AuthenticationModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatProgressSpinnerModule
   ]
 })
 export class CoreModule { }

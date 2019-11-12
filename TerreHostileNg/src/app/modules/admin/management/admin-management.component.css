@@ -1,2 +1,13 @@
-body{margin-top:20px;}
-.fa-fw {width: 2em;}
+
+
+:host{
+    height: 92%;  
+}
+
+.tab-pane {
+    height: 100%;  
+}
+
+.tab-content {
+    height: 100%;  
+}

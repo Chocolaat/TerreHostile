@@ -5,6 +5,10 @@ import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -14,6 +18,8 @@ import org.terrehostile.business.admin.authentification.Role;
 import org.terrehostile.business.admin.authentification.User;
 import org.terrehostile.repository.RoleRepository;
 import org.terrehostile.repository.UserRepository;
+import org.terrehostile.technic.FilterSortPaginateParams;
+import org.terrehostile.technic.GridPaginationResponse;
 
 @Service("userService")
 public class UserService implements UserDetailsService {
@@ -35,9 +41,41 @@ public class UserService implements UserDetailsService {
 		return userRepository.findAll();
 	}
 
+	public GridPaginationResponse<User> getPaginatedUsers(FilterSortPaginateParams params) {
+
+		GridPaginationResponse<User> gridPaginatedUsers = new GridPaginationResponse<User>();
+
+		System.out.println("params = " + params);
+		Sort sort = Sort.unsorted();
+		if (!params.getSortName().isEmpty()) {
+			sort = params.getSortOrder().equals("desc") ? Sort.by(params.getSortName()).descending()
+					: Sort.by(params.getSortName()).ascending();
+		}
+
+		Pageable sortedByNameAsc = PageRequest.of(params.getPageNumber(), params.getPageSize(), sort);
+
+		Page<User> userPageResult = userRepository.findAll(sortedByNameAsc);
+
+		gridPaginatedUsers.setItemList(userPageResult.getContent());
+		gridPaginatedUsers.setItemsCount(userPageResult.getTotalElements());
+
+		return gridPaginatedUsers;
+	}
+
 	public void updateUser(User u) {
 		userRepository.updateUserInfosById(u.getName(), u.getEmail(), u.getStartXCoord(), u.getStartYCoord(),
 				u.getUserId());
+	}
+
+	public User saveUser(User user) {
+		user.setPassword(bcryptEncoder.encode(user.getPassword()));
+		Role userRole = roleRepository.findByRole("ADMIN");
+		user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
+		return userRepository.save(user);
+	}
+
+	public void deleteUser(User user) {
+		userRepository.delete(user);
 	}
 
 	@Override
@@ -49,10 +87,4 @@ public class UserService implements UserDetailsService {
 		return u;
 	}
 
-	public User saveUser(User user) {
-		user.setPassword(bcryptEncoder.encode(user.getPassword()));
-		Role userRole = roleRepository.findByRole("ADMIN");
-		user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
-		return userRepository.save(user);
-	}
 }
