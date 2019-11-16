@@ -13,9 +13,17 @@ import { MatTableModule, MatPaginatorModule, MatSortModule, MatProgressSpinnerMo
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FilterSortPaginateParams } from './ui-components/grids/model/filterSortPaginateParams';
+import { AdminManagementBuildingsEditComponent } from '../modules/admin/management/buildings/admin-management-buildings-edit.component';
+import { LargeCRUDTableEditComponent } from './ui-components/largeCRUDTable/largeCRUDTableEdit.component';
+import { LargeCRUDTableService } from './ui-components/largeCRUDTable/largeCRUDTable.service';
+import { LargeCRUDTableContentComponent } from './ui-components/largeCRUDTable/largeCRUDTableContent.component';
+import { LargeCRUDTableComponent } from './ui-components/largeCRUDTable/largeCRUDTable.component';
 
 @NgModule({
   declarations: [
+    LargeCRUDTableEditComponent,
+    LargeCRUDTableContentComponent
+
   ],
   imports: [
     CoreModule,
@@ -24,6 +32,8 @@ import { FilterSortPaginateParams } from './ui-components/grids/model/filterSort
   exports: [
     MapModule,
     CoreModule,
+    LargeCRUDTableEditComponent,
+    LargeCRUDTableContentComponent
   ]
 })
 export class SharedModule { }

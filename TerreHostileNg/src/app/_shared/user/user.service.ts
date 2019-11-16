@@ -5,14 +5,17 @@ import { User } from './user';
 import { map } from 'rxjs/operators';
 import { FilterSortPaginateParams } from '../ui-components/grids/model/filterSortPaginateParams';
 import { GridPaginationResponse } from '../ui-components/grids/model/gridPaginationResponse';
+import { LargeCRUDTableService } from '../ui-components/largeCRUDTable/largeCRUDTable.service';
 
 @Injectable()
-export class UserService {
+export class UserService extends LargeCRUDTableService<User> {
 
-  constructor(private  httpClient: HttpClient) { }
+  constructor(private  httpClient: HttpClient) {
+    super();
+   }
 
 
-  getUserById(id: number): Observable<User> {
+  getById(id: number): Observable<User> {
     const params = '?id=' + id;
     return this.httpClient.get<User>('/api/user' + params);
   }
@@ -36,17 +39,19 @@ export class UserService {
 
 
 
-  updateUser(user: User): Observable<any> {
-    return this.httpClient.post<any>('/api/user', user);
+  createItem(item: User) {
+    return this.httpClient.post<any>('/api/user/create', item);
+  }
+  updateItem(item: User) {
+    console.log('item');
+    console.log(item);
+    console.log('item');
+    return this.httpClient.post<any>('/api/user', item);
+  }
+  deleteItem(item: User) {
+    return this.httpClient.post<any>('/api/user/delete', item);
   }
 
-  createUser(user: User): Observable<any> {
-    return this.httpClient.post<any>('/api/user/create', user);
-  }
-
-  deleteUser(user: User): Observable<any> {
-    return this.httpClient.post<any>('/api/user/delete', user);
-  }
 
 
 

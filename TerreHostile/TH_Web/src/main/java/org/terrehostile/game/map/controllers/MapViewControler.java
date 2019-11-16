@@ -23,11 +23,7 @@ public class MapViewControler {
 	@ResponseBody
 	public MapView getMapByXYAndSize(@RequestParam int beginX, int beginY, int size) {
 
-		System.out.println("HELLO");
 		MapView map = mapViewService.getMapByXYAndSize(beginX, beginY, size, size);
-		System.out.println("HELLO");
-		System.out.println(map);
-		System.out.println("HELLO");
 
 		return map;
 	}

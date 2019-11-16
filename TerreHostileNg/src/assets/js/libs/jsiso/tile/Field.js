@@ -286,7 +286,7 @@ function(EffectLoader, Emitter, utils) {
     	  {
 	  	  	if (mapLayout[i][j].units != undefined && mapLayout[i][j].units[0] != undefined)
 	  		{
-	  			graphicValue = mapLayout[i][j].units[0].unitType + 1;
+	  			graphicValue = mapLayout[i][j].units[0].type + 1;
 
 	  		}
 	  	  	else if (mapLayout[i][j].type != undefined)

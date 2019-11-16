@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 import org.terrehostile.business.Constants;
-import org.terrehostile.business.mapTileItem.Building;
-import org.terrehostile.business.mapTileItem.Resource;
-import org.terrehostile.business.mapTileItem.Troop;
+import org.terrehostile.business.map.tileItem.Building;
+import org.terrehostile.business.map.tileItem.Resource;
+import org.terrehostile.business.map.tileItem.Troop;
 
 public class MapView {
 
@@ -74,8 +74,8 @@ public class MapView {
 
 		for (Resource currentResource : resourceList) {
 
-			int newX = currentResource.getxCoord() - beginXCoord;
-			int newY = currentResource.getyCoord() - beginYCoord;
+			int newX = currentResource.getXCoord() - beginXCoord;
+			int newY = currentResource.getYCoord() - beginYCoord;
 			newX = (newX < 0) ? newX + Constants.XCOUNT : newX;
 			newY = (newY < 0) ? newY + Constants.YCOUNT : newY;
 			newX = (newX > Constants.XMAX) ? newX - Constants.XCOUNT : newX;
@@ -85,8 +85,8 @@ public class MapView {
 		}
 		for (Building currentBuilding : buildingList) {
 
-			int newX = currentBuilding.getxCoord() - beginXCoord;
-			int newY = currentBuilding.getyCoord() - beginYCoord;
+			int newX = currentBuilding.getXCoord() - beginXCoord;
+			int newY = currentBuilding.getYCoord() - beginYCoord;
 			newX = (newX < 0) ? newX + Constants.XCOUNT : newX;
 			newY = (newY < 0) ? newY + Constants.YCOUNT : newY;
 			newX = (newX > Constants.XMAX) ? newX - Constants.XCOUNT : newX;
@@ -96,8 +96,8 @@ public class MapView {
 		}
 		for (Troop currentTroop : troopList) {
 
-			int newX = currentTroop.getxCoord() - beginXCoord;
-			int newY = currentTroop.getyCoord() - beginYCoord;
+			int newX = currentTroop.getXCoord() - beginXCoord;
+			int newY = currentTroop.getYCoord() - beginYCoord;
 			newX = (newX < 0) ? newX + Constants.XCOUNT : newX;
 			newY = (newY < 0) ? newY + Constants.YCOUNT : newY;
 			newX = (newX > Constants.XMAX) ? newX - Constants.XCOUNT : newX;

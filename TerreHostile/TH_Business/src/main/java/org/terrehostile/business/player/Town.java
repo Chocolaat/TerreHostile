@@ -11,7 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-import org.terrehostile.business.mapTileItem.Building;
+import org.terrehostile.business.map.tileItem.Building;
 
 import lombok.Getter;
 import lombok.Setter;

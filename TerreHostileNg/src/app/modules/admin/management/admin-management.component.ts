@@ -4,10 +4,10 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-admin-management',
   template: `
   <ul class="nav nav-pills nav-stacked col-md-2">
-    <li class="active"><a href="#tab_a" data-toggle="pill">Pill A</a></li>
-    <li><a href="#tab_b" data-toggle="pill">Pill B</a></li>
-    <li><a href="#tab_c" data-toggle="pill">Pill C</a></li>
-    <li><a href="#tab_d" data-toggle="pill">Pill D</a></li>
+    <li class="active"><a href="#tab_a" data-toggle="pill">Users</a></li>
+    <li><a href="#tab_b" data-toggle="pill">Buildings</a></li>
+    <li><a href="#tab_c" data-toggle="pill">Resources</a></li>
+    <li><a href="#tab_d" data-toggle="pill">Troops</a></li>
   </ul>
 
 
@@ -16,21 +16,15 @@ import { Component, OnInit } from '@angular/core';
           <app-admin-management-users></app-admin-management-users>
           </div>
           <div class="tab-pane" id="tab_b">
-               <h4>Pane B</h4>
-              <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames
-                  ac turpis egestas.</p>
+          <app-admin-management-buildings></app-admin-management-buildings>
           </div>
           <div class="tab-pane" id="tab_c">
-               <h4>Pane C</h4>
-              <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames
-                  ac turpis egestas.</p>
+          <app-admin-management-resources></app-admin-management-resources>
           </div>
           <div class="tab-pane" id="tab_d">
-               <h4>Pane D</h4>
-              <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames
-                  ac turpis egestas.</p>
+          <app-admin-management-troops></app-admin-management-troops>
           </div>
-  </div><!-- tab content -->
+  </div>
   `,
   styleUrls: ['./admin-management.component.css']
 })

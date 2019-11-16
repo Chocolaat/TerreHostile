@@ -12,11 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.terrehostile.business.admin.authentification.User;
-import org.terrehostile.common.user.services.UserService;
-import org.terrehostile.web.security.JwtRequest;
-import org.terrehostile.web.security.JwtResponse;
-import org.terrehostile.web.security.JwtTokenUtil;
+import org.terrehostile.authentification.jwt.JwtRequest;
+import org.terrehostile.authentification.jwt.JwtResponse;
+import org.terrehostile.authentification.jwt.JwtTokenUtil;
+import org.terrehostile.business.authentification.User;
 
 @RestController
 @CrossOrigin

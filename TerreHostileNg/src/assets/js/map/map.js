@@ -310,7 +310,7 @@ console.log("MAP");
         break;
         //Troops
       case 3:
-        let newUnit = [{unitType:newTileValue, experience: 0, health:1, unitNumber:1}];
+        let newUnit = [{type:newTileValue, experience: 0, health:1, unitNumber:1}];
         newTile = {xCoord:tile_coordinates.x + map.beginXCoord, yCoord:tile_coordinates.y + map.beginYCoord, units:newUnit, userId:0};
         break;
       default:
