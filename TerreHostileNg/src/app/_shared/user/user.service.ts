@@ -43,9 +43,6 @@ export class UserService extends LargeCRUDTableService<User> {
     return this.httpClient.post<any>('/api/user/create', item);
   }
   updateItem(item: User) {
-    console.log('item');
-    console.log(item);
-    console.log('item');
     return this.httpClient.post<any>('/api/user', item);
   }
   deleteItem(item: User) {

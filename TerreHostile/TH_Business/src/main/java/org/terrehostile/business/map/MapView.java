@@ -74,8 +74,8 @@ public class MapView {
 
 		for (Resource currentResource : resourceList) {
 
-			int newX = currentResource.getXCoord() - beginXCoord;
-			int newY = currentResource.getYCoord() - beginYCoord;
+			int newX = currentResource.getxCoord() - beginXCoord;
+			int newY = currentResource.getyCoord() - beginYCoord;
 			newX = (newX < 0) ? newX + Constants.XCOUNT : newX;
 			newY = (newY < 0) ? newY + Constants.YCOUNT : newY;
 			newX = (newX > Constants.XMAX) ? newX - Constants.XCOUNT : newX;
@@ -85,8 +85,8 @@ public class MapView {
 		}
 		for (Building currentBuilding : buildingList) {
 
-			int newX = currentBuilding.getXCoord() - beginXCoord;
-			int newY = currentBuilding.getYCoord() - beginYCoord;
+			int newX = currentBuilding.getxCoord() - beginXCoord;
+			int newY = currentBuilding.getyCoord() - beginYCoord;
 			newX = (newX < 0) ? newX + Constants.XCOUNT : newX;
 			newY = (newY < 0) ? newY + Constants.YCOUNT : newY;
 			newX = (newX > Constants.XMAX) ? newX - Constants.XCOUNT : newX;
@@ -96,8 +96,8 @@ public class MapView {
 		}
 		for (Troop currentTroop : troopList) {
 
-			int newX = currentTroop.getXCoord() - beginXCoord;
-			int newY = currentTroop.getYCoord() - beginYCoord;
+			int newX = currentTroop.getxCoord() - beginXCoord;
+			int newY = currentTroop.getyCoord() - beginYCoord;
 			newX = (newX < 0) ? newX + Constants.XCOUNT : newX;
 			newY = (newY < 0) ? newY + Constants.YCOUNT : newY;
 			newX = (newX > Constants.XMAX) ? newX - Constants.XCOUNT : newX;

@@ -49,6 +49,8 @@ public class User implements UserDetails {
 	@Email(message = "*Please provide a valid Email")
 	private String email;
 
+	private boolean active;
+
 	@Column(name = "startXCoord", nullable = false)
 	private int startXCoord;
 
@@ -74,6 +76,10 @@ public class User implements UserDetails {
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "userId", referencedColumnName = "userId")
 	private List<Town> towns;
+
+	public User() {
+		this.active = true;
+	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

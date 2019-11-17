@@ -17,16 +17,6 @@ export class TroopService extends LargeCRUDTableService<Troop> {
       super();
   }
 
-    createItem(troop: Troop) {
-      return this.httpClient.post<Troop>('/api/troop', troop);
-    }
-    updateItem(troop: Troop) {
-      return this.httpClient.post<Troop>('/api/troop/create', troop);
-    }
-    deleteItem(troop: Troop) {
-      return this.httpClient.post<Troop>('/api/troop/delete', troop);
-    }
-
 
     getById(id: number): Observable<Troop> {
     const params = '?id=' + id;
@@ -42,6 +32,16 @@ export class TroopService extends LargeCRUDTableService<Troop> {
     .set('sortName', filterSortPaginateParams.sortName)
     .set('sortOrder', filterSortPaginateParams.sortOrder);
     return this.httpClient.get<any>('/api/troop/getPaginated', {params});
+  }
+
+  createItem(troop: Troop) {
+    return this.httpClient.post<Troop>('/api/troop/create', troop);
+  }
+  updateItem(troop: Troop) {
+    return this.httpClient.post<Troop>('/api/troop', troop);
+  }
+  deleteItem(troop: Troop) {
+    return this.httpClient.post<Troop>('/api/troop/delete', troop);
   }
 
 

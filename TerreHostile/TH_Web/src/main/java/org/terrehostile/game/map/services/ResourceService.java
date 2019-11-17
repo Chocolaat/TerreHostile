@@ -48,7 +48,7 @@ public class ResourceService {
 	}
 
 	public void updateResource(Resource r) {
-		resourceRepository.updateResourceById(r.getXCoord(), r.getYCoord(), r.getType(), r.getQuantity(),
+		resourceRepository.updateResourceById(r.getxCoord(), r.getyCoord(), r.getType(), r.getQuantity(),
 				r.getResourceId());
 	}
 

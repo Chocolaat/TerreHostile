@@ -53,7 +53,7 @@ public class TroopService {
 	}
 
 	public void updateTroop(Troop t) {
-		troopRepository.updateTroopById(t.getXCoord(), t.getYCoord(), t.getUserId(), t.getTownId(), t.getTroopId());
+		troopRepository.updateTroopById(t.getxCoord(), t.getyCoord(), t.getUserId(), t.getTownId(), t.getTroopId());
 	}
 
 	public Troop saveTroop(Troop t) {

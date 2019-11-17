@@ -39,8 +39,6 @@ public class UserController {
 
 	@RequestMapping(value = "/user/create", method = RequestMethod.POST)
 	public void createUser(@RequestBody User u) {
-		System.out.println("REQUEST RETRIEVED ");
-		System.out.println("REQUEST RETRIEVED " + u.getName());
 		userService.saveUser(u);
 	}
 

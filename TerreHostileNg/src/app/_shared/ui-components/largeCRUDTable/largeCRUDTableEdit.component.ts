@@ -1,4 +1,4 @@
-import { Component, OnInit, Optional, Inject, TemplateRef, ViewChild, ComponentFactoryResolver } from '@angular/core';
+import { Component, OnInit, Optional, Inject, TemplateRef, ViewChild, ComponentFactoryResolver, Input, ChangeDetectionStrategy } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { User } from 'src/app/_shared/user/user';
 import { AdminManagementBuildingsComponent } from 'src/app/modules/admin/management/buildings/admin-management-buildings.component';
@@ -14,13 +14,16 @@ export class DialogData<Item> {
 // TODO : pass local_data to template
 
 @Component({
-  selector: 'app-admin-management-users-edit',
+  selector: 'app-large-crud-table-edit',
   template: `
   <h1 mat-dialog-title>Row Action :: <strong>{{action}}</strong></h1>
   <div mat-dialog-content>
 
   <div *ngIf="action != 'Delete'; else elseTemplate">
-    <ng-container *ngComponentOutlet="data.component"></ng-container>
+    <ng-container
+    [ngTemplateOutlet]="itemTemplate"
+    [ngTemplateOutletContext]="{ local_data: local_data }"
+    ></ng-container>
   </div>
 
     <ng-template #elseTemplate>
@@ -32,39 +35,31 @@ export class DialogData<Item> {
     <button mat-button (click)="doAction()">{{action}}</button>
     <button mat-button (click)="closeDialog()" mat-flat-button color="warn">Cancel</button>
   </div>
-  `
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LargeCRUDTableEditComponent<Item> implements OnInit {
+export class LargeCRUDTableEditComponent<Item> {
+
+  @Input() itemTemplate: TemplateRef<HTMLElement>;
 
   action: string;
   local_data: any;
-
- // @ViewChild(LargeCRUDTableEditDirective, {static: true}) adHost: LargeCRUDTableEditDirective;
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver,
     public dialogRef: MatDialogRef<LargeCRUDTableEditComponent<Item>>,
 
     // @Optional() is used to prevent error if no data is passed
-    @Optional() @Inject(MAT_DIALOG_DATA) public data: DialogData<Item>) {
-        console.log('data');
-        console.log(data);
-        console.log('data');
-      this.local_data = {...data.data};
-      this.action = data.actionParam;
+    @Optional() @Inject(MAT_DIALOG_DATA) public dataReceived: DialogData<Item>) {
+      this.local_data = {...dataReceived.data};
+      this.action = dataReceived.actionParam;
   }
 
   doAction() {
     this.dialogRef.close({event: this.action, data: this.local_data});
-    console.log('data');
   }
 
   closeDialog() {
     this.dialogRef.close({event: 'Cancel', data: this.local_data});
-  }
-
-
-
-  ngOnInit() {
   }
 
 }

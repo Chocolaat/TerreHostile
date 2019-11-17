@@ -22,8 +22,6 @@ import { LargeCRUDTableEditComponent } from './largeCRUDTableEdit.component';
 export abstract class LargeCRUDTableComponent<Item> implements AfterViewInit, OnInit {
 
 
-
-
   itemList: Array<Item> = [];
 
   resultsLength = 0;
@@ -71,12 +69,10 @@ abstract getEditComponent(): Type<any>;
       });
   }
   onRowClicked(row) {
-    console.log('Row clicked: ', row);
 }
 
 
 refresh() {
-  console.log('refresh');
   this.loadItems().subscribe(data => {
     this.itemList = data.itemList;
     this.isLoadingResults = false;
@@ -96,20 +92,16 @@ loadItems() {
 }
 
  openDialog(action: string, obj: Item) {
-  console.log(action);
-  console.log(obj);
-  const dialogRef = this.dialog.open(LargeCRUDTableEditComponent, {
+  const dialogRef = this.dialog.open(this.getEditComponent(), {
     width: '250px',
     data: {
       data: obj,
-      actionParam: action,
-      component: this.getEditComponent()
+      actionParam: action
     },
   });
 
   dialogRef.afterClosed().subscribe(result => {
     if (result) {
-      console.log('result');
       if (result.event === 'Add') {
         this.addRowData(result.data);
       } else if (result.event === 'Update') {
@@ -130,7 +122,8 @@ loadItems() {
   updateRowData (item: Item) {
     this.itemService.updateItem(item).subscribe(() => {
     this.refresh();
-  });}
+  });
+}
 
   deleteRowData (item: Item) {
     this.itemService.deleteItem(item).subscribe(() => this.refresh());

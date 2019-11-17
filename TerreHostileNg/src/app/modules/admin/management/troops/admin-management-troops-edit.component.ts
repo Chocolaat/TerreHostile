@@ -7,21 +7,32 @@ import { Troop } from 'src/app/_shared/map/model/troop';
 @Component({
   selector: 'app-admin-management-troops-edit',
   template: `
-  <mat-form-field>
-  <input placeholder="{{action}} Id" matInput [(ngModel)]="local_data.troopId">
+
+<app-large-crud-table-edit
+[itemTemplate]="customItemTemplate"
+>
+</app-large-crud-table-edit>
+
+
+<ng-template #customItemTemplate let-local_data="local_data">
+
+<mat-form-field>
+<input placeholder="{{action}} Id" matInput [(ngModel)]="local_data.troopId">
 </mat-form-field>
 <mat-form-field>
-  <input placeholder="{{action}} x Coord" matInput [(ngModel)]="local_data.xCoord">
+<input placeholder="{{action}} x Coord" matInput [(ngModel)]="local_data.xCoord">
 </mat-form-field>
 <mat-form-field>
-  <input placeholder="{{action}} y Coord" matInput [(ngModel)]="local_data.yCoord">
+<input placeholder="{{action}} y Coord" matInput [(ngModel)]="local_data.yCoord">
 </mat-form-field>
 <mat-form-field>
-  <input placeholder="{{action}} UserId" matInput [(ngModel)]="local_data.userId">
+<input placeholder="{{action}} UserId" matInput [(ngModel)]="local_data.userId">
 </mat-form-field>
 <mat-form-field>
-  <input placeholder="{{action}} TownId" matInput [(ngModel)]="local_data.townId">
+<input placeholder="{{action}} TownId" matInput [(ngModel)]="local_data.townId">
 </mat-form-field>
+
+</ng-template>
   `
 })
 export class AdminManagementTroopsEditComponent implements OnInit {

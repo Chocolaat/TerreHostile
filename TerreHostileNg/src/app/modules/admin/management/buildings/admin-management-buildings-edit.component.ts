@@ -6,55 +6,43 @@ import { DialogData } from 'src/app/_shared/ui-components/largeCRUDTable/largeCR
 @Component({
   selector: 'app-admin-management-buildings-edit',
   template: `
-  <mat-form-field>
-  <input placeholder="{{action}} Id" matInput [(ngModel)]="local_data.buildinId">
+
+<app-large-crud-table-edit
+[itemTemplate]="customItemTemplate"
+>
+</app-large-crud-table-edit>
+
+
+<ng-template #customItemTemplate let-local_data="local_data">
+toto
+<mat-form-field>
+<input placeholder="{{action}} Id" matInput [(ngModel)]="local_data.buildinId">
 </mat-form-field>
 <mat-form-field>
-  <input placeholder="{{action}} x Coord" matInput [(ngModel)]="local_data.xCoord">
+<input placeholder="{{action}} x Coord" matInput [(ngModel)]="local_data.xCoord">
 </mat-form-field>
 <mat-form-field>
-  <input placeholder="{{action}} y Coord" matInput [(ngModel)]="local_data.yCoord">
+<input placeholder="{{action}} y Coord" matInput [(ngModel)]="local_data.yCoord">
 </mat-form-field>
 <mat-form-field>
-  <input placeholder="{{action}} Type" matInput [(ngModel)]="local_data.type">
+<input placeholder="{{action}} Type" matInput [(ngModel)]="local_data.type">
 </mat-form-field>
 <mat-form-field>
-  <input placeholder="{{action}} TownId" matInput [(ngModel)]="local_data.townId">
+<input placeholder="{{action}} TownId" matInput [(ngModel)]="local_data.townId">
 </mat-form-field>
 <mat-form-field>
-  <input placeholder="{{action}} Health" matInput [(ngModel)]="local_data.health">
+<input placeholder="{{action}} Health" matInput [(ngModel)]="local_data.health">
 </mat-form-field>
 <mat-form-field>
-  <input placeholder="{{action}} State" matInput [(ngModel)]="local_data.state">
+<input placeholder="{{action}} State" matInput [(ngModel)]="local_data.state">
 </mat-form-field>
+
+</ng-template>
+
+
   `
 })
-export class AdminManagementBuildingsEditComponent implements OnInit {
-
-  action: string;
-  local_data: Building;
-
-  constructor(
-    public dialogRef: MatDialogRef<AdminManagementBuildingsEditComponent>,
-
-    // @Optional() is used to prevent error if no data is passed
-    @Optional() @Inject(MAT_DIALOG_DATA) public data: DialogData<Building>) {
-    this.local_data = {...data.data};
-    this.action = data.actionParam;
-  }
-
-  doAction() {
-    this.dialogRef.close({event: this.action, data: this.local_data});
-  }
-
-  closeDialog() {
-    this.dialogRef.close({event: 'Cancel', data: this.local_data});
-  }
-
-
-
-  ngOnInit() {
-  }
+export class AdminManagementBuildingsEditComponent {
 
 }
 

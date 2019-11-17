@@ -7,21 +7,32 @@ import { Resource } from 'src/app/_shared/map/model/resource';
 @Component({
   selector: 'app-admin-management-resources-edit',
   template: `
-  <mat-form-field>
-  <input placeholder="{{action}} Id" matInput [(ngModel)]="local_data.resourceId">
+
+<app-large-crud-table-edit
+[itemTemplate]="customItemTemplate"
+>
+</app-large-crud-table-edit>
+
+
+<ng-template #customItemTemplate let-local_data="local_data">
+
+<mat-form-field>
+<input placeholder="{{action}} Id" matInput [(ngModel)]="local_data.resourceId">
 </mat-form-field>
 <mat-form-field>
-  <input placeholder="{{action}} x Coord" matInput [(ngModel)]="local_data.xCoord">
+<input placeholder="{{action}} x Coord" matInput [(ngModel)]="local_data.xCoord">
 </mat-form-field>
 <mat-form-field>
-  <input placeholder="{{action}} y Coord" matInput [(ngModel)]="local_data.yCoord">
+<input placeholder="{{action}} y Coord" matInput [(ngModel)]="local_data.yCoord">
 </mat-form-field>
 <mat-form-field>
-  <input placeholder="{{action}} Type" matInput [(ngModel)]="local_data.type">
+<input placeholder="{{action}} Type" matInput [(ngModel)]="local_data.type">
 </mat-form-field>
 <mat-form-field>
-  <input placeholder="{{action}} Quantity" matInput [(ngModel)]="local_data.quantity">
+<input placeholder="{{action}} Quantity" matInput [(ngModel)]="local_data.quantity">
 </mat-form-field>
+
+</ng-template>
   `
 })
 export class AdminManagementResourcesEditComponent implements OnInit {

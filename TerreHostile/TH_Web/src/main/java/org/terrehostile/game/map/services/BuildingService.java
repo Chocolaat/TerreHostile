@@ -48,8 +48,8 @@ public class BuildingService {
 	}
 
 	public void updateBuilding(Building b) {
-		buildingRepository.updateBuildingById(b.getTownId(), b.getType(), b.getHealth(), b.getState(), b.getXCoord(),
-				b.getYCoord(), b.getBuildingId());
+		buildingRepository.updateBuildingById(b.getTownId(), b.getType(), b.getHealth(), b.getState(), b.getxCoord(),
+				b.getyCoord(), b.getBuildingId());
 	}
 
 	public Building saveBuilding(Building b) {

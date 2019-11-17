@@ -13,11 +13,9 @@ public class Tile {
 
 	/** Coordinates */
 	@Id
-	@Column(name = "x_coord", nullable = false)
 	private int xCoord;
 
 	@Id
-	@Column(name = "y_coord", nullable = false)
 	private int yCoord;
 
 	/** Background */

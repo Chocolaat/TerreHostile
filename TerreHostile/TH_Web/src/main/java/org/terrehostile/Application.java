@@ -32,13 +32,6 @@ public class Application extends SpringBootServletInitializer {
 	@EventListener(ApplicationReadyEvent.class)
 	public void doSomethingAfterStartup() {
 
-//		System.out.println("Started");
-//
-//		User u = userRepo.findById(41).get();
-//		u.setStartXCoord(250);
-//		u.setStartYCoord(250);
-//		userRepo.save(u);
-
 	}
 
 	@Bean

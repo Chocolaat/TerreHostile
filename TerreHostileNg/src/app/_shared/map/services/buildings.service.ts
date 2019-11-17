@@ -16,16 +16,6 @@ export class BuildingService extends LargeCRUDTableService<Building> {
       super();
   }
 
-    createItem(building: Building) {
-      return this.httpClient.post<Building>('/api/building', building);
-    }
-    updateItem(building: Building) {
-      return this.httpClient.post<Building>('/api/building/create', building);
-    }
-    deleteItem(building: Building) {
-      return this.httpClient.post<Building>('/api/building/delete', building);
-    }
-
 
     getById(id: number): Observable<Building> {
     const params = '?id=' + id;
@@ -43,6 +33,16 @@ export class BuildingService extends LargeCRUDTableService<Building> {
     return this.httpClient.get<any>('/api/building/getPaginated', {params});
   }
 
+
+  createItem(building: Building) {
+    return this.httpClient.post<Building>('/api/building/create', building);
+  }
+  updateItem(building: Building) {
+    return this.httpClient.post<Building>('/api/building', building);
+  }
+  deleteItem(building: Building) {
+    return this.httpClient.post<Building>('/api/building/delete', building);
+  }
 
 
 

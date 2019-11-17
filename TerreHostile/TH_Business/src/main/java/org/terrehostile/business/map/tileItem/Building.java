@@ -39,7 +39,20 @@ public class Building {
 	private int health;
 	private int state;
 
-	public Building() {
+	public int getxCoord() {
+		return xCoord;
+	}
+
+	public void setxCoord(int xCoord) {
+		this.xCoord = xCoord;
+	}
+
+	public int getyCoord() {
+		return yCoord;
+	}
+
+	public void setyCoord(int yCoord) {
+		this.yCoord = yCoord;
 	}
 
 }

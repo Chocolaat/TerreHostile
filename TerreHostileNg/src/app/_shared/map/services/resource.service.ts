@@ -17,17 +17,6 @@ export class ResourceService extends LargeCRUDTableService<Resource> {
       super();
   }
 
-    createItem(resource: Resource) {
-      return this.httpClient.post<Resource>('/api/resource', resource);
-    }
-    updateItem(resource: Resource) {
-      return this.httpClient.post<Resource>('/api/resource/create', resource);
-    }
-    deleteItem(resource: Resource) {
-      return this.httpClient.post<Resource>('/api/resource/delete', resource);
-    }
-
-
     getById(id: number): Observable<Resource> {
     const params = '?id=' + id;
     return this.httpClient.get<Resource>('/api/resource' + params);
@@ -42,6 +31,16 @@ export class ResourceService extends LargeCRUDTableService<Resource> {
     .set('sortName', filterSortPaginateParams.sortName)
     .set('sortOrder', filterSortPaginateParams.sortOrder);
     return this.httpClient.get<any>('/api/resource/getPaginated', {params});
+  }
+
+  createItem(resource: Resource) {
+    return this.httpClient.post<Resource>('/api/resource/create', resource);
+  }
+  updateItem(resource: Resource) {
+    return this.httpClient.post<Resource>('/api/resource', resource);
+  }
+  deleteItem(resource: Resource) {
+    return this.httpClient.post<Resource>('/api/resource/delete', resource);
   }
 
 

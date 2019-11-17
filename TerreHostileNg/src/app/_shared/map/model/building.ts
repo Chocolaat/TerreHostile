@@ -4,6 +4,9 @@ export class Building {
     xCoord: number;
     yCoord: number;
 
+    zCoord: number;
+    ddCoord: number;
+
     type: number;
 
     townId: number;
