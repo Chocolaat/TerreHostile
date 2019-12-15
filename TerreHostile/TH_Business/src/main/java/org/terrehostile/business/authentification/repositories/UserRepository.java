@@ -1,4 +1,4 @@
-package org.terrehostile.repository;
+package org.terrehostile.business.authentification.repositories;
 
 import java.util.Optional;
 
@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import org.terrehostile.business.authentification.User;
+import org.terrehostile.business.authentification.models.User;
 
 @Repository("userRepository")
 public interface UserRepository extends JpaRepository<User, Integer> {

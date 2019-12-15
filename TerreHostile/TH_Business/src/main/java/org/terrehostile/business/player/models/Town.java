@@ -1,4 +1,4 @@
-package org.terrehostile.business.player;
+package org.terrehostile.business.player.models;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-import org.terrehostile.business.map.tileItem.Building;
+import org.terrehostile.business.map.tileItem.models.Building;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -8,15 +8,15 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.terrehostile.business.Constants;
-import org.terrehostile.business.map.MapView;
-import org.terrehostile.business.map.Tile;
-import org.terrehostile.business.map.tileItem.Building;
-import org.terrehostile.business.map.tileItem.Resource;
-import org.terrehostile.business.map.tileItem.Troop;
-import org.terrehostile.repository.BuildingRepository;
-import org.terrehostile.repository.ResourceRepository;
-import org.terrehostile.repository.TileRepository;
-import org.terrehostile.repository.TroopRepository;
+import org.terrehostile.business.map.models.MapView;
+import org.terrehostile.business.map.models.Tile;
+import org.terrehostile.business.map.tileItem.models.Building;
+import org.terrehostile.business.map.tileItem.models.Resource;
+import org.terrehostile.business.map.tileItem.models.Troop;
+import org.terrehostile.business.map.tileItem.repositories.BuildingRepository;
+import org.terrehostile.business.map.tileItem.repositories.ResourceRepository;
+import org.terrehostile.business.map.tileItem.repositories.TileRepository;
+import org.terrehostile.business.map.tileItem.repositories.TroopRepository;
 
 @Service("mapViewService")
 public class MapViewService {

@@ -1,4 +1,4 @@
-package org.terrehostile.business.authentification;
+package org.terrehostile.business.authentification.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

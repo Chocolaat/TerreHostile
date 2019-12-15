@@ -1,8 +1,8 @@
-package org.terrehostile.repository;
+package org.terrehostile.business.map.tileItem.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import org.terrehostile.business.map.tileItem.Unit;
+import org.terrehostile.business.map.tileItem.models.Unit;
 
 @Repository("unitRepository")
 public interface UnitRepository extends JpaRepository<Unit, Long> {

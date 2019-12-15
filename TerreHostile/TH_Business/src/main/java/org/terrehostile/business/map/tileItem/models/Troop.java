@@ -1,4 +1,4 @@
-package org.terrehostile.business.map.tileItem;
+package org.terrehostile.business.map.tileItem.models;
 
 import java.io.Serializable;
 import java.util.ArrayList;

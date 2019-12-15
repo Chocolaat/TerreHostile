@@ -8,10 +8,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.terrehostile.business.map.tileItem.Building;
-import org.terrehostile.repository.BuildingRepository;
-import org.terrehostile.technic.FilterSortPaginateParams;
-import org.terrehostile.technic.GridPaginationResponse;
+import org.terrehostile.business.map.tileItem.models.Building;
+import org.terrehostile.business.map.tileItem.repositories.BuildingRepository;
+import org.terrehostile.business.web.ui.grids.FilterSortPaginateParams;
+import org.terrehostile.business.web.ui.grids.GridPaginationResponse;
 
 @Service("buildingService")
 public class BuildingService {

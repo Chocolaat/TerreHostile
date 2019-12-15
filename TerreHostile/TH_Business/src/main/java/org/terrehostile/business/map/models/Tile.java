@@ -1,4 +1,4 @@
-package org.terrehostile.business.map;
+package org.terrehostile.business.map.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

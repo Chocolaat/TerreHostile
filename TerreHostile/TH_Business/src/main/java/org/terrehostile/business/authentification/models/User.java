@@ -1,4 +1,4 @@
-package org.terrehostile.business.authentification;
+package org.terrehostile.business.authentification.models;
 
 import java.util.Collection;
 import java.util.List;
@@ -22,8 +22,8 @@ import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.Transient;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.terrehostile.business.map.tileItem.Troop;
-import org.terrehostile.business.player.Town;
+import org.terrehostile.business.map.tileItem.models.Troop;
+import org.terrehostile.business.player.models.Town;
 
 import lombok.Getter;
 import lombok.Setter;

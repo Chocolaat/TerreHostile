@@ -1,4 +1,4 @@
-package org.terrehostile.business.map;
+package org.terrehostile.business.map.models;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 

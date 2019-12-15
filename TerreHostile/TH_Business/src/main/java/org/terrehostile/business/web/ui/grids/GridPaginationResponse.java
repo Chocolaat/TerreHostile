@@ -1,4 +1,4 @@
-package org.terrehostile.technic;
+package org.terrehostile.business.web.ui.grids;
 
 import java.util.List;
 

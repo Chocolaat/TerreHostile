@@ -1,13 +1,13 @@
-package org.terrehostile.business.map;
+package org.terrehostile.business.map.models;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 import org.terrehostile.business.Constants;
-import org.terrehostile.business.map.tileItem.Building;
-import org.terrehostile.business.map.tileItem.Resource;
-import org.terrehostile.business.map.tileItem.Troop;
+import org.terrehostile.business.map.tileItem.models.Building;
+import org.terrehostile.business.map.tileItem.models.Resource;
+import org.terrehostile.business.map.tileItem.models.Troop;
 
 public class MapView {
 

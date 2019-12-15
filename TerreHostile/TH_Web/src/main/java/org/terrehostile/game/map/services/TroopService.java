@@ -9,12 +9,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.terrehostile.business.map.tileItem.Troop;
-import org.terrehostile.business.map.tileItem.Unit;
-import org.terrehostile.repository.TroopRepository;
-import org.terrehostile.repository.UnitRepository;
-import org.terrehostile.technic.FilterSortPaginateParams;
-import org.terrehostile.technic.GridPaginationResponse;
+import org.terrehostile.business.map.tileItem.models.Troop;
+import org.terrehostile.business.map.tileItem.models.Unit;
+import org.terrehostile.business.map.tileItem.repositories.TroopRepository;
+import org.terrehostile.business.map.tileItem.repositories.UnitRepository;
+import org.terrehostile.business.web.ui.grids.FilterSortPaginateParams;
+import org.terrehostile.business.web.ui.grids.GridPaginationResponse;
 
 @Service("troopService")
 public class TroopService {

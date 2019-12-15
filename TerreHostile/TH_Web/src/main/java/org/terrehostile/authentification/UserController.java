@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.terrehostile.business.authentification.User;
-import org.terrehostile.technic.FilterSortPaginateParams;
-import org.terrehostile.technic.GridPaginationResponse;
+import org.terrehostile.business.authentification.models.User;
+import org.terrehostile.business.web.ui.grids.FilterSortPaginateParams;
+import org.terrehostile.business.web.ui.grids.GridPaginationResponse;
 
 @RestController
 public class UserController {

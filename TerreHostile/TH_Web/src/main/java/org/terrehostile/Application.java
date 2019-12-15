@@ -9,7 +9,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.event.EventListener;
 import org.springframework.web.filter.CommonsRequestLoggingFilter;
-import org.terrehostile.repository.UserRepository;
+import org.terrehostile.business.authentification.repositories.UserRepository;
 
 @SpringBootApplication
 public class Application extends SpringBootServletInitializer {

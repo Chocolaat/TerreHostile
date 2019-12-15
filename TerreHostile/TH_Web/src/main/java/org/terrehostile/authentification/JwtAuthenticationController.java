@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.terrehostile.authentification.jwt.JwtRequest;
 import org.terrehostile.authentification.jwt.JwtResponse;
 import org.terrehostile.authentification.jwt.JwtTokenUtil;
-import org.terrehostile.business.authentification.User;
+import org.terrehostile.business.authentification.models.User;
 
 @RestController
 @CrossOrigin

@@ -1,4 +1,4 @@
-package org.terrehostile.business.player;
+package org.terrehostile.business.player.models;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

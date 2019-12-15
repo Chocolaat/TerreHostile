@@ -1,12 +1,12 @@
-package org.terrehostile.repository;
+package org.terrehostile.business.map.tileItem.repositories;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import org.terrehostile.business.map.CoordinatesKey;
-import org.terrehostile.business.map.Tile;
+import org.terrehostile.business.map.models.CoordinatesKey;
+import org.terrehostile.business.map.models.Tile;
 
 @Repository("tileRepository")
 public interface TileRepository extends JpaRepository<Tile, CoordinatesKey> {

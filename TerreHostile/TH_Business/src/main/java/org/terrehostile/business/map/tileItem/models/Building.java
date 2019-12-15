@@ -1,4 +1,4 @@
-package org.terrehostile.business.map.tileItem;
+package org.terrehostile.business.map.tileItem.models;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

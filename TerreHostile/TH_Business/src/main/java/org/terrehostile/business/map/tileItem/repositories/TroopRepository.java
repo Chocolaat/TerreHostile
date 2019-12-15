@@ -1,4 +1,4 @@
-package org.terrehostile.repository;
+package org.terrehostile.business.map.tileItem.repositories;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import org.terrehostile.business.map.tileItem.Troop;
+import org.terrehostile.business.map.tileItem.models.Troop;
 
 @Repository("troopRepository")
 public interface TroopRepository extends JpaRepository<Troop, Integer> {
