@@ -48,7 +48,6 @@
 	</plugins>
   </build>
   <modules>
-    <module>TH_Business</module>
     <module>TH_Web</module>
   </modules>
 </project>

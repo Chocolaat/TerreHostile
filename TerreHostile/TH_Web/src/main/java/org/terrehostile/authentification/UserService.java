@@ -14,12 +14,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.terrehostile.business.authentification.models.Role;
-import org.terrehostile.business.authentification.models.User;
-import org.terrehostile.business.authentification.repositories.RoleRepository;
-import org.terrehostile.business.authentification.repositories.UserRepository;
-import org.terrehostile.business.web.ui.grids.FilterSortPaginateParams;
-import org.terrehostile.business.web.ui.grids.GridPaginationResponse;
+import org.terrehostile.authentification.models.Role;
+import org.terrehostile.authentification.models.User;
+import org.terrehostile.authentification.repositories.RoleRepository;
+import org.terrehostile.authentification.repositories.UserRepository;
+import org.terrehostile.ui.grids.FilterSortPaginateParams;
+import org.terrehostile.ui.grids.GridPaginationResponse;
 
 @Service("userService")
 public class UserService implements UserDetailsService {

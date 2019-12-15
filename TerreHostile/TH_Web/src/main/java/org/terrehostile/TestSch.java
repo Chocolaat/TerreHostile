@@ -6,10 +6,10 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.terrehostile.business.map.tileItem.models.Building;
-import org.terrehostile.game.configuration.model.UnitConfigurationPropertyList;
-import org.terrehostile.game.map.services.MapViewService;
-import org.terrehostile.game.map.services.TileItemService;
+import org.terrehostile.configuration.models.UnitConfigurationPropertyList;
+import org.terrehostile.map.tileItem.models.Building;
+import org.terrehostile.map.tileItem.services.MapViewService;
+import org.terrehostile.map.tileItem.services.TileItemService;
 
 @Component
 public class TestSch {
