@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -14,7 +15,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-@Table(name = "buildings")
+@Table(name = "buildings", uniqueConstraints = @UniqueConstraint(columnNames = { "xCoord", "yCoord" }))
 public class Building {
 
 	public final static int TYPE_BARRACK = 1;
@@ -37,7 +38,16 @@ public class Building {
 	private int townId;
 
 	private int health;
-	private int state;
+	private int state = STATE_PLANNED;
+
+	public Building() {
+	}
+
+	public Building(int xCoord, int yCoord, int type) {
+		this.xCoord = xCoord;
+		this.yCoord = yCoord;
+		this.type = type;
+	}
 
 	public int getxCoord() {
 		return xCoord;

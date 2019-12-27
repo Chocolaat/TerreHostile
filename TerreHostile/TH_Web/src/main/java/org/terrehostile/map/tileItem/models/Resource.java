@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -14,7 +15,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-@Table(name = "resources")
+@Table(name = "resources", uniqueConstraints = @UniqueConstraint(columnNames = { "xCoord", "yCoord" }))
 public class Resource {
 
 	public final static int TYPE_FLOURS = 1;

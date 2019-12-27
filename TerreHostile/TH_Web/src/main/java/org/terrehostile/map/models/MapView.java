@@ -35,6 +35,22 @@ public class MapView {
 		}
 	}
 
+	public Tile getTileAt(int x, int y) {
+		return this.tiles[x][y];
+	}
+
+	public Resource getResourceAt(int x, int y) {
+		return this.resources[x][y];
+	}
+
+	public Building getBuildingAt(int x, int y) {
+		return this.buildings[x][y];
+	}
+
+	public Troop getTroopAt(int x, int y) {
+		return this.troops[x][y];
+	}
+
 	public MapView(Tile[][] tiles, Resource[][] resources, Building[][] buildings, Troop[][] troops, int beginXCoord,
 			int beginYCoord, int xSize, int ySize) {
 		super();

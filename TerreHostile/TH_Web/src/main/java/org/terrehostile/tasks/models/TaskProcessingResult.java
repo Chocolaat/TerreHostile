@@ -1,4 +1,4 @@
-package org.terrehostile.processing.models;
+package org.terrehostile.tasks.models;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,7 +7,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class ActionResult {
+public class TaskProcessingResult {
 
 	public String result;
 
