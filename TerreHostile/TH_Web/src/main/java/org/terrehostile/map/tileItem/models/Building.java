@@ -8,6 +8,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -15,6 +16,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
 @Table(name = "buildings", uniqueConstraints = @UniqueConstraint(columnNames = { "xCoord", "yCoord" }))
 public class Building {
 
@@ -40,14 +42,13 @@ public class Building {
 	private int health;
 	private int state = STATE_PLANNED;
 
-	public Building() {
-	}
-
 	public Building(int xCoord, int yCoord, int type) {
 		this.xCoord = xCoord;
 		this.yCoord = yCoord;
 		this.type = type;
 	}
+
+	/** Lower case Setter/getter for JPA */
 
 	public int getxCoord() {
 		return xCoord;

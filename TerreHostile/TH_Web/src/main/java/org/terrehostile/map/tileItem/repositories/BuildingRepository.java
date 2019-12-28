@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.terrehostile.map.tileItem.models.Building;
 
-@Repository("buildingRepo")
+@Repository
 public interface BuildingRepository extends JpaRepository<Building, Integer> {
 
 	@Query("select buildings from Building buildings where xCoord >= ?1 and xCoord <= ?2 and yCoord >= ?3 and yCoord <= ?4 order by yCoord, xCoord")

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import org.terrehostile.map.models.MapView;
 import org.terrehostile.map.tileItem.models.Building;
 import org.terrehostile.map.tileItem.repositories.BuildingRepository;
-import org.terrehostile.tasks.models.Build;
+import org.terrehostile.tasks.models.BuildTask;
 import org.terrehostile.tasks.models.TaskPlannificationResult;
 import org.terrehostile.tasks.repositories.TaskRepository;
 import org.terrehostile.ui.grids.FilterSortPaginateParams;
@@ -78,18 +78,18 @@ public class BuildingService {
 
 		if ((tileToBuildOn.getBuildingAt(0, 0) != null) || (tileToBuildOn.getResourceAt(0, 0) != null)
 				|| (tileToBuildOn.getTroopAt(0, 0) != null)) {
-			taskPlannificationResult.fail(Build.CANNOT_BUILD_TILE_IS_NOT_EMPTY);
+			taskPlannificationResult.fail(BuildTask.CANNOT_BUILD_TILE_IS_NOT_EMPTY);
 		} else {
 			Building building = new Building(xCoord, yCoord, type);
 			building = saveBuilding(building);
 
-			Build build = new Build();
+			BuildTask build = new BuildTask();
 			build.setBuilding(building);
 			build.setBuilderCount(builderCount);
 
 			taskRepository.save(build);
 
-			taskPlannificationResult.succes(Build.BUILDING_SUCCESSFULY_PLANNED);
+			taskPlannificationResult.succes(BuildTask.BUILDING_SUCCESSFULY_PLANNED);
 
 		}
 		return taskPlannificationResult;

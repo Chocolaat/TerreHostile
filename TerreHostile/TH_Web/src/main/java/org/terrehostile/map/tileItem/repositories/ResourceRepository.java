@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.terrehostile.map.tileItem.models.Building;
 import org.terrehostile.map.tileItem.models.Resource;
 
-@Repository("resourceRepository")
+@Repository
 public interface ResourceRepository extends JpaRepository<Resource, Integer> {
 	Building findByResourceId(int id);
 

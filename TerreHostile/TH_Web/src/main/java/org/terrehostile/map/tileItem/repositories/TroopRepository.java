@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.terrehostile.map.tileItem.models.Troop;
 
-@Repository("troopRepository")
+@Repository
 public interface TroopRepository extends JpaRepository<Troop, Integer> {
 
 	Troop findByTroopId(String id);

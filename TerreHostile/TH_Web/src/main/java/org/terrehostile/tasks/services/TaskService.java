@@ -7,27 +7,20 @@ import org.terrehostile.tasks.models.TaskProcessingResult;
 import org.terrehostile.tasks.repositories.TaskRepository;
 
 @Service
-public abstract class TaskService {
+public abstract class TaskService<Taskimpl extends Task> {
 
 	@Autowired
 	TaskRepository taskRepository;
 
-	protected abstract TaskProcessingResult process();
+	protected abstract TaskProcessingResult process(Taskimpl task);
 
-	public abstract boolean isOver();
+	public abstract boolean isOver(Taskimpl task);
 
-	public TaskProcessingResult processTask() {
+	public TaskProcessingResult processTask(Taskimpl task) {
 
-		TaskProcessingResult result = process();
+		TaskProcessingResult result = process(task);
 
-		return result;
-	}
-
-	public TaskProcessingResult processTask(Task task) {
-
-		TaskProcessingResult result = processTask();
-
-		if (isOver()) {
+		if (isOver(task)) {
 			taskRepository.delete(task);
 		}
 
