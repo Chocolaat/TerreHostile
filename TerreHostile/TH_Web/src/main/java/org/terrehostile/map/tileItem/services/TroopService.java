@@ -16,7 +16,7 @@ import org.terrehostile.map.tileItem.repositories.UnitRepository;
 import org.terrehostile.ui.grids.FilterSortPaginateParams;
 import org.terrehostile.ui.grids.GridPaginationResponse;
 
-@Service("troopService")
+@Service
 public class TroopService {
 
 	@Autowired

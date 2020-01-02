@@ -18,7 +18,7 @@ import org.terrehostile.map.tileItem.repositories.ResourceRepository;
 import org.terrehostile.map.tileItem.repositories.TileRepository;
 import org.terrehostile.map.tileItem.repositories.TroopRepository;
 
-@Service("mapViewService")
+@Service
 public class MapViewService {
 
 	@Autowired

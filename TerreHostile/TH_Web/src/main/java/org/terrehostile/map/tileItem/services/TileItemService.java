@@ -13,7 +13,7 @@ import org.terrehostile.map.tileItem.repositories.TileRepository;
 import org.terrehostile.map.tileItem.repositories.TroopRepository;
 import org.terrehostile.map.tileItem.repositories.UnitRepository;
 
-@Service("tileItemService")
+@Service
 public class TileItemService {
 
 	@Autowired

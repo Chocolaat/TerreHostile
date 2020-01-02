@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.terrehostile.player.models.Stock;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -57,11 +58,33 @@ public class BuildingConfigurationPropertyList {
 			currentBuildingCfg.setArmor(Integer.parseInt(env.getProperty("buildings.armor[" + buildingType + "]")));
 			currentBuildingCfg.setRange(Integer.parseInt(env.getProperty("buildings.range[" + buildingType + "]")));
 
+			currentBuildingCfg = setBuildingCost(currentBuildingCfg, buildingType);
+
 			res.add(currentBuildingCfg);
 
 		}
 
 		return res;
+	}
+
+	private BuildingConfiguration setBuildingCost(BuildingConfiguration currentBuildingCfg, int buildingType) {
+
+		Stock stock = new Stock();
+		stock.setGold(getCostValue(env.getProperty("buildings.cost[" + buildingType + "].gold")));
+		stock.setStone(getCostValue(env.getProperty("buildings.cost[" + buildingType + "].stone")));
+		stock.setWood(getCostValue(env.getProperty("buildings.cost[" + buildingType + "].wood")));
+
+		currentBuildingCfg.setCost(stock);
+
+		return currentBuildingCfg;
+	}
+
+	private int getCostValue(String number) {
+		try {
+			return Integer.parseInt(number);
+		} catch (NumberFormatException e) {
+			return 0;
+		}
 	}
 
 }

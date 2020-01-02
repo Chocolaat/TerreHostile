@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -15,17 +16,24 @@ import lombok.ToString;
 @ToString
 @Entity
 @Table(name = "stocks")
-public class Stocks {
+public class Stock {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int stockId;
 
-	private int townId;
+	@OneToOne
+	private Town town;
 
 	private int wood;
 	private int stone;
 	private int gold;
+
+	public Stock() {
+		this.wood = 0;
+		this.stone = 0;
+		this.gold = 0;
+	}
 
 //	public void addToStock(StockItem... stockitems) {
 //		for (StockItem stockItem : stockitems) {

@@ -17,7 +17,7 @@ import org.terrehostile.tasks.repositories.TaskRepository;
 import org.terrehostile.ui.grids.FilterSortPaginateParams;
 import org.terrehostile.ui.grids.GridPaginationResponse;
 
-@Service("buildingService")
+@Service
 public class BuildingService {
 
 	@Autowired

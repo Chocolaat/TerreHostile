@@ -13,7 +13,7 @@ import org.terrehostile.map.tileItem.repositories.ResourceRepository;
 import org.terrehostile.ui.grids.FilterSortPaginateParams;
 import org.terrehostile.ui.grids.GridPaginationResponse;
 
-@Service("resourceService")
+@Service
 public class ResourceService {
 
 	@Autowired

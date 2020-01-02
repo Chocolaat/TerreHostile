@@ -1,5 +1,7 @@
 package org.terrehostile.configuration.models;
 
+import org.terrehostile.player.models.Stock;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -19,4 +21,6 @@ public class BuildingConfiguration {
 	private int power;
 	private int armor;
 	private int range;
+
+	private Stock cost;
 }
