@@ -15,6 +15,7 @@ import lombok.Setter;
 public class BuildTask extends Task {
 
 	public static final String CANNOT_BUILD_TILE_IS_NOT_EMPTY = "CANNOT_BUILD_TILE_IS_NOT_EMPTY";
+	public static final String CANNOT_BUILD_NO_TOWN = "CANNOT_BUILD_NO_TOWN";
 	public static final String BUILDING_SUCCESSFULY_PLANNED = "BUILDING_SUCCESSFULY_PLANNED";
 	public static final String BUILDING_IN_PROGRESS = "BUILDING_IN_PROGRESS";
 	public static final String BUILDING_SUCCESSFULY_BUILT = "BUILDING_SUCCESSFULY_BUILT";

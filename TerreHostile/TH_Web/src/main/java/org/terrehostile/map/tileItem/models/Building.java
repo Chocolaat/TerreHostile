@@ -4,8 +4,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+import org.terrehostile.player.models.Town;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -37,7 +40,8 @@ public class Building {
 
 	private int type;
 
-	private int townId;
+	@ManyToOne
+	private Town town;
 
 	private int health;
 	private int state = STATE_PLANNED;

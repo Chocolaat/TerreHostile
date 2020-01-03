@@ -17,7 +17,7 @@ public interface BuildingRepository extends JpaRepository<Building, Integer> {
 
 	@Transactional
 	@Modifying
-	@Query("update Building b set b.health = ?1, b.state = ?2, b.townId = ?3, b.type = ?4, b.xCoord = ?5, b.yCoord = ?6 where b.id = ?7")
+	@Query("update Building b set b.health = ?1, b.state = ?2, b.town = ?3, b.type = ?4, b.xCoord = ?5, b.yCoord = ?6 where b.id = ?7")
 	void updateBuildingById(int health, int state, int townId, int type, int xCoord, int yCoord, Integer buildingId);
 
 }

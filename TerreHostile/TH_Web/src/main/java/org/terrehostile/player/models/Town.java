@@ -12,10 +12,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import org.terrehostile.authentification.models.User;
 import org.terrehostile.configuration.Constants;
 import org.terrehostile.map.tileItem.models.Building;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -25,6 +29,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
+@Table(name = "towns", uniqueConstraints = @UniqueConstraint(columnNames = { "centerX", "centerY" }))
 public class Town {
 
 	public Town() {
@@ -34,7 +39,7 @@ public class Town {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int townId;
+	private int id;
 
 	@ManyToOne
 	private User user;
@@ -45,10 +50,11 @@ public class Town {
 	private int size;
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "townId", referencedColumnName = "townId")
+	@JoinColumn(name = "town_id", referencedColumnName = "id")
 	private List<Building> buildings;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
+	@JsonIgnoreProperties({ "town" })
 	private Stock stocks;
 
 	private String name;

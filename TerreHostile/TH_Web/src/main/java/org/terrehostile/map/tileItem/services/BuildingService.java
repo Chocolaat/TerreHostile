@@ -1,6 +1,7 @@
 package org.terrehostile.map.tileItem.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -11,6 +12,9 @@ import org.springframework.stereotype.Service;
 import org.terrehostile.map.models.MapView;
 import org.terrehostile.map.tileItem.models.Building;
 import org.terrehostile.map.tileItem.repositories.BuildingRepository;
+import org.terrehostile.player.models.Town;
+import org.terrehostile.player.repositories.TownRepository;
+import org.terrehostile.player.services.TownService;
 import org.terrehostile.tasks.models.BuildTask;
 import org.terrehostile.tasks.models.TaskPlannificationResult;
 import org.terrehostile.tasks.repositories.TaskRepository;
@@ -22,6 +26,12 @@ public class BuildingService {
 
 	@Autowired
 	private BuildingRepository buildingRepository;
+
+	@Autowired
+	private TownRepository townRepository;
+
+	@Autowired
+	private TownService townService;
 
 	@Autowired
 	private MapViewService mapViewService;
@@ -58,8 +68,8 @@ public class BuildingService {
 	}
 
 	public void updateBuilding(Building b) {
-		buildingRepository.updateBuildingById(b.getTownId(), b.getType(), b.getHealth(), b.getState(), b.getxCoord(),
-				b.getyCoord(), b.getBuildingId());
+		buildingRepository.updateBuildingById(b.getTown().getId(), b.getType(), b.getHealth(), b.getState(),
+				b.getxCoord(), b.getyCoord(), b.getBuildingId());
 	}
 
 	public Building saveBuilding(Building b) {
@@ -68,6 +78,11 @@ public class BuildingService {
 
 	public void deleteBuilding(Building b) {
 		buildingRepository.delete(b);
+	}
+
+	public TaskPlannificationResult plan(int xCoord, int yCoord, int type, int builderCount, String newTownName) {
+		townService.createTown(xCoord, yCoord, newTownName);
+		return plan(xCoord, yCoord, type, builderCount);
 	}
 
 	public TaskPlannificationResult plan(int xCoord, int yCoord, int type, int builderCount) {
@@ -79,18 +94,32 @@ public class BuildingService {
 		if ((tileToBuildOn.getBuildingAt(0, 0) != null) || (tileToBuildOn.getResourceAt(0, 0) != null)
 				|| (tileToBuildOn.getTroopAt(0, 0) != null)) {
 			taskPlannificationResult.fail(BuildTask.CANNOT_BUILD_TILE_IS_NOT_EMPTY);
-		} else {
-			Building building = new Building(xCoord, yCoord, type);
-			building = saveBuilding(building);
+		}
 
-			BuildTask build = new BuildTask();
-			build.setBuilding(building);
-			build.setBuilderCount(builderCount);
+		else {
 
-			taskRepository.save(build);
+			Optional<Town> townOpt = townRepository.getTownByCoords(xCoord, yCoord);
+			if (!townOpt.isPresent()) {
+				// Town town = townRepository.getTownByCoords(xCoord, yCoord);
+				// if (town != null) {
+				taskPlannificationResult.fail(BuildTask.CANNOT_BUILD_NO_TOWN);
+			} else {
 
-			taskPlannificationResult.succes(BuildTask.BUILDING_SUCCESSFULY_PLANNED);
+				Town town = townOpt.get();
 
+				Building building = new Building(xCoord, yCoord, type);
+				building.setTown(town);
+				town.getBuildings().add(building);
+				building = saveBuilding(building);
+
+				BuildTask build = new BuildTask();
+				build.setBuilding(building);
+				build.setBuilderCount(builderCount);
+
+				taskRepository.save(build);
+
+				taskPlannificationResult.succes(BuildTask.BUILDING_SUCCESSFULY_PLANNED);
+			}
 		}
 		return taskPlannificationResult;
 
